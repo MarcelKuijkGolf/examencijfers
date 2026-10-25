@@ -1,5 +1,5 @@
 // Eerst netwerk, bij geen verbinding de laatst bewaarde versie
-const CACHE = 'examencijfers-v2';
+const CACHE = 'examencijfers-v3';
 self.addEventListener('install', e => { self.skipWaiting(); });
 self.addEventListener('activate', e => { e.waitUntil(self.clients.claim()); });
 self.addEventListener('fetch', e => {

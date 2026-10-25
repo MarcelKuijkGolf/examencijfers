@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#1b2333">
+<meta name="theme-color" content="#0b0e22">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" type="image/png" href="icon-192.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -14,303 +14,457 @@
 <title>Examencijfers TL4</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500;700&display=swap">
 <style>
-/* Layout: cijferlijst. Uitslag bovenaan, daarna per vak een kaart met PTA toetsen, onderaan bewaren. */
+/* Indeling: app met zijbalk (desktop), smalle iconenbalk (tablet) en tabbalk onderin (telefoon). Nachthemel thema dat aansluit op het app icoon. */
 :root{
-  --bg:#f3f4f6; --paper:#ffffff; --ink:#1b2333; --muted:#5d6678; --line:#dde1e8;
-  --accent:#e2731c; --accent-soft:#fcebdc; --blue:#1f4e8c;
-  --ok:#1e7a4a; --ok-soft:#dff2e7; --warn:#a86a00; --warn-soft:#fbefd2; --bad:#b3261e; --bad-soft:#fbe1df;
-  --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
-  --f-body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
-  --f-num:"JetBrains Mono", ui-monospace, Consolas, monospace;
+  color-scheme:dark;
+  --bg:#0b0e22; --paper:#151938; --paper2:#1c2150; --line:rgba(255,255,255,.09); --line2:rgba(255,255,255,.16);
+  --ink:#eef0ff; --muted:#a3a8d0; --dim:#6f75a3;
+  --accent:#ffa23a; --accent2:#ff7a2a; --accent-soft:rgba(255,162,58,.14); --violet:#8b5cf6; --pink:#e04a8f; --blue:#8fb2ff;
+  --ok:#4ade9b; --ok-soft:rgba(74,222,155,.14); --warn:#ffcc5c; --warn-soft:rgba(255,204,92,.13); --bad:#ff6b7a; --bad-soft:rgba(255,107,122,.15);
+  --f-display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --f-body:"Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;
+  --f-num:"JetBrains Mono",ui-monospace,Consolas,monospace;
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#12161e; --paper:#1b212c; --ink:#e7eaf0; --muted:#9aa3b4; --line:#2c3443;
-  --accent:#f08a3a; --accent-soft:#3a2716; --blue:#8db4ec;
-  --ok:#5cc98d; --ok-soft:#15301f; --warn:#e8b14d; --warn-soft:#352a12; --bad:#f07a72; --bad-soft:#3a1c1a; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#12161e; --paper:#1b212c; --ink:#e7eaf0; --muted:#9aa3b4; --line:#2c3443;
-  --accent:#f08a3a; --accent-soft:#3a2716; --blue:#8db4ec;
-  --ok:#5cc98d; --ok-soft:#15301f; --warn:#e8b14d; --warn-soft:#352a12; --bad:#f07a72; --bad-soft:#3a1c1a; color-scheme:dark}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
-body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5}
-.wrap{max-width:980px;margin:0 auto;padding-block:28px 60px;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));display:grid;gap:22px}
-h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
-h1{font-size:clamp(1.7rem,4vw,2.3rem);font-weight:700;letter-spacing:-.01em}
-h2{font-size:1.25rem;font-weight:700}
-h3{font-size:1.05rem;font-weight:700}
-.eyebrow{font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}
+html,body{min-height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5;
+  background-image:radial-gradient(900px 620px at 8% -12%,rgba(124,58,237,.38),transparent 62%),radial-gradient(760px 520px at 105% 108%,rgba(255,130,40,.16),transparent 60%),radial-gradient(600px 400px at 70% 30%,rgba(224,74,143,.08),transparent 70%);
+  background-attachment:fixed}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;letter-spacing:-.01em}
+h1{font-size:clamp(1.7rem,4vw,2.4rem);font-weight:800}
+h2{font-size:1.2rem;font-weight:700}
+h3{font-size:1.02rem;font-weight:700}
+a{color:var(--accent)}
+.eyebrow{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700}
 .num{font-family:var(--f-num);font-variant-numeric:tabular-nums}
-.muted{color:var(--muted)}
-header{display:grid;gap:6px}
-header p{margin:0;max-width:65ch;color:var(--muted)}
-.banner{background:var(--accent-soft);border:1px solid var(--accent);border-radius:10px;padding:12px 14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-.banner p{margin:0;flex:1 1 260px}
-button{font:inherit;font-weight:700;border-radius:8px;border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:7px 12px;cursor:pointer}
-button:hover{border-color:var(--accent)}
-button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
-button:focus-visible,input:focus-visible,summary:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.muted{color:var(--muted)} .small{font-size:.86rem}
+button{font:inherit;font-weight:700;border-radius:10px;border:1px solid var(--line2);background:rgba(255,255,255,.05);color:var(--ink);padding:8px 14px;cursor:pointer;transition:background .15s,border-color .15s}
+button:hover{border-color:var(--accent);background:rgba(255,162,58,.08)}
+button.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent;color:#24120a}
+button.primary:hover{filter:brightness(1.08)}
+button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+input,select,textarea{font:inherit;color:var(--ink);background:rgba(255,255,255,.05);border:1px solid var(--line2);border-radius:10px}
+select option{background:#1c2150;color:var(--ink)}
 
-/* uitslag */
-.uitslag{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:14px}
-.status{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.pill{display:inline-flex;align-items:center;gap:6px;font-weight:700;border-radius:999px;padding:4px 12px;font-size:.9rem}
+/* app indeling */
+.app{display:grid;grid-template-columns:248px minmax(0,1fr);min-height:100vh}
+.side{position:sticky;top:0;height:100vh;padding:22px 14px;border-right:1px solid var(--line);background:rgba(10,12,32,.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:flex;flex-direction:column;gap:18px}
+.merk{display:flex;align-items:center;gap:12px;padding:4px 8px;text-decoration:none;color:var(--ink)}
+.merk img{width:42px;height:42px;border-radius:12px;box-shadow:0 6px 22px rgba(139,92,246,.45)}
+.merk b{font-family:var(--f-display);font-size:1.12rem;font-weight:800;display:block;line-height:1.1}
+.merk small{color:var(--muted);font-size:.75rem}
+.nav{display:grid;gap:4px}
+.nav a{position:relative;display:flex;align-items:center;gap:12px;padding:8px 10px;border-radius:14px;color:var(--muted);font-weight:700;text-decoration:none;transition:background .15s,color .15s}
+.nav a:hover{background:rgba(255,255,255,.05);color:var(--ink)}
+.ico{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;flex:none;background:rgba(255,255,255,.05);border:1px solid var(--line);transition:all .2s}
+.ico svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.nav a.actief{color:var(--ink);background:rgba(255,255,255,.06)}
+.nav a.actief .ico{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#24120a;border-color:transparent;box-shadow:0 0 22px rgba(255,140,50,.5)}
+.badge{min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:var(--bad);color:#fff;font-size:.72rem;font-weight:700;display:inline-grid;place-items:center;margin-left:auto}
+.side .wie{margin-top:auto;padding:12px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--line);display:grid;gap:6px}
+.side .wie select{width:100%;padding:7px 9px;font-weight:700}
+main{min-width:0}
+.content{max-width:1080px;margin:0 auto;padding-block:30px 70px;padding-left:max(28px, env(safe-area-inset-left, 0px));padding-right:max(28px, env(safe-area-inset-right, 0px));display:grid;gap:22px}
+.view{display:grid;gap:20px;animation:in .35s ease}
+@keyframes in{from{opacity:.4;transform:translateY(6px)}to{opacity:1;transform:none}}
+.vkop{display:grid;gap:4px}
+.vkop p{margin:0;color:var(--muted);max-width:68ch}
+.tabbar,.meer{display:none}
+
+/* panelen */
+.paneel{background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.015));border:1px solid var(--line);border-radius:20px;padding:20px;display:grid;gap:14px}
+.paneel-kop{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.paneel-kop a{font-weight:700;text-decoration:none;font-size:.9rem}
+
+/* lobby */
+.hero{position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center;padding:28px;border-radius:26px;
+  background:linear-gradient(135deg,#21195a 0%,#38206f 50%,#6a2a7c 100%);border:1px solid rgba(255,255,255,.14);box-shadow:0 20px 60px rgba(60,20,120,.45)}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(400px 220px at 85% 0%,rgba(255,162,58,.28),transparent 70%);pointer-events:none}
+.hero .ster{position:absolute;color:#fff;opacity:.8;pointer-events:none}
+.hero .ster svg{display:block;fill:currentColor}
+.hero-tekst{position:relative;display:grid;gap:10px;min-width:0}
+.hero h1{font-size:clamp(1.8rem,4.6vw,2.7rem)}
+.hero .datum-kop{color:#d6cff5;font-size:.95rem}
+.hero .statusregel{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:6px}
+.hero .statusregel b{font-family:var(--f-display);font-size:1.15rem}
+.hero .uitleg{color:#d9d4f5;max-width:60ch;margin:0;font-size:.92rem}
+.ring{position:relative;width:150px;height:150px}
+.ring svg{width:150px;height:150px;transform:rotate(-90deg)}
+.ring .midden{position:absolute;inset:0;display:grid;place-content:center;text-align:center}
+.ring .midden b{font-family:var(--f-display);font-size:2rem;font-weight:800;line-height:1}
+.ring .midden span{font-size:.72rem;color:#d6cff5;letter-spacing:.06em;text-transform:uppercase}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.stat{background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));border:1px solid var(--line);border-radius:18px;padding:16px;display:grid;gap:2px;text-decoration:none;color:var(--ink);transition:transform .15s,border-color .15s}
+a.stat:hover{transform:translateY(-2px);border-color:var(--line2)}
+.stat .k{font-size:.74rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:700}
+.stat .v{font-family:var(--f-display);font-size:2.1rem;font-weight:800;line-height:1.1}
+.stat .s{font-size:.8rem;color:var(--dim)}
+.stat.alarm{border-color:rgba(255,204,92,.5);background:linear-gradient(180deg,rgba(255,204,92,.12),rgba(255,204,92,.03))}
+.stat.alarm .v{color:var(--warn)}
+.duo{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:20px;align-items:start}
+.tegels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:820px){.tegels{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.tegel{position:relative;display:grid;gap:10px;padding:18px;border-radius:18px;background:var(--paper);border:1px solid var(--line);text-decoration:none;color:var(--ink);transition:transform .18s,border-color .18s,box-shadow .18s}
+.tegel:hover{transform:translateY(-3px);border-color:rgba(255,162,58,.45);box-shadow:0 12px 30px rgba(0,0,0,.3)}
+.tegel .ico{width:46px;height:46px;border-radius:14px;color:#fff;border:0}
+.tegel .ico svg{width:22px;height:22px}
+.tegel b{font-family:var(--f-display);font-size:1.08rem}
+.tegel span.sub{font-size:.84rem;color:var(--muted)}
+.g1{background:linear-gradient(135deg,#ff9f3a,#ff6a2a)} .g2{background:linear-gradient(135deg,#8b5cf6,#5b3bd6)} .g3{background:linear-gradient(135deg,#e04a8f,#9b2fbf)}
+.g4{background:linear-gradient(135deg,#37c7a1,#1f8f8a)} .g5{background:linear-gradient(135deg,#4f8cff,#3c5bd6)} .g6{background:linear-gradient(135deg,#7a7fa8,#4d5280)}
+li.leeg{color:var(--muted);font-size:.9rem;padding:6px 2px}
+
+/* pills, checks, cijfers */
+.pill{display:inline-flex;align-items:center;font-weight:700;border-radius:999px;padding:4px 12px;font-size:.85rem}
 .pill.ok{background:var(--ok-soft);color:var(--ok)} .pill.bad{background:var(--bad-soft);color:var(--bad)} .pill.warn{background:var(--warn-soft);color:var(--warn)}
-.big{font-family:var(--f-display);font-size:1.6rem;font-weight:700}
-.checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:8px;margin:0;padding:0;list-style:none}
-.checks li{display:flex;gap:8px;align-items:flex-start;font-size:.92rem;padding:8px 10px;border-radius:8px;background:var(--bg)}
+.big{font-family:var(--f-display);font-size:1.5rem;font-weight:800}
+.status{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.uitleg{margin:0;font-size:.92rem;color:var(--muted);max-width:75ch}
+.checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;margin:0;padding:0;list-style:none}
+.checks li{display:flex;gap:8px;align-items:flex-start;font-size:.9rem;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid var(--line)}
 .dot{width:10px;height:10px;border-radius:50%;margin-top:6px;flex:none}
-.dot.ok{background:var(--ok)}.dot.bad{background:var(--bad)}.dot.warn{background:var(--warn)}
+.dot.ok{background:var(--ok);box-shadow:0 0 10px var(--ok)}.dot.bad{background:var(--bad);box-shadow:0 0 10px var(--bad)}.dot.warn{background:var(--warn)}
 .tablewrap{overflow-x:auto}
 table{border-collapse:collapse;width:100%;font-size:.92rem}
-th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
-th{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+th,td{text-align:left;padding:8px;border-bottom:1px solid var(--line);white-space:nowrap}
+th{font-size:.7rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
 td.r,th.r{text-align:right}
-.grade{font-family:var(--f-num);font-weight:700;display:inline-block;min-width:2.2em;text-align:center;border-radius:6px;padding:1px 4px}
+.grade{font-family:var(--f-num);font-weight:700;display:inline-block;min-width:2.3em;text-align:center;border-radius:7px;padding:1px 5px}
 .g-bad{background:var(--bad-soft);color:var(--bad)} .g-warn{background:var(--warn-soft);color:var(--warn)} .g-ok{background:var(--ok-soft);color:var(--ok)}
-input.cell{width:4.6em;font-family:var(--f-num);font-size:.95rem;padding:5px 6px;border:1px solid var(--line);border-radius:6px;background:var(--paper);color:var(--ink);text-align:right}
-input.cell::placeholder{color:var(--muted);opacity:.7}
+input.cell{width:4.8em;font-family:var(--f-num);font-size:.95rem;padding:6px 7px;text-align:right}
+input.cell::placeholder{color:var(--dim)}
 input.cell.invalid{border-color:var(--bad)}
-
-/* pakket */
-.pakket{display:flex;flex-wrap:wrap;gap:6px}
-.pakket label{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:5px 11px;cursor:pointer;font-size:.9rem}
-.pakket input{accent-color:var(--accent)}
-.pakket label:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+.risico{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:.9rem}
+.risico .chip{border-radius:999px;padding:4px 11px;font-weight:700;font-size:.82rem;background:var(--bad-soft);color:var(--bad)}
+.risico .chip.w{background:var(--warn-soft);color:var(--warn)} .risico .chip.ok{background:var(--ok-soft);color:var(--ok)}
 
 /* vakken */
+.pakket{display:flex;flex-wrap:wrap;gap:6px}
+.pakket label{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line2);background:rgba(255,255,255,.03);border-radius:999px;padding:6px 12px;cursor:pointer;font-size:.9rem}
+.pakket input{accent-color:var(--accent)}
+.pakket label:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
 .vakken{display:grid;gap:12px}
-details.vak{background:var(--paper);border:1px solid var(--line);border-radius:12px}
+details.vak{background:var(--paper);border:1px solid var(--line);border-radius:16px;transition:border-color .15s}
+details.vak[open]{border-color:var(--line2)}
 details.vak>summary{list-style:none;cursor:pointer;padding:14px 16px;display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}
 details.vak>summary::-webkit-details-marker{display:none}
 .vhead{display:grid;gap:2px;min-width:0}
-.tag{font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--blue)}
+.tag{font-size:.68rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--violet);filter:brightness(1.4)}
 .vstats{display:flex;gap:16px;align-items:center}
-.stat{display:grid;justify-items:end;gap:0}
-.stat .k{font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
-.stat .v{font-family:var(--f-num);font-weight:700;font-size:1.15rem}
+.vstats .stat{background:none;border:0;padding:0;justify-items:end}
+.vstats .stat .k{font-size:.66rem}
+.vstats .stat .v{font-family:var(--f-num);font-size:1.1rem}
 .chev{transition:transform .15s;color:var(--muted)}
 details[open] .chev{transform:rotate(90deg)}
-.vbody{padding:0 16px 16px;display:grid;gap:12px;border-top:1px solid var(--line);padding-top:12px}
+.vbody{padding:12px 16px 16px;display:grid;gap:12px;border-top:1px solid var(--line)}
 .need{display:flex;flex-wrap:wrap;gap:8px}
-.need div{background:var(--bg);border-radius:8px;padding:8px 12px;display:grid;gap:0;min-width:120px}
+.need div{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:12px;padding:8px 12px;display:grid;min-width:130px}
 .need .k{font-size:.72rem;color:var(--muted)}
-.need .v{font-family:var(--f-num);font-weight:700;font-size:1.1rem}
-.small{font-size:.85rem}
+.need .v{font-family:var(--f-num);font-weight:700;font-size:1.05rem}
 .per{font-family:var(--f-num);font-size:.8rem;color:var(--muted)}
-.hk{font-size:.75rem;color:var(--muted)}
-.sec{display:grid;gap:10px}
-textarea{width:100%;min-height:80px;font-family:var(--f-num);font-size:.8rem;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);padding:8px}
+.hk{font-size:.74rem;color:var(--muted)}
+
+/* agenda en herinneringen */
+.herinner{background:linear-gradient(135deg,rgba(255,204,92,.14),rgba(255,130,40,.08));border:1px solid rgba(255,204,92,.45);border-radius:18px;padding:14px 18px;display:grid;gap:8px}
+.herinner h2{font-size:1.02rem;color:var(--warn)}
+.herinner ul,ul.alijst{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.aitem{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid var(--line)}
+.aitem .datum{font-family:var(--f-num);font-weight:700;min-width:6.6em;color:var(--accent)}
+.aitem .wat{flex:1 1 200px;min-width:0}
+.aitem .acties{display:flex;gap:6px}
+.aitem button{padding:5px 10px;font-size:.84rem}
+.nodig{display:block;font-size:.78rem;color:var(--muted);font-family:var(--f-num)}
+.aform{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;align-items:end}
+.aform label{display:grid;gap:4px;font-size:.76rem;color:var(--muted);font-weight:700}
+.aform input,.aform select{font-size:.92rem;padding:8px 9px;min-width:0;width:100%}
+.tag-st{font-size:.72rem;font-weight:700;border-radius:999px;padding:3px 9px}
+.st-kom{background:var(--accent-soft);color:var(--accent)} .st-open{background:var(--warn-soft);color:var(--warn)} .st-klaar{background:var(--ok-soft);color:var(--ok)}
+
+/* tijdlijn */
+.tl-kop{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;align-items:baseline}
+.tl-kop .big{font-size:1.2rem}
+.tl-bar{position:relative;height:30px;border-radius:10px;background:rgba(255,255,255,.05);overflow:hidden}
+.tl-seg{position:absolute;top:0;bottom:0;border-radius:4px;min-width:4px}
+.tl-seg.tw{background:var(--blue);opacity:.8}
+.tl-seg.ce{background:linear-gradient(90deg,var(--accent),var(--pink))}
+.tl-seg.ce2{background:var(--accent);opacity:.4}
+.tl-seg.hk{background:repeating-linear-gradient(45deg,var(--warn) 0 4px,transparent 4px 8px)}
+.tl-nu{position:absolute;top:-2px;bottom:-2px;width:3px;background:#fff;border-radius:2px;box-shadow:0 0 10px #fff}
+.tl-maand{display:flex;justify-content:space-between;font-family:var(--f-num);font-size:.7rem;color:var(--dim);margin-top:4px}
+.tl-lijst{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:6px}
+.tl-lijst li{display:flex;gap:8px;align-items:center;font-size:.86rem;padding:7px 10px;border-radius:10px;background:rgba(255,255,255,.04)}
+.tl-lijst .sw{width:12px;height:12px;border-radius:3px;flex:none}
+.tl-lijst .wanneer{margin-left:auto;font-family:var(--f-num);font-size:.78rem;color:var(--muted);white-space:nowrap}
+.tl-lijst li.voorbij{opacity:.5}
+
+/* herkansen, magister, instellingen */
+.hk-ctrl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:.92rem}
+.hk-lijst{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.hk-lijst li{display:grid;grid-template-columns:auto 1fr auto;gap:4px 12px;align-items:center;padding:12px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--line)}
+.hk-lijst li.top{background:linear-gradient(135deg,rgba(74,222,155,.14),rgba(74,222,155,.04));border-color:rgba(74,222,155,.35)}
+.hk-rang{font-family:var(--f-display);font-weight:800;font-size:1.3rem;color:var(--ok);width:1.4em;text-align:center}
+.hk-wat{min-width:0}
+.hk-effect{font-family:var(--f-num);font-weight:700;text-align:right;white-space:nowrap;color:var(--ok)}
+.hk-sub{grid-column:2 / -1;font-size:.82rem;color:var(--muted)}
+textarea{width:100%;min-height:110px;font-family:var(--f-num);font-size:.8rem;padding:10px}
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-details.fold{background:var(--paper);border:1px solid var(--line);border-radius:12px}
-details.fold>summary{cursor:pointer;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px;list-style:none}
-details.fold>summary::-webkit-details-marker{display:none}
-details.fold>summary h2{font-size:1.1rem}
-details.fold[open] .chev{transform:rotate(90deg)}
-.foldbody{padding:0 16px 16px;display:grid;gap:10px}
+.mg-prev{list-style:none;margin:0;padding:0;display:grid;gap:4px;max-height:340px;overflow:auto;font-size:.88rem}
+.mg-prev li{display:flex;gap:8px;padding:6px 10px;border-radius:8px;background:rgba(255,255,255,.04)}
+.mg-prev .pijl{font-family:var(--f-num);margin-left:auto;white-space:nowrap}
+.mg-prev li.nieuw .pijl{color:var(--ok);font-weight:700} .mg-prev li.anders .pijl{color:var(--warn);font-weight:700}
+ol.stappen{margin:0;padding-left:1.2em;font-size:.9rem;color:var(--muted);display:grid;gap:3px}
 .leerling{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-.leerling select,.leerling input{font:inherit;font-weight:700;padding:6px 10px;border-radius:8px;border:1px solid var(--line);background:var(--paper);color:var(--ink)}
-.leerling select{font-family:var(--f-display);font-size:1.05rem}
-.uitleg{margin:0;font-size:.92rem;color:var(--muted);max-width:75ch}
-details.mini>summary{cursor:pointer;list-style:none;font-size:.88rem;color:var(--muted);font-weight:700;display:inline-flex;gap:6px;align-items:center}
+.leerling select,.leerling input{font-weight:700;padding:7px 10px}
+details.mini>summary{cursor:pointer;list-style:none;font-size:.86rem;color:var(--muted);font-weight:700;display:inline-flex;gap:6px;align-items:center}
 details.mini>summary::-webkit-details-marker{display:none}
 details.mini[open]>summary .chev{transform:rotate(90deg)}
 details.mini .leerling{margin-top:8px}
-.herinner{background:var(--warn-soft);border:1px solid var(--warn);border-radius:12px;padding:12px 16px;display:grid;gap:8px}
-.herinner h2{font-size:1.05rem;color:var(--warn)}
-.herinner ul,.agenda ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
-.aitem{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;padding:8px 10px;border-radius:8px;background:var(--bg)}
-.aitem .datum{font-family:var(--f-num);font-weight:700;min-width:6.5em}
-.aitem .wat{flex:1 1 200px;min-width:0}
-.aitem .acties{display:flex;gap:6px}
-.aitem button{padding:4px 10px;font-size:.85rem}
-.aform{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;align-items:end}
-.aform label{display:grid;gap:3px;font-size:.78rem;color:var(--muted);font-weight:700}
-.aform input,.aform select{font:inherit;font-size:.92rem;padding:6px 8px;border-radius:8px;border:1px solid var(--line);background:var(--paper);color:var(--ink);min-width:0;width:100%}
-.tag-st{font-size:.72rem;font-weight:700;border-radius:999px;padding:2px 8px}
-.st-kom{background:var(--accent-soft);color:var(--accent)} .st-open{background:var(--warn-soft);color:var(--warn)} .st-klaar{background:var(--ok-soft);color:var(--ok)}
-.risico{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:.9rem}
-.risico .chip{border-radius:999px;padding:3px 10px;font-weight:700;font-size:.82rem;background:var(--bad-soft);color:var(--bad)}
-.risico .chip.w{background:var(--warn-soft);color:var(--warn)}
-.risico .chip.ok{background:var(--ok-soft);color:var(--ok)}
-.tijdlijn{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:grid;gap:12px}
-.tl-kop{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;align-items:baseline}
-.tl-kop .big{font-size:1.25rem}
-.tl-bar{position:relative;height:30px;border-radius:8px;background:var(--bg);overflow:hidden}
-.tl-seg{position:absolute;top:0;bottom:0;border-radius:4px;min-width:4px}
-.tl-seg.tw{background:var(--blue);opacity:.75}
-.tl-seg.ce{background:var(--accent)}
-.tl-seg.ce2{background:var(--accent);opacity:.45}
-.tl-seg.hk{background:repeating-linear-gradient(45deg,var(--warn) 0 4px,transparent 4px 8px);opacity:.9}
-.tl-nu{position:absolute;top:-2px;bottom:-2px;width:3px;background:var(--ink);border-radius:2px}
-.tl-maand{display:flex;justify-content:space-between;font-family:var(--f-num);font-size:.72rem;color:var(--muted)}
-.tl-lijst{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:6px}
-.tl-lijst li{display:flex;gap:8px;align-items:center;font-size:.88rem;padding:6px 8px;border-radius:8px;background:var(--bg)}
-.tl-lijst .sw{width:12px;height:12px;border-radius:3px;flex:none}
-.tl-lijst .wanneer{margin-left:auto;font-family:var(--f-num);font-size:.8rem;color:var(--muted);white-space:nowrap}
-.tl-lijst li.voorbij{opacity:.55}
-.hk-ctrl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:.92rem}
-.hk-ctrl input{width:4.6em}
-.hk-lijst{list-style:none;margin:0;padding:0;display:grid;gap:6px}
-.hk-lijst li{display:grid;grid-template-columns:auto 1fr auto;gap:4px 12px;align-items:center;padding:8px 10px;border-radius:8px;background:var(--bg)}
-.hk-lijst li.top{background:var(--ok-soft)}
-.hk-rang{font-family:var(--f-display);font-weight:700;font-size:1.1rem;color:var(--ok);width:1.4em;text-align:center}
-.hk-wat{min-width:0}
-.hk-effect{font-family:var(--f-num);font-weight:700;text-align:right;white-space:nowrap}
-.hk-sub{grid-column:2 / -1;font-size:.82rem;color:var(--muted)}
-.nodig{display:block;font-size:.8rem;color:var(--muted);font-family:var(--f-num)}
-.mg-prev{list-style:none;margin:0;padding:0;display:grid;gap:4px;max-height:320px;overflow:auto;font-size:.88rem}
-.mg-prev li{display:flex;gap:8px;padding:5px 8px;border-radius:6px;background:var(--bg)}
-.mg-prev .pijl{font-family:var(--f-num);margin-left:auto;white-space:nowrap}
-.mg-prev li.nieuw .pijl{color:var(--ok);font-weight:700}
-.mg-prev li.anders .pijl{color:var(--warn);font-weight:700}
-ol.stappen{margin:0;padding-left:1.2em;font-size:.9rem;color:var(--muted);display:grid;gap:2px}
-footer{font-size:.82rem;color:var(--muted);max-width:75ch}
-@media (max-width:560px){
-  details.vak>summary{grid-template-columns:1fr}
-  .vstats{justify-content:space-between}
-  .stat{justify-items:start}
+footer{font-size:.8rem;color:var(--dim);max-width:80ch}
+
+/* tablet: alleen iconen */
+@media (max-width:980px){
+  .app{grid-template-columns:84px minmax(0,1fr)}
+  .side{padding:18px 10px;align-items:center}
+  .merk div,.nav a span.lbl,.side .wie{display:none}
+  .nav a{justify-content:center;padding:6px}
+  .nav a .badge{position:absolute;top:0;right:4px}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .duo{grid-template-columns:minmax(0,1fr)}
 }
-@media (prefers-reduced-motion:reduce){.chev{transition:none}}
+/* telefoon: tabbalk onderin */
+@media (max-width:640px){
+  .app{grid-template-columns:minmax(0,1fr)}
+  .side{display:none}
+  .content{padding-block:18px 110px;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+  .tabbar{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;z-index:20;padding:8px max(8px, env(safe-area-inset-right, 0px)) calc(8px + env(safe-area-inset-bottom, 0px)) max(8px, env(safe-area-inset-left, 0px));background:rgba(12,14,36,.86);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--line)}
+  .tabbar a{position:relative;display:grid;justify-items:center;gap:3px;text-decoration:none;color:var(--muted);font-size:.68rem;font-weight:700}
+  .tabbar .ico{width:40px;height:32px;border-radius:12px;background:none;border:0}
+  .tabbar a.actief{color:var(--ink)}
+  .tabbar a.actief .ico{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#24120a;box-shadow:0 0 18px rgba(255,140,50,.5)}
+  .tabbar .badge{position:absolute;top:-4px;right:calc(50% - 26px);margin:0}
+  .meer{position:fixed;right:max(12px, env(safe-area-inset-right, 0px));bottom:calc(84px + env(safe-area-inset-bottom, 0px));z-index:21;display:grid;gap:4px;padding:8px;min-width:220px;border-radius:16px;background:#1c2150;border:1px solid var(--line2);box-shadow:0 18px 50px rgba(0,0,0,.5)}
+  .meer a{display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:10px;color:var(--ink);text-decoration:none;font-weight:700}
+  .meer a:hover,.meer a.actief{background:rgba(255,255,255,.07)}
+  .meer .ico{width:32px;height:32px}
+  .hero{grid-template-columns:minmax(0,1fr) 92px;gap:14px;padding:20px;align-items:start}
+  .hero h1{font-size:1.65rem}
+  .hero .uitleg,.hero .ster{display:none}
+  .ring{width:92px;height:92px} .ring svg{width:92px;height:92px} .ring .midden b{font-size:1.25rem} .ring .midden span{font-size:.58rem}
+  .tegel{padding:14px} .tegel .ico{width:40px;height:40px}
+  .stats{gap:10px} .stat .v{font-size:1.7rem}
+  details.vak>summary{grid-template-columns:1fr}
+  .vstats{justify-content:space-between} .vstats .stat{justify-items:start}
+}
+@media (prefers-reduced-motion:reduce){.view{animation:none}.chev,.tegel,.stat{transition:none}}
 </style>
+
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></symbol>
+  <symbol id="i-agenda" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M8 14h3M8 17h6"/></symbol>
+  <symbol id="i-cijfers" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></symbol>
+  <symbol id="i-uitslag" viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></symbol>
+  <symbol id="i-herk" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/><path d="M12 8v4l3 2"/></symbol>
+  <symbol id="i-magister" viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4V3h6v1M9 11h6M9 15h4"/></symbol>
+  <symbol id="i-inst" viewBox="0 0 24 24"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></symbol>
+  <symbol id="i-meer" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="19" cy="12" r="1.4"/></symbol>
+  <symbol id="i-ster" viewBox="0 0 24 24"><path d="M12 0 14.6 9.4 24 12 14.6 14.6 12 24 9.4 14.6 0 12 9.4 9.4z"/></symbol>
+</svg>
 
-<div class="wrap">
-  <header>
-    <span class="eyebrow">Ichthus College Dronten · vmbo TL · cohort 2025-2027</span>
-    <h1 id="naamKop">Examencijfers TL4</h1>
-    <div class="leerling">
-      <label for="leerlingKeuze" class="small muted">Leerling</label>
-      <select id="leerlingKeuze"></select>
-    </div>
-    <details class="mini" id="beheer">
-      <summary><span class="chev" aria-hidden="true">›</span> Leerlingen beheren</summary>
-    <div class="leerling">
-      <button type="button" id="nieuwKnop">Leerling toevoegen</button>
-      <button type="button" id="verwijderKnop">Verwijderen</button>
-    </div>
-    <form class="leerling" id="nieuwForm" hidden>
-      <input id="nieuwNaam" placeholder="Naam" autocomplete="off" aria-label="Naam nieuwe leerling">
-      <button type="submit" class="primary">Toevoegen</button>
-      <button type="button" id="nieuwAnnuleer">Annuleren</button>
-    </form>
-    <div class="leerling" id="verwijderBevestig" hidden>
-      <span class="small" id="verwijderTekst"></span>
-      <button type="button" class="primary" id="verwijderJa">Ja, verwijderen</button>
-      <button type="button" id="verwijderNee">Annuleren</button>
-    </div>
-    </details>
-    <p>Vul de cijfers uit Magister in bij de PTA toetsen. Je ziet per vak het SE cijfer, welk CE cijfer je nodig hebt, en of je met de verwachte CE cijfers slaagt. Toetsweek 1 loopt van 27 oktober tot en met 3 november, het CE eerste tijdvak van 14 mei tot en met 1 juni 2027.</p>
-  </header>
+<div class="app">
+  <aside class="side">
+    <a class="merk" href="#home" data-nav="home"><img src="data:image/png;base64,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" alt=""><div><b>Examencijfers</b><small>Ichthus College · TL4</small></div></a>
+    <nav class="nav" aria-label="Hoofdmenu">
+      <a href="#home" data-nav="home"><span class="ico"><svg><use href="#i-home"/></svg></span><span class="lbl">Lobby</span></a>
+      <a href="#agenda" data-nav="agenda"><span class="ico"><svg><use href="#i-agenda"/></svg></span><span class="lbl">Toetsagenda</span><span class="badge" id="navBadge" hidden></span></a>
+      <a href="#cijfers" data-nav="cijfers"><span class="ico"><svg><use href="#i-cijfers"/></svg></span><span class="lbl">Cijfers invoeren</span></a>
+      <a href="#uitslag" data-nav="uitslag"><span class="ico"><svg><use href="#i-uitslag"/></svg></span><span class="lbl">Uitslag</span></a>
+      <a href="#herkansen" data-nav="herkansen"><span class="ico"><svg><use href="#i-herk"/></svg></span><span class="lbl">Herkansen</span></a>
+      <a href="#magister" data-nav="magister"><span class="ico"><svg><use href="#i-magister"/></svg></span><span class="lbl">Uit Magister</span></a>
+      <a href="#instellingen" data-nav="instellingen"><span class="ico"><svg><use href="#i-inst"/></svg></span><span class="lbl">Instellingen</span></a>
+    </nav>
+    <div class="wie"><span class="eyebrow">Leerling</span><select id="leerlingKeuze" aria-label="Kies leerling"></select></div>
+  </aside>
 
+  <main>
+  <div class="content">
 
-  <section class="herinner" id="herinner" hidden aria-labelledby="herinnerKop">
-    <h2 id="herinnerKop">Cijfer nog invullen</h2>
-    <ul id="herinnerLijst"></ul>
-  </section>
-
-  <section class="uitslag" aria-labelledby="uitslagKop">
-    <div class="status">
-      <div>
-        <div class="eyebrow" id="uitslagKop">Verwachte uitslag</div>
-        <div class="big" id="uitslagTekst">…</div>
+    <!-- LOBBY -->
+    <section class="view" data-view="home">
+      <div class="hero">
+        <span class="ster" style="top:20px;right:200px"><svg width="16" height="16"><use href="#i-ster"/></svg></span>
+        <span class="ster" style="bottom:26px;right:180px;opacity:.5"><svg width="10" height="10"><use href="#i-ster"/></svg></span>
+        <span class="ster" style="top:24px;right:24px;opacity:.6;color:#ffd08a"><svg width="12" height="12"><use href="#i-ster"/></svg></span>
+        <div class="hero-tekst">
+          <span class="datum-kop" id="homeDatum"></span>
+          <h1 id="homeNaam">Welkom</h1>
+          <div class="statusregel"><b id="homeStatus"></b><span class="pill" id="homePill"></span></div>
+          <p class="uitleg" id="homeUitleg"></p>
+        </div>
+        <div class="ring" role="img" aria-label="Deel van de PTA dat al is ingevuld">
+          <svg viewBox="0 0 120 120"><defs><linearGradient id="ringGr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffa23a"/><stop offset="1" stop-color="#e04a8f"/></linearGradient></defs>
+            <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="11"/>
+            <circle id="ringBoog" cx="60" cy="60" r="52" fill="none" stroke="url(#ringGr)" stroke-width="11" stroke-linecap="round" stroke-dasharray="0 400"/></svg>
+          <div class="midden"><b id="ringPct">0%</b><span>PTA klaar</span></div>
+        </div>
       </div>
-      <span class="pill" id="uitslagPill"></span>
-    </div>
-    <p class="uitleg" id="uitslagUitleg"></p>
-    <div class="risico" id="risico"></div>
-    <ul class="checks" id="checks"></ul>
-    <div class="tablewrap">
-      <table>
-        <thead><tr><th>Vak</th><th class="r">SE</th><th class="r">CE verwacht</th><th class="r">Eindcijfer</th><th class="r">CE nodig voor 6</th></tr></thead>
-        <tbody id="overzicht"></tbody>
-      </table>
-    </div>
-    <p class="small muted" style="margin:0">Laat je bij CE verwacht niets in, dan rekent de site met je SE cijfer als CE cijfer (grijs weergegeven).</p>
-  </section>
 
-  <section class="tijdlijn" aria-labelledby="tlKop">
-    <div class="tl-kop">
-      <div><div class="eyebrow" id="tlKop">Schooljaar 2026-2027</div><div class="big" id="tlAftel">…</div></div>
-      <span class="small muted" id="tlSub"></span>
-    </div>
-    <div>
-      <div class="tl-bar" id="tlBar" role="img" aria-label="Tijdlijn met toetsweken en centraal examen"></div>
-      <div class="tl-maand" id="tlMaand"></div>
-    </div>
-    <ul class="tl-lijst" id="tlLijst"></ul>
-  </section>
-
-  <details class="fold agenda" id="agendaFold" open>
-    <summary><h2>Toetsagenda <span class="small muted" id="agendaAantal"></span></h2><span class="chev" aria-hidden="true">›</span></summary>
-    <div class="foldbody">
-      <form class="aform" id="agendaForm">
-        <label>Datum<input type="date" id="aDatum" required></label>
-        <label>Vak<select id="aVak"></select></label>
-        <label>Toets<select id="aToets"></select></label>
-        <label id="aOmsLabel">Omschrijving<input id="aOms" autocomplete="off" placeholder="Bijvoorbeeld SO hoofdstuk 3"></label>
-        <button type="submit" class="primary">Toevoegen</button>
-      </form>
-      <ul id="agendaLijst"></ul>
-      <p class="small muted" style="margin:0">Is de datum van een PTA toets voorbij en staat het cijfer er nog niet in, dan zie je bovenaan een herinnering. Zodra je het cijfer invult, verdwijnt die vanzelf. Bij andere toetsen vink je hem zelf af.</p>
-    </div>
-  </details>
-
-  <details class="fold" id="hkFold">
-    <summary><h2>Herkansingsadviseur <span class="small muted" id="hkAantal"></span></h2><span class="chev" aria-hidden="true">›</span></summary>
-    <div class="foldbody">
-      <p class="uitleg">In het examenjaar mag je na periode 3 drie toetsen herkansen. Je kiest uit herkansbare PTA toetsen uit periode 4 van klas 3 en periode 1 tot en met 3 van klas 4. Het hoogste cijfer telt. Hieronder staan de toetsen waar een herkansing je SE het meest oplevert.</p>
-      <div class="hk-ctrl"><label for="hkDoel">Stel dat de herkansing een</label><input class="cell" id="hkDoel" inputmode="decimal" value="7,0" autocomplete="off"><span>wordt.</span></div>
-      <ul class="hk-lijst" id="hkLijst"></ul>
-    </div>
-  </details>
-
-  <details class="fold" id="pakketFold">
-    <summary><h2>Vakkenpakket <span class="small muted" id="pakketAantal"></span></h2><span class="chev" aria-hidden="true">›</span></summary>
-    <div class="foldbody"><div class="pakket" id="pakket"></div></div>
-  </details>
-
-  <section class="sec" aria-labelledby="vakKop">
-    <h2 id="vakKop">Cijfers per vak</h2>
-    <div class="vakken" id="vakken"></div>
-  </section>
-
-  <details class="fold" id="mgFold">
-    <summary><h2>Cijfers plakken uit Magister</h2><span class="chev" aria-hidden="true">›</span></summary>
-    <div class="foldbody">
-      <ol class="stappen">
-        <li>Open Magister in de browser en ga naar Cijfers, Cijferoverzicht.</li>
-        <li>Kies bij Cijfersoort "PTA kolommen" en bij Cijferperiodes LJ3 en LJ4.</li>
-        <li>Selecteer de hele tabel, kopieer hem en plak hem hieronder. De lijst Laatste cijfers werkt ook.</li>
-      </ol>
-      <textarea id="mgTekst" aria-label="Geplakte tabel uit Magister" spellcheck="false" placeholder="Plak hier de tabel uit Magister"></textarea>
-      <div class="row"><button type="button" class="primary" id="mgLees">Cijfers herkennen</button><span class="small muted" id="mgMelding" role="status"></span></div>
-      <div id="mgResultaat" hidden>
-        <ul class="mg-prev" id="mgPrev"></ul>
-        <div class="row"><button type="button" class="primary" id="mgToepas">Deze wijzigingen opslaan</button><button type="button" id="mgAnnuleer">Annuleren</button></div>
+      <div class="stats">
+        <a class="stat" href="#uitslag"><span class="k">Gemiddeld SE</span><span class="v num" id="statGem">–</span><span class="s">over je examenvakken</span></a>
+        <a class="stat" href="#agenda"><span class="k">Toetsen gepland</span><span class="v num" id="statToetsen">0</span><span class="s">in je agenda</span></a>
+        <a class="stat" href="#agenda" id="statOpenTile"><span class="k">Cijfers invullen</span><span class="v num" id="statOpen">0</span><span class="s">na gemaakte toetsen</span></a>
+        <div class="stat"><span class="k">Weken tot CE</span><span class="v num" id="statCE">–</span><span class="s">start 14 mei 2027</span></div>
       </div>
-    </div>
-  </details>
 
-  <details class="fold">
-    <summary><h2>Bewaren en overzetten</h2><span class="chev" aria-hidden="true">›</span></summary>
-    <div class="foldbody">
-    <p class="small muted" style="margin:0">De cijfers blijven bewaard in deze browser. Wil je ze op een ander apparaat gebruiken, kopieer dan de code hieronder en plak hem daar. De code hoort bij de gekozen leerling.</p>
-    <textarea id="code" aria-label="Code met alle cijfers" spellcheck="false"></textarea>
-    <div class="row">
-      <button type="button" id="kopieer">Code kopiëren</button>
-      <button type="button" id="laad">Geplakte code laden</button>
-      <span class="small muted" id="codeMelding" role="status"></span>
-    </div>
-    </div>
-  </details>
+      <section class="herinner" id="herinner" hidden aria-labelledby="herinnerKop">
+        <h2 id="herinnerKop">Cijfer nog invullen</h2>
+        <ul id="herinnerLijst"></ul>
+      </section>
 
-  <footer>
-    Rekenregels: SE cijfer is het gewogen gemiddelde volgens het PTA, afgerond op één decimaal. Eindcijfer is (SE + CE) / 2, afgerond op een heel cijfer. Geslaagd als het CE gemiddelde 5,5 of hoger is, Nederlands minimaal een 5 heeft, er geen cijfer onder de 4 is, en: alles 6 of hoger, of één 5, of één 4 met minstens één 7, of twee 5en met minstens één 7. Het officiële examenreglement 2026-2027 van school is leidend.
-  </footer>
+      <div class="duo">
+        <section class="paneel" aria-labelledby="volgKop">
+          <div class="paneel-kop"><h2 id="volgKop">Volgende toetsen</h2><a href="#agenda">Naar agenda ›</a></div>
+          <ul class="alijst" id="homeVolgende"></ul>
+          <div class="risico" id="homeRisico"></div>
+        </section>
+        <section class="paneel" aria-labelledby="tlKop">
+          <div class="tl-kop"><div><div class="eyebrow" id="tlKop">Schooljaar 2026-2027</div><div class="big" id="tlAftel">…</div></div><span class="small muted" id="tlSub"></span></div>
+          <div><div class="tl-bar" id="tlBar" role="img" aria-label="Tijdlijn met toetsweken en centraal examen"></div><div class="tl-maand" id="tlMaand"></div></div>
+          <ul class="tl-lijst" id="tlLijst"></ul>
+        </section>
+      </div>
+
+      <section aria-labelledby="snelKop" style="display:grid;gap:12px">
+        <h2 id="snelKop">Snel naar</h2>
+        <div class="tegels">
+          <a class="tegel" href="#agenda"><span class="ico g1"><svg><use href="#i-agenda"/></svg></span><b>Toetsagenda</b><span class="sub" id="tileAgenda"></span></a>
+          <a class="tegel" href="#cijfers"><span class="ico g2"><svg><use href="#i-cijfers"/></svg></span><b>Cijfers invoeren</b><span class="sub" id="tileCijfers"></span></a>
+          <a class="tegel" href="#uitslag"><span class="ico g3"><svg><use href="#i-uitslag"/></svg></span><b>Uitslag</b><span class="sub" id="tileUitslag"></span></a>
+          <a class="tegel" href="#herkansen"><span class="ico g4"><svg><use href="#i-herk"/></svg></span><b>Herkansen</b><span class="sub" id="tileHerk"></span></a>
+          <a class="tegel" href="#magister"><span class="ico g5"><svg><use href="#i-magister"/></svg></span><b>Uit Magister</b><span class="sub">Cijfers plakken in één keer</span></a>
+          <a class="tegel" href="#instellingen"><span class="ico g6"><svg><use href="#i-inst"/></svg></span><b>Instellingen</b><span class="sub">Vakken, leerlingen, bewaren</span></a>
+        </div>
+      </section>
+    </section>
+
+    <!-- AGENDA -->
+    <section class="view" data-view="agenda" hidden>
+      <div class="vkop"><span class="eyebrow">Plannen</span><h1>Toetsagenda <span class="small muted" id="agendaAantal"></span></h1><p>Zet je toetsen erin. Bij PTA toetsen zie je wat je moet halen, en na de toets krijg je een herinnering om het cijfer in te vullen.</p></div>
+      <section class="paneel">
+        <form class="aform" id="agendaForm">
+          <label>Datum<input type="date" id="aDatum" required></label>
+          <label>Vak<select id="aVak"></select></label>
+          <label>Toets<select id="aToets"></select></label>
+          <label id="aOmsLabel">Omschrijving<input id="aOms" autocomplete="off" placeholder="Bijvoorbeeld SO hoofdstuk 3"></label>
+          <button type="submit" class="primary">Toevoegen</button>
+        </form>
+      </section>
+      <ul class="alijst" id="agendaLijst"></ul>
+    </section>
+
+    <!-- CIJFERS -->
+    <section class="view" data-view="cijfers" hidden>
+      <div class="vkop"><span class="eyebrow">Invoeren</span><h1>Cijfers per vak</h1><p>Open een vak en vul de cijfers uit Magister in. Bij handelingsdelen vul je V, G of O in.</p></div>
+      <div class="vakken" id="vakken"></div>
+    </section>
+
+    <!-- UITSLAG -->
+    <section class="view" data-view="uitslag" hidden>
+      <div class="vkop"><span class="eyebrow">Slaag of zak</span><h1>Verwachte uitslag</h1></div>
+      <section class="paneel">
+        <div class="status"><div class="big" id="uitslagTekst">…</div><span class="pill" id="uitslagPill"></span></div>
+        <p class="uitleg" id="uitslagUitleg"></p>
+        <div class="risico" id="risico"></div>
+        <ul class="checks" id="checks"></ul>
+      </section>
+      <section class="paneel">
+        <h2>Per vak</h2>
+        <div class="tablewrap"><table>
+          <thead><tr><th>Vak</th><th class="r">SE</th><th class="r">CE verwacht</th><th class="r">Eindcijfer</th><th class="r">CE nodig voor 6</th></tr></thead>
+          <tbody id="overzicht"></tbody>
+        </table></div>
+        <p class="small muted" style="margin:0">Vul je bij CE verwacht niets in, dan rekent de site met je SE cijfer als CE cijfer.</p>
+      </section>
+      <footer>Rekenregels: SE cijfer is het gewogen gemiddelde volgens het PTA, afgerond op één decimaal. Eindcijfer is (SE + CE) / 2, afgerond op een heel cijfer. Geslaagd als het CE gemiddelde 5,5 of hoger is, Nederlands minimaal een 5 heeft, er geen cijfer onder de 4 is, en: alles 6 of hoger, of één 5, of één 4 met minstens één 7, of twee 5en met minstens één 7. Het officiële examenreglement 2026-2027 van school is leidend.</footer>
+    </section>
+
+    <!-- HERKANSEN -->
+    <section class="view" data-view="herkansen" hidden>
+      <div class="vkop"><span class="eyebrow">Slim kiezen</span><h1>Herkansingsadviseur <span class="small muted" id="hkAantal"></span></h1><p>In het examenjaar mag je na periode 3 drie toetsen herkansen, uit periode 4 van klas 3 en periode 1 tot en met 3 van klas 4. Het hoogste cijfer telt. Hier zie je waar een herkansing het meeste oplevert.</p></div>
+      <section class="paneel">
+        <div class="hk-ctrl"><label for="hkDoel">Stel dat de herkansing een</label><input class="cell" id="hkDoel" inputmode="decimal" value="7,0" autocomplete="off"><span>wordt.</span></div>
+        <ul class="hk-lijst" id="hkLijst"></ul>
+      </section>
+    </section>
+
+    <!-- MAGISTER -->
+    <section class="view" data-view="magister" hidden>
+      <div class="vkop"><span class="eyebrow">Importeren</span><h1>Cijfers uit Magister</h1><p>Plak het cijferoverzicht en de site vult alle PTA cijfers zelf in. Je ziet eerst wat er verandert.</p></div>
+      <section class="paneel">
+        <ol class="stappen">
+          <li>Open Magister in de browser en ga naar Cijfers, Cijferoverzicht.</li>
+          <li>Kies bij Cijfersoort "PTA kolommen" en bij Cijferperiodes LJ3 en LJ4.</li>
+          <li>Selecteer de hele tabel, kopieer hem en plak hem hieronder. De lijst Laatste cijfers werkt ook.</li>
+        </ol>
+        <textarea id="mgTekst" aria-label="Geplakte tabel uit Magister" spellcheck="false" placeholder="Plak hier de tabel uit Magister"></textarea>
+        <div class="row"><button type="button" class="primary" id="mgLees">Cijfers herkennen</button><span class="small muted" id="mgMelding" role="status"></span></div>
+        <div id="mgResultaat" hidden style="display:grid;gap:10px">
+          <ul class="mg-prev" id="mgPrev"></ul>
+          <div class="row"><button type="button" class="primary" id="mgToepas">Deze wijzigingen opslaan</button><button type="button" id="mgAnnuleer">Annuleren</button></div>
+        </div>
+      </section>
+    </section>
+
+    <!-- INSTELLINGEN -->
+    <section class="view" data-view="instellingen" hidden>
+      <div class="vkop"><span class="eyebrow">Instellingen</span><h1 id="naamKop">Examencijfers</h1><p>Ichthus College Dronten · vmbo TL · PTA cohort 2025-2027</p></div>
+      <section class="paneel">
+        <h2>Leerling</h2>
+        <div class="leerling"><label for="leerlingKeuze2" class="small muted">Gekozen leerling</label><select id="leerlingKeuze2"></select></div>
+        <details class="mini" id="beheer">
+          <summary><span class="chev" aria-hidden="true">›</span> Leerlingen beheren</summary>
+          <div class="leerling"><button type="button" id="nieuwKnop">Leerling toevoegen</button><button type="button" id="verwijderKnop">Verwijderen</button></div>
+          <form class="leerling" id="nieuwForm" hidden>
+            <input id="nieuwNaam" placeholder="Naam" autocomplete="off" aria-label="Naam nieuwe leerling">
+            <button type="submit" class="primary">Toevoegen</button><button type="button" id="nieuwAnnuleer">Annuleren</button>
+          </form>
+          <div class="leerling" id="verwijderBevestig" hidden>
+            <span class="small" id="verwijderTekst"></span>
+            <button type="button" class="primary" id="verwijderJa">Ja, verwijderen</button><button type="button" id="verwijderNee">Annuleren</button>
+          </div>
+        </details>
+      </section>
+      <section class="paneel">
+        <h2>Vakkenpakket <span class="small muted" id="pakketAantal"></span></h2>
+        <div class="pakket" id="pakket"></div>
+      </section>
+      <section class="paneel">
+        <h2>Bewaren en overzetten</h2>
+        <p class="small muted" style="margin:0">De cijfers blijven bewaard in deze browser. Wil je ze op een ander apparaat gebruiken, kopieer dan de code en plak hem daar. De code hoort bij de gekozen leerling.</p>
+        <textarea id="code" aria-label="Code met alle cijfers" spellcheck="false"></textarea>
+        <div class="row"><button type="button" id="kopieer">Code kopiëren</button><button type="button" id="laad">Geplakte code laden</button><span class="small muted" id="codeMelding" role="status"></span></div>
+      </section>
+    </section>
+
+  </div>
+  </main>
+</div>
+
+<nav class="tabbar" aria-label="Menu">
+  <a href="#home" data-nav="home"><span class="ico"><svg><use href="#i-home"/></svg></span>Lobby</a>
+  <a href="#agenda" data-nav="agenda"><span class="ico"><svg><use href="#i-agenda"/></svg></span>Agenda<span class="badge" id="navBadgeM" hidden></span></a>
+  <a href="#cijfers" data-nav="cijfers"><span class="ico"><svg><use href="#i-cijfers"/></svg></span>Cijfers</a>
+  <a href="#uitslag" data-nav="uitslag"><span class="ico"><svg><use href="#i-uitslag"/></svg></span>Uitslag</a>
+  <a href="#meer" data-nav="meer"><span class="ico"><svg><use href="#i-meer"/></svg></span>Meer</a>
+</nav>
+<div class="meer" id="meerMenu" hidden>
+  <a href="#herkansen" data-nav="herkansen"><span class="ico g4"><svg><use href="#i-herk"/></svg></span>Herkansen</a>
+  <a href="#magister" data-nav="magister"><span class="ico g5"><svg><use href="#i-magister"/></svg></span>Uit Magister</a>
+  <a href="#instellingen" data-nav="instellingen"><span class="ico g6"><svg><use href="#i-inst"/></svg></span>Instellingen</a>
 </div>
 
 <script>
@@ -505,15 +659,17 @@ function renderUitslag(){
     u='Er gaat nog niets mis, maar nog niet elke regel is te controleren.'+(zonder.length?' Nog geen cijfers voor: '+zonder.join(', ')+'.':'')+(checks.some(c=>!c.info&&c.ok===null&&/handelingsdelen/.test(c.t))?' Ook staan nog niet alle handelingsdelen van LO op V of G.':'')+' Zodra die er zijn, toont dit blok Op koers of Let op.';}
   uitleg.textContent=u;
   renderRisico(rows); renderHerkansing();
+  let wS=0,wT=0,seS=0,seN=0; for(const id of S.pakket){ const v=BY_ID[id]; const i=seInfo(v); wS+=i.w; wT+=i.wTot; if(['ce','se'].includes(v.type)&&i.se!=null){seS+=i.se;seN++;} }
+  UIT={tekst:txt.textContent,pillKlasse:pill.className,pill:pill.textContent,uitleg:u,voortgang:wT?wS/wT:0,gem:seN?seS/seN:null,risico:$('risico').innerHTML};
+  renderHome();
 }
 
 function renderLeerling(){
-  const sel=document.getElementById('leerlingKeuze'); sel.innerHTML='';
-  for(const [id,l] of Object.entries(DB.leerlingen)){const o=document.createElement('option'); o.value=id; o.textContent=l.naam; o.selected=id===DB.actief; sel.appendChild(o);}
+  for(const sid of ['leerlingKeuze','leerlingKeuze2']){ const sel=document.getElementById(sid); sel.innerHTML='';
+  for(const [id,l] of Object.entries(DB.leerlingen)){const o=document.createElement('option'); o.value=id; o.textContent=l.naam; o.selected=id===DB.actief; sel.appendChild(o);} }
   document.getElementById('naamKop').textContent='Examencijfers '+S.naam;
   document.getElementById('verwijderKnop').hidden=Object.keys(DB.leerlingen).length<2;
   document.getElementById('pakketAantal').textContent=`(${S.pakket.length} vakken)`;
-  document.getElementById('pakketFold').open=S.pakket.length===0;
 }
 const VANDAAG=()=>{const d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');};
 const datumNL=iso=>{const [y,m,d]=iso.split('-').map(Number); return new Date(y,m-1,d).toLocaleDateString('nl-NL',{weekday:'short',day:'numeric',month:'short'});};
@@ -552,11 +708,12 @@ function renderAgenda(){
   const open=items.filter(a=>status(a)==='open'); const h=$('herinnerLijst'); h.innerHTML='';
   for(const a of open){ const {t}=toetsInfo(a); const li=document.createElement('li'); li.className='aitem';
     li.innerHTML=`<span class="datum">${datumNL(a.datum)}</span><span class="wat">${aTitel(a)}</span><span class="acties">${t?'<button type="button" class="primary" data-ga>Cijfer invullen</button>':'<button type="button" data-af>Afvinken</button>'}</span>`;
-    const ga=li.querySelector('[data-ga]'); if(ga) ga.addEventListener('click',()=>{ const d=$('vak-'+a.vak); if(!d) return; d.open=true; openState.add(a.vak); const inp=$('c-'+a.vak+'-'+t[0]); d.scrollIntoView({behavior:'smooth',block:'start'}); if(inp) setTimeout(()=>inp.focus({preventScroll:true}),400); });
+    const ga=li.querySelector('[data-ga]'); if(ga) ga.addEventListener('click',()=>{ go('cijfers'); const d=$('vak-'+a.vak); if(!d) return; d.open=true; openState.add(a.vak); const inp=$('c-'+a.vak+'-'+t[0]); d.scrollIntoView({behavior:'smooth',block:'start'}); if(inp) setTimeout(()=>inp.focus({preventScroll:true}),400); });
     const af=li.querySelector('[data-af]'); if(af) af.addEventListener('click',()=>{a.klaar=true; save(); renderAgenda();});
     h.appendChild(li); }
   $('herinner').hidden=!open.length;
   $('herinnerKop').textContent=open.length===1?'1 cijfer nog invullen':`${open.length} cijfers nog invullen`;
+  renderHome();
 }
 
 // Tijdlijn
@@ -607,7 +764,7 @@ function renderHerkansing(){
     else { const a=r0(k.i.se), b=r0(k.seNa); if(a!==b) sub+=` · eindcijfer ${a} wordt ${b}`; }
     li.innerHTML=`<span class="hk-rang">${n<3?n+1:''}</span><span class="hk-wat"><strong>${k.v.naam}</strong> · ${k.t[0]} ${k.t[2]}</span><span class="hk-effect">+${fmt(k.seNa-k.i.se)}</span><span class="hk-sub">${sub}</span>`;
     ul.appendChild(li); });
-  $('hkAantal').textContent=`(${Math.min(3,kand.length)} tips)`;
+  {const n=Math.min(3,kand.length); $("hkAantal").textContent=`(${n} tip${n>1?"s":""})`;}
 }
 
 // Risicovakken
@@ -675,6 +832,43 @@ function mgLees(){
   if(onbekend.length) msg+=` Niet herkend: ${onbekend.slice(0,4).join('; ')}${onbekend.length>4?' en meer':''}.`;
   $('mgMelding').textContent=msg; $('mgResultaat').hidden=!mgVoorstel.length;
 }
+let UIT={};
+// Lobby
+function renderHome(){
+  if(!$('homeNaam')) return;
+  const voornaam=S.naam.split(' ')[0]; const uur=new Date().getHours();
+  $('homeNaam').textContent=(uur<6?'Goedenacht':uur<12?'Goedemorgen':uur<18?'Goedemiddag':'Goedenavond')+', '+voornaam;
+  {const ds=new Date().toLocaleDateString('nl-NL',{weekday:'long',day:'numeric',month:'long'}); $('homeDatum').textContent=ds.charAt(0).toUpperCase()+ds.slice(1);}
+  $('homeStatus').textContent=UIT.tekst||''; $('homePill').className=UIT.pillKlasse||'pill'; $('homePill').textContent=UIT.pill||''; $('homeUitleg').textContent=UIT.uitleg||'';
+  const p=Math.round((UIT.voortgang||0)*100); $('ringPct').textContent=p+'%';
+  const C=2*Math.PI*52; $('ringBoog').setAttribute('stroke-dasharray',`${C*p/100} ${C}`);
+  $('statGem').textContent=UIT.gem==null?'–':fmt(r1(UIT.gem));
+  const nu=dag(VANDAAG()), ce=dag('2027-05-14'); $('statCE').textContent=nu<ce?Math.ceil((ce-nu)/7):'0';
+  const items=[...S.agenda].sort((a,b)=>a.datum.localeCompare(b.datum));
+  const kom=items.filter(a=>['kom','vandaag'].includes(status(a))), open=items.filter(a=>status(a)==='open');
+  $('statToetsen').textContent=kom.length; $('statOpen').textContent=open.length;
+  $('statOpenTile').classList.toggle('alarm',open.length>0);
+  const ul=$('homeVolgende'); ul.innerHTML='';
+  for(const a of kom.slice(0,4)){ const li=document.createElement('li'); li.className='aitem';
+    li.innerHTML=`<span class="datum">${datumNL(a.datum)}</span><span class="wat">${aTitel(a)}${nodigBij(a,status(a))}</span>`; ul.appendChild(li); }
+  if(!kom.length) ul.innerHTML='<li class="leeg">Geen toetsen gepland. <a href="#agenda">Zet je eerste toets in de agenda</a>.</li>';
+  $('homeRisico').innerHTML=UIT.risico||'';
+  $('navBadge').textContent=open.length||''; $('navBadge').hidden=!open.length; $('navBadgeM').textContent=open.length||''; $('navBadgeM').hidden=!open.length;
+  const zet=(id,t)=>{const e=$(id); if(e) e.textContent=t;};
+  zet('tileAgenda',kom.length?`${kom.length} toets${kom.length>1?'en':''} gepland`:'Nog niets gepland');
+  zet('tileCijfers',`${p}% van de PTA ingevuld`);
+  zet('tileUitslag',UIT.pill?UIT.pill:'');
+  zet('tileHerk',$('hkAantal').textContent.replace(/[()]/g,'')||'Nog geen tips');
+}
+// Navigatie
+const VIEWS=['home','agenda','cijfers','uitslag','herkansen','magister','instellingen'];
+function go(v,push=true){ if(!VIEWS.includes(v)) v='home';
+  for(const s of document.querySelectorAll('[data-view]')) s.hidden=s.dataset.view!==v;
+  for(const a of document.querySelectorAll('[data-nav]')) a.classList.toggle('actief',a.dataset.nav===v||(a.dataset.nav==='meer'&&['herkansen','magister','instellingen'].includes(v)));
+  $('meerMenu').hidden=true;
+  if(push){ try{ history.replaceState(null,'','#'+v); }catch(e){} }
+  window.scrollTo({top:0});
+}
 function renderAll(){
   renderLeerling(); renderPakket(); renderVakken(); renderUitslag(); renderAgenda(); renderTijdlijn(); document.getElementById('code').value=JSON.stringify(S);
 }
@@ -691,7 +885,7 @@ document.getElementById('laad').addEventListener('click',()=>{
   catch(e){m.textContent='Deze code klopt niet. Kopieer hem opnieuw in zijn geheel.';}
 });
 const $=id=>document.getElementById(id);
-$('leerlingKeuze').addEventListener('change',e=>{DB.actief=e.target.value; S=DB.leerlingen[DB.actief]; save(); openState.clear(); renderAll();});
+for(const sid of ['leerlingKeuze','leerlingKeuze2']) $(sid).addEventListener('change',e=>{DB.actief=e.target.value; S=DB.leerlingen[DB.actief]; save(); openState.clear(); renderAll();});
 $('nieuwKnop').addEventListener('click',()=>{$('nieuwForm').hidden=false; $('verwijderBevestig').hidden=true; $('nieuwNaam').value=''; $('nieuwNaam').focus();});
 $('nieuwAnnuleer').addEventListener('click',()=>{$('nieuwForm').hidden=true;});
 $('nieuwForm').addEventListener('submit',e=>{e.preventDefault(); const naam=$('nieuwNaam').value.trim(); if(!naam){$('nieuwNaam').focus();return;}
@@ -711,7 +905,12 @@ $('mgToepas').addEventListener('click',()=>{ for(const m of mgVoorstel){ S.cijfe
   S.pakket.sort((a,b)=>VAKKEN.indexOf(BY_ID[a])-VAKKEN.indexOf(BY_ID[b]));
   const n=mgVoorstel.length; mgVoorstel=[]; save(); renderAll(); $('mgResultaat').hidden=true; $('mgTekst').value=''; $('mgMelding').textContent=`${n} cijfers opgeslagen.`; });
 $('beheer').open=false;
+for(const a of document.querySelectorAll('[data-nav]')) a.addEventListener('click',e=>{ const v=a.dataset.nav; if(v==='meer'){ e.preventDefault(); $('meerMenu').hidden=!$('meerMenu').hidden; return; } e.preventDefault(); go(v); });
+document.addEventListener('click',e=>{ const l=e.target.closest('a[href^="#"]'); if(l&&!l.dataset.nav){ const v=l.getAttribute('href').slice(1); if(VIEWS.includes(v)){ e.preventDefault(); go(v); } } if(!e.target.closest('#meerMenu')&&!e.target.closest('[data-nav="meer"]')) $('meerMenu').hidden=true; });
+window.addEventListener('hashchange',()=>go(location.hash.slice(1),false));
 renderAll();
+go(location.hash.slice(1)||'home',false);
+
 if('serviceWorker' in navigator && location.protocol==='https:'){ navigator.serviceWorker.register('sw.js').catch(()=>{}); }
 </script>
 
