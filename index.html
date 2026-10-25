@@ -95,6 +95,16 @@ details[open] .chev{transform:rotate(90deg)}
 .sec{display:grid;gap:10px}
 textarea{width:100%;min-height:80px;font-family:var(--f-num);font-size:.8rem;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);padding:8px}
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+details.fold{background:var(--paper);border:1px solid var(--line);border-radius:12px}
+details.fold>summary{cursor:pointer;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px;list-style:none}
+details.fold>summary::-webkit-details-marker{display:none}
+details.fold>summary h2{font-size:1.1rem}
+details.fold[open] .chev{transform:rotate(90deg)}
+.foldbody{padding:0 16px 16px;display:grid;gap:10px}
+.leerling{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.leerling select,.leerling input{font:inherit;font-weight:700;padding:6px 10px;border-radius:8px;border:1px solid var(--line);background:var(--paper);color:var(--ink)}
+.leerling select{font-family:var(--f-display);font-size:1.05rem}
+.uitleg{margin:0;font-size:.92rem;color:var(--muted);max-width:75ch}
 footer{font-size:.82rem;color:var(--muted);max-width:75ch}
 @media (max-width:560px){
   details.vak>summary{grid-template-columns:1fr}
@@ -109,7 +119,23 @@ footer{font-size:.82rem;color:var(--muted);max-width:75ch}
 <div class="wrap">
   <header>
     <span class="eyebrow">Ichthus College Dronten · vmbo TL · cohort 2025-2027</span>
-    <h1>Examencijfers TL4</h1>
+    <h1 id="naamKop">Examencijfers TL4</h1>
+    <div class="leerling">
+      <label for="leerlingKeuze" class="small muted">Leerling</label>
+      <select id="leerlingKeuze"></select>
+      <button type="button" id="nieuwKnop">Leerling toevoegen</button>
+      <button type="button" id="verwijderKnop">Verwijderen</button>
+    </div>
+    <form class="leerling" id="nieuwForm" hidden>
+      <input id="nieuwNaam" placeholder="Naam" autocomplete="off" aria-label="Naam nieuwe leerling">
+      <button type="submit" class="primary">Toevoegen</button>
+      <button type="button" id="nieuwAnnuleer">Annuleren</button>
+    </form>
+    <div class="leerling" id="verwijderBevestig" hidden>
+      <span class="small" id="verwijderTekst"></span>
+      <button type="button" class="primary" id="verwijderJa">Ja, verwijderen</button>
+      <button type="button" id="verwijderNee">Annuleren</button>
+    </div>
     <p>Vul de cijfers uit Magister in bij de PTA toetsen. Je ziet per vak het SE cijfer, welk CE cijfer je nodig hebt, en of je met de verwachte CE cijfers slaagt. Toetsweek 1 loopt van 27 oktober tot en met 3 november, het CE eerste tijdvak van 14 mei tot en met 1 juni 2027.</p>
   </header>
 
@@ -122,6 +148,7 @@ footer{font-size:.82rem;color:var(--muted);max-width:75ch}
       </div>
       <span class="pill" id="uitslagPill"></span>
     </div>
+    <p class="uitleg" id="uitslagUitleg"></p>
     <ul class="checks" id="checks"></ul>
     <div class="tablewrap">
       <table>
@@ -132,26 +159,28 @@ footer{font-size:.82rem;color:var(--muted);max-width:75ch}
     <p class="small muted" style="margin:0">Laat je bij CE verwacht niets in, dan rekent de site met je SE cijfer als CE cijfer (grijs weergegeven).</p>
   </section>
 
-  <section class="sec" aria-labelledby="pakketKop">
-    <h2 id="pakketKop">Vakkenpakket</h2>
-    <div class="pakket" id="pakket"></div>
-  </section>
+  <details class="fold" id="pakketFold">
+    <summary><h2>Vakkenpakket <span class="small muted" id="pakketAantal"></span></h2><span class="chev" aria-hidden="true">›</span></summary>
+    <div class="foldbody"><div class="pakket" id="pakket"></div></div>
+  </details>
 
   <section class="sec" aria-labelledby="vakKop">
     <h2 id="vakKop">Cijfers per vak</h2>
     <div class="vakken" id="vakken"></div>
   </section>
 
-  <section class="sec" aria-labelledby="bewaarKop">
-    <h2 id="bewaarKop">Bewaren en overzetten</h2>
-    <p class="small muted" style="margin:0">De cijfers blijven bewaard in deze browser. Wil je ze op een ander apparaat gebruiken, kopieer dan de code hieronder en plak hem daar.</p>
+  <details class="fold">
+    <summary><h2>Bewaren en overzetten</h2><span class="chev" aria-hidden="true">›</span></summary>
+    <div class="foldbody">
+    <p class="small muted" style="margin:0">De cijfers blijven bewaard in deze browser. Wil je ze op een ander apparaat gebruiken, kopieer dan de code hieronder en plak hem daar. De code hoort bij de gekozen leerling.</p>
     <textarea id="code" aria-label="Code met alle cijfers" spellcheck="false"></textarea>
     <div class="row">
       <button type="button" id="kopieer">Code kopiëren</button>
       <button type="button" id="laad">Geplakte code laden</button>
       <span class="small muted" id="codeMelding" role="status"></span>
     </div>
-  </section>
+    </div>
+  </details>
 
   <footer>
     Rekenregels: SE cijfer is het gewogen gemiddelde volgens het PTA, afgerond op één decimaal. Eindcijfer is (SE + CE) / 2, afgerond op een heel cijfer. Geslaagd als het CE gemiddelde 5,5 of hoger is, Nederlands minimaal een 5 heeft, er geen cijfer onder de 4 is, en: alles 6 of hoger, of één 5, of één 4 met minstens één 7, of twee 5en met minstens één 7. Het officiële examenreglement 2026-2027 van school is leidend.
@@ -184,10 +213,10 @@ const VAKKEN = [
 ];
 const TYPE_LABEL={ce:'Examenvak met CE',se:'Alleen schoolexamen',vg:'Moet voldoende zijn',hd:'Handelingsdelen, voldoende of goed',info:'Eigen examenstof school'};
 const BY_ID=Object.fromEntries(VAKKEN.map(v=>[v.id,v]));
-const KEY='examencijfers-tl4-v5';
+const KEY='examencijfers-tl4-v6', OUDE_KEY='examencijfers-tl4-v5';
 
 // Startstand: cijfers uit Magister, stand 25-10-2026
-const VOORBEELD={voorbeeld:false,pakket:['ne','en','wi','nask1','bi','ma','pvtt','lo2','lo','kv1','levo'],
+const VOORBEELD={naam:'Liam Kuijk',pakket:['ne','en','wi','nask1','bi','ma','pvtt','lo2','lo','kv1','levo'],
  cijfers:{'nask1-331':9.2,'nask1-341':6.9,'ma-311':7.8,'ma-321':6.9,'ma-331':8.4,'ma-341':7.9,
  'lo2-311':6.0,'lo2-322':6.0,'lo2-323':7.0,'lo2-331':8.5,'lo2-412':7.5,
  'lo2-312':'G','lo2-313':'V','lo2-321':'G','lo2-332':'G','lo2-333':'V','lo2-341':'G','lo2-342':'V','lo2-343':'G',
@@ -196,13 +225,15 @@ const VOORBEELD={voorbeeld:false,pakket:['ne','en','wi','nask1','bi','ma','pvtt'
  'lo-321':'V','lo-331':'V','lo-332':'G','lo-341':'G','lo-342':'G','lo-411':'G','lo-414':'G'},
  ce:{}};
 
-let S=load();
+let DB=load(), S=DB.leerlingen[DB.actief];
 function load(){
-  try{const raw=localStorage.getItem(KEY); if(raw){const s=JSON.parse(raw); if(s&&s.pakket) return norm(s);}}catch(e){}
-  return JSON.parse(JSON.stringify(VOORBEELD));
+  try{const raw=localStorage.getItem(KEY); if(raw){const d=JSON.parse(raw); if(d&&d.leerlingen&&d.leerlingen[d.actief]){for(const k in d.leerlingen) d.leerlingen[k]=norm(d.leerlingen[k]); return d;}}}catch(e){}
+  const liam=norm(JSON.parse(JSON.stringify(VOORBEELD)));
+  try{const oud=localStorage.getItem(OUDE_KEY); if(oud){const o=JSON.parse(oud); if(o&&o.pakket) Object.assign(liam,norm(o),{naam:liam.naam});}}catch(e){}
+  return {actief:'l1',leerlingen:{l1:liam}};
 }
-function norm(s){return {voorbeeld:!!s.voorbeeld,pakket:Array.isArray(s.pakket)?s.pakket.filter(id=>BY_ID[id]):[],cijfers:s.cijfers||{},ce:s.ce||{}};}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){} document.getElementById('code').value=JSON.stringify(S);}
+function norm(s){return {naam:String(s.naam||'Leerling').slice(0,40),pakket:Array.isArray(s.pakket)?s.pakket.filter(id=>BY_ID[id]):[],cijfers:s.cijfers||{},ce:s.ce||{}};}
+function save(){DB.leerlingen[DB.actief]=S; try{localStorage.setItem(KEY,JSON.stringify(DB));}catch(e){} document.getElementById('code').value=JSON.stringify(S);}
 
 const r1=x=>Math.round(x*10+1e-9)/10;
 const r0=x=>Math.floor(x+0.5+1e-9);
@@ -230,7 +261,7 @@ function renderPakket(){
     lab.innerHTML=`<input type="checkbox" id="${id}" ${S.pakket.includes(v.id)?'checked':''}> ${v.naam}`;
     lab.querySelector('input').addEventListener('change',e=>{
       if(e.target.checked){ if(!S.pakket.includes(v.id)) S.pakket.push(v.id); } else S.pakket=S.pakket.filter(x=>x!==v.id);
-      S.pakket.sort((a,b)=>VAKKEN.indexOf(BY_ID[a])-VAKKEN.indexOf(BY_ID[b]));
+      S.pakket.sort((a,b)=>VAKKEN.indexOf(BY_ID[a])-VAKKEN.indexOf(BY_ID[b])); document.getElementById('pakketAantal').textContent=`(${S.pakket.length} vakken)`;
       save(); renderVakken(); renderUitslag();
     });
     el.appendChild(lab);
@@ -338,14 +369,27 @@ function renderUitslag(){
   const hard=checks.filter(c=>!c.info);
   const geslaagd=hard.every(c=>c.ok===true), gezakt=hard.some(c=>c.ok===false);
   const pill=document.getElementById('uitslagPill'), txt=document.getElementById('uitslagTekst');
-  if(!tel.length){txt.textContent='Kies eerst het vakkenpakket';pill.className='pill warn';pill.textContent='Geen vakken';}
-  else if(geslaagd){txt.textContent='Op koers om te slagen';pill.className='pill ok';pill.textContent=compleet?'Geslaagd':'Voorlopig';}
-  else if(gezakt){txt.textContent='Nog niet genoeg om te slagen';pill.className='pill bad';pill.textContent=compleet?'Gezakt':'Let op';}
-  else {txt.textContent='Nog te weinig cijfers';pill.className='pill warn';pill.textContent='Onvolledig';}
+  const zonder=rows.filter(r=>r.i.se==null).map(r=>r.v.naam);
+  const nogOpen=rows.filter(r=>r.i.se!=null&&r.i.rest>0).length;
+  const uitleg=document.getElementById('uitslagUitleg'); let u='';
+  if(!tel.length){txt.textContent='Kies eerst het vakkenpakket';pill.className='pill warn';pill.textContent='Geen vakken';u='Open Vakkenpakket hieronder en vink de vakken aan.';}
+  else if(gezakt){txt.textContent='Nog niet genoeg om te slagen';pill.className='pill bad';pill.textContent=compleet?'Gezakt':'Let op';u='Met de cijfers tot nu toe voldoet niet alles aan de slaagregels. Kijk bij de rode punten hieronder wat er beter moet.';}
+  else if(geslaagd){txt.textContent='Op koers om te slagen';pill.className='pill ok';pill.textContent=compleet?'Geslaagd':'Voorlopig';u=compleet?'Alle PTA cijfers staan erin en alle regels zijn gehaald.':'Met de cijfers tot nu toe worden alle slaagregels gehaald. Dit wordt definitief als alle PTA toetsen en het CE zijn gemaakt.';}
+  else {txt.textContent='Op koers met de cijfers tot nu toe';pill.className='pill warn';pill.textContent='Onvolledig';
+    u='Er gaat nog niets mis, maar nog niet elke regel is te controleren.'+(zonder.length?' Nog geen cijfers voor: '+zonder.join(', ')+'.':'')+(checks.some(c=>!c.info&&c.ok===null&&/handelingsdelen/.test(c.t))?' Ook staan nog niet alle handelingsdelen van LO op V of G.':'')+' Zodra die er zijn, toont dit blok Op koers of Let op.';}
+  uitleg.textContent=u;
 }
 
+function renderLeerling(){
+  const sel=document.getElementById('leerlingKeuze'); sel.innerHTML='';
+  for(const [id,l] of Object.entries(DB.leerlingen)){const o=document.createElement('option'); o.value=id; o.textContent=l.naam; o.selected=id===DB.actief; sel.appendChild(o);}
+  document.getElementById('naamKop').textContent='Examencijfers '+S.naam;
+  document.getElementById('verwijderKnop').hidden=Object.keys(DB.leerlingen).length<2;
+  document.getElementById('pakketAantal').textContent=`(${S.pakket.length} vakken)`;
+  document.getElementById('pakketFold').open=S.pakket.length===0;
+}
 function renderAll(){
-  renderPakket(); renderVakken(); renderUitslag(); document.getElementById('code').value=JSON.stringify(S);
+  renderLeerling(); renderPakket(); renderVakken(); renderUitslag(); document.getElementById('code').value=JSON.stringify(S);
 }
 document.getElementById('kopieer').addEventListener('click',()=>{
   const ta=document.getElementById('code'), m=document.getElementById('codeMelding');
@@ -353,9 +397,21 @@ document.getElementById('kopieer').addEventListener('click',()=>{
 });
 document.getElementById('laad').addEventListener('click',()=>{
   const m=document.getElementById('codeMelding');
-  try{const s=JSON.parse(document.getElementById('code').value); if(!s||!s.pakket) throw 0; S=norm(s); S.voorbeeld=false; save(); renderAll(); m.textContent='Cijfers geladen';}
+  try{const s=JSON.parse(document.getElementById('code').value); if(!s||!s.pakket) throw 0; const n=norm(s); if(!s.naam) n.naam=S.naam;
+    const bestaand=Object.keys(DB.leerlingen).find(k=>DB.leerlingen[k].naam.toLowerCase()===n.naam.toLowerCase());
+    if(bestaand) DB.actief=bestaand; else {DB.actief='l'+Date.now(); }
+    S=n; save(); renderAll(); m.textContent='Cijfers geladen voor '+n.naam;}
   catch(e){m.textContent='Deze code klopt niet. Kopieer hem opnieuw in zijn geheel.';}
 });
+const $=id=>document.getElementById(id);
+$('leerlingKeuze').addEventListener('change',e=>{DB.actief=e.target.value; S=DB.leerlingen[DB.actief]; save(); openState.clear(); renderAll();});
+$('nieuwKnop').addEventListener('click',()=>{$('nieuwForm').hidden=false; $('verwijderBevestig').hidden=true; $('nieuwNaam').value=''; $('nieuwNaam').focus();});
+$('nieuwAnnuleer').addEventListener('click',()=>{$('nieuwForm').hidden=true;});
+$('nieuwForm').addEventListener('submit',e=>{e.preventDefault(); const naam=$('nieuwNaam').value.trim(); if(!naam){$('nieuwNaam').focus();return;}
+  const id='l'+Date.now(); DB.leerlingen[id]=norm({naam,pakket:[],cijfers:{},ce:{}}); DB.actief=id; S=DB.leerlingen[id]; $('nieuwForm').hidden=true; save(); openState.clear(); renderAll();});
+$('verwijderKnop').addEventListener('click',()=>{$('verwijderTekst').textContent=`${S.naam} en alle cijfers verwijderen?`; $('verwijderBevestig').hidden=false; $('nieuwForm').hidden=true;});
+$('verwijderNee').addEventListener('click',()=>{$('verwijderBevestig').hidden=true;});
+$('verwijderJa').addEventListener('click',()=>{delete DB.leerlingen[DB.actief]; DB.actief=Object.keys(DB.leerlingen)[0]; S=DB.leerlingen[DB.actief]; $('verwijderBevestig').hidden=true; save(); openState.clear(); renderAll();});
 renderAll();
 </script>
 
