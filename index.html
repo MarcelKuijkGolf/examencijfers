@@ -2,6 +2,14 @@
 <html lang="nl">
 <head>
 <meta charset="utf-8">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1b2333">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Examencijfers">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Examencijfers TL4</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -123,6 +131,42 @@ details.mini .leerling{margin-top:8px}
 .aform input,.aform select{font:inherit;font-size:.92rem;padding:6px 8px;border-radius:8px;border:1px solid var(--line);background:var(--paper);color:var(--ink);min-width:0;width:100%}
 .tag-st{font-size:.72rem;font-weight:700;border-radius:999px;padding:2px 8px}
 .st-kom{background:var(--accent-soft);color:var(--accent)} .st-open{background:var(--warn-soft);color:var(--warn)} .st-klaar{background:var(--ok-soft);color:var(--ok)}
+.risico{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:.9rem}
+.risico .chip{border-radius:999px;padding:3px 10px;font-weight:700;font-size:.82rem;background:var(--bad-soft);color:var(--bad)}
+.risico .chip.w{background:var(--warn-soft);color:var(--warn)}
+.risico .chip.ok{background:var(--ok-soft);color:var(--ok)}
+.tijdlijn{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:grid;gap:12px}
+.tl-kop{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;align-items:baseline}
+.tl-kop .big{font-size:1.25rem}
+.tl-bar{position:relative;height:30px;border-radius:8px;background:var(--bg);overflow:hidden}
+.tl-seg{position:absolute;top:0;bottom:0;border-radius:4px;min-width:4px}
+.tl-seg.tw{background:var(--blue);opacity:.75}
+.tl-seg.ce{background:var(--accent)}
+.tl-seg.ce2{background:var(--accent);opacity:.45}
+.tl-seg.hk{background:repeating-linear-gradient(45deg,var(--warn) 0 4px,transparent 4px 8px);opacity:.9}
+.tl-nu{position:absolute;top:-2px;bottom:-2px;width:3px;background:var(--ink);border-radius:2px}
+.tl-maand{display:flex;justify-content:space-between;font-family:var(--f-num);font-size:.72rem;color:var(--muted)}
+.tl-lijst{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:6px}
+.tl-lijst li{display:flex;gap:8px;align-items:center;font-size:.88rem;padding:6px 8px;border-radius:8px;background:var(--bg)}
+.tl-lijst .sw{width:12px;height:12px;border-radius:3px;flex:none}
+.tl-lijst .wanneer{margin-left:auto;font-family:var(--f-num);font-size:.8rem;color:var(--muted);white-space:nowrap}
+.tl-lijst li.voorbij{opacity:.55}
+.hk-ctrl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:.92rem}
+.hk-ctrl input{width:4.6em}
+.hk-lijst{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.hk-lijst li{display:grid;grid-template-columns:auto 1fr auto;gap:4px 12px;align-items:center;padding:8px 10px;border-radius:8px;background:var(--bg)}
+.hk-lijst li.top{background:var(--ok-soft)}
+.hk-rang{font-family:var(--f-display);font-weight:700;font-size:1.1rem;color:var(--ok);width:1.4em;text-align:center}
+.hk-wat{min-width:0}
+.hk-effect{font-family:var(--f-num);font-weight:700;text-align:right;white-space:nowrap}
+.hk-sub{grid-column:2 / -1;font-size:.82rem;color:var(--muted)}
+.nodig{display:block;font-size:.8rem;color:var(--muted);font-family:var(--f-num)}
+.mg-prev{list-style:none;margin:0;padding:0;display:grid;gap:4px;max-height:320px;overflow:auto;font-size:.88rem}
+.mg-prev li{display:flex;gap:8px;padding:5px 8px;border-radius:6px;background:var(--bg)}
+.mg-prev .pijl{font-family:var(--f-num);margin-left:auto;white-space:nowrap}
+.mg-prev li.nieuw .pijl{color:var(--ok);font-weight:700}
+.mg-prev li.anders .pijl{color:var(--warn);font-weight:700}
+ol.stappen{margin:0;padding-left:1.2em;font-size:.9rem;color:var(--muted);display:grid;gap:2px}
 footer{font-size:.82rem;color:var(--muted);max-width:75ch}
 @media (max-width:560px){
   details.vak>summary{grid-template-columns:1fr}
@@ -177,6 +221,7 @@ footer{font-size:.82rem;color:var(--muted);max-width:75ch}
       <span class="pill" id="uitslagPill"></span>
     </div>
     <p class="uitleg" id="uitslagUitleg"></p>
+    <div class="risico" id="risico"></div>
     <ul class="checks" id="checks"></ul>
     <div class="tablewrap">
       <table>
@@ -185,6 +230,18 @@ footer{font-size:.82rem;color:var(--muted);max-width:75ch}
       </table>
     </div>
     <p class="small muted" style="margin:0">Laat je bij CE verwacht niets in, dan rekent de site met je SE cijfer als CE cijfer (grijs weergegeven).</p>
+  </section>
+
+  <section class="tijdlijn" aria-labelledby="tlKop">
+    <div class="tl-kop">
+      <div><div class="eyebrow" id="tlKop">Schooljaar 2026-2027</div><div class="big" id="tlAftel">…</div></div>
+      <span class="small muted" id="tlSub"></span>
+    </div>
+    <div>
+      <div class="tl-bar" id="tlBar" role="img" aria-label="Tijdlijn met toetsweken en centraal examen"></div>
+      <div class="tl-maand" id="tlMaand"></div>
+    </div>
+    <ul class="tl-lijst" id="tlLijst"></ul>
   </section>
 
   <details class="fold agenda" id="agendaFold" open>
@@ -202,6 +259,15 @@ footer{font-size:.82rem;color:var(--muted);max-width:75ch}
     </div>
   </details>
 
+  <details class="fold" id="hkFold">
+    <summary><h2>Herkansingsadviseur <span class="small muted" id="hkAantal"></span></h2><span class="chev" aria-hidden="true">›</span></summary>
+    <div class="foldbody">
+      <p class="uitleg">In het examenjaar mag je na periode 3 drie toetsen herkansen. Je kiest uit herkansbare PTA toetsen uit periode 4 van klas 3 en periode 1 tot en met 3 van klas 4. Het hoogste cijfer telt. Hieronder staan de toetsen waar een herkansing je SE het meest oplevert.</p>
+      <div class="hk-ctrl"><label for="hkDoel">Stel dat de herkansing een</label><input class="cell" id="hkDoel" inputmode="decimal" value="7,0" autocomplete="off"><span>wordt.</span></div>
+      <ul class="hk-lijst" id="hkLijst"></ul>
+    </div>
+  </details>
+
   <details class="fold" id="pakketFold">
     <summary><h2>Vakkenpakket <span class="small muted" id="pakketAantal"></span></h2><span class="chev" aria-hidden="true">›</span></summary>
     <div class="foldbody"><div class="pakket" id="pakket"></div></div>
@@ -211,6 +277,23 @@ footer{font-size:.82rem;color:var(--muted);max-width:75ch}
     <h2 id="vakKop">Cijfers per vak</h2>
     <div class="vakken" id="vakken"></div>
   </section>
+
+  <details class="fold" id="mgFold">
+    <summary><h2>Cijfers plakken uit Magister</h2><span class="chev" aria-hidden="true">›</span></summary>
+    <div class="foldbody">
+      <ol class="stappen">
+        <li>Open Magister in de browser en ga naar Cijfers, Cijferoverzicht.</li>
+        <li>Kies bij Cijfersoort "PTA kolommen" en bij Cijferperiodes LJ3 en LJ4.</li>
+        <li>Selecteer de hele tabel, kopieer hem en plak hem hieronder. De lijst Laatste cijfers werkt ook.</li>
+      </ol>
+      <textarea id="mgTekst" aria-label="Geplakte tabel uit Magister" spellcheck="false" placeholder="Plak hier de tabel uit Magister"></textarea>
+      <div class="row"><button type="button" class="primary" id="mgLees">Cijfers herkennen</button><span class="small muted" id="mgMelding" role="status"></span></div>
+      <div id="mgResultaat" hidden>
+        <ul class="mg-prev" id="mgPrev"></ul>
+        <div class="row"><button type="button" class="primary" id="mgToepas">Deze wijzigingen opslaan</button><button type="button" id="mgAnnuleer">Annuleren</button></div>
+      </div>
+    </div>
+  </details>
 
   <details class="fold">
     <summary><h2>Bewaren en overzetten</h2><span class="chev" aria-hidden="true">›</span></summary>
@@ -421,6 +504,7 @@ function renderUitslag(){
   else {txt.textContent='Op koers met de cijfers tot nu toe';pill.className='pill warn';pill.textContent='Onvolledig';
     u='Er gaat nog niets mis, maar nog niet elke regel is te controleren.'+(zonder.length?' Nog geen cijfers voor: '+zonder.join(', ')+'.':'')+(checks.some(c=>!c.info&&c.ok===null&&/handelingsdelen/.test(c.t))?' Ook staan nog niet alle handelingsdelen van LO op V of G.':'')+' Zodra die er zijn, toont dit blok Op koers of Let op.';}
   uitleg.textContent=u;
+  renderRisico(rows); renderHerkansing();
 }
 
 function renderLeerling(){
@@ -439,6 +523,9 @@ function status(a){ const {t}=toetsInfo(a); const c=t?S.cijfers[a.vak+'-'+t[0]]:
   return a.datum>VANDAAG()?'kom':(a.datum===VANDAAG()?'vandaag':'open'); }
 function aTitel(a){ const {v,t}=toetsInfo(a); return `<strong>${v?v.naam:a.vak}</strong> · ${t?t[0]+' '+t[2]:esc(a.oms||'Toets')}`; }
 function esc(x){return String(x).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function nodigBij(a,st){ const {v,t}=toetsInfo(a); if(!t||!t[3]||!['kom','vandaag'].includes(st)||!['ce','se','vg'].includes(v.type)) return '';
+  const i=seInfo(v); const f=T=>{ const n=(T*(i.w+t[3])-i.sum)/t[3]; return n<=1?'altijd':n>10?'niet haalbaar':fmt(Math.ceil(n*10-1e-9)/10); };
+  return `<span class="nodig">Nodig voor SE 6,0: ${f(5.95)} · voor SE 7,0: ${f(6.95)}${i.w?'':' (eerste cijfer)'}</span>`; }
 function vulToetsKeuze(){
   const vak=$('aVak').value, sel=$('aToets'); sel.innerHTML='';
   const v=BY_ID[vak]; if(v) for(const t of v.toetsen){ if(S.cijfers[vak+'-'+t[0]]!=null) continue; const o=document.createElement('option'); o.value=t[0]; o.textContent=`${t[0]} ${t[2]}`; sel.appendChild(o); }
@@ -454,7 +541,7 @@ function renderAgenda(){
   const lab={kom:['st-kom','Komt nog'],vandaag:['st-kom','Vandaag'],open:['st-open','Cijfer invullen'],klaar:['st-klaar','Cijfer staat erin']};
   for(const a of items){ const st=status(a); const {t}=toetsInfo(a);
     const li=document.createElement('li'); li.className='aitem';
-    li.innerHTML=`<span class="datum">${datumNL(a.datum)}</span><span class="wat">${aTitel(a)}</span><span class="tag-st ${lab[st][0]}">${lab[st][1]}</span><span class="acties">${!t&&st!=='kom'&&st!=='vandaag'?`<button type="button" data-klaar>${a.klaar?'Terugzetten':'Afvinken'}</button>`:''}<button type="button" data-weg aria-label="Verwijderen uit agenda">Verwijderen</button></span>`;
+    li.innerHTML=`<span class="datum">${datumNL(a.datum)}</span><span class="wat">${aTitel(a)}${nodigBij(a,st)}</span><span class="tag-st ${lab[st][0]}">${lab[st][1]}</span><span class="acties">${!t&&st!=='kom'&&st!=='vandaag'?`<button type="button" data-klaar>${a.klaar?'Terugzetten':'Afvinken'}</button>`:''}<button type="button" data-weg aria-label="Verwijderen uit agenda">Verwijderen</button></span>`;
     li.querySelector('[data-weg]').addEventListener('click',()=>{S.agenda=S.agenda.filter(x=>x.id!==a.id); save(); renderAgenda();});
     const k=li.querySelector('[data-klaar]'); if(k) k.addEventListener('click',()=>{a.klaar=!a.klaar; save(); renderAgenda();});
     lijst.appendChild(li); }
@@ -471,8 +558,125 @@ function renderAgenda(){
   $('herinner').hidden=!open.length;
   $('herinnerKop').textContent=open.length===1?'1 cijfer nog invullen':`${open.length} cijfers nog invullen`;
 }
+
+// Tijdlijn
+const TL_START='2026-09-01', TL_EIND='2027-06-30';
+const TL=[
+ {k:'tw',naam:'Toetsweek 1',van:'2026-10-27',tot:'2026-11-03'},
+ {k:'tw',naam:'Toetsweek 2',van:'2027-01-07',tot:'2027-01-14'},
+ {k:'tw',naam:'Toetsweek 3',van:'2027-03-18',tot:'2027-03-25'},
+ {k:'hk',naam:'Herkansingen (na periode 3, datum volgt)',van:'2027-03-29',tot:'2027-04-09',vaag:true},
+ {k:'ce',naam:'Centraal examen 1e tijdvak',van:'2027-05-14',tot:'2027-06-01'},
+ {k:'ce2',naam:'2e tijdvak (herexamen)',van:'2027-06-22',tot:'2027-06-29'},
+];
+const dag=iso=>{const [y,m,d]=iso.split('-').map(Number); return Date.UTC(y,m-1,d)/864e5;};
+function renderTijdlijn(){
+  const a=dag(TL_START), b=dag(TL_EIND), nu=dag(VANDAAG()), pct=x=>Math.max(0,Math.min(100,(x-a)/(b-a)*100));
+  const bar=$('tlBar'); bar.innerHTML='';
+  for(const e of TL){const s=document.createElement('div'); s.className='tl-seg '+e.k; s.style.left=pct(dag(e.van))+'%'; s.style.width=Math.max(.6,pct(dag(e.tot)+1)-pct(dag(e.van)))+'%'; s.title=e.naam; bar.appendChild(s);}
+  if(nu>=a&&nu<=b){const n=document.createElement('div'); n.className='tl-nu'; n.style.left=`calc(${pct(nu)}% - 1px)`; n.title='Vandaag'; bar.appendChild(n);}
+  const mnd=['sep','okt','nov','dec','jan','feb','mrt','apr','mei','jun']; $('tlMaand').innerHTML=mnd.map(m=>`<span>${m}</span>`).join('');
+  const kleur={tw:'var(--blue)',hk:'var(--warn)',ce:'var(--accent)',ce2:'var(--accent)'};
+  const ul=$('tlLijst'); ul.innerHTML='';
+  for(const e of TL){ const v=dag(e.van), t=dag(e.tot); let w;
+    if(nu>t) w='voorbij'; else if(nu>=v) w='nu bezig'; else { const d=v-nu; w=e.vaag?'± '+Math.round(d/7)+' weken':(d<14?`over ${d} dagen`:`over ${Math.round(d/7)} weken`); }
+    const li=document.createElement('li'); if(nu>t) li.className='voorbij';
+    li.innerHTML=`<span class="sw" style="background:${kleur[e.k]}${e.k==='ce2'?';opacity:.45':''}"></span><span>${e.naam}</span><span class="wanneer">${w}</span>`; ul.appendChild(li); }
+  const ce=dag('2027-05-14'), volgende=TL.find(e=>dag(e.tot)>=nu&&e.k==='tw');
+  $('tlAftel').textContent= nu<ce ? `Nog ${Math.ceil((ce-nu)/7)} weken tot het centraal examen` : (nu<=dag('2027-06-01')?'Het centraal examen is bezig':'Het centraal examen is voorbij');
+  $('tlSub').textContent= volgende ? (nu>=dag(volgende.van)?`${volgende.naam} is nu bezig`:`${volgende.naam} begint ${datumNL(volgende.van)}`) : '';
+}
+
+// Herkansingsadviseur
+function hkMag(t){ return t[4] && t[3]>0 && (t[1].startsWith('LJ4') || /^LJ3 (P|TW) ?4/.test(t[1])); }
+function renderHerkansing(){
+  const X=parse($('hkDoel').value); $('hkDoel').classList.toggle('invalid',Number.isNaN(X));
+  const doel=(X==null||Number.isNaN(X))?7:X;
+  const kand=[];
+  for(const id of S.pakket){ const v=BY_ID[id]; if(!['ce','se','vg'].includes(v.type)) continue; const i=seInfo(v); if(!i.w) continue;
+    for(const t of v.toetsen){ if(!hkMag(t)) continue; const c=S.cijfers[id+'-'+t[0]]; if(typeof c!=='number') continue;
+      const nieuw=Math.max(c,doel); if(nieuw<=c) continue;
+      const rawNa=(i.sum-c*t[3]+nieuw*t[3])/i.w, seNa=r1(rawNa);
+      if(seNa>i.se) kand.push({v,t,c,i,seNa,winst:rawNa-i.raw}); } }
+  kand.sort((p,q)=>q.winst-p.winst);
+  const ul=$('hkLijst'); ul.innerHTML='';
+  if(!kand.length){ ul.innerHTML=`<li><span></span><span class="small muted">Nog geen toetsen waar een herkansing met een ${fmt(doel)} iets oplevert. De adviseur vult zich zodra er cijfers zijn van herkansbare toetsen uit klas 4.</span><span></span></li>`; $('hkAantal').textContent=''; return; }
+  kand.forEach((k,n)=>{ const li=document.createElement('li'); if(n<3) li.className='top';
+    let sub=`Nu ${fmt(k.c)} · weging ${k.t[3]} · SE ${fmt(k.i.se)} wordt ${fmt(k.seNa)}`;
+    if(k.v.type==='ce'){ const a=ceNodig(k.i.se,6), b=ceNodig(k.seNa,6); if(a!==b) sub+=` · CE nodig voor 6: ${nodigTekst(a)} wordt ${nodigTekst(b)}`; }
+    else { const a=r0(k.i.se), b=r0(k.seNa); if(a!==b) sub+=` · eindcijfer ${a} wordt ${b}`; }
+    li.innerHTML=`<span class="hk-rang">${n<3?n+1:''}</span><span class="hk-wat"><strong>${k.v.naam}</strong> · ${k.t[0]} ${k.t[2]}</span><span class="hk-effect">+${fmt(k.seNa-k.i.se)}</span><span class="hk-sub">${sub}</span>`;
+    ul.appendChild(li); });
+  $('hkAantal').textContent=`(${Math.min(3,kand.length)} tips)`;
+}
+
+// Risicovakken
+function renderRisico(rows){
+  const el=$('risico'); const r=[];
+  for(const {v,i,eind} of rows){ if(i.se==null) continue;
+    if(v.type==='ce'){ const n=ceNodig(i.se,6); if(i.se<5.5||n>=6.5) r.push({v,ernst:n>=7.5||i.se<5?'':'w',why:`SE ${fmt(i.se)}, CE nodig voor 6: ${nodigTekst(n)}`}); }
+    else if(eind!=null&&eind<6) r.push({v,ernst:eind<5?'':'w',why:`SE ${fmt(i.se)}, eindcijfer ${eind}`}); }
+  const metCijfer=rows.filter(x=>x.i.se!=null).length;
+  if(!metCijfer){el.innerHTML='';return;}
+  el.innerHTML= r.length ? `<span class="small muted">Let op bij:</span>`+r.map(x=>`<span class="chip ${x.ernst}" title="${x.why}">${x.v.naam} · ${x.why}</span>`).join('')
+    : `<span class="chip ok">Geen risicovakken</span><span class="small muted">Bij alle vakken met cijfers is een 6 haalbaar met een CE onder de 6,5.</span>`;
+}
+
+// Magister plakken
+const ALIAS={ne:['nederlands','nederlandse taal'],en:['engels','engelse taal'],du:['duits','duitse taal'],wi:['wiskunde'],
+ nask1:['natuur- en scheikunde i','natuur- en scheikunde 1','nask1','nask 1'],nask2:['natuur- en scheikunde ii','natuur- en scheikunde 2','nask2','nask 2'],
+ bi:['biologie'],ec:['economie'],ak:['aardrijkskunde'],gs:['geschiedenis'],te:['kunstvakken ii tekenen','tekenen'],ma:['maatschappijleer'],
+ pvtt:['pgv technologie en toepassing','technologie en toepassing','pvtt'],pveo:['pv economie en ondernemen','economie en ondernemen','pveo'],pvzw:['pv zorg en welzijn','zorg en welzijn','pvzw'],
+ lo2:['lichamelijke opvoeding 2','lo2','lo 2'],lo:['lichamelijke opvoeding','lo'],kv1:['kunstvakken inclusief ckv','ckv','kunstvakken 1'],levo:['levensbeschouw vormingsonderw','levensbeschouwelijke vorming','levo']};
+const nrm=x=>String(x).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,' ').trim();
+function vakKandidaten(naam){ const afgekapt=/(\.\.\.|…)\s*$/.test(naam); const n=nrm(naam.replace(/(\.\.\.|…)\s*$/,'')); if(!n) return [];
+  const exact=Object.keys(ALIAS).filter(id=>ALIAS[id].some(a=>nrm(a)===n)); if(exact.length&&!afgekapt) return exact;
+  return Object.keys(ALIAS).filter(id=>ALIAS[id].some(a=>nrm(a).startsWith(n))); }
+const woorden=x=>new Set(nrm(x).split(' ').filter(w=>w.length>=3));
+function bigr(x){ const c=nrm(x).replace(/ /g,''), m=new Map(); for(let i=0;i<c.length-1;i++){const g=c.slice(i,i+2); m.set(g,(m.get(g)||0)+1);} return m; }
+function dice(a,b){ const A=bigr(a),B=bigr(b); let n=0,ta=0,tb=0; for(const v of A.values()) ta+=v; for(const v of B.values()) tb+=v; for(const [g,v] of A) n+=Math.min(v,B.get(g)||0); return ta+tb?2*n/(ta+tb):0; }
+function lijkt(a,b){ const A=woorden(a),B=woorden(b); let n=0; for(const w of A) if(B.has(w)) n++; const ws=A.size&&B.size?n/Math.min(A.size,B.size):0; return Math.max(ws,dice(a,b)); }
+function waarde(cel,t){ const s=String(cel).replace(/\bH\b/g,'').trim(); if(!s||s==='-') return null;
+  if(t[3]===0){ const m=s.match(/^[VGO]$/i); return m?m[0].toUpperCase():(/^\d/.test(s)?null:null); }
+  const m=s.match(/^(\d{1,2})([,.]\d)?$/); if(!m) return /^[VGO]$/i.test(s)&&t[3]>0?null:null; const n=parse(s); return Number.isNaN(n)?null:n; }
+function leesMagister(tekst){
+  const regels=tekst.split(/\r?\n/).map(r=>r.replace(/ /g,' ')); const res=[], onbekend=[];
+  // methode 1: cijferoverzicht met kolomnummers
+  let kolommen=null;
+  for(const r of regels){ const toks=r.split(/\t|\s{2,}|\s/).map(x=>x.trim()).filter(Boolean); const nrs=toks.filter(x=>/^\d{3}$/.test(x)); if(nrs.length>=3&&nrs.length>=toks.length-2){kolommen=nrs;break;} }
+  if(!kolommen){ const losse=regels.map(r=>r.trim()).filter(r=>/^\d{3}$/.test(r)); if(losse.length>=3) kolommen=losse; }
+  if(kolommen){
+    for(const r of regels){ if(!r.includes('\t')) continue; const p=r.split('\t'); const naam=p[0].trim(); const kand=vakKandidaten(naam); if(kand.length!==1) { if(naam&&!/^\d{3}$/.test(naam)&&!/^(vak|lj\d)/i.test(naam)&&p.slice(1).some(c=>c.trim()&&c.trim()!=='-')) onbekend.push(naam); continue; }
+      const v=BY_ID[kand[0]]; let cellen=p.slice(1); if(cellen.length>kolommen.length) cellen=cellen.slice(cellen.length-kolommen.length);
+      kolommen.forEach((nr,ix)=>{ const t=v.toetsen.find(t=>t[0]===nr); if(!t||ix>=cellen.length) return; const w=waarde(cellen[ix],t); if(w!=null) res.push({v,t,w}); }); }
+  }
+  // methode 2: laatste cijfers (vak, datum, omschrijving, resultaat, weegfactor)
+  if(!res.length){
+    for(const r of regels){ const p=r.split('\t').map(x=>x.trim()); if(p.length<4||!/\d{1,2}-\d{1,2}-\d{4}/.test(p[1])) continue;
+      const [naam,,oms,resu,weeg]=p; const kand=vakKandidaten(naam); const wf=parseInt(weeg); let lijst=[];
+      for(const id of kand){ for(const t of BY_ID[id].toetsen){ let sc=lijkt(oms,t[2]); if(!isNaN(wf)&&t[3]===wf) sc+=.01; lijst.push({v:BY_ID[id],t,sc}); } }
+      const bs=Math.max(0,...lijst.map(x=>x.sc)); let top=lijst.filter(x=>Math.abs(x.sc-bs)<.02);
+      if(!top.length||bs<.5){ onbekend.push(`${naam} · ${oms}`); continue; }
+      if(top.length>1){ const w0=waarde(resu,top[0].t); if(w0!=null&&top.some(x=>S.cijfers[x.v.id+'-'+x.t[0]]===w0)) continue; const leeg=top.filter(x=>S.cijfers[x.v.id+'-'+x.t[0]]==null); if(leeg.length===1) top=leeg; else { onbekend.push(`${naam} · ${oms}`); continue; } }
+      const best=top[0]; const w=waarde(resu,best.t); if(w!=null) res.push({v:best.v,t:best.t,w}); else onbekend.push(`${naam} · ${oms}`); }
+  }
+  return {res,onbekend};
+}
+let mgVoorstel=[];
+function mgLees(){
+  const {res,onbekend}=leesMagister($('mgTekst').value); const prev=$('mgPrev'); prev.innerHTML='';
+  mgVoorstel=[]; let gelijk=0; const nietInPakket=new Set();
+  for(const x of res){ const key=x.v.id+'-'+x.t[0], oud=S.cijfers[key]; if(oud===x.w){gelijk++;continue;} mgVoorstel.push({key,x,oud}); if(!S.pakket.includes(x.v.id)) nietInPakket.add(x.v.naam); }
+  for(const m of mgVoorstel){ const li=document.createElement('li'); li.className=m.oud==null?'nieuw':'anders';
+    const f=v=>typeof v==='number'?fmt(v):(v??'leeg');
+    li.innerHTML=`<span><strong>${m.x.v.naam}</strong> · ${m.x.t[0]} ${m.x.t[2]}</span><span class="pijl">${f(m.oud)} → ${f(m.x.w)}</span>`; prev.appendChild(li); }
+  let msg=res.length?`${res.length} cijfers herkend. ${mgVoorstel.length} nieuw of anders, ${gelijk} stonden er al.`:'Geen cijfers herkend. Kopieer de hele tabel, inclusief de kopregel met de kolomnummers.';
+  if(nietInPakket.size) msg+=` Wordt toegevoegd aan het pakket: ${[...nietInPakket].join(', ')}.`;
+  if(onbekend.length) msg+=` Niet herkend: ${onbekend.slice(0,4).join('; ')}${onbekend.length>4?' en meer':''}.`;
+  $('mgMelding').textContent=msg; $('mgResultaat').hidden=!mgVoorstel.length;
+}
 function renderAll(){
-  renderLeerling(); renderPakket(); renderVakken(); renderUitslag(); renderAgenda(); document.getElementById('code').value=JSON.stringify(S);
+  renderLeerling(); renderPakket(); renderVakken(); renderUitslag(); renderAgenda(); renderTijdlijn(); document.getElementById('code').value=JSON.stringify(S);
 }
 document.getElementById('kopieer').addEventListener('click',()=>{
   const ta=document.getElementById('code'), m=document.getElementById('codeMelding');
@@ -500,8 +704,15 @@ $('aToets').addEventListener('change',()=>{$('aOmsLabel').hidden=$('aToets').val
 $('agendaForm').addEventListener('submit',e=>{e.preventDefault(); const datum=$('aDatum').value; if(!datum){$('aDatum').focus();return;}
   const toets=$('aToets').value, oms=$('aOms').value.trim(); if(!$('aVak').value) return;
   S.agenda.push({id:'a'+Date.now(),datum,vak:$('aVak').value,toets,oms:toets?'':oms,klaar:false}); $('aOms').value=''; save(); renderAgenda();});
+$('hkDoel').addEventListener('input',renderHerkansing);
+$('mgLees').addEventListener('click',mgLees);
+$('mgAnnuleer').addEventListener('click',()=>{$('mgResultaat').hidden=true; mgVoorstel=[]; $('mgMelding').textContent='';});
+$('mgToepas').addEventListener('click',()=>{ for(const m of mgVoorstel){ S.cijfers[m.key]=m.x.w; if(!S.pakket.includes(m.x.v.id)) S.pakket.push(m.x.v.id); }
+  S.pakket.sort((a,b)=>VAKKEN.indexOf(BY_ID[a])-VAKKEN.indexOf(BY_ID[b]));
+  const n=mgVoorstel.length; mgVoorstel=[]; save(); renderAll(); $('mgResultaat').hidden=true; $('mgTekst').value=''; $('mgMelding').textContent=`${n} cijfers opgeslagen.`; });
 $('beheer').open=false;
 renderAll();
+if('serviceWorker' in navigator && location.protocol==='https:'){ navigator.serviceWorker.register('sw.js').catch(()=>{}); }
 </script>
 
 </body>
