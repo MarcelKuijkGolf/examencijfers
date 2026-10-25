@@ -113,10 +113,6 @@ footer{font-size:.82rem;color:var(--muted);max-width:75ch}
     <p>Vul de cijfers uit Magister in bij de PTA toetsen. Je ziet per vak het SE cijfer, welk CE cijfer je nodig hebt, en of je met de verwachte CE cijfers slaagt. Toetsweek 1 loopt van 27 oktober tot en met 3 november, het CE eerste tijdvak van 14 mei tot en met 1 juni 2027.</p>
   </header>
 
-  <div class="banner" id="voorbeeld" hidden>
-    <p><strong>Dit zijn voorbeeldcijfers.</strong> Ze laten zien hoe de berekening werkt. Wis ze en vul de echte cijfers in.</p>
-    <button class="primary" id="wisVoorbeeld" type="button">Voorbeeld wissen</button>
-  </div>
 
   <section class="uitslag" aria-labelledby="uitslagKop">
     <div class="status">
@@ -347,10 +343,8 @@ function renderUitslag(){
 }
 
 function renderAll(){
-  document.getElementById('voorbeeld').hidden=!S.voorbeeld;
   renderPakket(); renderVakken(); renderUitslag(); document.getElementById('code').value=JSON.stringify(S);
 }
-document.getElementById('wisVoorbeeld').addEventListener('click',()=>{S={voorbeeld:false,pakket:S.pakket.slice(),cijfers:{},ce:{}};save();renderAll();});
 document.getElementById('kopieer').addEventListener('click',()=>{
   const ta=document.getElementById('code'), m=document.getElementById('codeMelding');
   navigator.clipboard.writeText(ta.value).then(()=>{m.textContent='Gekopieerd';},()=>{ta.select();m.textContent='Selecteer en kopieer de code zelf';});
