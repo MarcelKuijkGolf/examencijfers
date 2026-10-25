@@ -179,19 +179,21 @@ const VAKKEN = [
  {id:'pvzw',naam:'Zorg en welzijn (pvzw)',type:'se',toetsen:[['341','LJ3 P4','Voeding en leefstijl',1,0],['421','LJ4 P1/2/3','Organiseren activiteit',1,0],['431','LJ4 P1/2/3','Ontwerpen en ondersteunen',1,0]]},
  {id:'lo2',naam:'Lichamelijke opvoeding 2',type:'se',toetsen:[['311','LJ3 P1','Minute to win it',1,0],['312','LJ3 P1','Conditie',0,0],['313','LJ3 P1','Racketsporten',0,0],['321','LJ3 P2','Zwaaien/balanceren',0,0],['322','LJ3 P2','The move',1,1],['323','LJ3 P2','Toernooien',1,1],['331','LJ3 P3','Groepsopdracht trampoline',1,0],['332','LJ3 P3','Beroepsoriëntatie en beroepspraktijkvorming',0,0],['333','LJ3 P3','Bewegen op muziek (dans/spinning)',0,0],['341','LJ3 P4','Fitness',0,0],['342','LJ3 P4','Spelregelkennis',0,0],['343','LJ3 P4','Beachvolleybal',0,0],['411','LJ4 TW1','Toets sportgeschiedenis',2,1],['412','LJ4 P1','Honkbal',1,0],['413','LJ4 P1','Rugby varianten',0,0],['421','LJ4 P2','Les en leidinggeven',2,0],['422','LJ4 TW2','Toets EHBSO, hartslag en BMI',2,1],['423','LJ4 P2','Zelfverdediging',0,0],['424','LJ4 P2','Atletiek (kogelstoten en hinkstapsprong)',0,0],['431','LJ4 P3','Beroepsoriëntatie en beroepspraktijkvorming',0,0],['432','LJ4 P3','Bewegen op muziek (dans en spinning)',0,0],['433','LJ4 P3','Sportfolio',2,0],['434','LJ4 P3','Beroepshouding',2,0]]},
  {id:'lo',naam:'Lichamelijke opvoeding',type:'hd',toetsen:[['321','LJ3 P2','Bewegen op muziek',0,0],['331','LJ3 P3','Ver- en hoogspringen',0,0],['332','LJ3 P3','Badminton',0,0],['341','LJ3 P4','Softbal',0,0],['342','LJ3 P4','Atletiek werpen',0,0],['411','LJ4 P1','Atletiek lopen',0,0],['412','LJ4 P1','Volleybal',0,0],['413','LJ4 P1','Hockey',0,0],['414','LJ4 P1','Flagfootball',0,0],['421','LJ4 P2','Turnen springen',0,0],['422','LJ4 P2','Futsal',0,0],['423','LJ4 P2','Aangepaste/recreatieve sporten',0,0],['424','LJ4 P2','Zelfverdediging',0,0]]},
- {id:'kv1',naam:'Kunstvakken inclusief ckv',type:'hd',toetsen:[['ED','LJ3','Eindbeoordeling (afgerond in klas 3)',0,0]]},
+ {id:'kv1',naam:'Kunstvakken inclusief ckv',type:'vg',toetsen:[['311','LJ3 P1','CZP 1',1,0],['321','LJ3 P2','Architectuur',1,0],['322','LJ3 P2','Reflectie 1 en 2',1,0],['331','LJ3 P3','Reflectie 3 en 4',1,0],['341','LJ3 P4','CZP 2',1,0],['342','LJ3 P4','Fotografie',1,0]]},
  {id:'levo',naam:'Levensbeschouwelijke vorming',type:'info',toetsen:[['411','LJ4 TW1','Hindoeïsme',1,1],['421','LJ4 P2','Boeddhisme',1,0],['422','LJ4 P2','Gesprek over levensvragen',1,0]]},
 ];
 const TYPE_LABEL={ce:'Examenvak met CE',se:'Alleen schoolexamen',vg:'Moet voldoende zijn',hd:'Handelingsdelen, voldoende of goed',info:'Eigen examenstof school'};
 const BY_ID=Object.fromEntries(VAKKEN.map(v=>[v.id,v]));
-const KEY='examencijfers-tl4-v4';
+const KEY='examencijfers-tl4-v5';
 
 // Startstand: cijfers uit Magister, stand 25-10-2026
 const VOORBEELD={voorbeeld:false,pakket:['ne','en','wi','nask1','bi','ma','pvtt','lo2','lo','kv1','levo'],
  cijfers:{'nask1-331':9.2,'nask1-341':6.9,'ma-311':7.8,'ma-321':6.9,'ma-331':8.4,'ma-341':7.9,
  'lo2-311':6.0,'lo2-322':6.0,'lo2-323':7.0,'lo2-331':8.5,'lo2-412':7.5,
  'lo2-312':'G','lo2-313':'V','lo2-321':'G','lo2-332':'G','lo2-333':'V','lo2-341':'G','lo2-342':'V','lo2-343':'G',
- 'bi-321':7.1,'bi-341':7.1,'bi-342':7.1,'kv1-ED':'V','lo-321':'V','lo-331':'V','lo-332':'G','lo-341':'G','lo-342':'G','lo-411':'G','lo-414':'G'},
+ 'bi-321':6.2,'bi-341':8.4,'bi-342':6.9,
+ 'kv1-311':7.0,'kv1-321':6.4,'kv1-322':5.6,'kv1-331':7.0,'kv1-341':6.9,'kv1-342':8.0,
+ 'lo-321':'V','lo-331':'V','lo-332':'G','lo-341':'G','lo-342':'G','lo-411':'G','lo-414':'G'},
  ce:{}};
 
 let S=load();
@@ -327,7 +329,8 @@ function renderUitslag(){
   checks.push({ok:ceAvg==null?null:ceAvg>=5.5,t:`CE gemiddelde ${ceAvg==null?'–':fmt(r1(ceAvg))} (minimaal 5,5)`});
   checks.push({ok:ne&&ne.eind!=null?ne.eind>=5:null,t:ne?`Nederlands eindcijfer ${ne.eind??'–'} (minimaal 5)`:'Nederlands staat niet in het pakket'});
   checks.push({ok:ein.length?comp:null,t:`Eindcijfers: ${n4} keer een 4, ${n5} keer een 5, ${n7} keer 7 of hoger${onder4?', en een cijfer onder de 4':''}`});
-    for(const id of ['lo','lo2','kv1']){ if(!S.pakket.includes(id)) continue; const h=seInfo(BY_ID[id]).hd; if(!h.n) continue;
+    if(kv1) checks.push({ok:kv1.se==null?null:kv1.se>=5.5,t:`Kunstvakken inclusief ckv gemiddeld ${fmt(kv1.se)} (voldoende nodig)`});
+  for(const id of ['lo','lo2']){ if(!S.pakket.includes(id)) continue; const h=seInfo(BY_ID[id]).hd; if(!h.n) continue;
     checks.push({ok:h.onv?false:(h.klaar===h.n?true:null),t:`${BY_ID[id].naam}: ${h.klaar} van ${h.n} handelingsdelen V of G${h.onv?', '+h.onv+' onvoldoende':''}`}); }
   checks.push({ok:null,t:'LOB en profielwerkstuk: moeten voldoende of goed zijn afgerond',info:true});
   const ul=document.getElementById('checks'); ul.innerHTML='';
