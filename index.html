@@ -190,8 +190,13 @@ const TYPE_LABEL={ce:'Examenvak met CE',se:'Alleen schoolexamen',vg:'Moet voldoe
 const BY_ID=Object.fromEntries(VAKKEN.map(v=>[v.id,v]));
 const KEY='examencijfers-tl4-v3';
 
-// Standaard vakkenpakket, zonder cijfers. Cijfers blijven in de eigen browser.
-const VOORBEELD={voorbeeld:false,pakket:['ne','en','wi','nask1','bi','ma','pvtt','lo2','lo','levo'],cijfers:{},ce:{}};
+// Startstand: cijfers uit Magister, stand 25-10-2026
+const VOORBEELD={voorbeeld:false,pakket:['ne','en','wi','nask1','bi','ma','pvtt','lo2','lo','levo'],
+ cijfers:{'nask1-331':9.2,'nask1-341':6.9,'ma-311':7.8,'ma-321':6.9,'ma-331':8.4,'ma-341':7.9,
+ 'lo2-311':6.0,'lo2-322':6.0,'lo2-323':7.0,'lo2-331':8.5,'lo2-412':7.5,
+ 'lo2-312':'G','lo2-313':'V','lo2-321':'G','lo2-332':'G','lo2-333':'V','lo2-341':'G','lo2-342':'V','lo2-343':'G',
+ 'lo-331':'V','lo-332':'G','lo-341':'G','lo-342':'G','lo-411':'G','lo-414':'G'},
+ ce:{}};
 
 let S=load();
 function load(){
