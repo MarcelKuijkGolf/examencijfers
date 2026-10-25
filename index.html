@@ -181,19 +181,17 @@ const VAKKEN = [
  {id:'pvtt',naam:'Technologie en toepassing (pvtt)',type:'se',toetsen:[['411','LJ4 P1','Opdracht 1',1,0],['421','LJ4 P2','Opdracht 2',1,0],['431','LJ4 P3','Opdracht 3',1,0]]},
  {id:'pveo',naam:'Economie en ondernemen (pveo)',type:'se',toetsen:[['341','LJ3 P4','Ontwikkelen',1,0],['411','LJ4 P1','Adviseren',1,0],['421','LJ4 P2','Organiseren',1,0]]},
  {id:'pvzw',naam:'Zorg en welzijn (pvzw)',type:'se',toetsen:[['341','LJ3 P4','Voeding en leefstijl',1,0],['421','LJ4 P1/2/3','Organiseren activiteit',1,0],['431','LJ4 P1/2/3','Ontwerpen en ondersteunen',1,0]]},
- {id:'lo2',naam:'Lichamelijke opvoeding 2',type:'se',toetsen:[['311','LJ3 P1','Minute to win it',1,0],['322','LJ3 P2','The move',1,1],['323','LJ3 P2','Toernooien',1,1],['331','LJ3 P3','Groepsopdracht trampoline',1,0],['411','LJ4 TW1','Toets sportgeschiedenis',2,1],['412','LJ4 P1','Honkbal',1,0],['421','LJ4 P2','Les en leidinggeven',2,0],['422','LJ4 TW2','Toets EHBSO, hartslag en BMI',2,1],['433','LJ4 P3','Sportfolio',2,0],['434','LJ4 P3','Beroepshouding',2,0]]},
+ {id:'lo2',naam:'Lichamelijke opvoeding 2',type:'se',toetsen:[['311','LJ3 P1','Minute to win it',1,0],['312','LJ3 P1','Conditie',0,0],['313','LJ3 P1','Racketsporten',0,0],['321','LJ3 P2','Zwaaien/balanceren',0,0],['322','LJ3 P2','The move',1,1],['323','LJ3 P2','Toernooien',1,1],['331','LJ3 P3','Groepsopdracht trampoline',1,0],['332','LJ3 P3','Beroepsoriëntatie en beroepspraktijkvorming',0,0],['333','LJ3 P3','Bewegen op muziek (dans/spinning)',0,0],['341','LJ3 P4','Fitness',0,0],['342','LJ3 P4','Spelregelkennis',0,0],['343','LJ3 P4','Beachvolleybal',0,0],['411','LJ4 TW1','Toets sportgeschiedenis',2,1],['412','LJ4 P1','Honkbal',1,0],['413','LJ4 P1','Rugby varianten',0,0],['421','LJ4 P2','Les en leidinggeven',2,0],['422','LJ4 TW2','Toets EHBSO, hartslag en BMI',2,1],['423','LJ4 P2','Zelfverdediging',0,0],['424','LJ4 P2','Atletiek (kogelstoten en hinkstapsprong)',0,0],['431','LJ4 P3','Beroepsoriëntatie en beroepspraktijkvorming',0,0],['432','LJ4 P3','Bewegen op muziek (dans en spinning)',0,0],['433','LJ4 P3','Sportfolio',2,0],['434','LJ4 P3','Beroepshouding',2,0]]},
+ {id:'lo',naam:'Lichamelijke opvoeding',type:'hd',toetsen:[['321','LJ3 P2','Bewegen op muziek',0,0],['331','LJ3 P3','Ver- en hoogspringen',0,0],['332','LJ3 P3','Badminton',0,0],['341','LJ3 P4','Softbal',0,0],['342','LJ3 P4','Atletiek werpen',0,0],['411','LJ4 P1','Atletiek lopen',0,0],['412','LJ4 P1','Volleybal',0,0],['413','LJ4 P1','Hockey',0,0],['414','LJ4 P1','Flagfootball',0,0],['421','LJ4 P2','Turnen springen',0,0],['422','LJ4 P2','Futsal',0,0],['423','LJ4 P2','Aangepaste/recreatieve sporten',0,0],['424','LJ4 P2','Zelfverdediging',0,0]]},
  {id:'kv1',naam:'Kunstvakken inclusief ckv',type:'vg',toetsen:[['311','LJ3 P1','CZP 1',1,0],['321','LJ3 P2','Architectuur',1,0],['322','LJ3 P2','Reflectie 1 en 2',1,0],['331','LJ3 P3','Reflectie 3 en 4',1,0],['341','LJ3 P4','CZP 2',1,0],['342','LJ3 P4','Fotografie',1,0]]},
  {id:'levo',naam:'Levensbeschouwelijke vorming',type:'info',toetsen:[['411','LJ4 TW1','Hindoeïsme',1,1],['421','LJ4 P2','Boeddhisme',1,0],['422','LJ4 P2','Gesprek over levensvragen',1,0]]},
 ];
-const TYPE_LABEL={ce:'Examenvak met CE',se:'Alleen schoolexamen',vg:'Moet voldoende zijn',info:'Eigen examenstof school'};
+const TYPE_LABEL={ce:'Examenvak met CE',se:'Alleen schoolexamen',vg:'Moet voldoende zijn',hd:'Handelingsdelen, voldoende of goed',info:'Eigen examenstof school'};
 const BY_ID=Object.fromEntries(VAKKEN.map(v=>[v.id,v]));
-const KEY='examencijfers-tl4-v2';
+const KEY='examencijfers-tl4-v3';
 
-// Voorbeeldstand (verzonnen cijfers), wordt getoond tot er eigen cijfers zijn
-const VOORBEELD={voorbeeld:true,pakket:['ne','en','wi','nask1','bi','ec','ma','pvtt','kv1'],
- cijfers:{'nask1-331':6.8,'nask1-341':5.4,'bi-321':7.2,'bi-341':6.5,'bi-342':5.9,'ma-311':6.4,'ma-321':5.8,'ma-331':7.0,'ma-341':6.9,
- 'kv1-311':7,'kv1-321':6.5,'kv1-322':7.5,'kv1-331':6.8,'kv1-341':7.2,'kv1-342':8},
- ce:{}};
+// Standaard vakkenpakket, zonder cijfers. Cijfers blijven in de eigen browser.
+const VOORBEELD={voorbeeld:false,pakket:['ne','en','wi','nask1','bi','ma','pvtt','lo2','lo','levo'],cijfers:{},ce:{}};
 
 let S=load();
 function load(){
@@ -210,13 +208,15 @@ function parse(str){
   if(str==null) return null; str=String(str).trim().replace(',','.'); if(str==='') return null;
   const n=Number(str); return (isFinite(n)&&n>=1&&n<=10)?n:NaN;
 }
+function parseHD(str){ if(str==null) return null; str=String(str).trim().toUpperCase(); if(str==='') return null; return ['V','G','O'].includes(str)?str:NaN; }
 function gcls(x,ce){ if(x==null||isNaN(x)) return ''; const t=ce?x:x; return t<5.5?(t<4.5?'g-bad':'g-warn'):'g-ok'; }
 
 function seInfo(v){
   let sum=0,w=0,wTot=0;
-  for(const t of v.toetsen){const c=S.cijfers[v.id+'-'+t[0]]; wTot+=t[3]; if(c!=null&&!isNaN(c)){sum+=c*t[3];w+=t[3];}}
-  return {se:w?r1(sum/w):null,raw:w?sum/w:null,sum,w,wTot,rest:wTot-w};
+  for(const t of v.toetsen){if(!t[3]) continue; const c=S.cijfers[v.id+'-'+t[0]]; wTot+=t[3]; if(typeof c==='number'&&!isNaN(c)){sum+=c*t[3];w+=t[3];}}
+  return {hd:hdInfo(v),se:w?r1(sum/w):null,raw:w?sum/w:null,sum,w,wTot,rest:wTot-w};
 }
+function hdInfo(v){ let n=0,klaar=0,onv=0; for(const t of v.toetsen){ if(t[3]) continue; n++; const c=S.cijfers[v.id+'-'+t[0]]; if(c==='V'||c==='G') klaar++; else if(c==='O') onv++; } return {n,klaar,onv}; }
 function ceNodig(se,doel){ if(se==null) return null; return r1(2*doel-1-se); }
 function nodigTekst(n){ if(n==null) return '–'; if(n<=1) return 'altijd'; if(n>10) return 'niet haalbaar'; return fmt(n); }
 
@@ -256,11 +256,11 @@ function renderVakken(){
     for(const t of v.toetsen){
       const key=id+'-'+t[0]; const c=S.cijfers[key];
       const tr=document.createElement('tr');
-      tr.innerHTML=`<td class="per">${t[0]}</td><td class="per">${t[1]}</td><td style="white-space:normal;min-width:180px">${t[2]}${t[4]?' <span class="hk">herkansbaar</span>':''}</td><td class="r num">${t[3]}</td>
-        <td class="r"><input class="cell" id="c-${key}" inputmode="decimal" autocomplete="off" placeholder="–" aria-label="Cijfer ${v.naam} ${t[0]}" value="${c!=null?String(c).replace('.',','):''}"></td>`;
+      tr.innerHTML=`<td class="per">${t[0]}</td><td class="per">${t[1]}</td><td style="white-space:normal;min-width:180px">${t[2]}${t[4]?' <span class="hk">herkansbaar</span>':''}</td><td class="r num">${t[3]||'HD'}</td>
+        <td class="r"><input class="cell" id="c-${key}" inputmode="decimal" autocomplete="off" placeholder="${t[3]?'–':'V/G'}" aria-label="${t[3]?'Cijfer':'Beoordeling'} ${v.naam} ${t[0]}" value="${c!=null?String(c).replace('.',','):''}"></td>`;
       const inp=tr.querySelector('input');
       inp.addEventListener('input',()=>{
-        const n=parse(inp.value); inp.classList.toggle('invalid',Number.isNaN(n));
+        const n=t[3]?parse(inp.value):parseHD(inp.value); inp.classList.toggle('invalid',Number.isNaN(n));
         if(n==null) delete S.cijfers[key]; else if(!Number.isNaN(n)) S.cijfers[key]=n; else return;
         save(); updateVak(id); renderUitslag();
       });
@@ -272,8 +272,9 @@ function renderVakken(){
 function updateVak(id){
   const v=BY_ID[id], d=document.getElementById('vak-'+id); if(!d) return;
   const i=seInfo(v);
-  const seEl=d.querySelector('[data-se]'); seEl.innerHTML=i.se==null?'–':`<span class="grade ${gcls(i.se)}">${fmt(i.se)}</span>`;
-  d.querySelector('[data-voortgang]').textContent=`${i.w} van ${i.wTot} wegingspunten ingevuld`;
+  const seEl=d.querySelector('[data-se]'); if(v.type==='hd'){ seEl.innerHTML=i.hd.onv?`<span class="grade g-bad">O</span>`:`<span class="grade ${i.hd.klaar===i.hd.n?'g-ok':''}">${i.hd.klaar}/${i.hd.n}</span>`; d.querySelector('.stat .k').textContent='Afgerond'; }
+  else seEl.innerHTML=i.se==null?'–':`<span class="grade ${gcls(i.se)}">${fmt(i.se)}</span>`;
+  d.querySelector('[data-voortgang]').textContent=(i.wTot?`${i.w} van ${i.wTot} wegingspunten ingevuld`:'')+(i.hd.n?`${i.wTot?' · ':''}${i.hd.klaar} van ${i.hd.n} handelingsdelen V of G`:'');
   const nd=d.querySelector('[data-nodig]'); if(nd) nd.textContent=nodigTekst(ceNodig(i.se,6));
   const need=d.querySelector('[data-need]'); let h='';
   if(v.type==='ce'&&i.se!=null){
@@ -285,6 +286,7 @@ function updateVak(id){
     h+=`<div><span class="k">Gemiddeld nodig op resterende toetsen voor SE ${fmt(doelSE)}</span><span class="v">${n<=1?'haalbaar':n>10?'niet haalbaar':fmt(Math.ceil(n*10-1e-9)/10)}</span></div>`;
   }
   if(v.type==='vg') h+=`<div><span class="k">Eis</span><span class="v small">gemiddeld voldoende</span></div>`;
+  if(i.hd.n) h+=`<div><span class="k">Handelingsdelen (HD)</span><span class="v small">${i.hd.onv?i.hd.onv+' onvoldoende':'allemaal V of G nodig'}</span></div>`;
   if(v.type==='info') h+=`<div><span class="k">Telt niet mee</span><span class="v small">in de slaag/zakregeling</span></div>`;
   need.innerHTML=h; need.hidden=!h;
 }
@@ -325,7 +327,9 @@ function renderUitslag(){
   checks.push({ok:ne&&ne.eind!=null?ne.eind>=5:null,t:ne?`Nederlands eindcijfer ${ne.eind??'–'} (minimaal 5)`:'Nederlands staat niet in het pakket'});
   checks.push({ok:ein.length?comp:null,t:`Eindcijfers: ${n4} keer een 4, ${n5} keer een 5, ${n7} keer 7 of hoger${onder4?', en een cijfer onder de 4':''}`});
   if(kv1) checks.push({ok:kv1.se==null?null:kv1.se>=5.5,t:`Kunstvakken inclusief ckv gemiddeld ${fmt(kv1.se)} (voldoende nodig)`});
-  checks.push({ok:null,t:'LO, LOB en profielwerkstuk: moeten voldoende of goed zijn afgerond (staat niet in Magister als cijfer)',info:true});
+  for(const id of ['lo','lo2']){ if(!S.pakket.includes(id)) continue; const h=seInfo(BY_ID[id]).hd; if(!h.n) continue;
+    checks.push({ok:h.onv?false:(h.klaar===h.n?true:null),t:`${BY_ID[id].naam}: ${h.klaar} van ${h.n} handelingsdelen V of G${h.onv?', '+h.onv+' onvoldoende':''}`}); }
+  checks.push({ok:null,t:'LOB en profielwerkstuk: moeten voldoende of goed zijn afgerond',info:true});
   const ul=document.getElementById('checks'); ul.innerHTML='';
   for(const c of checks){const li=document.createElement('li'); li.innerHTML=`<span class="dot ${c.ok===true?'ok':c.ok===false?'bad':'warn'}"></span><span>${c.t}</span>`; ul.appendChild(li);}
   const hard=checks.filter(c=>!c.info);
