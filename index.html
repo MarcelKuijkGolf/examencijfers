@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Examencijfers TL4</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: cijferlijst. Uitslag bovenaan, daarna per vak een kaart met PTA toetsen, onderaan bewaren. */
+:root{
+  --bg:#f3f4f6; --paper:#ffffff; --ink:#1b2333; --muted:#5d6678; --line:#dde1e8;
+  --accent:#e2731c; --accent-soft:#fcebdc; --blue:#1f4e8c;
+  --ok:#1e7a4a; --ok-soft:#dff2e7; --warn:#a86a00; --warn-soft:#fbefd2; --bad:#b3261e; --bad-soft:#fbe1df;
+  --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-num:"JetBrains Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#12161e; --paper:#1b212c; --ink:#e7eaf0; --muted:#9aa3b4; --line:#2c3443;
+  --accent:#f08a3a; --accent-soft:#3a2716; --blue:#8db4ec;
+  --ok:#5cc98d; --ok-soft:#15301f; --warn:#e8b14d; --warn-soft:#352a12; --bad:#f07a72; --bad-soft:#3a1c1a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#12161e; --paper:#1b212c; --ink:#e7eaf0; --muted:#9aa3b4; --line:#2c3443;
+  --accent:#f08a3a; --accent-soft:#3a2716; --blue:#8db4ec;
+  --ok:#5cc98d; --ok-soft:#15301f; --warn:#e8b14d; --warn-soft:#352a12; --bad:#f07a72; --bad-soft:#3a1c1a; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5}
+.wrap{max-width:980px;margin:0 auto;padding-block:28px 60px;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));display:grid;gap:22px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
+h1{font-size:clamp(1.7rem,4vw,2.3rem);font-weight:700;letter-spacing:-.01em}
+h2{font-size:1.25rem;font-weight:700}
+h3{font-size:1.05rem;font-weight:700}
+.eyebrow{font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}
+.num{font-family:var(--f-num);font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+header{display:grid;gap:6px}
+header p{margin:0;max-width:65ch;color:var(--muted)}
+.banner{background:var(--accent-soft);border:1px solid var(--accent);border-radius:10px;padding:12px 14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.banner p{margin:0;flex:1 1 260px}
+button{font:inherit;font-weight:700;border-radius:8px;border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:7px 12px;cursor:pointer}
+button:hover{border-color:var(--accent)}
+button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+button:focus-visible,input:focus-visible,summary:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* uitslag */
+.uitslag{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:14px}
+.status{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.pill{display:inline-flex;align-items:center;gap:6px;font-weight:700;border-radius:999px;padding:4px 12px;font-size:.9rem}
+.pill.ok{background:var(--ok-soft);color:var(--ok)} .pill.bad{background:var(--bad-soft);color:var(--bad)} .pill.warn{background:var(--warn-soft);color:var(--warn)}
+.big{font-family:var(--f-display);font-size:1.6rem;font-weight:700}
+.checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:8px;margin:0;padding:0;list-style:none}
+.checks li{display:flex;gap:8px;align-items:flex-start;font-size:.92rem;padding:8px 10px;border-radius:8px;background:var(--bg)}
+.dot{width:10px;height:10px;border-radius:50%;margin-top:6px;flex:none}
+.dot.ok{background:var(--ok)}.dot.bad{background:var(--bad)}.dot.warn{background:var(--warn)}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+th{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+td.r,th.r{text-align:right}
+.grade{font-family:var(--f-num);font-weight:700;display:inline-block;min-width:2.2em;text-align:center;border-radius:6px;padding:1px 4px}
+.g-bad{background:var(--bad-soft);color:var(--bad)} .g-warn{background:var(--warn-soft);color:var(--warn)} .g-ok{background:var(--ok-soft);color:var(--ok)}
+input.cell{width:4.6em;font-family:var(--f-num);font-size:.95rem;padding:5px 6px;border:1px solid var(--line);border-radius:6px;background:var(--paper);color:var(--ink);text-align:right}
+input.cell::placeholder{color:var(--muted);opacity:.7}
+input.cell.invalid{border-color:var(--bad)}
+
+/* pakket */
+.pakket{display:flex;flex-wrap:wrap;gap:6px}
+.pakket label{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:5px 11px;cursor:pointer;font-size:.9rem}
+.pakket input{accent-color:var(--accent)}
+.pakket label:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+
+/* vakken */
+.vakken{display:grid;gap:12px}
+details.vak{background:var(--paper);border:1px solid var(--line);border-radius:12px}
+details.vak>summary{list-style:none;cursor:pointer;padding:14px 16px;display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}
+details.vak>summary::-webkit-details-marker{display:none}
+.vhead{display:grid;gap:2px;min-width:0}
+.tag{font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--blue)}
+.vstats{display:flex;gap:16px;align-items:center}
+.stat{display:grid;justify-items:end;gap:0}
+.stat .k{font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.stat .v{font-family:var(--f-num);font-weight:700;font-size:1.15rem}
+.chev{transition:transform .15s;color:var(--muted)}
+details[open] .chev{transform:rotate(90deg)}
+.vbody{padding:0 16px 16px;display:grid;gap:12px;border-top:1px solid var(--line);padding-top:12px}
+.need{display:flex;flex-wrap:wrap;gap:8px}
+.need div{background:var(--bg);border-radius:8px;padding:8px 12px;display:grid;gap:0;min-width:120px}
+.need .k{font-size:.72rem;color:var(--muted)}
+.need .v{font-family:var(--f-num);font-weight:700;font-size:1.1rem}
+.small{font-size:.85rem}
+.per{font-family:var(--f-num);font-size:.8rem;color:var(--muted)}
+.hk{font-size:.75rem;color:var(--muted)}
+.sec{display:grid;gap:10px}
+textarea{width:100%;min-height:80px;font-family:var(--f-num);font-size:.8rem;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);padding:8px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+footer{font-size:.82rem;color:var(--muted);max-width:75ch}
+@media (max-width:560px){
+  details.vak>summary{grid-template-columns:1fr}
+  .vstats{justify-content:space-between}
+  .stat{justify-items:start}
+}
+@media (prefers-reduced-motion:reduce){.chev{transition:none}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Ichthus College Dronten · vmbo TL · cohort 2025-2027</span>
+    <h1>Examencijfers TL4</h1>
+    <p>Vul de cijfers uit Magister in bij de PTA toetsen. Je ziet per vak het SE cijfer, welk CE cijfer je nodig hebt, en of je met de verwachte CE cijfers slaagt. Toetsweek 1 loopt van 27 oktober tot en met 3 november, het CE eerste tijdvak van 14 mei tot en met 1 juni 2027.</p>
+  </header>
+
+  <div class="banner" id="voorbeeld" hidden>
+    <p><strong>Dit zijn voorbeeldcijfers.</strong> Ze laten zien hoe de berekening werkt. Wis ze en vul de echte cijfers in.</p>
+    <button class="primary" id="wisVoorbeeld" type="button">Voorbeeld wissen</button>
+  </div>
+
+  <section class="uitslag" aria-labelledby="uitslagKop">
+    <div class="status">
+      <div>
+        <div class="eyebrow" id="uitslagKop">Verwachte uitslag</div>
+        <div class="big" id="uitslagTekst">…</div>
+      </div>
+      <span class="pill" id="uitslagPill"></span>
+    </div>
+    <ul class="checks" id="checks"></ul>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Vak</th><th class="r">SE</th><th class="r">CE verwacht</th><th class="r">Eindcijfer</th><th class="r">CE nodig voor 6</th></tr></thead>
+        <tbody id="overzicht"></tbody>
+      </table>
+    </div>
+    <p class="small muted" style="margin:0">Laat je bij CE verwacht niets in, dan rekent de site met je SE cijfer als CE cijfer (grijs weergegeven).</p>
+  </section>
+
+  <section class="sec" aria-labelledby="pakketKop">
+    <h2 id="pakketKop">Vakkenpakket</h2>
+    <div class="pakket" id="pakket"></div>
+  </section>
+
+  <section class="sec" aria-labelledby="vakKop">
+    <h2 id="vakKop">Cijfers per vak</h2>
+    <div class="vakken" id="vakken"></div>
+  </section>
+
+  <section class="sec" aria-labelledby="bewaarKop">
+    <h2 id="bewaarKop">Bewaren en overzetten</h2>
+    <p class="small muted" style="margin:0">De cijfers blijven bewaard in deze browser. Wil je ze op een ander apparaat gebruiken, kopieer dan de code hieronder en plak hem daar.</p>
+    <textarea id="code" aria-label="Code met alle cijfers" spellcheck="false"></textarea>
+    <div class="row">
+      <button type="button" id="kopieer">Code kopiëren</button>
+      <button type="button" id="laad">Geplakte code laden</button>
+      <span class="small muted" id="codeMelding" role="status"></span>
+    </div>
+  </section>
+
+  <footer>
+    Rekenregels: SE cijfer is het gewogen gemiddelde volgens het PTA, afgerond op één decimaal. Eindcijfer is (SE + CE) / 2, afgerond op een heel cijfer. Geslaagd als het CE gemiddelde 5,5 of hoger is, Nederlands minimaal een 5 heeft, er geen cijfer onder de 4 is, en: alles 6 of hoger, of één 5, of één 4 met minstens één 7, of twee 5en met minstens één 7. Het officiële examenreglement 2026-2027 van school is leidend.
+  </footer>
+</div>
+
+<script>
+// type: ce = vak met centraal examen, se = alleen schoolexamen (telt mee in uitslag), vg = moet voldoende zijn, info = alleen ter info
+// toets: [nummer, periode, omschrijving, weging, herkansbaar]
+const VAKKEN = [
+ {id:'ne',naam:'Nederlands',type:'ce',toetsen:[['411','LJ4 TW1','Zakelijk schrijven',1,1],['412','LJ4 P1','Fictieopdracht (Pecha Kucha)',1,0],['421','LJ4 P2/3','Kijk- en luistervaardigheid',2,1],['431','LJ4 P3','Fictieopdracht mondeling',1,0],['432','LJ4 TW3','Gedocumenteerd schrijven',2,0]]},
+ {id:'en',naam:'Engels',type:'ce',toetsen:[['411','LJ4 TW1','Methodetoets + grammatica',1,1],['421','LJ4 TW2','Schrijfvaardigheid',1,1],['422','LJ4 P2/3','Kijk- en luistertoets',1,1],['431','LJ4 TW3','Leestoets',1,1],['432','LJ4 TW3','Mondeling',1,0]]},
+ {id:'du',naam:'Duits',type:'ce',toetsen:[['411','LJ4 TW1','Methodetoets + grammatica',1,1],['421','LJ4 TW2','Schrijfvaardigheid',1,1],['431','LJ4 P2/3','Kijk- en luistervaardigheid',2,1],['432','LJ4 TW3','Mondeling',2,1],['433','LJ4 P3','Leesvaardigheid',1,1]]},
+ {id:'wi',naam:'Wiskunde',type:'ce',toetsen:[['411','LJ4 TW1','Drie dimensies, afstanden en hoeken',3,1],['421','LJ4 TW2','Vlakke meetkunde en ruimtemeetkunde',3,1],['431','LJ4 TW3','Verbanden',3,1],['432','LJ4 P2/3','Statistiek, Excelopdracht',2,0]]},
+ {id:'nask1',naam:'Natuur- en scheikunde 1',type:'ce',toetsen:[['331','LJ3 P3','Practicum',2,0],['341','LJ3 TW3','Licht en Beeld + Het weer',2,1],['411','LJ4 TW1','Straling + Elektriciteit',3,1],['421','LJ4 TW2','Geluid + Constructies',3,1],['431','LJ4 TW3','Veilig bewegen + Bewegen en Energie',3,1]]},
+ {id:'nask2',naam:'Natuur- en scheikunde 2',type:'ce',toetsen:[['411','LJ4 TW1','Verbrandingen (H8)',1,1],['421','LJ4 TW2','Stoffen en Deeltjes + Zouten',1,1],['431','LJ4 TW3','Zuren en basen (H10)',1,1],['432','LJ4 P3','Praktijk / onderzoek',1,0]]},
+ {id:'bi',naam:'Biologie',type:'ce',toetsen:[['321','LJ3 P2','H2 Bewegen onderzoek/verslag',1,0],['341','LJ3 P4','Practicum Bloedsomloop',1,0],['342','LJ3 TW4','H6 Mens en Milieu + H1',2,1],['411','LJ4 TW1','H7 Ademen en eten + H8 Bloed',2,0],['421','LJ4 TW2','H9 Afweer + H10 Voortplanting',2,1],['431','LJ4 TW3','H11 Erfelijkheid + H12 Evolutie',2,1]]},
+ {id:'ec',naam:'Economie',type:'ce',toetsen:[['411','LJ4 TW1','Consumptie en consumentenorganisaties',1,1],['421','LJ4 TW2','Arbeid, Productie, Bedrijfsleven',1,1],['431','LJ4 TW3','Natuur, Milieu, Overheid, Int. ontw.',1,1]]},
+ {id:'ak',naam:'Aardrijkskunde',type:'ce',toetsen:[['341','LJ3 TW4','Leerstof klas 3 (open boek)',1,1],['411','LJ4 TW1','Weer en Klimaat',1,1],['421','LJ4 TW2','Bevolking en Ruimte',1,1],['431','LJ4 TW3','Water',1,1]]},
+ {id:'gs',naam:'Geschiedenis',type:'ce',toetsen:[['411','LJ4 TW1','Nederland en de Eerste Wereldoorlog',2,1],['421','LJ4 TW2','Interbellum en Tweede Wereldoorlog',2,1],['431','LJ4 TW3','Europa en de wereld, Koude Oorlog',2,1],['432','LJ4 P3','Praktische opdracht 20e eeuw',1,0]]},
+ {id:'te',naam:'Kunstvakken II tekenen',type:'ce',toetsen:[['341','LJ3 P4','2D keuze opdracht',1,0],['411','LJ4 P1','2D fantasie',1,0],['421','LJ4 P2','2D waarneming',2,0],['431','LJ4 P3','2D thema / toepassing',2,0]]},
+ {id:'ma',naam:'Maatschappijleer',type:'se',toetsen:[['311','LJ3 TW1','Wat is Maatschappijleer?',1,1],['321','LJ3 TW2','Politiek, Rechtsstaat',1,1],['331','LJ3 TW3','Nederland en de wereld',1,1],['341','LJ3 P4','Burgerschap',1,0]]},
+ {id:'pvtt',naam:'Technologie en toepassing (pvtt)',type:'se',toetsen:[['411','LJ4 P1','Opdracht 1',1,0],['421','LJ4 P2','Opdracht 2',1,0],['431','LJ4 P3','Opdracht 3',1,0]]},
+ {id:'pveo',naam:'Economie en ondernemen (pveo)',type:'se',toetsen:[['341','LJ3 P4','Ontwikkelen',1,0],['411','LJ4 P1','Adviseren',1,0],['421','LJ4 P2','Organiseren',1,0]]},
+ {id:'pvzw',naam:'Zorg en welzijn (pvzw)',type:'se',toetsen:[['341','LJ3 P4','Voeding en leefstijl',1,0],['421','LJ4 P1/2/3','Organiseren activiteit',1,0],['431','LJ4 P1/2/3','Ontwerpen en ondersteunen',1,0]]},
+ {id:'lo2',naam:'Lichamelijke opvoeding 2',type:'se',toetsen:[['311','LJ3 P1','Minute to win it',1,0],['322','LJ3 P2','The move',1,1],['323','LJ3 P2','Toernooien',1,1],['331','LJ3 P3','Groepsopdracht trampoline',1,0],['411','LJ4 TW1','Toets sportgeschiedenis',2,1],['412','LJ4 P1','Honkbal',1,0],['421','LJ4 P2','Les en leidinggeven',2,0],['422','LJ4 TW2','Toets EHBSO, hartslag en BMI',2,1],['433','LJ4 P3','Sportfolio',2,0],['434','LJ4 P3','Beroepshouding',2,0]]},
+ {id:'kv1',naam:'Kunstvakken inclusief ckv',type:'vg',toetsen:[['311','LJ3 P1','CZP 1',1,0],['321','LJ3 P2','Architectuur',1,0],['322','LJ3 P2','Reflectie 1 en 2',1,0],['331','LJ3 P3','Reflectie 3 en 4',1,0],['341','LJ3 P4','CZP 2',1,0],['342','LJ3 P4','Fotografie',1,0]]},
+ {id:'levo',naam:'Levensbeschouwelijke vorming',type:'info',toetsen:[['411','LJ4 TW1','Hindoeïsme',1,1],['421','LJ4 P2','Boeddhisme',1,0],['422','LJ4 P2','Gesprek over levensvragen',1,0]]},
+];
+const TYPE_LABEL={ce:'Examenvak met CE',se:'Alleen schoolexamen',vg:'Moet voldoende zijn',info:'Eigen examenstof school'};
+const BY_ID=Object.fromEntries(VAKKEN.map(v=>[v.id,v]));
+const KEY='examencijfers-tl4-v2';
+
+// Voorbeeldstand (verzonnen cijfers), wordt getoond tot er eigen cijfers zijn
+const VOORBEELD={voorbeeld:true,pakket:['ne','en','wi','nask1','bi','ec','ma','pvtt','kv1'],
+ cijfers:{'nask1-331':6.8,'nask1-341':5.4,'bi-321':7.2,'bi-341':6.5,'bi-342':5.9,'ma-311':6.4,'ma-321':5.8,'ma-331':7.0,'ma-341':6.9,
+ 'kv1-311':7,'kv1-321':6.5,'kv1-322':7.5,'kv1-331':6.8,'kv1-341':7.2,'kv1-342':8},
+ ce:{}};
+
+let S=load();
+function load(){
+  try{const raw=localStorage.getItem(KEY); if(raw){const s=JSON.parse(raw); if(s&&s.pakket) return norm(s);}}catch(e){}
+  return JSON.parse(JSON.stringify(VOORBEELD));
+}
+function norm(s){return {voorbeeld:!!s.voorbeeld,pakket:Array.isArray(s.pakket)?s.pakket.filter(id=>BY_ID[id]):[],cijfers:s.cijfers||{},ce:s.ce||{}};}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){} document.getElementById('code').value=JSON.stringify(S);}
+
+const r1=x=>Math.round(x*10+1e-9)/10;
+const r0=x=>Math.floor(x+0.5+1e-9);
+const fmt=(x,d=1)=>x==null||isNaN(x)?'–':x.toFixed(d).replace('.',',');
+function parse(str){
+  if(str==null) return null; str=String(str).trim().replace(',','.'); if(str==='') return null;
+  const n=Number(str); return (isFinite(n)&&n>=1&&n<=10)?n:NaN;
+}
+function gcls(x,ce){ if(x==null||isNaN(x)) return ''; const t=ce?x:x; return t<5.5?(t<4.5?'g-bad':'g-warn'):'g-ok'; }
+
+function seInfo(v){
+  let sum=0,w=0,wTot=0;
+  for(const t of v.toetsen){const c=S.cijfers[v.id+'-'+t[0]]; wTot+=t[3]; if(c!=null&&!isNaN(c)){sum+=c*t[3];w+=t[3];}}
+  return {se:w?r1(sum/w):null,raw:w?sum/w:null,sum,w,wTot,rest:wTot-w};
+}
+function ceNodig(se,doel){ if(se==null) return null; return r1(2*doel-1-se); }
+function nodigTekst(n){ if(n==null) return '–'; if(n<=1) return 'altijd'; if(n>10) return 'niet haalbaar'; return fmt(n); }
+
+function renderPakket(){
+  const el=document.getElementById('pakket'); el.innerHTML='';
+  for(const v of VAKKEN){
+    const id='pk-'+v.id; const lab=document.createElement('label');
+    lab.innerHTML=`<input type="checkbox" id="${id}" ${S.pakket.includes(v.id)?'checked':''}> ${v.naam}`;
+    lab.querySelector('input').addEventListener('change',e=>{
+      if(e.target.checked){ if(!S.pakket.includes(v.id)) S.pakket.push(v.id); } else S.pakket=S.pakket.filter(x=>x!==v.id);
+      S.pakket.sort((a,b)=>VAKKEN.indexOf(BY_ID[a])-VAKKEN.indexOf(BY_ID[b]));
+      save(); renderVakken(); renderUitslag();
+    });
+    el.appendChild(lab);
+  }
+}
+
+const openState=new Set();
+function renderVakken(){
+  const el=document.getElementById('vakken'); el.innerHTML='';
+  if(!S.pakket.length){el.innerHTML='<p class="muted">Kies hierboven de vakken uit het pakket.</p>';return;}
+  for(const id of S.pakket){
+    const v=BY_ID[id]; const d=document.createElement('details'); d.className='vak'; d.id='vak-'+id;
+    if(openState.has(id)) d.open=true;
+    d.addEventListener('toggle',()=>{d.open?openState.add(id):openState.delete(id);});
+    d.innerHTML=`<summary>
+        <div class="vhead"><span class="tag">${TYPE_LABEL[v.type]}</span><h3>${v.naam}</h3><span class="small muted" data-voortgang></span></div>
+        <div class="vstats"><div class="stat"><span class="k">SE nu</span><span class="v" data-se></span></div>
+        ${v.type==='ce'?'<div class="stat"><span class="k">CE nodig voor 6</span><span class="v" data-nodig></span></div>':''}
+        <span class="chev" aria-hidden="true">›</span></div>
+      </summary>
+      <div class="vbody">
+        <div class="tablewrap"><table><thead><tr><th>Nr</th><th>Wanneer</th><th>Toets</th><th class="r">Weging</th><th class="r">Cijfer</th></tr></thead><tbody></tbody></table></div>
+        <div class="need" data-need></div>
+      </div>`;
+    const tb=d.querySelector('tbody');
+    for(const t of v.toetsen){
+      const key=id+'-'+t[0]; const c=S.cijfers[key];
+      const tr=document.createElement('tr');
+      tr.innerHTML=`<td class="per">${t[0]}</td><td class="per">${t[1]}</td><td style="white-space:normal;min-width:180px">${t[2]}${t[4]?' <span class="hk">herkansbaar</span>':''}</td><td class="r num">${t[3]}</td>
+        <td class="r"><input class="cell" id="c-${key}" inputmode="decimal" autocomplete="off" placeholder="–" aria-label="Cijfer ${v.naam} ${t[0]}" value="${c!=null?String(c).replace('.',','):''}"></td>`;
+      const inp=tr.querySelector('input');
+      inp.addEventListener('input',()=>{
+        const n=parse(inp.value); inp.classList.toggle('invalid',Number.isNaN(n));
+        if(n==null) delete S.cijfers[key]; else if(!Number.isNaN(n)) S.cijfers[key]=n; else return;
+        save(); updateVak(id); renderUitslag();
+      });
+      tb.appendChild(tr);
+    }
+    el.appendChild(d); updateVak(id);
+  }
+}
+function updateVak(id){
+  const v=BY_ID[id], d=document.getElementById('vak-'+id); if(!d) return;
+  const i=seInfo(v);
+  const seEl=d.querySelector('[data-se]'); seEl.innerHTML=i.se==null?'–':`<span class="grade ${gcls(i.se)}">${fmt(i.se)}</span>`;
+  d.querySelector('[data-voortgang]').textContent=`${i.w} van ${i.wTot} wegingspunten ingevuld`;
+  const nd=d.querySelector('[data-nodig]'); if(nd) nd.textContent=nodigTekst(ceNodig(i.se,6));
+  const need=d.querySelector('[data-need]'); let h='';
+  if(v.type==='ce'&&i.se!=null){
+    for(const doel of [5,6,7]) h+=`<div><span class="k">CE nodig voor eindcijfer ${doel}</span><span class="v">${nodigTekst(ceNodig(i.se,doel))}</span></div>`;
+  }
+  if(i.rest>0&&i.w>0){
+    const doelSE= v.type==='ce'?6.0:5.5;
+    const n=(doelSE*i.wTot-i.sum)/i.rest;
+    h+=`<div><span class="k">Gemiddeld nodig op resterende toetsen voor SE ${fmt(doelSE)}</span><span class="v">${n<=1?'haalbaar':n>10?'niet haalbaar':fmt(Math.ceil(n*10-1e-9)/10)}</span></div>`;
+  }
+  if(v.type==='vg') h+=`<div><span class="k">Eis</span><span class="v small">gemiddeld voldoende</span></div>`;
+  if(v.type==='info') h+=`<div><span class="k">Telt niet mee</span><span class="v small">in de slaag/zakregeling</span></div>`;
+  need.innerHTML=h; need.hidden=!h;
+}
+
+function renderUitslag(){
+  const tb=document.getElementById('overzicht'); tb.innerHTML='';
+  const tel=S.pakket.map(id=>BY_ID[id]).filter(v=>v.type==='ce'||v.type==='se');
+  const rows=[]; let ceSom=0,ceN=0,compleet=true;
+  for(const v of tel){
+    const i=seInfo(v); if(i.rest>0) compleet=false;
+    let ceIn=v.type==='ce'?S.ce[v.id]:null; let ceGebruikt=null, aanname=false;
+    if(v.type==='ce'){ ceGebruikt=ceIn!=null?ceIn:i.se; aanname=ceIn==null; if(ceGebruikt!=null){ceSom+=ceGebruikt;ceN++;} }
+    let eind=null;
+    if(i.se!=null) eind = v.type==='ce' ? (ceGebruikt!=null? r0((i.se+ceGebruikt)/2):null) : r0(i.se);
+    rows.push({v,i,eind});
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${v.naam}</td><td class="r"><span class="grade ${gcls(i.se)}">${fmt(i.se)}</span></td>
+      <td class="r">${v.type==='ce'?`<input class="cell" id="ce-${v.id}" inputmode="decimal" autocomplete="off" aria-label="Verwacht CE ${v.naam}" placeholder="${i.se!=null?fmt(i.se):'–'}" value="${ceIn!=null?String(ceIn).replace('.',','):''}">`:'<span class="muted small">geen CE</span>'}</td>
+      <td class="r"><span class="grade ${eind==null?'':eind<5?'g-bad':eind<6?'g-warn':'g-ok'}">${eind==null?'–':eind}</span></td>
+      <td class="r num">${v.type==='ce'?nodigTekst(ceNodig(i.se,6)):'–'}</td>`;
+    const inp=tr.querySelector('input');
+    if(inp) inp.addEventListener('input',()=>{
+      const n=parse(inp.value); inp.classList.toggle('invalid',Number.isNaN(n));
+      if(n==null) delete S.ce[v.id]; else if(!Number.isNaN(n)) S.ce[v.id]=n; else return;
+      save(); renderUitslag(); const f=document.getElementById('ce-'+v.id); if(f){f.focus(); const L=f.value.length; f.setSelectionRange(L,L);}
+    });
+    tb.appendChild(tr);
+  }
+  // regels
+  const ein=rows.filter(r=>r.eind!=null).map(r=>r.eind);
+  const ceAvg=ceN?ceSom/ceN:null;
+  const ne=rows.find(r=>r.v.id==='ne');
+  const kv1=S.pakket.includes('kv1')?seInfo(BY_ID.kv1):null;
+  const n4=ein.filter(e=>e===4).length, n5=ein.filter(e=>e===5).length, onder4=ein.some(e=>e<4), n7=ein.filter(e=>e>=7).length;
+  const comp = !onder4 && ((n4===0&&n5<=1)||(n4===1&&n5===0&&n7>=1)||(n4===0&&n5===2&&n7>=1));
+  const checks=[];
+  checks.push({ok:ceAvg==null?null:ceAvg>=5.5,t:`CE gemiddelde ${ceAvg==null?'–':fmt(r1(ceAvg))} (minimaal 5,5)`});
+  checks.push({ok:ne&&ne.eind!=null?ne.eind>=5:null,t:ne?`Nederlands eindcijfer ${ne.eind??'–'} (minimaal 5)`:'Nederlands staat niet in het pakket'});
+  checks.push({ok:ein.length?comp:null,t:`Eindcijfers: ${n4} keer een 4, ${n5} keer een 5, ${n7} keer 7 of hoger${onder4?', en een cijfer onder de 4':''}`});
+  if(kv1) checks.push({ok:kv1.se==null?null:kv1.se>=5.5,t:`Kunstvakken inclusief ckv gemiddeld ${fmt(kv1.se)} (voldoende nodig)`});
+  checks.push({ok:null,t:'LO, LOB en profielwerkstuk: moeten voldoende of goed zijn afgerond (staat niet in Magister als cijfer)',info:true});
+  const ul=document.getElementById('checks'); ul.innerHTML='';
+  for(const c of checks){const li=document.createElement('li'); li.innerHTML=`<span class="dot ${c.ok===true?'ok':c.ok===false?'bad':'warn'}"></span><span>${c.t}</span>`; ul.appendChild(li);}
+  const hard=checks.filter(c=>!c.info);
+  const geslaagd=hard.every(c=>c.ok===true), gezakt=hard.some(c=>c.ok===false);
+  const pill=document.getElementById('uitslagPill'), txt=document.getElementById('uitslagTekst');
+  if(!tel.length){txt.textContent='Kies eerst het vakkenpakket';pill.className='pill warn';pill.textContent='Geen vakken';}
+  else if(geslaagd){txt.textContent='Op koers om te slagen';pill.className='pill ok';pill.textContent=compleet?'Geslaagd':'Voorlopig';}
+  else if(gezakt){txt.textContent='Nog niet genoeg om te slagen';pill.className='pill bad';pill.textContent=compleet?'Gezakt':'Let op';}
+  else {txt.textContent='Nog te weinig cijfers';pill.className='pill warn';pill.textContent='Onvolledig';}
+}
+
+function renderAll(){
+  document.getElementById('voorbeeld').hidden=!S.voorbeeld;
+  renderPakket(); renderVakken(); renderUitslag(); document.getElementById('code').value=JSON.stringify(S);
+}
+document.getElementById('wisVoorbeeld').addEventListener('click',()=>{S={voorbeeld:false,pakket:S.pakket.slice(),cijfers:{},ce:{}};save();renderAll();});
+document.getElementById('kopieer').addEventListener('click',()=>{
+  const ta=document.getElementById('code'), m=document.getElementById('codeMelding');
+  navigator.clipboard.writeText(ta.value).then(()=>{m.textContent='Gekopieerd';},()=>{ta.select();m.textContent='Selecteer en kopieer de code zelf';});
+});
+document.getElementById('laad').addEventListener('click',()=>{
+  const m=document.getElementById('codeMelding');
+  try{const s=JSON.parse(document.getElementById('code').value); if(!s||!s.pakket) throw 0; S=norm(s); S.voorbeeld=false; save(); renderAll(); m.textContent='Cijfers geladen';}
+  catch(e){m.textContent='Deze code klopt niet. Kopieer hem opnieuw in zijn geheel.';}
+});
+renderAll();
+</script>
+
+</body>
+</html>
