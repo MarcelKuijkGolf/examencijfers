@@ -248,6 +248,9 @@ footer{font-size:.8rem;color:var(--dim);max-width:80ch}
 .linkknop{border:0;background:none;padding:0;color:var(--accent);font-weight:700;font-size:.9rem;text-decoration:underline;text-underline-offset:3px}
 .linkknop:hover{background:none;filter:brightness(1.15)}
 .opt{font-weight:400;color:var(--dim)}
+.deel{display:flex;flex-wrap:wrap;gap:18px;align-items:center}
+.qr{width:180px;height:180px;border-radius:18px;background:#fff;padding:6px;flex:none}
+.deel-link{font-family:var(--f-num);font-size:.85rem;color:var(--accent);word-break:break-all}
 .acc-form{display:grid;gap:6px}
 .acc-form label{font-size:.8rem;color:var(--muted);font-weight:700}
 .acc-form input{padding:9px 11px;min-width:0;flex:1 1 220px}
@@ -492,6 +495,17 @@ footer{font-size:.8rem;color:var(--dim);max-width:80ch}
             <button type="button" class="primary" id="verwijderJa">Ja, verwijderen</button><button type="button" id="verwijderNee">Annuleren</button>
           </div>
         </details>
+      </section>
+      <section class="paneel" id="deelPaneel">
+        <h2>App delen</h2>
+        <div class="deel">
+          <img src="qr.png" alt="QR code naar de app" width="180" height="180" class="qr">
+          <div style="display:grid;gap:8px;min-width:0">
+            <p style="margin:0">Laat een klasgenoot, broer of zus deze code scannen met de camera van zijn telefoon. Daarna maakt hij zijn eigen account aan.</p>
+            <code class="deel-link">marcelkuijkgolf.github.io/examencijfers</code>
+            <div class="row"><button type="button" id="deelKopieer">Link kopiëren</button><span class="small muted" id="deelMelding" role="status"></span></div>
+          </div>
+        </div>
       </section>
       <section class="paneel">
         <h2>Vakkenpakket <span class="small muted" id="pakketAantal"></span></h2>
@@ -1152,6 +1166,8 @@ for(const b of document.querySelectorAll('.uitlog')) b.addEventListener('click',
   try{ localStorage.removeItem(cacheKey()); }catch(e){}
   DB=LOKAAL; S=DB.leerlingen[DB.actief]; zetModus('in'); toonLogin('');
 });
+$('deelKopieer').addEventListener('click',()=>{ const u='https://marcelkuijkgolf.github.io/examencijfers/';
+  (navigator.clipboard?navigator.clipboard.writeText(u):Promise.reject()).then(()=>{$('deelMelding').textContent='Gekopieerd';},()=>{$('deelMelding').textContent=u;}); });
 // account: herstelmail en wachtwoord
 function accMeld(t,ok){ const e=$('accMelding'); e.textContent=t; e.style.color=ok?'var(--ok)':'var(--bad)'; }
 $('accMailForm').addEventListener('submit',async e=>{ e.preventDefault(); const m=$('accMail').value.trim();
