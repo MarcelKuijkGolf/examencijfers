@@ -243,6 +243,15 @@ footer{font-size:.8rem;color:var(--dim);max-width:80ch}
 .oog:hover{background:rgba(255,255,255,.07);color:var(--ink)}
 .oog svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .oog .o-dicht{display:none} .oog[aria-pressed="true"] .o-open{display:none} .oog[aria-pressed="true"] .o-dicht{display:block}
+.login-ok{margin:0;color:var(--ok);font-size:.9rem}
+.login-ok:empty{display:none}
+.linkknop{border:0;background:none;padding:0;color:var(--accent);font-weight:700;font-size:.9rem;text-decoration:underline;text-underline-offset:3px}
+.linkknop:hover{background:none;filter:brightness(1.15)}
+.opt{font-weight:400;color:var(--dim)}
+.acc-form{display:grid;gap:6px}
+.acc-form label{font-size:.8rem;color:var(--muted);font-weight:700}
+.acc-form input{padding:9px 11px;min-width:0;flex:1 1 220px}
+.acc-form .ww-veld{flex:1 1 220px;min-width:0}
 .login-fout{margin:0;color:var(--bad);font-size:.9rem;min-height:1.2em}
 .im-lijst{display:grid;gap:8px}
 .im-lijst button{text-align:left;display:grid;gap:2px}
@@ -457,6 +466,15 @@ footer{font-size:.8rem;color:var(--dim);max-width:80ch}
         <h2>Account</h2>
         <p style="margin:0">Ingelogd als <b id="accNaam"></b> <span class="small muted">(gebruikersnaam <span id="accGebr"></span>)</span></p>
         <p class="small muted" style="margin:0">Je cijfers en agenda worden online bewaard en zijn op elk apparaat hetzelfde. <span class="sync" id="syncStatus2"></span></p>
+        <form class="acc-form" id="accMailForm">
+          <label for="accMail">E-mailadres voor wachtwoord vergeten</label>
+          <div class="row"><input id="accMail" type="email" autocomplete="email" autocapitalize="none" spellcheck="false" placeholder="naam@voorbeeld.nl"><button type="submit">Opslaan</button></div>
+        </form>
+        <form class="acc-form" id="accWwForm">
+          <label for="accWw">Nieuw wachtwoord</label>
+          <div class="row"><span class="ww-veld"><input id="accWw" type="password" autocomplete="new-password" placeholder="Minimaal 6 tekens"><button type="button" class="oog" data-voor="accWw" aria-label="Wachtwoord tonen" aria-pressed="false"><svg viewBox="0 0 24 24" class="o-open"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><svg viewBox="0 0 24 24" class="o-dicht"><path d="M3 3l18 18M10.6 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4.1M6.6 6.6C3.8 8.4 2 12 2 12s3.6 7 10 7a9.6 9.6 0 0 0 4.4-1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg></button></span><button type="submit">Wijzigen</button></div>
+        </form>
+        <p class="small" id="accMelding" role="status" style="margin:0"></p>
         <div class="row"><button type="button" class="uitlog">Uitloggen</button></div>
       </section>
       <section class="paneel" id="leerlingPaneel">
@@ -517,11 +535,14 @@ footer{font-size:.8rem;color:var(--dim);max-width:80ch}
     <form id="loginForm" class="login-form" novalidate>
       <label id="lNaam" hidden>Je naam<input id="liNaam" autocomplete="name" placeholder="Bijvoorbeeld Sam de Vries" maxlength="40"></label>
       <label>Gebruikersnaam<input id="liGebr" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="Bijvoorbeeld samv" maxlength="30"></label>
-      <label>Wachtwoord<span class="ww-veld"><input id="liWw" type="password" autocomplete="current-password" placeholder="Minimaal 6 tekens"><button type="button" class="oog" data-voor="liWw" aria-label="Wachtwoord tonen" aria-pressed="false"><svg viewBox="0 0 24 24" class="o-open"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><svg viewBox="0 0 24 24" class="o-dicht"><path d="M3 3l18 18M10.6 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4.1M6.6 6.6C3.8 8.4 2 12 2 12s3.6 7 10 7a9.6 9.6 0 0 0 4.4-1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg></button></span></label>
+      <label id="lWw">Wachtwoord<span class="ww-veld"><input id="liWw" type="password" autocomplete="current-password" placeholder="Minimaal 6 tekens"><button type="button" class="oog" data-voor="liWw" aria-label="Wachtwoord tonen" aria-pressed="false"><svg viewBox="0 0 24 24" class="o-open"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><svg viewBox="0 0 24 24" class="o-dicht"><path d="M3 3l18 18M10.6 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4.1M6.6 6.6C3.8 8.4 2 12 2 12s3.6 7 10 7a9.6 9.6 0 0 0 4.4-1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg></button></span></label>
+      <label id="lMail" hidden>E-mailadres <span class="opt">voor wachtwoord vergeten, mag leeg</span><input id="liMail" type="email" autocomplete="email" autocapitalize="none" spellcheck="false" placeholder="naam@voorbeeld.nl"></label>
       <label id="lWw2" hidden>Wachtwoord herhalen<span class="ww-veld"><input id="liWw2" type="password" autocomplete="new-password"><button type="button" class="oog" data-voor="liWw2" aria-label="Wachtwoord tonen" aria-pressed="false"><svg viewBox="0 0 24 24" class="o-open"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><svg viewBox="0 0 24 24" class="o-dicht"><path d="M3 3l18 18M10.6 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4.1M6.6 6.6C3.8 8.4 2 12 2 12s3.6 7 10 7a9.6 9.6 0 0 0 4.4-1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg></button></span></label>
       <button type="submit" class="primary" id="liKnop">Inloggen</button>
       <p class="login-fout" id="liFout" role="alert"></p>
-      <p class="small muted" id="liTip" style="margin:0">Wachtwoord vergeten? Vraag het aan de beheerder van de site.</p>
+      <p class="login-ok" id="liOk" role="status"></p>
+      <p style="margin:0" id="liTip"><button type="button" class="linkknop" id="vergetenKnop">Wachtwoord vergeten?</button></p>
+      <p style="margin:0" id="terugTip" hidden><button type="button" class="linkknop" id="terugKnop">Terug naar inloggen</button></p>
     </form>
   </div>
 </div>
@@ -532,6 +553,19 @@ footer{font-size:.8rem;color:var(--dim);max-width:80ch}
     <p class="muted" style="margin:0">Op dit apparaat staan al cijfers. Wil je die in je account zetten?</p>
     <div id="imLijst" class="im-lijst"></div>
     <button type="button" id="imLeeg">Nee, leeg beginnen</button>
+  </div>
+</div>
+
+<div class="login" id="herstel" hidden>
+  <div class="login-kaart">
+    <h1 style="font-size:1.6rem">Nieuw wachtwoord</h1>
+    <p class="muted" style="margin:0">Kies een nieuw wachtwoord voor <b id="hsGebr"></b>.</p>
+    <form id="herstelForm" class="login-form" novalidate>
+      <label>Nieuw wachtwoord<span class="ww-veld"><input id="hsWw" type="password" autocomplete="new-password" placeholder="Minimaal 6 tekens"><button type="button" class="oog" data-voor="hsWw" aria-label="Wachtwoord tonen" aria-pressed="false"><svg viewBox="0 0 24 24" class="o-open"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><svg viewBox="0 0 24 24" class="o-dicht"><path d="M3 3l18 18M10.6 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4.1M6.6 6.6C3.8 8.4 2 12 2 12s3.6 7 10 7a9.6 9.6 0 0 0 4.4-1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg></button></span></label>
+      <label>Herhalen<span class="ww-veld"><input id="hsWw2" type="password" autocomplete="new-password"><button type="button" class="oog" data-voor="hsWw2" aria-label="Wachtwoord tonen" aria-pressed="false"><svg viewBox="0 0 24 24" class="o-open"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><svg viewBox="0 0 24 24" class="o-dicht"><path d="M3 3l18 18M10.6 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4.1M6.6 6.6C3.8 8.4 2 12 2 12s3.6 7 10 7a9.6 9.6 0 0 0 4.4-1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg></button></span></label>
+      <button type="submit" class="primary" id="hsKnop">Wachtwoord opslaan</button>
+      <p class="login-fout" id="hsFout" role="alert"></p>
+    </form>
   </div>
 </div>
 
@@ -981,6 +1015,9 @@ const SB_KEY='sb_publishable_4J5sf5_TLUr0lYgMbCuaVw_PddCxZVA';
 const MAIL_DOMEIN='marcelkuijkgolf.github.io';
 const NIEUW_PAKKET=['ne','en','ma','lo','kv1'];
 const LOKAAL=DB;
+const HERSTEL=/type=recovery/.test(location.hash);
+let USER=null;
+const geldigeMail=m=>/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(m);
 let sb=null, UID=null, GEBR=null, laatsteSync=null, pushTimer=null, pushBezig=false, nogEens=false, wijzigingOpen=false, modus='in';
 
 const appEl=document.querySelector('.app'), tabEl=document.querySelector('.tabbar');
@@ -1012,13 +1049,13 @@ async function haalOp(){
 function startMet(s,nieuw){
   S=norm(s); DB={actief:'cloud',leerlingen:{cloud:S}};
   CLOUD={gebr:GEBR,bewaar:bewaarCloud};
-  $('login').hidden=true; $('import').hidden=true; toonApp(true);
+  $('login').hidden=true; $('import').hidden=true; $('herstel').hidden=true; toonApp(true); vulAccount();
   openState.clear(); renderAll();
   go(nieuw?'instellingen':(location.hash.slice(1)||'home'),false);
   if(nieuw) push(); else if(!wijzigingOpen) syncStatus('Opgeslagen','ok');
 }
 async function naInloggen(user){
-  UID=user.id; const meta=user.user_metadata||{};
+  USER=user; UID=user.id; const meta=user.user_metadata||{};
   GEBR=meta.gebruikersnaam||String(user.email||'').split('@')[0];
   const naam=meta.naam||GEBR;
   let rij=null, offline=false;
@@ -1040,14 +1077,15 @@ async function naInloggen(user){
   $('login').hidden=true; $('import').hidden=false;
 }
 function zetModus(m){
-  modus=m; const nieuw=m==='nieuw';
-  $('tabIn').setAttribute('aria-selected',String(!nieuw)); $('tabNieuw').setAttribute('aria-selected',String(nieuw));
-  $('lNaam').hidden=!nieuw; $('lWw2').hidden=!nieuw; $('liTip').hidden=nieuw;
-  $('liKnop').textContent=nieuw?'Account maken':'Inloggen';
-  $('liWw').autocomplete=nieuw?'new-password':'current-password'; $('liFout').textContent='';
+  modus=m; const nieuw=m==='nieuw', verg=m==='vergeten';
+  $('tabIn').setAttribute('aria-selected',String(m==='in')); $('tabNieuw').setAttribute('aria-selected',String(nieuw));
+  $('lNaam').hidden=!nieuw; $('lMail').hidden=!nieuw; $('lWw2').hidden=!nieuw; $('lWw').hidden=verg;
+  $('liTip').hidden=m!=='in'; $('terugTip').hidden=!verg;
+  $('liKnop').textContent=nieuw?'Account maken':verg?'Stuur herstelmail':'Inloggen';
+  $('liWw').autocomplete=nieuw?'new-password':'current-password'; $('liFout').textContent=''; $('liOk').textContent='';
 }
 function toonLogin(fout){
-  CLOUD=null; UID=null; toonApp(false); $('import').hidden=true; $('login').hidden=false;
+  CLOUD=null; UID=null; USER=null; $('herstel').hidden=true; toonApp(false); $('import').hidden=true; $('login').hidden=false;
   $('liFout').textContent=fout||''; $('liKnop').disabled=false;
 }
 function vertaal(err){
@@ -1066,11 +1104,24 @@ for(const b of document.querySelectorAll('.oog')) b.addEventListener('click',()=
 });
 function verbergWw(){ for(const b of document.querySelectorAll('.oog')){ $(b.dataset.voor).type='password'; b.setAttribute('aria-pressed','false'); b.setAttribute('aria-label','Wachtwoord tonen'); } }
 $('tabIn').addEventListener('click',()=>zetModus('in'));
+$('vergetenKnop').addEventListener('click',()=>{ zetModus('vergeten'); $('liGebr').focus(); });
+$('terugKnop').addEventListener('click',()=>zetModus('in'));
 $('tabNieuw').addEventListener('click',()=>zetModus('nieuw'));
 $('loginForm').addEventListener('submit',async e=>{
   e.preventDefault(); const fout=$('liFout'); fout.textContent='';
   const g=normGebr($('liGebr').value), w=$('liWw').value;
   if(!/^[a-z0-9._-]{3,30}$/.test(g)){ fout.textContent='Gebruikersnaam: 3 tot 30 tekens, alleen letters, cijfers, punt, streepje of underscore.'; $('liGebr').focus(); return; }
+  if(modus==='vergeten'){
+    if(!sb){ fout.textContent='Geen verbinding met de server. Herlaad de pagina.'; return; }
+    const knop=$('liKnop'); knop.disabled=true; $('liOk').textContent='';
+    try{
+      const r=await sb.functions.invoke('wachtwoord-vergeten',{body:{gebruikersnaam:g}});
+      if(r.error) throw r.error;
+      if(r.data&&r.data.reden==='mail_niet_ingesteld') fout.textContent='Wachtwoord herstellen via mail is nog niet ingesteld. Vraag het aan de beheerder.';
+      else $('liOk').textContent='Als er een e-mailadres bij dit account hoort, is er nu een mail met een link onderweg. Kijk ook in je spam.';
+    }catch(err){ fout.textContent=vertaal(err); }
+    knop.disabled=false; return;
+  }
   if(w.length<6){ fout.textContent='Wachtwoord moet minimaal 6 tekens hebben.'; $('liWw').focus(); return; }
   if(!sb){ fout.textContent='Geen verbinding met de server. Herlaad de pagina.'; return; }
   const knop=$('liKnop'); knop.disabled=true;
@@ -1078,8 +1129,10 @@ $('loginForm').addEventListener('submit',async e=>{
     if(modus==='nieuw'){
       const naam=$('liNaam').value.trim();
       if(!naam){ fout.textContent='Vul je naam in.'; $('liNaam').focus(); knop.disabled=false; return; }
+      const mail=$('liMail').value.trim();
+      if(mail&&!geldigeMail(mail)){ fout.textContent='Dit e-mailadres klopt niet. Laat het leeg of vul het goed in.'; $('liMail').focus(); knop.disabled=false; return; }
       if(w!==$('liWw2').value){ fout.textContent='De wachtwoorden zijn niet hetzelfde.'; $('liWw2').focus(); knop.disabled=false; return; }
-      const r=await sb.auth.signUp({email:g+'@'+MAIL_DOMEIN,password:w,options:{data:{gebruikersnaam:g,naam}}});
+      const r=await sb.auth.signUp({email:g+'@'+MAIL_DOMEIN,password:w,options:{data:mail?{gebruikersnaam:g,naam,herstel_email:mail}:{gebruikersnaam:g,naam}}});
       if(r.error) throw r.error;
       if(!r.data.session){ fout.textContent='Account gemaakt, maar direct inloggen lukt niet. Staat Confirm email in Supabase nog aan?'; knop.disabled=false; return; }
       if(r.data.user&&Array.isArray(r.data.user.identities)&&!r.data.user.identities.length) throw new Error('already registered');
@@ -1099,6 +1152,30 @@ for(const b of document.querySelectorAll('.uitlog')) b.addEventListener('click',
   try{ localStorage.removeItem(cacheKey()); }catch(e){}
   DB=LOKAAL; S=DB.leerlingen[DB.actief]; zetModus('in'); toonLogin('');
 });
+// account: herstelmail en wachtwoord
+function accMeld(t,ok){ const e=$('accMelding'); e.textContent=t; e.style.color=ok?'var(--ok)':'var(--bad)'; }
+$('accMailForm').addEventListener('submit',async e=>{ e.preventDefault(); const m=$('accMail').value.trim();
+  if(m&&!geldigeMail(m)){ accMeld('Dit e-mailadres klopt niet.',false); return; }
+  const r=await sb.auth.updateUser({data:{...(USER&&USER.user_metadata||{}),herstel_email:m}});
+  if(r.error){ accMeld(vertaal(r.error),false); return; } USER=r.data.user; accMeld(m?'E-mailadres opgeslagen. Hiermee kun je je wachtwoord herstellen.':'E-mailadres verwijderd.',true); });
+$('accWwForm').addEventListener('submit',async e=>{ e.preventDefault(); const w=$('accWw').value;
+  if(w.length<6){ accMeld('Wachtwoord moet minimaal 6 tekens hebben.',false); return; }
+  const r=await sb.auth.updateUser({password:w});
+  if(r.error){ accMeld(/same|different/i.test(r.error.message)?'Dit is je huidige wachtwoord. Kies een ander.':vertaal(r.error),false); return; }
+  $('accWw').value=''; verbergWw(); accMeld('Wachtwoord gewijzigd.',true); });
+function vulAccount(){ if(USER) $('accMail').value=(USER.user_metadata||{}).herstel_email||''; $('accMelding').textContent=''; }
+function toonHerstel(user){
+  USER=user; toonApp(false); $('login').hidden=true; $('import').hidden=true; $('herstel').hidden=false;
+  $('hsGebr').textContent=(user.user_metadata||{}).gebruikersnaam||String(user.email||'').split('@')[0]; $('hsWw').focus();
+}
+$('herstelForm').addEventListener('submit',async e=>{ e.preventDefault(); const f=$('hsFout'); f.textContent='';
+  const w=$('hsWw').value; if(w.length<6){ f.textContent='Wachtwoord moet minimaal 6 tekens hebben.'; return; }
+  if(w!==$('hsWw2').value){ f.textContent='De wachtwoorden zijn niet hetzelfde.'; return; }
+  $('hsKnop').disabled=true; const r=await sb.auth.updateUser({password:w}); $('hsKnop').disabled=false;
+  if(r.error){ f.textContent=/same|different/i.test(r.error.message)?'Dit is je oude wachtwoord. Kies een nieuw.':vertaal(r.error); return; }
+  $('hsWw').value=''; $('hsWw2').value=''; verbergWw(); $('herstel').hidden=true;
+  try{ history.replaceState(null,'',location.pathname+'#home'); }catch(err){}
+  await naInloggen(r.data.user); });
 // bij terugkomen in de app de nieuwste versie ophalen
 async function verversVanServer(){
   if(!UID||wijzigingOpen||pushBezig||document.visibilityState!=='visible') return;
@@ -1118,8 +1195,10 @@ window.addEventListener('online',()=>{ if(wijzigingOpen) push(); });
   if(!window.supabase||!window.supabase.createClient){ toonLogin('De inlogdienst kon niet laden. Controleer je internet en herlaad de pagina.'); return; }
   sb=window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:true,autoRefreshToken:true,storageKey:'examencijfers-auth'}});
   let sessie=null; try{ sessie=(await sb.auth.getSession()).data.session; }catch(e){}
-  if(sessie) await naInloggen(sessie.user); else toonLogin('');
-  sb.auth.onAuthStateChange((ev)=>{ if(ev==='SIGNED_OUT'&&CLOUD){ DB=LOKAAL; S=DB.leerlingen[DB.actief]; toonLogin('Je bent uitgelogd.'); } });
+  if(sessie&&HERSTEL) toonHerstel(sessie.user);
+  else if(sessie) await naInloggen(sessie.user);
+  else toonLogin(HERSTEL?'Deze herstellink is verlopen of al gebruikt. Vraag een nieuwe aan via Wachtwoord vergeten.':'');
+  sb.auth.onAuthStateChange((ev,s)=>{ if(ev==='PASSWORD_RECOVERY'&&s&&$('herstel').hidden) toonHerstel(s.user); if(ev==='SIGNED_OUT'&&CLOUD){ DB=LOKAAL; S=DB.leerlingen[DB.actief]; toonLogin('Je bent uitgelogd.'); } });
 })();
 
 if('serviceWorker' in navigator && location.protocol==='https:'){ navigator.serviceWorker.register('sw.js').catch(()=>{}); }
