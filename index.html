@@ -306,6 +306,36 @@ dl.begrip div{padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.
 dl.begrip dt{font-family:var(--f-display);font-weight:700;color:var(--accent)}
 dl.begrip dd{margin:2px 0 0;font-size:.88rem;color:var(--muted)}
 @media (prefers-reduced-motion:reduce){.tour-licht .ico{animation:none!important}.tour-kaart{animation:none}}
+
+/* instellingen */
+.profielkaart{position:relative;overflow:hidden;display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding:22px;border-radius:24px;background:linear-gradient(135deg,#21195a,#38206f 55%,#6a2a7c);border:1px solid rgba(255,255,255,.14);box-shadow:0 18px 50px rgba(60,20,120,.4)}
+.profielkaart::before{content:"";position:absolute;inset:0;background:radial-gradient(320px 180px at 100% 0%,rgba(255,162,58,.25),transparent 70%);pointer-events:none}
+.profielkaart .av-groot{cursor:pointer;border-color:rgba(255,255,255,.5);box-shadow:0 8px 24px rgba(0,0,0,.35);position:relative}
+.prof-tekst{position:relative;display:grid;gap:2px;min-width:0;flex:1 1 200px}
+.prof-tekst h1{font-size:clamp(1.5rem,4vw,2rem);overflow-wrap:anywhere}
+.prof-sub{color:#d6cff5;font-size:.92rem;overflow-wrap:anywhere}
+.prof-uitlog{position:relative;background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.25)}
+.set-kop{font-size:.74rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700;margin:6px 0 -10px 6px}
+.set-groep{display:grid;border-radius:20px;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.015));border:1px solid var(--line)}
+.set-groep>.set+.set,.set-groep>.set+.set-knop{border-top:1px solid var(--line)}
+.set-groep>[hidden]+.set{border-top:0}
+details.set>summary,.set-knop{list-style:none;cursor:pointer;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center;padding:14px 16px;transition:background .15s}
+details.set>summary::-webkit-details-marker{display:none}
+details.set>summary:hover,.set-knop:hover{background:rgba(255,255,255,.04)}
+.set .ico{width:40px;height:40px;border-radius:12px;color:#fff;border:0}
+.set .ico svg{width:20px;height:20px}
+.set-tekst{display:grid;gap:1px;min-width:0}
+.set-tekst b{font-family:var(--f-display);font-size:1.02rem}
+.set-tekst small{color:var(--muted);font-size:.84rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+details.set[open]>summary{background:rgba(255,255,255,.03)}
+details.set[open]>summary .chev{transform:rotate(90deg)}
+.set-body{display:grid;gap:12px;padding:6px 16px 18px 70px;animation:in .25s ease}
+.set-knop{width:100%;text-align:left;border:0;border-radius:0;background:none;font:inherit;color:var(--ink);font-weight:400}
+.set-knop:hover{border-color:transparent}
+@media (max-width:640px){.set-body{padding:6px 14px 16px}.profielkaart{padding:18px}.profielkaart .av-groot{width:76px;height:76px;font-size:1.7rem}.prof-uitlog{width:100%}}
+.naam-velden{display:grid!important;grid-template-columns:1fr 1fr auto;gap:8px}
+.naam-velden input{min-width:0;width:100%}
+@media (max-width:640px){.naam-velden{grid-template-columns:1fr 1fr}.naam-velden button{grid-column:1/-1}}
 /* tablet: alleen iconen */
 @media (max-width:980px){
   .app{grid-template-columns:84px minmax(0,1fr)}
@@ -361,6 +391,12 @@ dl.begrip dd{margin:2px 0 0;font-size:.88rem;color:var(--muted)}
   <symbol id="i-magister" viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4V3h6v1M9 11h6M9 15h4"/></symbol>
   <symbol id="i-inst" viewBox="0 0 24 24"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></symbol>
   <symbol id="i-meer" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="19" cy="12" r="1.4"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+  <symbol id="i-slot" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.5" r="1.3"/></symbol>
+  <symbol id="i-school" viewBox="0 0 24 24"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2.5 9 2.5 12 0v-5"/></symbol>
+  <symbol id="i-boek" viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19a2 2 0 0 1 2-2h13"/><path d="M9 7h6"/></symbol>
+  <symbol id="i-deel" viewBox="0 0 24 24"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.8l7.6-4.4M8.2 13.2l7.6 4.4"/></symbol>
+  <symbol id="i-opslaan" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></symbol>
   <symbol id="i-ster" viewBox="0 0 24 24"><path d="M12 0 14.6 9.4 24 12 14.6 14.6 12 24 9.4 14.6 0 12 9.4 9.4z"/></symbol>
 </svg>
 
@@ -514,11 +550,23 @@ dl.begrip dd{margin:2px 0 0;font-size:.88rem;color:var(--muted)}
 
     <!-- INSTELLINGEN -->
     <section class="view" data-view="instellingen" hidden>
-      <div class="vkop"><span class="eyebrow">Instellingen</span><h1 id="naamKop">Examencijfers</h1><p>Ichthus College Dronten · vmbo TL · PTA cohort 2025-2027</p></div>
-      <section class="paneel" id="fotoPaneel">
-        <h2>Profielfoto</h2>
+      <div class="profielkaart">
+        <button type="button" class="avatar av-groot" data-av aria-label="Profielfoto wijzigen"></button>
+        <div class="prof-tekst">
+          <span class="eyebrow">Instellingen</span>
+          <h1 id="naamKop">Examencijfers</h1>
+          <span class="prof-sub" id="profSub">Ichthus College · vmbo TL</span>
+          <span class="sync" id="syncStatus2"></span>
+        </div>
+        <button type="button" class="uitlog prof-uitlog" id="profUitlog" hidden>Uitloggen</button>
+      </div>
+
+      <span class="set-kop">Jij</span>
+      <div class="set-groep">
+        <details class="set" id="fotoPaneel">
+          <summary><span class="ico g3"><svg><use href="#i-user"/></svg></span><span class="set-tekst"><b>Profielfoto</b><small id="fotoSub">Nog geen foto</small></span><span class="chev" aria-hidden="true">›</span></summary>
+          <div class="set-body">
         <div class="foto-rij">
-          <span class="avatar av-groot" data-av aria-hidden="true"></span>
           <div style="display:grid;gap:8px;min-width:0">
             <p class="small muted" style="margin:0">Kies een foto van je telefoon of computer. De app maakt hem zelf vierkant en klein.</p>
             <div class="row">
@@ -529,15 +577,17 @@ dl.begrip dd{margin:2px 0 0;font-size:.88rem;color:var(--muted)}
             <span class="small" id="fotoMelding" role="status"></span>
           </div>
         </div>
-      </section>
-      <section class="paneel" id="accountPaneel" hidden>
-        <h2>Account</h2>
-        <p style="margin:0">Ingelogd als <b id="accNaam"></b> <span class="small muted">(<span id="accGebr"></span>)</span></p>
+          </div>
+        </details>
+        <details class="set" id="accountPaneel" hidden>
+          <summary><span class="ico g2"><svg><use href="#i-slot"/></svg></span><span class="set-tekst"><b>Account</b><small id="accSub">Naam, e-mailadres en wachtwoord</small></span><span class="chev" aria-hidden="true">›</span></summary>
+          <div class="set-body">
+        <span hidden><b id="accNaam"></b><span id="accGebr"></span></span>
+
         <p class="small" id="accOud" hidden style="margin:0;color:var(--warn)">Je logt nog in met een gebruikersnaam. Vul hieronder je e-mailadres in, dan log je voortaan daarmee in en kun je je wachtwoord herstellen.</p>
-        <p class="small muted" style="margin:0">Je cijfers en agenda worden online bewaard en zijn op elk apparaat hetzelfde. <span class="sync" id="syncStatus2"></span></p>
         <form class="acc-form" id="accNaamForm">
           <label for="accVoor">Naam</label>
-          <div class="row"><input id="accVoor" autocomplete="given-name" placeholder="Voornaam" maxlength="30"><input id="accAchter" autocomplete="family-name" placeholder="Achternaam" maxlength="40"><button type="submit">Opslaan</button></div>
+          <div class="row naam-velden"><input id="accVoor" autocomplete="given-name" placeholder="Voornaam" maxlength="30"><input id="accAchter" autocomplete="family-name" placeholder="Achternaam" maxlength="40"><button type="submit">Opslaan</button></div>
         </form>
         <form class="acc-form" id="accMailForm">
           <label for="accMail">E-mailadres (hiermee log je in)</label>
@@ -548,10 +598,12 @@ dl.begrip dd{margin:2px 0 0;font-size:.88rem;color:var(--muted)}
           <div class="row"><span class="ww-veld"><input id="accWw" type="password" autocomplete="new-password" placeholder="Minimaal 6 tekens"><button type="button" class="oog" data-voor="accWw" aria-label="Wachtwoord tonen" aria-pressed="false"><svg viewBox="0 0 24 24" class="o-open"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><svg viewBox="0 0 24 24" class="o-dicht"><path d="M3 3l18 18M10.6 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4.1M6.6 6.6C3.8 8.4 2 12 2 12s3.6 7 10 7a9.6 9.6 0 0 0 4.4-1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg></button></span><button type="submit">Wijzigen</button></div>
         </form>
         <p class="small" id="accMelding" role="status" style="margin:0"></p>
-        <div class="row"><button type="button" class="uitlog">Uitloggen</button></div>
-      </section>
-      <section class="paneel" id="leerlingPaneel">
-        <h2>Leerling</h2>
+        
+          </div>
+        </details>
+        <details class="set" id="leerlingPaneel">
+          <summary><span class="ico g2"><svg><use href="#i-user"/></svg></span><span class="set-tekst"><b>Leerling</b><small id="leerSub">Wissel of voeg een leerling toe</small></span><span class="chev" aria-hidden="true">›</span></summary>
+          <div class="set-body">
         <div class="leerling"><label for="leerlingKeuze2" class="small muted">Gekozen leerling</label><select id="leerlingKeuze2"></select></div>
         <details class="mini" id="beheer">
           <summary><span class="chev" aria-hidden="true">›</span> Leerlingen beheren</summary>
@@ -565,14 +617,31 @@ dl.begrip dd{margin:2px 0 0;font-size:.88rem;color:var(--muted)}
             <button type="button" class="primary" id="verwijderJa">Ja, verwijderen</button><button type="button" id="verwijderNee">Annuleren</button>
           </div>
         </details>
-      </section>
-      <section class="paneel" id="begrippen">
-        <div class="paneel-kop"><h2>Wat betekent dat?</h2><button type="button" id="tourOpnieuw">Rondleiding bekijken</button></div>
-        <p class="small muted" style="margin:0">Alle afkortingen en woorden die je in de app tegenkomt.</p>
+          </div>
+        </details>
+      </div>
+
+      <span class="set-kop">School</span>
+      <div class="set-groep">
+        <details class="set" id="pakketPaneel">
+          <summary><span class="ico g1"><svg><use href="#i-school"/></svg></span><span class="set-tekst"><b>Vakkenpakket</b><small id="pakketAantal"></small></span><span class="chev" aria-hidden="true">›</span></summary>
+          <div class="set-body">
+        <div class="pakket" id="pakket"></div>
+          </div>
+        </details>
+        <details class="set" id="begrippen">
+          <summary><span class="ico g5"><svg><use href="#i-boek"/></svg></span><span class="set-tekst"><b>Wat betekent dat?</b><small id="begSub">Alle afkortingen uitgelegd</small></span><span class="chev" aria-hidden="true">›</span></summary>
+          <div class="set-body">
         <dl class="begrip"><div><dt>PTA</dt><dd>Programma van Toetsing en Afsluiting. De lijst van school met alle toetsen die meetellen voor je examen, en hoe zwaar ze tellen.</dd></div><div><dt>SE</dt><dd>Schoolexamen. Alle PTA toetsen die je op school maakt in klas 3 en 4. Samen geven ze je gemiddelde van school.</dd></div><div><dt>CE</dt><dd>Centraal examen. Het landelijke eindexamen in mei, voor iedereen in Nederland hetzelfde.</dd></div><div><dt>Eindcijfer</dt><dd>Het gemiddelde van je schoolexamen en je centraal examen samen, afgerond op een heel cijfer. Heeft een vak geen centraal examen, dan is je schoolcijfer je eindcijfer.</dd></div><div><dt>Telt mee (weging)</dt><dd>Hoe zwaar een toets meetelt. Een toets met 2x telt dubbel zo zwaar als een toets met 1x.</dd></div><div><dt>HD</dt><dd>Handelingsdeel. Een onderdeel zonder cijfer, zoals bij gym. Je moet het met een V of G afronden.</dd></div><div><dt>V, G, O</dt><dd>Voldoende, Goed, Onvoldoende. Zo worden handelingsdelen beoordeeld.</dd></div><div><dt>LJ3, LJ4</dt><dd>Leerjaar 3 en leerjaar 4. In de app staat dit als klas 3 en klas 4.</dd></div><div><dt>P1, P2, P3, P4</dt><dd>Periode 1 tot en met 4 van het schooljaar.</dd></div><div><dt>TW1, TW2, TW3</dt><dd>Toetsweek 1, 2 en 3.</dd></div><div><dt>Herkansbaar</dt><dd>Deze toets mag je opnieuw maken. In klas 4 mag je na periode 3 drie toetsen herkansen. Het hoogste cijfer telt.</dd></div><div><dt>Herexamen</dt><dd>Een tweede kans voor een centraal examen. Dit heet ook het 2e tijdvak, in juni.</dd></div><div><dt>LOB</dt><dd>Loopbaanoriëntatie en begeleiding. Opdrachten over je vervolgopleiding en beroep.</dd></div><div><dt>PWS</dt><dd>Profielwerkstuk. Een groot werkstuk in klas 4 dat je voldoende of goed moet afronden.</dd></div><div><dt>TL</dt><dd>Theoretische leerweg van het vmbo.</dd></div><div><dt>ckv, KV1</dt><dd>Culturele en kunstzinnige vorming. Moet gemiddeld voldoende zijn.</dd></div><div><dt>LO</dt><dd>Lichamelijke opvoeding, oftewel gym. LO2 is het examenvak met cijfers.</dd></div><div><dt>nask</dt><dd>Natuur- en scheikunde. Nask1 gaat vooral over natuurkunde, nask2 over scheikunde.</dd></div><div><dt>pvtt, pveo, pvzw</dt><dd>Praktijkvakken: technologie en toepassing, economie en ondernemen, zorg en welzijn.</dd></div><div><dt>Levo</dt><dd>Levensbeschouwelijke vorming. Eigen vak van school, telt niet mee voor slagen.</dd></div></dl>
-      </section>
-      <section class="paneel" id="deelPaneel">
-        <h2>App delen</h2>
+          </div>
+        </details>
+      </div>
+
+      <span class="set-kop">Overig</span>
+      <div class="set-groep">
+        <details class="set" id="deelPaneel">
+          <summary><span class="ico g4"><svg><use href="#i-deel"/></svg></span><span class="set-tekst"><b>App delen</b><small id="deelSub">QR code voor vrienden</small></span><span class="chev" aria-hidden="true">›</span></summary>
+          <div class="set-body">
         <div class="deel">
           <img src="qr.png" alt="QR code naar de app" width="180" height="180" class="qr">
           <div style="display:grid;gap:8px;min-width:0">
@@ -581,17 +650,18 @@ dl.begrip dd{margin:2px 0 0;font-size:.88rem;color:var(--muted)}
             <div class="row"><button type="button" id="deelKopieer">Link kopiëren</button><span class="small muted" id="deelMelding" role="status"></span></div>
           </div>
         </div>
-      </section>
-      <section class="paneel">
-        <h2>Vakkenpakket <span class="small muted" id="pakketAantal"></span></h2>
-        <div class="pakket" id="pakket"></div>
-      </section>
-      <section class="paneel">
-        <h2>Bewaren en overzetten</h2>
+          </div>
+        </details>
+        <details class="set" id="bewaarPaneel">
+          <summary><span class="ico g6"><svg><use href="#i-opslaan"/></svg></span><span class="set-tekst"><b>Bewaren en overzetten</b><small id="bewSub">Code om cijfers over te zetten</small></span><span class="chev" aria-hidden="true">›</span></summary>
+          <div class="set-body">
         <p class="small muted" style="margin:0">De cijfers blijven bewaard in deze browser. Wil je ze op een ander apparaat gebruiken, kopieer dan de code en plak hem daar. De code hoort bij de gekozen leerling.</p>
         <textarea id="code" aria-label="Code met alle cijfers" spellcheck="false"></textarea>
         <div class="row"><button type="button" id="kopieer">Code kopiëren</button><button type="button" id="laad">Geplakte code laden</button><span class="small muted" id="codeMelding" role="status"></span></div>
-      </section>
+          </div>
+        </details>
+        <button type="button" class="set set-knop" id="tourOpnieuw"><span class="ico g2"><svg><use href="#i-ster"/></svg></span><span class="set-tekst"><b>Rondleiding bekijken</b><small>Uitleg over de app, stap voor stap</small></span><span class="chev" aria-hidden="true">›</span></button>
+      </div>
     </section>
 
   </div>
@@ -741,7 +811,7 @@ function renderPakket(){
     lab.innerHTML=`<input type="checkbox" id="${id}" ${S.pakket.includes(v.id)?'checked':''}> ${v.naam}`;
     lab.querySelector('input').addEventListener('change',e=>{
       if(e.target.checked){ if(!S.pakket.includes(v.id)) S.pakket.push(v.id); } else S.pakket=S.pakket.filter(x=>x!==v.id);
-      S.pakket.sort((a,b)=>VAKKEN.indexOf(BY_ID[a])-VAKKEN.indexOf(BY_ID[b])); document.getElementById('pakketAantal').textContent=`(${S.pakket.length} vakken)`;
+      S.pakket.sort((a,b)=>VAKKEN.indexOf(BY_ID[a])-VAKKEN.indexOf(BY_ID[b])); document.getElementById('pakketAantal').textContent=S.pakket.length?`${S.pakket.length} vakken gekozen`:'Nog geen vakken gekozen';
       save(); renderVakken(); renderUitslag(); renderAgenda();
     });
     el.appendChild(lab);
@@ -875,6 +945,7 @@ function renderAvatars(){
     else { el.classList.remove('foto'); el.style.removeProperty('--foto'); el.textContent=initialen(S.naam); }
   }
   const w=document.getElementById('fotoWeg'); if(w) w.hidden=!S.foto;
+  const fs=document.getElementById('fotoSub'); if(fs) fs.textContent=S.foto?'Foto ingesteld':'Nog geen foto';
 }
 function maakFoto(file){ return new Promise((ok,nee)=>{
   if(!file||!/^image\//.test(file.type)) return nee(new Error('geen afbeelding'));
@@ -891,9 +962,13 @@ function renderLeerling(){
   if(c){ $('wieNaam').textContent=S.naam; $('accNaam').textContent=S.naam; $('accGebr').textContent=CLOUD.gebr.includes('@')?CLOUD.gebr:'gebruikersnaam '+CLOUD.gebr; }
   for(const sid of ['leerlingKeuze','leerlingKeuze2']){ const sel=document.getElementById(sid); sel.innerHTML='';
   for(const [id,l] of Object.entries(DB.leerlingen)){const o=document.createElement('option'); o.value=id; o.textContent=l.naam; o.selected=id===DB.actief; sel.appendChild(o);} }
-  document.getElementById('naamKop').textContent='Examencijfers '+S.naam;
+  document.getElementById('naamKop').textContent=S.naam;
+  $('profSub').textContent=c?(CLOUD.gebr.includes('@')?CLOUD.gebr:'Gebruikersnaam '+CLOUD.gebr):'Ichthus College · vmbo TL';
+  $('profUitlog').hidden=!c; $('accSub').textContent=c?'Naam, e-mailadres en wachtwoord':'';
+  $('leerSub').textContent=Object.keys(DB.leerlingen).length>1?Object.keys(DB.leerlingen).length+' leerlingen op dit apparaat':'Wissel of voeg een leerling toe';
+  $('bewSub').textContent=c?'Je cijfers staan al veilig online':'Code om cijfers over te zetten';
   document.getElementById('verwijderKnop').hidden=Object.keys(DB.leerlingen).length<2;
-  document.getElementById('pakketAantal').textContent=`(${S.pakket.length} vakken)`;
+  document.getElementById('pakketAantal').textContent=S.pakket.length?`${S.pakket.length} vakken gekozen`:'Nog geen vakken gekozen';
 }
 const VANDAAG=()=>{const d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');};
 const datumNL=iso=>{const [y,m,d]=iso.split('-').map(Number); return new Date(y,m-1,d).toLocaleDateString('nl-NL',{weekday:'short',day:'numeric',month:'short'});};
@@ -1158,7 +1233,7 @@ $('fotoInput').addEventListener('change',async e=>{ const f=e.target.files&&e.ta
   catch(err){ m.textContent='Deze foto kon niet worden gelezen. Probeer een andere (JPG of PNG).'; m.style.color='var(--bad)'; }
   e.target.value=''; });
 $('fotoWeg').addEventListener('click',()=>{ S.foto=''; save(); renderAvatars(); $('fotoMelding').textContent='Profielfoto verwijderd.'; $('fotoMelding').style.color=''; });
-for(const b of document.querySelectorAll('button[data-av]')) b.addEventListener('click',()=>{ go('instellingen'); const p=$('fotoPaneel'); if(p&&p.scrollIntoView) p.scrollIntoView({behavior:'smooth',block:'start'}); });
+for(const b of document.querySelectorAll('button[data-av]')) b.addEventListener('click',()=>{ go('instellingen'); const p=$('fotoPaneel'); if(p) p.open=true; if(p&&p.scrollIntoView) p.scrollIntoView({behavior:'smooth',block:'start'}); });
 $('tourVolgende').addEventListener('click',()=>{ if(tourStap<TOUR.length-1) toonTour(tourStap+1); else { sluitTour(); if(!S.pakket.length) go('instellingen'); } });
 $('tourTerug').addEventListener('click',()=>toonTour(Math.max(0,tourStap-1)));
 $('tourSkip').addEventListener('click',sluitTour);
