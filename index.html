@@ -237,6 +237,12 @@ footer{font-size:.8rem;color:var(--dim);max-width:80ch}
 .login-form label{display:grid;gap:4px;font-size:.8rem;color:var(--muted);font-weight:700}
 .login-form input{font-size:1rem;padding:11px 12px}
 .login-form button.primary{padding:12px;font-size:1rem;margin-top:4px}
+.ww-veld{position:relative;display:block}
+.ww-veld input{width:100%;padding-right:48px}
+.oog{position:absolute;right:4px;top:50%;transform:translateY(-50%);width:40px;height:38px;padding:0;display:grid;place-items:center;border:0;background:none;color:var(--muted);border-radius:8px}
+.oog:hover{background:rgba(255,255,255,.07);color:var(--ink)}
+.oog svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.oog .o-dicht{display:none} .oog[aria-pressed="true"] .o-open{display:none} .oog[aria-pressed="true"] .o-dicht{display:block}
 .login-fout{margin:0;color:var(--bad);font-size:.9rem;min-height:1.2em}
 .im-lijst{display:grid;gap:8px}
 .im-lijst button{text-align:left;display:grid;gap:2px}
@@ -511,8 +517,8 @@ footer{font-size:.8rem;color:var(--dim);max-width:80ch}
     <form id="loginForm" class="login-form" novalidate>
       <label id="lNaam" hidden>Je naam<input id="liNaam" autocomplete="name" placeholder="Bijvoorbeeld Sam de Vries" maxlength="40"></label>
       <label>Gebruikersnaam<input id="liGebr" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="Bijvoorbeeld samv" maxlength="30"></label>
-      <label>Wachtwoord<input id="liWw" type="password" autocomplete="current-password" placeholder="Minimaal 6 tekens"></label>
-      <label id="lWw2" hidden>Wachtwoord herhalen<input id="liWw2" type="password" autocomplete="new-password"></label>
+      <label>Wachtwoord<span class="ww-veld"><input id="liWw" type="password" autocomplete="current-password" placeholder="Minimaal 6 tekens"><button type="button" class="oog" data-voor="liWw" aria-label="Wachtwoord tonen" aria-pressed="false"><svg viewBox="0 0 24 24" class="o-open"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><svg viewBox="0 0 24 24" class="o-dicht"><path d="M3 3l18 18M10.6 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4.1M6.6 6.6C3.8 8.4 2 12 2 12s3.6 7 10 7a9.6 9.6 0 0 0 4.4-1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg></button></span></label>
+      <label id="lWw2" hidden>Wachtwoord herhalen<span class="ww-veld"><input id="liWw2" type="password" autocomplete="new-password"><button type="button" class="oog" data-voor="liWw2" aria-label="Wachtwoord tonen" aria-pressed="false"><svg viewBox="0 0 24 24" class="o-open"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><svg viewBox="0 0 24 24" class="o-dicht"><path d="M3 3l18 18M10.6 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4.1M6.6 6.6C3.8 8.4 2 12 2 12s3.6 7 10 7a9.6 9.6 0 0 0 4.4-1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg></button></span></label>
       <button type="submit" class="primary" id="liKnop">Inloggen</button>
       <p class="login-fout" id="liFout" role="alert"></p>
       <p class="small muted" id="liTip" style="margin:0">Wachtwoord vergeten? Vraag het aan de beheerder van de site.</p>
@@ -1054,6 +1060,11 @@ function vertaal(err){
   if(m.includes('fetch')||m.includes('network')) return 'Geen verbinding met de server. Controleer je internet.';
   return 'Er ging iets mis: '+((err&&err.message)||err);
 }
+for(const b of document.querySelectorAll('.oog')) b.addEventListener('click',()=>{
+  const inp=$(b.dataset.voor), zien=inp.type==='password'; inp.type=zien?'text':'password';
+  b.setAttribute('aria-pressed',String(zien)); b.setAttribute('aria-label',zien?'Wachtwoord verbergen':'Wachtwoord tonen'); inp.focus();
+});
+function verbergWw(){ for(const b of document.querySelectorAll('.oog')){ $(b.dataset.voor).type='password'; b.setAttribute('aria-pressed','false'); b.setAttribute('aria-label','Wachtwoord tonen'); } }
 $('tabIn').addEventListener('click',()=>zetModus('in'));
 $('tabNieuw').addEventListener('click',()=>zetModus('nieuw'));
 $('loginForm').addEventListener('submit',async e=>{
@@ -1078,7 +1089,7 @@ $('loginForm').addEventListener('submit',async e=>{
       if(r.error) throw r.error;
       await naInloggen(r.data.user);
     }
-    $('liWw').value=''; $('liWw2').value='';
+    $('liWw').value=''; $('liWw2').value=''; verbergWw();
   }catch(err){ fout.textContent=vertaal(err); }
   knop.disabled=false;
 });
