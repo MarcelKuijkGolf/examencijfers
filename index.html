@@ -333,11 +333,15 @@ dl.begrip dd{margin:2px 0 0;font-size:.88rem;color:var(--muted)}
   .meer a{display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:10px;color:var(--ink);text-decoration:none;font-weight:700}
   .meer a:hover,.meer a.actief{background:rgba(255,255,255,.07)}
   .meer .ico{width:32px;height:32px}
-  .hero{grid-template-columns:minmax(0,1fr) 92px;gap:14px;padding:20px;align-items:start}
-  .hero h1{font-size:1.65rem}
+  .hero{display:block;padding:20px}
+  .hero-tekst{gap:12px}
+  .hero .datum-kop{padding-right:92px;min-height:20px}
+  .hero-naam{flex-direction:column;align-items:flex-start;gap:12px;margin-top:-4px}
+  .hero h1{font-size:clamp(1.45rem,7vw,1.8rem);overflow-wrap:anywhere;padding-right:0}
+  .hero .ring{position:absolute;top:16px;right:16px}
   .hero .uitleg,.hero .ster{display:none}
   .av-hero{width:44px;height:44px;font-size:1.05rem}
-  .ring{width:92px;height:92px} .ring svg{width:92px;height:92px} .ring .midden b{font-size:1.25rem} .ring .midden span{font-size:.58rem}
+  .ring{width:80px;height:80px} .ring svg{width:80px;height:80px} .ring .midden b{font-size:1.1rem} .ring .midden span{font-size:.52rem;max-width:60px;line-height:1.1}
   .tegel{padding:14px} .tegel .ico{width:40px;height:40px}
   .stats{gap:10px} .stat .v{font-size:1.7rem}
   details.vak>summary{grid-template-columns:1fr}
