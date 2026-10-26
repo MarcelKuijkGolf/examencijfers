@@ -273,8 +273,8 @@ button.avatar:hover{border-color:var(--accent);filter:none;background-color:tran
 .hero-naam{display:flex;align-items:center;gap:14px;min-width:0}
 .hero-naam h1{min-width:0}
 .foto-rij{display:flex;flex-wrap:wrap;gap:18px;align-items:center}
-label.knop{display:inline-block;font-weight:700;border-radius:10px;padding:8px 14px;cursor:pointer}
-label.knop.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#24120a}
+label.knop,a.knop{text-decoration:none;text-align:center;display:inline-block;font-weight:700;border-radius:10px;padding:8px 14px;cursor:pointer}
+label.knop.primary,a.knop.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#24120a}
 label.knop:focus-within{outline:2px solid var(--accent);outline-offset:2px}
 .verborgen{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
 #wieLokaal,#wieCloud{display:grid;gap:4px;min-width:0}
@@ -492,6 +492,43 @@ details.set[open]>summary .chev{transform:rotate(90deg)}
 .home-leer{margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
 .home-leer h3{margin:0 0 8px;font-size:.95rem}
 .home-leer ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+
+/* vakantie, profiel en verjaardag */
+.vak-chip{justify-self:start;display:inline-flex;align-items:center;gap:7px;padding:5px 12px;border-radius:999px;background:rgba(74,222,155,.14);border:1px solid rgba(74,222,155,.42);color:#c4f7df;font-size:.82rem;font-weight:700}
+.vak-chip.nu{background:linear-gradient(135deg,rgba(74,222,155,.35),rgba(56,189,248,.25));color:#fff}
+.profiel-tip{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center;padding:14px 18px;border-radius:18px;background:linear-gradient(135deg,rgba(124,77,255,.2),rgba(224,74,143,.12));border:1px solid rgba(160,120,255,.45)}
+.profiel-tip b{display:block;font-family:var(--f-display);font-size:1.02rem}
+.profiel-tip small{color:var(--muted)}
+.feest-banner{position:relative;overflow:hidden;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center;padding:18px 20px;border-radius:20px;background:linear-gradient(120deg,#ff5fa2 0%,#ff8a3d 50%,#ffd84d 100%);color:#2a0f22;box-shadow:0 14px 40px rgba(255,95,162,.35)}
+.feest-banner .taart{font-size:2.6rem;line-height:1;animation:wiebel 1.6s ease-in-out infinite}
+.feest-banner h2{margin:0;font-family:var(--f-display);font-size:1.4rem;color:#2a0f22}
+.feest-banner p{margin:3px 0 0;font-weight:600}
+.feest-banner button{background:rgba(255,255,255,.9);color:#2a0f22;border:0;font-weight:800}
+.feest-banner.morgen{background:linear-gradient(120deg,rgba(255,95,162,.25),rgba(255,216,77,.18));color:var(--ink);box-shadow:none;border:1px solid rgba(255,140,190,.5)}
+.feest-banner.morgen h2{color:var(--ink)}
+@keyframes wiebel{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg) scale(1.08)}}
+body.feest .hero{background:linear-gradient(135deg,#7a1f6b 0%,#c2306f 45%,#ff8a3d 100%);box-shadow:0 20px 60px rgba(255,95,162,.45)}
+body.feest .hero::before{background:radial-gradient(420px 240px at 80% 0%,rgba(255,216,77,.45),transparent 70%)}
+body.feest .side,body.feest .tabbar{box-shadow:inset 0 3px 0 0 #ff5fa2}
+body.feest .tabbar{box-shadow:inset 0 3px 0 0 #ffd84d}
+body.feest{background-image:radial-gradient(800px 400px at 90% -10%,rgba(255,95,162,.18),transparent 70%),radial-gradient(600px 300px at 0% 0%,rgba(255,216,77,.1),transparent 70%)}
+.ballon{position:absolute;bottom:-60px;width:34px;height:42px;border-radius:50% 50% 48% 48%;opacity:.85;pointer-events:none;animation:zweef 9s ease-in infinite}
+.ballon::after{content:"";position:absolute;left:50%;top:100%;width:1px;height:40px;background:rgba(255,255,255,.5)}
+@keyframes zweef{0%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-120px) rotate(4deg)}100%{transform:translateY(-260px) rotate(-3deg);opacity:0}}
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:300;overflow:hidden}
+.confetti i{position:absolute;top:-24px;width:9px;height:15px;border-radius:2px;animation:val linear forwards}
+@keyframes val{to{transform:translate3d(var(--dx),110vh,0) rotate(var(--r))}}
+.wi-vakantie{background:linear-gradient(135deg,rgba(74,222,155,.3),rgba(56,189,248,.2));color:#d8fbea}
+.wi-jarig{background:linear-gradient(120deg,#ff5fa2,#ffa23a);color:#2a0f22}
+.dagkol.vakantie{background:linear-gradient(180deg,rgba(74,222,155,.08),transparent 60%)}
+.wk-vakantie{display:inline-flex;margin-left:10px;padding:3px 10px;border-radius:999px;background:rgba(74,222,155,.16);border:1px solid rgba(74,222,155,.4);color:#c4f7df;font-size:.78rem;font-weight:700;vertical-align:middle}
+.prof-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.prof-grid label{display:grid;gap:5px;font-size:.8rem;color:var(--muted);font-weight:700}
+.prof-grid input,.prof-grid select{padding:9px 11px;min-width:0;width:100%}
+.vast-leren{font-size:.75rem;padding:4px 9px}
+.vast-leren.aan{border-color:rgba(74,222,155,.5);color:var(--ok)}
+@media (max-width:640px){.prof-grid{grid-template-columns:minmax(0,1fr)}.feest-banner,.profiel-tip{grid-template-columns:auto minmax(0,1fr)}.feest-banner button,.profiel-tip .knop{grid-column:1/-1}}
+@media (prefers-reduced-motion:reduce){.confetti,.ballon{display:none}.feest-banner .taart{animation:none}}
 </style>
 
 </head>
@@ -519,7 +556,7 @@ details.set[open]>summary .chev{transform:rotate(90deg)}
 
 <div class="app">
   <aside class="side">
-    <a class="merk" href="#home" data-nav="home"><img src="data:image/png;base64,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" alt=""><div><b>Examencijfers</b><small>Ichthus College · TL4</small></div></a>
+    <a class="merk" href="#home" data-nav="home"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAIAAABt+uBvAAAZ4ElEQVR42u196Y8d13Xn73furfde780m2WSTprjIkkjJokjKjGRTspM4khfZkbIhCJIgyIcAQebDfMkEGcynwWCAYIAAM39DMEAwg4ENx4IMK1YCJ5EdLZRFiVpoUaQoiotIsZtNdr+l6p4zH2p5VW9pNpstUTZc4FL9WK/q1LlnP79zycnZAwABEgAIACDzk+zz9A9w6AUgCEKQHYMuyK7JbjLkbiBXvuCTpAcAff7PKN0LVWqKHwecFNSgRA3KL4zyVQNuUvow5U7/BbeLHiHhbyQ7xYcrrxVXXqv8XrcuO58MPRk5Avqq7AygZl3Wqvpdrlp2bhc9UvzgV16risaiT2MJQHpVoGdZ2HPngWs1aJFvGz0iObMJ+FvjTtlAYDg1vWvQp1n9j7st9GSyU3yYMugTWKth1OA2yc5K3GEmOxll/peaNUizsjt0VeyXmtWjWek9JTfSv9SsHs1i8WX/i6hZpchuFbIzULNYeLGcGikJ52okuZ+acoTG26dZN5VJDNasEmvpK+H7qtZKBsb5ZWpun2YNXK3isFVqFrOTbtDJ8kr2UcMqNSCsmiWhSstt16yMN5bRadnvLpvKujeEO3k+7NkbsPdTgz7uVPNbVsVkQKLwyfiscp5V5oqVl9EsY4kAVlao8knOHSmnGjdaq2omYzAYQQrNzPq9xe3xWdldU+4Up2RZmLqrKwXLB8lOenMpmajVUAOY0dKnwkyTJO6SmZFxu6LBQrNS7hhggJEWEjXT4kcWhJbMcz93CEmFaJCKDZbkYlkAQQhhZuPknj3b4zh2QtKyJTKrcof9Lz+EO+WL1xYNlmUHKTviWHffUZuacCGElDsECKMVmkUMkB1J7yvDZadv5Uvc8U6azeahQ3t/93cfW1pa9mm0QGPFDJbLTF0usMyyzFGwZLn6Xn4APX3Om8IeSQdI1CK2mslTT266796RONbIZ2vYU+yQPtmR4r69Tx0myZbTIyDgHNXCoYN7H33kQKMedatYFVNZ9mUcVBtkiSO9B7sVntVEp/kVmZUxAJ12+OhKZ3Ex+eKjU3fd1Th/uXX9ehKC9Vll9mkWyrlYT7WJA+xOanAAks6Jd6QT793n7r/rwIG9mzZtWG6267VaCBZCpmFWenzJubH7OJb8rtHyRTAQNBpBy59vfXraY3d6mGwEzXTnjsa+faMP3D+2f09j6rc2h4CT77TfeKu1dD0VyCx+qfKrwh0hpU92iH5ZRSZtSRLm569e+PDK1fnFvXft2n//XY1G7ZFHHmguLV+6dOXSpfl2uyPCkjaVFaePO2YwM4Mhs6CAAkozQA1WXJC/dq+K9cTKlUcAmzZGBw+Of/HItBOZ21o/8uj0vfeMjjUEVlhHshIHdjWra5I2bflS14QPluTsQ9WwadPUI0cOHDlyYN++3ffcs3tqahxApxOfOPHeW2+eeunlN5977uX337/sJE3xJAtYSyvMIo7q2isrnE81Ok3vkC6z5IpbfNif92U8z727ttqh1UoEeP5fDn3/mY/+8j+f2jRTH6n7KHI0JyBFCJHsNaUnFErp8OiNyfvzmjINjGpRrR41GvUotXhmzrlGo1av12q1mlC6NqASbVspUEAuL6nBUOYCwsILgIAYFHAopTgAzQyF2ahY62w1cpGT0VFumPIffhj/+wuLb7zR3DxTn9kQJTHNKFlTqGIf+wNFAty09VeHy07FBJFIkmR5qammY6P1u+++49vf/l9btmz8sz/7r9/59nPtdggBY2Nj9VrdjKCwK0Rdscm5nwqOSep3aY7mBYnBgEgYlGrOjGYOEIMAjhCkv0hSaCwl62UhyoNDmBMsL4dHH5744Fx89mynXndm4piKpJAUcJjsZOUO9gcmPXFa9kJiZrUoGtlYF6EI3zh+6tixE48++uC//Ohoo9GYnGxkRloLjrBkPqyUChlpYipiQvXOImeq2uxwZtwccemaNGr0LiRBQgjBnJmDmUFAl3tVGpDGFVax0gQpeaShaqMN/+LRpiNqNQ+j5EoqpURsGHeKiuKw6KtsZ41GMySJEqjVfBLs+PFTMzNTly9fnZiYaHcSGs2ka0etEJnUMJjASE0FxzmtOfVeNZgGm9tgv75ff+fhUHP2nRf8D151Zy+LF9fwEgdNVENQNWeZYqaKLOnKdUOQ4m9jzgIY4KXwSlJ27b2ZajXJSEMaPyCxrPiIwgAwDZLTu4QA0r322jtRFDWbyfhEHqCiJHO5dqXSLlDSHNU5qzmNnCZBxWzvZ+wbD+pXH7DZTYYOYPiPTyV/8uXk2WPy9FH/5vteqbWaJhri4ELwampwMANcvgCSKRZ76hWZ6RLQkGpT5siFRZA8VHaywG7z1l9fsTbYbfQWUXzK6DiOt2/fPDMzfezYiZGRhmlqplitERlppAnUiTpndadOLIQwVreDu/XJw/qlvWhMAG2EOIsI1eA8UEfcxPMn5Lsv+pdO+mtN8c6puU7ik+DMXDAHOMIBDhDASR6pFLFlN89Kfxtzu8Mbcif77uzWr+DGVe6S8OaZKklVVUPknalVs1AjIDTQhOppkdPIBwKqunFcj+yzbx3Ww3tAD7QRQnc184wYanACNICAY2fkey+5H70eXbrmhI6UTuLj4M2cmVcTwJEuDQgkCyyyLCplgJQcOftkJ1WRHtnJjMXs1q8MqeP2Jz6FjzaWQRZWuHDLOWqOSjFHq7lQ86aqgO7YaL+x375xyO7aDhjQRrA8DhlyqIIE6wBx+iK+f9T/46u19y47g3fi4sQlwQX1CgdLRckRLvdNJISptcmCwFXKTjeQ4OzW31ix6o6+NKqnPJR5biksMVVo3mnNWeQ0qHqxe7bpE4fw+AHbPAPE0E5aLscqDzXAIBFQs4V5+eHr7umXa29+4OPEeeeDujhxQb1ZmU1CuDSwTDklmYNjOX0fqlkFmmJ262Mryg4KK9jPHcIsC2dSc6OO5p3WvYpYCDpWt0N77MnP26N7MTIOtKFJJQe5qcMMZhAP1C1u8t/edv/wUu3oyeh6y3vnTF1uxR3Mp0qXxjsClwdllCxAozC13BikWSwSc27Z+tiQnkRfMJ1ZahZxDfNgT6hOUtYYoUFt07ge2YdvHbZf2Q1Egw3N2o6SeTIk+Ol77ukX6//2Vu2jRefEES5OfKLOzFvKplSUshPJlU4ICGSAZnUTPBLglq2Po1qd6Lc7PRQKAGgWAYs6Ws1bzamZGmzHRntsv33jEFZvaNZ2BIUQrBuIUxfcD45Gzx2rv385AsWJC4mPg1d1OZtKvzK9EyElr0ZVNasULmzZ+tW+js1Au5PVmQgljSi0yZyoqnpne7fbE4fs8f3cvHEthmZtR2aeaoYI8/N87rXa94/WT3wQJcF7JyH4OPGqkZkjPODJ1IpLwaPCqZVlp/Br3DL31eH9LKsWWYxpvCcaidYjddQk2HhdH9xjTx7Gl+7lyNitGpo1611hnjrL/PHb0dMv1V85WV9uR5l5SqKgHogIX4iS5NIk/ZpVWO6tc18b3gu13O4YAIGSGkmoeQU0BN00oV++1556CA/t4foamnUxT6+cip5+sfHjN0Y+Woy8d4IoCVHQSBABTuAJJ8zjJnIAdwBunfv68M5sN70UmJfgJCTBgoZdm/SbD+qTD2HvdgBAa/0MDV3x0FL9/yb1TiEE6gbi5Dn/zEsjzx4dP3up7iWqeW8WqdZSURI4oeRWCT0Ro4Apg4b10dO4Oe2TaKujZPjcjvD7X0ie+hXbuhnofAyGJr4OU4iHRJAo5xdyftlNmScaWDNEdvkj/8zLY9/9yfSJ98dp0UjdC73Ap3G5FGF31euT5NzcN4ZhPPMCncKsHoVDe+Lfeyj+2n6dnAI6CHEp51mvg8Ddf4hkCfMnsHQe7SuIl2EBdJAI4iG+6zRWx6/MPEWGmi0tun9+bfyZl2ZePzWdxHURX7JE7Mk20jByCIiT3S4YyU7Azin7i6/Hv/ZAgBJLSEKW86wfa4jQwehW7P/z3I23sfgeFk9h8TQW3sH197H8IeJrCB2AJRErpFcHqmT6LqEjLtjYVPLEl+c3zoS//fvxsx82vMvfsY87RZOfc3NPDOqFFquU+i8NwVTDA7viPziSfPNQ2DQDJLAOLK0jrAuDNKA2iV1fx+QuTO3G5B5EY5Vrli5g8V0snsbCSSyexvIFtOeRNGGaiZhLVbIrYmogjJHB28KC/+Gr4999fuaN05PeRZHzpHfwBMmeynSGfQHAublvDuQOiwJwFi6rMHRiVdM9W5InDoZvHdb7dwBuHZ0XYQHxdUAQjaA+jdGtmNqNqTsxsRPTn8XolsrlyTKuvpuJ2Pw7WPoArcvoXMuiDKlBPOqE8Wfna88eHXvulfH3Lo4IonrkYREsciyrWJ6IsSxE5La5b3ZL3+zr+VguvVCBRS54p2ohJDYzHh6+Ozz5eTuyFyNjQAcWw27dKqVW2RQaQxNonAaCqE9gZBbjn8H0XZjYiak9mNwJVy8ZG8X1D2zhpF07g4V3uHg6Wb7003fDD4+NHz3RuLTgYCLwSVJTjWiRMCKcg5CuKIOkLdqCOwJw29y3BqEMSnUy69bYySBUL2k6qiFo3evebfb4A/qV/bZjFjCgA9V18WvluqBBk4xfloAefhSNGYzNYWoPpu/ExE6dvFNGZsrfby1e/i//4X+889Y50rVbbLdckkRmERERXuAEXiClalGhWaVUY9vcbw5HqJShJIZS5VQYnFjdhcirmQl023R4ZJ8+fgAP3AGpAR1Asa4JGCttagtdETMiqmNswmpbftbcd07vn94yN7fzji3bt144e+E//el/u3h+KYQoSZwlWTAtGYMklRjJWdPVrDLSvtpH70E3QUAw7ccZsyK5BXNmquraida8Nny4fF3+4eXw/Fvh4E597AE7fCdrdUHeIl0PTvXFjVKDq6fhadIOr78tP3ln+Z3zry02jy+1MLt9x9/+3d9Mz2xodaI49kRkKkCUBYdpEynL6YsyI9BXHvJkz+BRL34HsAw7YUVgAcLUTM0cQyfWEFwtSsZrjBMcPQXfaj0k1zFex3QDoxEcoLaeAmU5JsMMS20sNHmt/fzbd78xPwVjcLXYkuvLNCBOkiSWoE7oaC6vDbnCc5VDnoEYRV/tEQ5EN0kXfWcF9iML0tTEoKqKmEsGBxupmRN6qF1pcqGJ0QjTI5iswTuoQQ1YK6csb546IlYstrDQwlJsas6bhHa72ekkvpUky8s2MpG5bVVn6iAOlvYLnSCtBxVFRQ7AmeVey/eNDXH49FrKaKPBss6UpQ1iNQ2KOFg7NpgutwUA0h7fUozrMeoOk3VMN9DwWRZwU3qXXpzesJ1goY2rLbSTLJZ3BNFs2tKyBdV2YLtjcYZ8g6Y1iLSN0C1Xi1Sq9/0NH6T9D89VzGeVDRNTo9QtMGZ9zWAmakkIhMShrAgEgTjg0hKuNDFew3QD4zV4yQSKN2QN4YmguNbBQgvX2lmtzEsXeUjEiXY6quYSRUhooVzgS4v2RTU6BbX0Ijh7ZGdt82JVa5XDhgAAzlSDCQND4OCXNGCxjcUWGhGmGpiqo+4GG/KCuQBixZUWrrbQTDIVS1lTNdkhQUhgYFCmTTrLW8KwKmu6SKihmsVbmxdDHo6nmK7U/NJAMypkcJUi/TANytoJLlzDR8sYr2FDA6M1OEIVmjdDHaHAcoz5Jq51EIdMlbrWry8nVQsBIHKwUQVmyzKmK0tN+9C/FdlZh3mxnD+WeZSURzCa8QaGNhUoNSy0cLWFkQjTDUzWETkASAKutjHfwnIMtWEi05+1AwOuYbXxWf5jRdm51XkxshcBhFyOYKsxv4VAGbAcY6mDSw7TDZBYaKEdMhXzxKqqGrQC1pbCtwv6pBsaF1FPL/p3MHduaV6MfWO1GbpWQVuD5yaRKD5cyq0MMUQiVrhRyhmxVIVKDpgUQGl5cSOntezFqpq1PvNiLHI1CKHFMqquLfZjOnyEmyscFjfIuswEnYN32UuleCkIRFEBw1YSCH4s82I9AxyW4uZM1GTtIfItlSNFSBF66yL/ROAi0irDAGX48TDulMZ4KmjuNcxnlYeFmJgkdhvaGmpUCEnvnQadnBol6RzrDW8WnMthVWXweCXJGDQvlvXyK/j2FWRnWOu1AO27AAnqYnVBafYJscYMwZioM3MUlyQ6u23mr/7mTykcGWv85X//w/pIZDBxWa+8J1Lpq7eiGy6tbl5shSmSDFKZroSBMJeoB8SNJOItJV3tY+SLGcSbq8eAJOoovtXs/M6fPHbHnq0aVFUPPHT313774eb1lnNSBexyNfNi5UrpGmaKCx1O8acumPfOvXtl9P/+dObMYsTIXCNIZGkrXQ23yKs06lYlAEbmGgkjO3+99szxuTPzY0J2YpuYGj/0xXstBTEZzOzhL98X1VzhwtAP/V+PebEbTSCBhDMzoZ27PvLXz+6Ym2jdP7t0ZMfyg9uad810fMOgQJDUx/UAR27IlxTYJmL0BtHQkXcv14+dH3/xg8kTlyevtEbrkYsi125jevPEptkNJC1F3JGzcxtGR+tJS0kP684hsIwVGjIvNhzEudoZ5+IKBwaYV4Mjx+pY7DT+9Uz0/NnJmUbnzg3tz29rHtrWum9je2wkgEBCC9TqrM+AVjIoMDqjMxDLTff2xZFXz429cn7svSujVzt1mI+cG3FO1SXBmVnc0SQJlV5knGiwfKiHrEzeDJ2mS0to/mbmxQZyJ6/2p7BTKuHV2Al0ErwLNQnLsRy7WH/14vjfvxa2T3b2z7Y+v715/2xrdiJ2DkiIwKAks5xSDWZ0YvTmXIDyo6Xo+IeNV86NHb84dm6x0UwigQilLj5YpOZD4kgKxEVy+eK1s6cu7t2/y1JsteDMyQ+XrrbHJ8Y1FAD7zItJydsMnBfztyA7LM8t5TXZ9NHOENQ0Vg0aHNUzRBJi1VPztZNXxr53IsyOxfdsah/evrx/S3P3dOwaCYxIJMOyMFgiZxZqr10YeeXc2FuXRy8v1ePgnDhHerpgKYjTg1mF0EBVOJPla60ffOeFfQd2m8IJQTz7/14gHZW0FELeTe5LdZzBE1G+lws3v3tAF5CfhT9KwihmBlOFwtSoiZqjOoZIAmgXl2oXro386PTUVD3ZtaF9cK55cNvyfRtbTuyNc6PHzo8ePT96en7kaisyEy8icE4kmE+CNxPAZwBgk9zbAGahY2Oj49/73z+++747vv57XzCzv/uf33/hn94aGx3VBIS4bhu+3AvDsHkx7tr+RyvkWYNm+4btZVDK1buj4yYwmBEqMEJJFRoRHNWLeQZAgyIoGk53THccceZqrZ24SOhFCFFzQZ2ZM3qYpHwRFPhDKdaLUMDEmZkGTe47uDvuJG+/+n5jpCFKaNrn8YRzWUE6hcGWk/7KRJSQ3LX9j9csO/3z8TkMyWCFCSwGNVQyxqmkbwITBtI81YkBFgfCWPMmoJkEczBn5kgpwehYAA4l79bkIGSztMcpoKC13BaRkdE6QvqZK1oaknV7pDv5OGQiypeF69Z3mMm/lp5YOmySUZ/NoaRgmtRxm5rCzGiJGQ1CIxknJAmTfFKsEBaSjiYskKoFiL4yeiZQhWF0dIyAJUaTAsopuYz0dTLWMi92izvMCGms7jyWznTkAydWzG9njTdL5/5h2SuRKbrJMlUqgOE0yYdNyWKSM2OQph0YC8i/WxTqmYHwu2iFAZOYZYPtq1O1677DjOTCxm49rWze05+ZT8JY2mMiQWZRnuQppZAUSyfhMs5IqZoDK7gjyCZoaMEkv4nkGZaQ1UmOW5sXW/PeTdWJKrIr2OXw0vJ/snxnvnw9hcVYSgprZqlBXO4UZ+XedNozn0sioUmYmhmLO0l7KRYntMr08sqaVa6ZrVKzeFN7N5Ueiaokd8sLQpJOKI6SNcvpSCeQ7IQpgFCKhLvkoctliiqyGRAgily7GX/h8b2779mSdIJ3rruGhl5s9PB5seFbU9ykZg2uGAyZ1i9ESbJYVoTMAaci4shuwCLdsrKUxadkOPLiTq7OqnZ9obm00DzwyJ133L3lyoXF1nKnLOMyyO5w0MyP76sNrotmcYXYdKAkl6voKOOXqml3Fd3UMxSZnanp+OTI4af2H3z0zs/u3/6ZOzfv+Ozmo/988s1/fw+K3pmMG021eK7EnZveFW2IuMrKksxy34E9jXAOOel5aHfWWiBxOzn91sW4nezcu+XCe/NH/+lnl85eTduH7ANArUgPfL95vpVd0dYgO2XzMQjrjnJCMKA6UbW7qc1POnrq9QsvPnvicw/tOv6T0z/8Pz+d3T7tnS+24yjMAlaghwTgZiYPrUGz1pU7+X3YkyJVEblEP7opU5ZKMzNNCFirR7WaI+XimfmkrfValIaL0gW+DJrr7aWnZzfgT4tmDUbkDsFgoJJp501LS1Bv1I//5DSUUeRN81HVbGg+n9VckZ5iN2CusMvwbdIsrkazerbgqPR7CQEtSeuH+XRYHoXJYNlB/8yPL+0e8Mn5rOrkI3qimB6s+yowGGRp67Zy5JlDVlMUIotZw9XT46sE/BxpVk8/S5hvD8OsWF+FO2dhV0UJSo8YSo9fxf6Hn2bN6sv7KrsA9gbZUhQbysMGK9Ljb2h3Pt2a1Zf3sSJoUnZ8FauMVdLj176T56dCs/rzvoKMIrNBzyZcq6dH0Afi/DnUrB4BwTrSA2Yq9nOtWez5bw7Wlx7/C6FZHyM9/hdCsz4+eiogzp9fzfr46On+xyOlScxfahYGoDvA9c/RP1WatRZ6uhXFlTSrt86wamoq/dyBkjwIX3FD7nyy9PiSia4krFIFSuXQdEG1M4tKzRRS3diw1BUoXyPlfbwL0DsqUySfFnr+P5uKIEofI4tBAAAAAElFTkSuQmCC" alt=""><div><b>Examencijfers</b><small id="merkSub">Ichthus College · TL4</small></div></a>
     <nav class="nav" aria-label="Hoofdmenu">
       <a href="#home" data-nav="home"><span class="ico"><svg><use href="#i-home"/></svg></span><span class="lbl">Lobby</span></a>
       <a href="#agenda" data-nav="agenda"><span class="ico"><svg><use href="#i-agenda"/></svg></span><span class="lbl">Toetsagenda</span><span class="badge" id="navBadge" hidden></span></a>
@@ -550,6 +587,7 @@ details.set[open]>summary .chev{transform:rotate(90deg)}
           <div class="hero-naam"><button type="button" class="avatar av-hero" data-av aria-label="Profielfoto wijzigen" data-naar="instellingen"></button><h1 id="homeNaam">Welkom</h1></div>
           <div class="statusregel"><b id="homeStatus"></b><span class="pill" id="homePill"></span></div>
           <p class="uitleg" id="homeUitleg"></p>
+          <span class="vak-chip" id="homeVakantie" hidden></span>
         </div>
         <div class="ring" role="img" aria-label="Deel van de PTA dat al is ingevuld">
           <svg viewBox="0 0 120 120"><defs><linearGradient id="ringGr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffa23a"/><stop offset="1" stop-color="#e04a8f"/></linearGradient></defs>
@@ -559,6 +597,11 @@ details.set[open]>summary .chev{transform:rotate(90deg)}
         </div>
       </div>
 
+      <section class="feest-banner" id="feestBanner" hidden aria-live="polite">
+        <span class="taart" aria-hidden="true">🎂</span>
+        <div><h2 id="feestKop">Gefeliciteerd!</h2><p id="feestTekst"></p></div>
+        <button type="button" id="feestKnop">Nog meer confetti</button>
+      </section>
       <div class="stats">
         <a class="stat" href="#uitslag"><span class="stat-ico g2"><svg><use href="#i-grafiek"/></svg></span><span class="k">Gemiddeld cijfer</span><span class="v num" id="statGem">–</span><span class="s">van je schooltoetsen</span></a>
         <a class="stat" href="#agenda"><span class="stat-ico g1"><svg><use href="#i-agenda"/></svg></span><span class="k">Toetsen gepland</span><span class="v num" id="statToetsen">0</span><span class="s">in je agenda</span></a>
@@ -566,6 +609,11 @@ details.set[open]>summary .chev{transform:rotate(90deg)}
         <div class="stat"><span class="stat-ico g4"><svg><use href="#i-klok"/></svg></span><span class="k">Weken tot eindexamen</span><span class="v num" id="statCE">–</span><span class="s">start 14 mei 2027</span></div>
       </div>
 
+      <section class="profiel-tip" id="profielTip" hidden>
+        <span class="ico g1"><svg><use href="#i-school"/></svg></span>
+        <div><b>Maak de app van jou</b><small>Vul je school, plaats en verjaardag in. Dan zie je je schoolvakanties in de agenda.</small></div>
+        <a class="knop primary" href="#instellingen" id="profielTipKnop">Invullen</a>
+      </section>
       <section class="herinner" id="herinner" hidden aria-labelledby="herinnerKop">
         <h2 id="herinnerKop">Cijfer nog invullen</h2>
         <ul id="herinnerLijst"></ul>
@@ -749,6 +797,21 @@ details.set[open]>summary .chev{transform:rotate(90deg)}
         </div>
           </div>
         </details>
+        <details class="set" id="schoolPaneel">
+          <summary><span class="ico g1"><svg><use href="#i-school"/></svg></span><span class="set-tekst"><b>School en verjaardag</b><small id="schoolSub">Nog niet ingevuld</small></span><span class="chev" aria-hidden="true">›</span></summary>
+          <div class="set-body">
+        <form class="acc-form" id="profForm" novalidate>
+          <div class="prof-grid">
+            <label>Naam van je school<input id="pfSchool" maxlength="60" placeholder="Bijvoorbeeld Ichthus College" autocomplete="organization"></label>
+            <label>Plaats van je school<input id="pfPlaats" maxlength="40" placeholder="Bijvoorbeeld Dronten" autocomplete="off"></label>
+            <label>Geboortedatum<input id="pfGeboorte" type="date" min="1990-01-01"></label>
+            <label>Vakantieregio<select id="pfRegio"><option value="">Automatisch (via de plaats)</option><option value="noord">Regio noord</option><option value="midden">Regio midden</option><option value="zuid">Regio zuid</option></select></label>
+          </div>
+          <p class="small muted" id="pfRegioTekst" style="margin:4px 0 0"></p>
+          <div class="row"><button type="submit" class="primary">Opslaan</button><span class="small" id="pfMelding" role="status"></span></div>
+        </form>
+          </div>
+        </details>
         <details class="set" id="accountPaneel" hidden>
           <summary><span class="ico g2"><svg><use href="#i-slot"/></svg></span><span class="set-tekst"><b>Account</b><small id="accSub">Naam, e-mailadres en wachtwoord</small></span><span class="chev" aria-hidden="true">›</span></summary>
           <div class="set-body">
@@ -838,6 +901,7 @@ details.set[open]>summary .chev{transform:rotate(90deg)}
   </main>
 </div>
 
+<div class="confetti" id="confetti" aria-hidden="true"></div>
 <div class="tour" id="tour" hidden role="dialog" aria-modal="true" aria-labelledby="tourTitel">
   <div class="tour-kaart">
     <button type="button" class="tour-skip" id="tourSkip">Overslaan</button>
@@ -875,6 +939,11 @@ details.set[open]>summary .chev{transform:rotate(90deg)}
         <label>Voornaam<input id="liVoor" autocomplete="given-name" maxlength="30"></label>
         <label>Achternaam<input id="liAchter" autocomplete="family-name" maxlength="40"></label>
       </div>
+      <div class="naam-rij" id="lSchool" hidden>
+        <label>School<input id="liSchool" maxlength="60" placeholder="Ichthus College" autocomplete="organization"></label>
+        <label>Plaats van school<input id="liPlaats" maxlength="40" placeholder="Dronten" autocomplete="off"></label>
+      </div>
+      <label id="lGeboorte" hidden>Geboortedatum<input id="liGeboorte" type="date" min="1990-01-01"></label>
       <label>E-mailadres<input id="liMail" type="email" inputmode="email" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="naam@voorbeeld.nl" maxlength="120"></label>
       <label id="lWw">Wachtwoord<span class="ww-veld"><input id="liWw" type="password" autocomplete="current-password" placeholder="Minimaal 6 tekens"><button type="button" class="oog" data-voor="liWw" aria-label="Wachtwoord tonen" aria-pressed="false"><svg viewBox="0 0 24 24" class="o-open"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><svg viewBox="0 0 24 24" class="o-dicht"><path d="M3 3l18 18M10.6 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4.1M6.6 6.6C3.8 8.4 2 12 2 12s3.6 7 10 7a9.6 9.6 0 0 0 4.4-1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg></button></span></label>
       <label id="lWw2" hidden>Wachtwoord herhalen<span class="ww-veld"><input id="liWw2" type="password" autocomplete="new-password"><button type="button" class="oog" data-voor="liWw2" aria-label="Wachtwoord tonen" aria-pressed="false"><svg viewBox="0 0 24 24" class="o-open"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><svg viewBox="0 0 24 24" class="o-dicht"><path d="M3 3l18 18M10.6 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4.1M6.6 6.6C3.8 8.4 2 12 2 12s3.6 7 10 7a9.6 9.6 0 0 0 4.4-1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg></button></span></label>
@@ -952,7 +1021,7 @@ function load(){
   try{const oud=localStorage.getItem(OUDE_KEY); if(oud){const o=JSON.parse(oud); if(o&&o.pakket) Object.assign(liam,norm(o),{naam:liam.naam});}}catch(e){}
   return {actief:'l1',leerlingen:{l1:liam}};
 }
-function norm(s){return {naam:String(s.naam||'Leerling').slice(0,40),pakket:Array.isArray(s.pakket)?s.pakket.filter(id=>BY_ID[id]):[],cijfers:s.cijfers||{},ce:s.ce||{},agenda:Array.isArray(s.agenda)?s.agenda:[],tour:!!s.tour,vast:Array.isArray(s.vast)?s.vast.filter(v=>v&&v.naam&&v.dag>=0&&v.dag<=6).map(v=>({...v,naam:vastNaamVan(v.naam)})).filter((v,i,a)=>a.findIndex(x=>x.naam===v.naam&&x.dag===v.dag)===i):[],leer:Array.isArray(s.leer)?s.leer.filter(l=>l&&l.datum&&BY_ID[l.vak]):[],foto:typeof s.foto==='string'&&s.foto.startsWith('data:image/')&&s.foto.length<200000?s.foto:''};}
+function norm(s){return {naam:String(s.naam||'Leerling').slice(0,40),pakket:Array.isArray(s.pakket)?s.pakket.filter(id=>BY_ID[id]):[],cijfers:s.cijfers||{},ce:s.ce||{},agenda:Array.isArray(s.agenda)?s.agenda:[],tour:!!s.tour,school:String(s.school||'').slice(0,60),plaats:String(s.plaats||'').slice(0,40),geboorte:/^\d{4}-\d{2}-\d{2}$/.test(s.geboorte||'')?s.geboorte:'',regio:['noord','midden','zuid'].includes(s.regio)?s.regio:'',regioAuto:s.regioAuto&&typeof s.regioAuto==='object'?s.regioAuto:null,vast:Array.isArray(s.vast)?s.vast.filter(v=>v&&v.naam&&v.dag>=0&&v.dag<=6).map(v=>({...v,naam:vastNaamVan(v.naam),leren:!!v.leren})).filter((v,i,a)=>a.findIndex(x=>x.naam===v.naam&&x.dag===v.dag)===i):[],leer:Array.isArray(s.leer)?s.leer.filter(l=>l&&l.datum&&BY_ID[l.vak]):[],foto:typeof s.foto==='string'&&s.foto.startsWith('data:image/')&&s.foto.length<200000?s.foto:''};}
 function save(){DB.leerlingen[DB.actief]=S; if(CLOUD) CLOUD.bewaar(S); else { try{localStorage.setItem(KEY,JSON.stringify(DB));}catch(e){} } document.getElementById('code').value=JSON.stringify(S);}
 
 const r1=x=>Math.round(x*10+1e-9)/10;
@@ -1331,6 +1400,7 @@ function renderHome(){
       li.querySelector('input').addEventListener('change',e=>zetGedaan(x.id,e.target.checked)); vl.appendChild(li); }
     $('homeLeerBlok').hidden=!l.length; $('homeLeerKop').textContent=l.length&&l.every(x=>x.gedaan)?'Vandaag leren · alles klaar!':'Vandaag leren'; } }
   $('homeRisico').innerHTML=UIT.risico||'';
+  { const tip=$('profielTip'); if(tip) tip.hidden=!!(S.school&&S.plaats&&geldigeGeboorte(S.geboorte)); }
   // mijn vakken
   const vr=$('homeVakken'); vr.innerHTML='';
   for(const id of S.pakket){ const v=BY_ID[id]; if(v.type==='info') continue; const i=seInfo(v);
@@ -1350,6 +1420,7 @@ function renderHome(){
   zet('tileAgenda',kom.length?`${kom.length} toets${kom.length>1?'en':''} gepland`:'Nog niets gepland');
   zet('tileCijfers',`${p}% van je toetsen gehad`);
   zet('tileUitslag',UIT.pill?UIT.pill:'');
+  renderFeest(); renderVakChip();
   zet('tileHerk',$('hkAantal').textContent.replace(/[()]/g,'')||'Nog geen tips');
 }
 // ===== Week, planner en Leerhulp (26-10-2026 MK) =====
@@ -1373,13 +1444,18 @@ function renderWeek(){
   const g=$('weekGrid'); if(!g) return;
   const nu=dag(VANDAAG()), ma=maandagVan(nu)+wkOffset*7, zo=ma+6;
   $('wkTitel').textContent=`Week ${isoWeek(ma)}`+(wkOffset===0?' · deze week':wkOffset===1?' · volgende week':wkOffset===-1?' · vorige week':'');
+  { const vk=[...new Set(Array.from({length:7},(_,i)=>vakantieOp(isoVan(ma+i))).filter(Boolean).map(v=>v.naam))];
+    if(vk.length){ const s=document.createElement('span'); s.className='wk-vakantie'; s.textContent='🌴 '+vk.join(' / '); $('wkTitel').appendChild(s); } }
   $('wkBereik').textContent=`${Number(isoVan(ma).slice(8))} ${MAANDEN[Number(isoVan(ma).slice(5,7))-1]} t/m ${Number(isoVan(zo).slice(8))} ${MAANDEN[Number(isoVan(zo).slice(5,7))-1]}`;
   g.innerHTML='';
   for(let n=ma;n<=zo;n++){
     const iso=isoVan(n), wd=wdVan(n);
-    const col=document.createElement('div'); col.className='dagkol'+(n===nu?' vandaag':'')+(n<nu?' voorbij':'');
+    const vak=vakantieOp(iso);
+    const col=document.createElement('div'); col.className='dagkol'+(n===nu?' vandaag':'')+(n<nu?' voorbij':'')+(vak?' vakantie':'');
     let h=`<div class="dk-kop"><b><span class="dn-lang">${DAGNAMEN[wd]}</span><span class="dn-kort">${DAGNAMEN[wd].slice(0,2)}</span></b><span class="dk-dat">${Number(iso.slice(8))}<small>${MAANDEN[Number(iso.slice(5,7))-1].slice(0,3)}</small></span></div><div class="dk-items">`;
-    for(const v of S.vast.filter(v=>v.dag===wd)) h+=`<div class="wi wi-vast"><b>${esc(v.naam)}</b><small>vaste afspraak</small></div>`;
+    if(jarigOp(iso)){ const lt=+iso.slice(0,4)-+S.geboorte.slice(0,4); h+=`<div class="wi wi-jarig"><b>Jarig! 🎂</b><small>${lt} jaar</small></div>`; }
+    if(vak) h+=`<div class="wi wi-vakantie"><b>${vak.naam}</b><small>${iso===vak.van?'eerste dag':iso===vak.tot?'laatste dag':'vrij van school'}</small></div>`;
+    for(const v of S.vast.filter(v=>v.dag===wd)) h+=`<div class="wi wi-vast"><b>${esc(v.naam)}</b><small>${v.leren?'leren kan ook':'vaste afspraak'}</small></div>`;
     for(const a of S.agenda.filter(a=>a.datum===iso)){ const {v,t}=toetsInfo(a); const vt=voortgangToets(a);
       h+=`<div class="wi wi-toets"><b>${v?v.naam:esc(a.vak)}</b><small>${t?esc(t[2]):esc(a.oms||'Toets')}${vt?' · '+vt:''}</small></div>`; }
     for(const l of S.leer.filter(l=>l.datum===iso)){ const v=BY_ID[l.vak];
@@ -1394,12 +1470,12 @@ function renderVast(){
   const ul=$('vastLijst'); if(!ul) return; ul.innerHTML='';
   const lijst=[...S.vast].sort((a,b)=>((a.dag+6)%7)-((b.dag+6)%7));
   for(const v of lijst){ const li=document.createElement('li'); li.className='aitem';
-    li.innerHTML=`<span class="datum">${DAGNAMEN[v.dag]}</span><span class="wat">${esc(v.naam)}</span><span class="acties"><button type="button">Verwijderen</button></span>`;
-    li.querySelector('button').addEventListener('click',()=>{ S.vast=S.vast.filter(x=>x.id!==v.id); save(); renderAgenda(); }); ul.appendChild(li); }
+    li.innerHTML=`<span class="datum">${DAGNAMEN[v.dag]}</span><span class="wat">${esc(v.naam)}</span><span class="acties"><button type="button" class="vast-leren${v.leren?' aan':''}" data-l aria-pressed="${v.leren}" title="Mag de Leerhulp op deze dag ook leren inplannen?">${v.leren?'✓ Leren kan ook':'Geen leren'}</button><button type="button" data-w>Verwijderen</button></span>`;
+    li.querySelector('[data-l]').addEventListener('click',()=>{ v.leren=!v.leren; save(); renderAgenda(); });
+    li.querySelector('[data-w]').addEventListener('click',()=>{ S.vast=S.vast.filter(x=>x.id!==v.id); save(); renderAgenda(); }); ul.appendChild(li); }
   if(!lijst.length) ul.innerHTML='<li class="leeg">Nog geen vaste afspraken.</li>';
   $('vastSub').textContent=lijst.length?lijst.map(v=>`${v.naam} (${DAGNAMEN[v.dag].slice(0,2)})`).join(', '):'Sport, werk, muziekles';
 }
-
 // ---------- zinsbegrip ----------
 const WD={maandag:1,dinsdag:2,woensdag:3,donderdag:4,vrijdag:5,zaterdag:6,zondag:0};
 const WDRE='(maandag|dinsdag|woensdag|donderdag|vrijdag|zaterdag|zondag)(?:s|en)?';
@@ -1440,7 +1516,7 @@ function datumUit(t,losseDag){
   if((m=t.match(new RegExp('\\b(\\d{1,2})\\s*'+MAANDRE)))){ const mi=['jan','feb','maa','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec']; let k=m[2].slice(0,3); if(k==='maa') k='mrt';
     const idx={jan:1,feb:2,mrt:3,apr:4,mei:5,jun:6,jul:7,aug:8,sep:9,okt:10,nov:11,dec:12}[k]; const r=maakIso(+m[1],idx); if(r) return {iso:r}; }
   const dagRe=new RegExp('(volgende week\\s+)?(?:op\\s+)?'+WDRE);
-  const ctx=new RegExp('(toets|so|proefwerk|overhoring)[^.,]{0,30}?(volgende week\\s+)?(?:op\\s+)?'+WDRE+'|'+WDRE+'\\s+(?:heb ik\\s+)?(?:een\\s+|mijn\\s+)?(toets|so|proefwerk|overhoring)|(volgende week)\\s+'+WDRE);
+  const ctx=new RegExp('(toets\\w*|\\bso\\b|proefwerk|overhoring)[^.,]{0,30}?(volgende week\\s+)?(?:op\\s+)?'+WDRE+'|'+WDRE+'\\s+(?:heb ik\\s+)?(?:een\\s+|mijn\\s+)?(toets|\\bso\\b|proefwerk|overhoring)|(volgende week)\\s+'+WDRE);
   if((m=t.match(ctx))||(losseDag&&(m=t.match(dagRe)))){
     const woord=(m[3]||m[4]||m[7]||m[2]||m[1]||'').replace(/(s|en)$/,''); const wd=WD[woord]; if(wd==null) return null;
     const volgendeWeek=/volgende week/.test(m[0]);
@@ -1451,19 +1527,26 @@ function datumUit(t,losseDag){
 }
 function maakIso(d,m,j){ if(m<1||m>12||d<1||d>31) return null; const nu=new Date(); let y=j?(+j<100?2000+ +j:+j):nu.getFullYear();
   let iso=`${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`; if(!j&&dag(iso)<dag(VANDAAG())-1){ y++; iso=`${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`; } return iso; }
+const WEL_RE=/\b(wel|toch|nog|ook|best)\b[^.,]{0,14}\b(leren|studeren)\b|\bwel tijd\b|\bkan ik wel\b/;
+function zinsdelen(t){ return t.split(new RegExp('[.;!?\\n]|,|\\b(?:en|maar)\\b(?=\\s+(?:op\\s+|de\\s+)?'+WDRE+')')).filter(Boolean); }
 function dagenUit(t,datumWd){
-  t=lc(t); const blok=new Set(); let alleen=null;
-  const am=t.match(new RegExp('(?:alleen|enkel|wel)\\s+(?:op\\s+)?(?:de\\s+)?((?:'+WDRE+'(?:\\s*(?:,|en|of)\\s*)?)+)'));
+  t=lc(t); const blok=new Set(), wel=new Set(); let alleen=null;
+  const am=t.match(new RegExp('(?:alleen|enkel)\\s+(?:op\\s+)?(?:de\\s+)?((?:'+WDRE+'(?:\\s*(?:,|en|of)\\s*)?)+)'));
   if(am){ alleen=new Set(); for(const w of am[1].matchAll(new RegExp(WDRE,'g'))) alleen.add(WD[w[1]]); }
   if(/door de week|doordeweeks/.test(t)&&/(alleen|enkel)/.test(t)) alleen=new Set([1,2,3,4,5]);
   if(/(niet|geen)[^.]{0,25}weekend|weekend[^.]{0,20}(niet|vrij|geen|nooit)/.test(t)){ blok.add(0); blok.add(6); }
-  for(const w of t.matchAll(new RegExp(WDRE,'g'))){ const wd=WD[w[1]]; if(wd===datumWd) continue; if(alleen&&alleen.has(wd)) continue; blok.add(wd); }
-  return {blok,alleen};
+  for(const deel of zinsdelen(t)){
+    const welHier=WEL_RE.test(deel)||new RegExp('\\bwel\\s+(?:op\\s+)?'+WDRE).test(deel);
+    for(const w of deel.matchAll(new RegExp(WDRE,'g'))){ const wd=WD[w[1]]; if(wd===datumWd) continue;
+      if(welHier){ wel.add(wd); continue; } if(alleen&&alleen.has(wd)) continue; blok.add(wd); }
+  }
+  for(const w of wel) blok.delete(w);
+  return {blok,alleen,wel};
 }
 function activiteitenUit(t){
-  t=lc(t); const uit=[], zie=new Set();
+  const welDagen=dagenUit(t).wel; t=lc(t); const uit=[], zie=new Set();
   const voeg=(naam,woord)=>{ naam=naam.replace(/[^a-z]/g,''); const wd=WD[woord.replace(/(s|en)$/,'')]; if(!naam||wd==null||STOP.has(naam)||vakUit(naam)&&!ACTIVITEITEN.includes(naam)) return;
-    if(!ACTIVITEITEN.includes(naam)&&naam.length<3) return; const k=naam+wd; if(zie.has(k)) return; zie.add(k); const nm=vastNaamVan(naam.charAt(0).toUpperCase()+naam.slice(1)); if(uit.some(x=>x.naam===nm&&x.dag===wd)) return; uit.push({naam:nm,dag:wd}); };
+    if(!ACTIVITEITEN.includes(naam)&&naam.length<3) return; const k=naam+wd; if(zie.has(k)) return; zie.add(k); const nm=vastNaamVan(naam.charAt(0).toUpperCase()+naam.slice(1)); if(uit.some(x=>x.naam===nm&&x.dag===wd)) return; uit.push({naam:nm,dag:wd,leren:welDagen.has(wd)}); };
   for(const m of t.matchAll(new RegExp(WDRE+'\\s+(?:avond\\s+|middag\\s+)?(?:heb ik|heb|ga ik naar|ga ik|moet ik naar|is er|is)?\\s*([a-z]+)','g'))){ if(ACTIVITEITEN.includes(m[2])||/heb ik|ga ik|moet ik/.test(m[0])) voeg(m[2],m[1]); }
   for(const m of t.matchAll(new RegExp('\\b([a-z]+)\\s+(?:op|elke|iedere)\\s+'+WDRE,'g'))){ if(ACTIVITEITEN.includes(m[1])) voeg(m[1],m[2]); }
   return uit;
@@ -1471,40 +1554,50 @@ function activiteitenUit(t){
 function eerstvolgendeToets(vak){ const nu=VANDAAG(); return [...S.agenda].filter(a=>a.vak===vak&&a.datum>nu).sort((a,b)=>a.datum.localeCompare(b.datum))[0]||null; }
 
 // ---------- planner ----------
-function maakPlan(vak,toetsIso,min,blok,alleen,agendaId){
+function maakPlan(vak,toetsIso,min,blok,alleen,agendaId,opt={}){
   const nu=dag(VANDAAG()), eind=dag(toetsIso);
-  if(eind<=nu) return {fout:'voorbij'};
-  const vastDagen=new Set(S.vast.map(v=>v.dag)), weg=new Map();
-  let dagen=[];
-  for(let n=nu;n<eind;n++){ const wd=wdVan(n);
-    if(alleen){ if(!alleen.has(wd)){ continue; } }
-    else if(blok.has(wd)||vastDagen.has(wd)){ weg.set(wd,(S.vast.find(v=>v.dag===wd)||{}).naam||''); continue; }
+  if(eind<nu||(eind===nu&&!opt.ookToetsdag)) return {fout:'voorbij'};
+  const welDagen=opt.wel||new Set(), vastBlok=new Map();
+  for(const v of S.vast) if(!v.leren&&!welDagen.has(v.dag)&&!vastBlok.has(v.dag)) vastBlok.set(v.dag,v.naam);
+  const weg=new Map(), extra=[], toetsDagen=[]; let dagen=[];
+  for(let n=nu;n<=eind;n++){ const wd=wdVan(n), iso=isoVan(n);
+    if(n===eind){ if(opt.ookToetsdag) dagen.push(n); break; }
+    if(alleen){ if(!alleen.has(wd)) continue; }
+    else if(blok.has(wd)&&!welDagen.has(wd)){ weg.set(wd,''); continue; }
+    else if(vastBlok.has(wd)){ weg.set(wd,vastBlok.get(wd)); continue; }
+    if(!opt.ookJarig&&jarigOp(iso)){ extra.push(`je verjaardag (${kortDatum(iso)})`); continue; }
+    const andere=S.agenda.filter(a=>a.datum===iso&&a.id!==agendaId&&!(a.vak===vak&&a.datum===toetsIso));
+    if(andere.length){ const namen=andere.map(a=>{const {v}=toetsInfo(a); return v?v.naam:a.vak;});
+      if(opt.geenToetsdagen){ extra.push(`${kortDatum(iso)} (toets ${lijstTekst(namen)})`); continue; }
+      toetsDagen.push(`${kortDatum(iso)} (${lijstTekst(namen)})`); }
     dagen.push(n); }
-  if(dagen[0]===nu&&new Date().getHours()>=20) dagen.shift();
+  if(dagen.length>1&&dagen[0]===nu&&new Date().getHours()>=20) dagen.shift();
   if(!dagen.length) return {fout:'geen_dagen'};
   const MAX=14; if(dagen.length>MAX) dagen=dagen.slice(-MAX);
-  const k=dagen.length;
+  const metToetsdag=opt.ookToetsdag&&dagen[dagen.length-1]===eind, k=dagen.length-(metToetsdag?1:0);
   const fase=i=>k===1?'Alles herhalen en overhoren':i===k-1?'Herhalen en overhoren':(i/(k-1))<0.34?'Stof doorlezen':(i/(k-1))<0.67?'Samenvatten en begrippen':'Oefenen met opgaven';
-  const druk=[];
-  const items=dagen.map((n,i)=>{ const iso=isoVan(n); const al=S.leer.filter(l=>l.datum===iso&&l.agendaId!==agendaId).reduce((s,l)=>s+l.minuten,0); if(al+min>240) druk.push(iso); return {datum:iso,minuten:min,label:fase(i)}; });
-  return {vak,toetsIso,min,items,weg,druk};
+  const druk=[], vakantie=new Set();
+  const items=dagen.map((n,i)=>{ const iso=isoVan(n); const vk=vakantieOp(iso); if(vk) vakantie.add(vk.naam.toLowerCase());
+    const toetsdag=n===eind, m=toetsdag?Math.min(min,45):min;
+    const al=S.leer.filter(l=>l.datum===iso&&l.agendaId!==agendaId).reduce((s,l)=>s+l.minuten,0); if(al+m>240) druk.push(iso);
+    return {datum:iso,minuten:m,label:toetsdag?'Kort herhalen voor de toets':fase(i)}; });
+  return {vak,toetsIso,min,items,weg,druk,extra,toetsDagen:toetsDagen.filter(x=>items.some(i=>x.startsWith(kortDatum(i.datum)))),vakantie:[...vakantie],metToetsdag};
 }
-
 // ---------- leerhulp chat ----------
 let lhLog=[], lhCtx={}, lhVoorstel=null, lhGestart=false;
 function lhStart(){
   if(lhGestart) return; lhGestart=true;
   const naam=String(S.naam||'').split(' ')[0]; const hoi=naam&&naam!=='Leerling'?`Hoi ${naam}! `:'Hoi! ';
-  const t=eerstvolgendeToetsAlgemeen();
+  const t=eerstvolgendeToetsAlgemeen(), j=verjaardag();
+  if(j&&j.over===0) return lhBot(`Gefeliciteerd met je verjaardag, ${naam}! 🎉 Vandaag word je ${j.leeftijd}. Ik plan vandaag niks voor je in, geniet ervan. Wil je toch iets plannen voor later? Vertel het me maar.`,{direct:true});
   lhBot(hoi+'Ik ben je Leerhulp. Vertel me voor welke toets je wilt leren, hoeveel tijd per dag, en welke dagen je niet kunt. Dan plan ik je leermomenten in.'+(t?`\n\nIk zie dat je ${langDatum(t.datum)} een toets ${(BY_ID[t.vak]||{}).naam||''} hebt. Zal ik die inplannen?`:''),{direct:true});
-  lhTips();
 }
 function eerstvolgendeToetsAlgemeen(){ const nu=VANDAAG(); return [...S.agenda].filter(a=>a.datum>nu&&BY_ID[a.vak]).sort((a,b)=>a.datum.localeCompare(b.datum))[0]||null; }
 function lhTips(){
   const el=$('lhTips'); if(!el) return; el.innerHTML='';
   const t=eerstvolgendeToetsAlgemeen(); const tips=[];
   if(t) tips.push(`Plan ${BY_ID[t.vak].naam} in, 1 uur per dag`);
-  tips.push('Wat moet ik vandaag doen?','Geef me een leertip');
+  tips.push('Wat moet ik vandaag doen?'); if(mijnRegio()) tips.push('Wanneer is de vakantie?'); tips.push('Geef me een leertip');
   if(!S.vast.length) tips.push('Op donderdag heb ik sport');
   for(const x of tips){ const b=document.createElement('button'); b.type='button'; b.textContent=x; b.addEventListener('click',()=>lhVerstuur(x)); el.appendChild(b); }
 }
@@ -1538,7 +1631,7 @@ function lhBegrijp(raw){
   if(/(help|wat kan je|wat kun je|hoe werkt)/.test(t)) return lhBot('Ik kan:\n• leermomenten inplannen voor een toets ("plan 2 uur per dag voor Nederlands, op donderdag kan ik niet")\n• vertellen wat je vandaag of morgen moet doen\n• vaste afspraken onthouden ("op maandag heb ik gym")\n• een planning weghalen ("verwijder de planning voor Engels")\n• leertips geven als je even vastzit');
   if(/(geen zin|\bmoe\b|stress|zenuw|lukt (me )?niet|\bbang\b|zwaar|te veel|teveel)/.test(t)&&!/(plan|toets)/.test(t)) return lhBot(kies(['Dat is heel normaal, vooral in een toetsweek. Begin klein: zet een timer op 25 minuten en doe alleen het eerste stukje. Vaak komt de zin vanzelf als je eenmaal bezig bent.','Snap ik. Probeer het op te knippen: 25 minuten leren, 5 minuten pauze. Na vier rondes neem je een langere pauze. Zal ik je planning wat lichter maken?','Je doet het al goed door te plannen. Kies vandaag één ding en vink het af. Elke stap telt.']));
   if(/(tip|hoe leer|hoe kan ik (beter )?leren|hoe moet ik leren|leertip)/.test(t)) return lhBot(kies(['Leertip: overhoor jezelf in plaats van alleen teruglezen. Dek de antwoorden af, of laat iemand je overhoren. Dat onthoud je veel beter.','Leertip: werk met blokjes van 25 minuten en 5 minuten pauze (de pomodoro methode). Telefoon in een andere kamer helpt enorm.','Leertip: leer een beetje elke dag in plaats van alles op de laatste avond. Je brein onthoudt het beter als je het vaker terugziet.','Leertip: maak na elk hoofdstuk een mini samenvatting van 5 regels in je eigen woorden. Lukt dat, dan snap je het.']));
-  if(/(verwijder|wis|haal\b.*weg|annuleer|stop\b|schrap)/.test(t)&&/(planning|leermoment|leren|plan)/.test(t)){
+  if(/(verwijder|\bwis\b|\bwissen\b|haal\b.*weg|annuleer|\bstop\b|schrap)/.test(t)&&/(planning|leermoment|leren|plan)/.test(t)){
     const v=vakUit(raw); const nu=VANDAAG(); const voor=S.leer.length;
     if(/(alles|alle)/.test(t)&&!v) S.leer=S.leer.filter(l=>l.gedaan||l.datum<nu); else if(v) S.leer=S.leer.filter(l=>l.vak!==v||l.gedaan||l.datum<nu);
     else return lhBot('Van welk vak zal ik de planning weghalen? Zeg bijvoorbeeld "verwijder de planning voor Engels".');
@@ -1548,14 +1641,27 @@ function lhBegrijp(raw){
   if(/(vandaag)/.test(t)&&!/(plan|toets)/.test(t)) return lhDag(VANDAAG(),'vandaag');
   if(/(wat|welke|moet ik).*morgen|^morgen\??$/.test(t)&&!/(plan|toets)/.test(t)) return lhDag(isoVan(dag(VANDAAG())+1),'morgen');
   if(/(deze week|mijn week|overzicht)/.test(t)&&/(wat|laat|toon|geef)/.test(t)) return lhWeek();
+  if(/vakantie|vrij van school/.test(t)&&!/(plan|toets|leer|leren)/.test(t)) return lhVakantie();
+  if(/(jarig|verjaardag)/.test(t)&&/(wanneer|hoe lang|hoeveel|ben ik)/.test(t)&&!/(plan|toets|leer|leren)/.test(t)) return lhJarig();
 
   // planning of vaste afspraken
   const acts=activiteitenUit(raw), vak=vakUit(raw), min=duurUit(raw);
   const d=datumUit(raw,false), dg=dagenUit(raw,d&&d.wd);
   const planWoorden=/(plan|toets|so\b|proefwerk|overhoring|leren|leer|studeren|oefenen|voorbereiden|inplannen)/.test(t);
   if(acts.length&&!vak&&!min&&!planWoorden) return lhVast(acts);
-  if(vak||min||planWoorden||d){
-    lhCtx={vak:vak||lhCtx.vak, min:min||lhCtx.min, datum:d?d.iso:lhCtx.datum, blok:dg.blok.size?dg.blok:(lhCtx.blok||new Set()), alleen:dg.alleen||lhCtx.alleen||null, acts:acts.length?acts:(lhCtx.acts||[])};
+  const toetsdagWoord=/(dag van (de|mijn|je) (toets|so|proefwerk)|toetsdag|toets dag)/;
+  const mod={};
+  if(toetsdagWoord.test(t)){ if(/(niet|geen)\b/.test(t)&&!/(wel|ook|toch)\b/.test(t)) { if(/toetsdagen|toets dagen|dagen (dat|met|waarop)/.test(t)) mod.geenToetsdagen=true; else mod.ookToetsdag=false; }
+    else { mod.ookToetsdag=true; mod.geenToetsdagen=false; } }
+  if(/dagen (dat|met|waarop) ik (een )?(andere )?toets/.test(t)){ if(/(niet|geen)\b/.test(t)&&!/(wel|ook|toch)\b/.test(t)) mod.geenToetsdagen=true; else mod.geenToetsdagen=false; }
+  if(/verjaardag|jarig/.test(t)) mod.ookJarig=/(ook|wel|toch)\b/.test(t)&&!/(niet|geen)\b/.test(t);
+  const heeftMod=Object.keys(mod).length>0||dg.wel.size>0;
+  if(vak||min||planWoorden||d||heeftMod){
+    const vers=vak&&lhCtx.vak&&vak!==lhCtx.vak, b=vers?{}:lhCtx;
+    const blok=new Set([...(dg.blok.size?dg.blok:(b.blok||[]))]), wel=new Set([...(b.wel||[])].filter(x=>!dg.blok.has(x)));
+    for(const w of dg.wel){ wel.add(w); blok.delete(w); }
+    lhCtx={vak:vak||b.vak, min:min||b.min, datum:d?d.iso:b.datum, blok, wel, alleen:dg.alleen||b.alleen||null, acts:acts.length?acts:(b.acts||[]),
+      ookToetsdag:mod.ookToetsdag??b.ookToetsdag, geenToetsdagen:mod.geenToetsdagen??b.geenToetsdagen, ookJarig:mod.ookJarig??b.ookJarig};
     return lhPlan();
   }
   lhBot(kies(['Hmm, dat snap ik nog niet helemaal. Probeer bijvoorbeeld: "Plan 1 uur per dag voor wiskunde, in het weekend kan ik niet."','Sorry, die begrijp ik niet. Je kunt me vragen een toets in te plannen, of "wat moet ik vandaag doen?"']));
@@ -1569,14 +1675,20 @@ function lhPlan(){
   if(!c.datum){ c.wacht='datum'; return lhBot(`Wanneer is je toets ${v.naam}? Je mag een datum noemen ("4 november") of een dag ("volgende week dinsdag").`); }
   if(!c.min){ c.wacht='duur'; return lhBot(kies([`Hoeveel tijd wil je per dag aan ${v.naam} besteden? Bijvoorbeeld 45 minuten of 1 uur.`,`Hoe lang wil je per dag leren voor ${v.naam}?`])); }
   if(c.min<10) c.min=10; if(c.min>240) c.min=240;
-  const p=maakPlan(c.vak,c.datum,c.min,c.blok||new Set(),c.alleen,ag&&ag.id);
-  if(p.fout==='voorbij'){ delete c.datum; c.wacht='datum'; return lhBot('Die datum is al geweest of is vandaag. Wanneer is de toets precies?'); }
+  const p=maakPlan(c.vak,c.datum,c.min,c.blok||new Set(),c.alleen,ag&&ag.id,{wel:c.wel,ookToetsdag:c.ookToetsdag,geenToetsdagen:c.geenToetsdagen,ookJarig:c.ookJarig});
+  if(p.fout==='voorbij'){ delete c.datum; c.wacht='datum'; return lhBot('Die datum is al geweest. Wanneer is de toets precies?'); }
   if(p.fout==='geen_dagen') return lhBot('Er blijft geen dag over om te leren voor deze toets. Misschien kun je op een van je vrije dagen toch een uurtje?');
   lhVoorstel={...p,agendaId:ag&&ag.id,nieuweToets:!ag,acts:c.acts||[]};
   let tekst=kies(['Top, hier is mijn voorstel','Oké, dit is je planning','Ik heb het uitgerekend. Zo zou ik het doen'])+` voor ${v.naam} (toets op ${langDatum(c.datum)}), ${duurTekst(c.min)} per dag:`;
   const wegTekst=[...p.weg.entries()].map(([wd,naam])=>DAGNAMEN[wd]+(naam?` (${naam})`:''));
   if(wegTekst.length) tekst+=`\nIk sla ${lijstTekst(wegTekst)} over.`;
+  if(p.extra.length) tekst+=`\nIk sla ook ${lijstTekst(p.extra)} over.`;
   if(c.alleen) tekst+=`\nAlleen op ${lijstTekst([...c.alleen].map(w=>DAGNAMEN[w]))}, zoals je vroeg.`;
+  const welNamen=[...(c.wel||[])].filter(w=>S.vast.some(v=>v.dag===w)||c.acts&&c.acts.some(a=>a.dag===w));
+  if(welNamen.length) tekst+=`\nOp ${lijstTekst(welNamen.map(w=>DAGNAMEN[w]))} plan ik toch leren, zoals je zei.`;
+  if(p.toetsDagen.length) tekst+=`\nOp ${lijstTekst(p.toetsDagen)} heb je ook een toets, maar daar plan ik toch even leren. Liever niet? Zeg dan "niet op toetsdagen".`;
+  if(p.metToetsdag) tekst+=`\nOp de toetsdag zelf plan ik nog een korte herhaling.`;
+  if(p.vakantie.length) tekst+=`\nEen deel valt in de ${lijstTekst(p.vakantie)}.`;
   if(p.druk.length) tekst+=`\nLet op: op ${lijstTekst(p.druk.map(kortDatum))} wordt het samen met andere vakken meer dan 4 uur.`;
   if(!ag) tekst+=`\nDeze toets stond nog niet in je agenda, die zet ik er ook in.`;
   lhBot(tekst,{voorstel:p,knoppen:[
@@ -1591,10 +1703,10 @@ function lhAkkoord(){
   const nu=VANDAAG();
   S.leer=S.leer.filter(l=>!(l.agendaId===agId&&!l.gedaan&&l.datum>=nu));
   p.items.forEach((i,k)=>S.leer.push({id:'l'+Date.now()+k,agendaId:agId,vak:p.vak,datum:i.datum,minuten:i.minuten,label:i.label,gedaan:false}));
-  save(); lhVoorstel=null; lhCtx={};
+  save(); lhVoorstel=null; delete lhCtx.wacht;
   const eerste=p.items[0].datum, wkNodig=Math.floor((maandagVan(dag(eerste))-maandagVan(dag(nu)))/7); wkOffset=Math.max(0,wkNodig);
   renderAgenda(); renderHome();
-  const nieuweActs=(p.acts||[]).filter(a=>!S.vast.some(v=>v.dag===a.dag&&lc(v.naam)===lc(a.naam)));
+  const nieuweActs=(p.acts||[]).filter(a=>!S.vast.some(v=>v.dag===a.dag&&lc(v.naam)===lc(a.naam)&&!!v.leren===!!a.leren));
   lhBot(kies(['Ingepland!','Staat erin!','Gepland!'])+` Je ziet de ${p.items.length} leermomenten nu in je week. Vink ze af als je klaar bent, dan zie je hoe ver je bent.`,
     nieuweActs.length?{knoppen:[{label:`Zet ${actsTekst(nieuweActs)} vast in mijn week`,primair:true,actie:()=>lhVastOpslaan(nieuweActs)},{label:'Niet nodig',actie:()=>lhBot('Oké!')}]}:{});
   lhTips();
@@ -1602,16 +1714,26 @@ function lhAkkoord(){
 function actsTekst(acts){ const g=new Map(); for(const a of acts){ const k=a.naam.toLowerCase(); if(!g.has(k)) g.set(k,[]); g.get(k).push(a.dag); }
   return lijstTekst([...g.entries()].map(([n,d])=>`${n} op ${lijstTekst(d.sort((x,y)=>((x+6)%7)-((y+6)%7)).map(w=>DAGNAMEN[w]))}`)); }
 function lhVast(acts){
-  const nieuw=acts.filter(a=>!S.vast.some(v=>v.dag===a.dag&&lc(v.naam)===lc(a.naam)));
+  const nieuw=acts.filter(a=>!S.vast.some(v=>v.dag===a.dag&&lc(v.naam)===lc(a.naam)&&!!v.leren===!!a.leren));
   if(!nieuw.length) return lhBot('Die staat al in je vaste afspraken.');
-  lhBot(`Zal ik ${actsTekst(nieuw)} vast in je week zetten? Dan plan ik op die dag${nieuw.length>1?'en':''} geen leermomenten.`,
+  lhBot(`Zal ik ${actsTekst(nieuw)} vast in je week zetten? ${nieuw.every(a=>a.leren)?'Je kunt dan nog wel leren, dus daar plan ik gewoon leermomenten.':nieuw.some(a=>a.leren)?'Waar je zei dat leren nog kan, plan ik gewoon leermomenten.':`Dan plan ik op die dag${nieuw.length>1?'en':''} geen leermomenten. Kun je daarnaast toch leren? Zeg dan bijvoorbeeld "op donderdag heb ik sport maar dan kan ik wel leren".`}`,
     {knoppen:[{label:'Ja, zet vast',primair:true,actie:()=>lhVastOpslaan(nieuw)},{label:'Nee',actie:()=>lhBot('Oké, ik onthoud het niet.')}]});
 }
-function lhVastOpslaan(acts){ for(const a of acts) S.vast.push({id:'v'+Date.now()+Math.random().toString(36).slice(2,5),naam:a.naam,dag:a.dag}); save(); renderAgenda(); lhBot(kies(['Opgeslagen. Daar houd ik voortaan rekening mee.','Staat in je vaste afspraken!'])); lhTips(); }
+function lhVastOpslaan(acts){
+  for(const a of acts){ const v=S.vast.find(x=>x.dag===a.dag&&lc(x.naam)===lc(a.naam)); if(v) v.leren=!!a.leren; else S.vast.push({id:'v'+Date.now()+Math.random().toString(36).slice(2,5),naam:a.naam,dag:a.dag,leren:!!a.leren}); }
+  save(); renderAgenda(); lhBot(kies(['Opgeslagen. Daar houd ik voortaan rekening mee.','Staat in je vaste afspraken!'])); lhTips(); }
+function lhVakantie(){
+  const r=mijnRegio(); if(!r) return lhBot('Ik weet nog niet in welke regio je school ligt. Vul bij Instellingen, onder School en verjaardag, de plaats van je school in. Dan zoek ik op wanneer jij vakantie hebt.');
+  const nu=VANDAAG(); const kom=VAKANTIES[r].filter(x=>x[2]>=nu).slice(0,3); if(!kom.length) return lhBot('Ik heb nog geen vakantiedata voor na de zomer van 2028.');
+  const v=kom[0]; let tekst=v[1]<=nu?`Je hebt nu ${v[0].toLowerCase()}! Die duurt tot en met ${langDatum(v[2])}.`:`Je volgende vakantie is de ${v[0].toLowerCase()}: van ${langDatum(v[1])} tot en met ${langDatum(v[2])}. Nog ${dag(v[1])-dag(nu)} dagen!`;
+  if(kom.length>1) tekst+=`\nDaarna: `+kom.slice(1).map(x=>`${x[0].toLowerCase()} (${kortDM(x[1])} t/m ${kortDM(x[2])})`).join(' en ')+'.';
+  lhBot(tekst+`\n(regio ${r}, check de schoolgids want je school kan iets afwijken)`); }
+function lhJarig(){ const j=verjaardag(); if(!j) return lhBot('Dat weet ik nog niet! Vul je geboortedatum in bij Instellingen, onder School en verjaardag.');
+  lhBot(j.over===0?'Vandaag! Gefeliciteerd! 🎉':j.over===1?`Morgen al! Dan word je ${j.leeftijd}. 🎂`:`Over ${j.over} dagen, op ${langDatum(j.datum)}. Dan word je ${j.leeftijd}. 🎂`); }
 function lhDag(iso,woord){
   const leer=S.leer.filter(l=>l.datum===iso), toetsen=S.agenda.filter(a=>a.datum===iso);
   const gisteren=woord==='vandaag'?S.leer.filter(l=>l.datum<iso&&!l.gedaan&&dag(l.datum)>=dag(iso)-3):[];
-  let tekst='';
+  let tekst=jarigOp(iso)?(woord==='vandaag'?'Je bent vandaag jarig, gefeliciteerd! 🎉\n':'Morgen ben je jarig! 🎂\n'):'';
   if(toetsen.length) tekst+=`${woord.charAt(0).toUpperCase()+woord.slice(1)} heb je een toets: ${lijstTekst(toetsen.map(a=>{const {v}=toetsInfo(a); return v?v.naam:a.vak;}))}. Succes!\n`;
   if(leer.length){ tekst+=`${toetsen.length?'Verder':woord.charAt(0).toUpperCase()+woord.slice(1)} staat op je planning:\n`+leer.map(l=>`${l.gedaan?'✓':'•'} ${BY_ID[l.vak].naam}: ${duurTekst(l.minuten)}, ${l.label.toLowerCase()}`).join('\n');
     const tot=leer.filter(l=>!l.gedaan).reduce((s,l)=>s+l.minuten,0); if(tot) tekst+=`\nSamen nog ${duurTekst(tot)}.`; else tekst+='\nAlles is al afgevinkt. Goed bezig!'; }
@@ -1633,6 +1755,132 @@ function initPlanner(){
   $('lhForm').addEventListener('submit',e=>{ e.preventDefault(); const v=$('lhTekst').value; $('lhTekst').value=''; $('lhTekst').style.height=''; lhVerstuur(v); });
   $('lhTekst').addEventListener('keydown',e=>{ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); $('lhForm').requestSubmit(); } });
   $('lhTekst').addEventListener('input',e=>{ e.target.style.height='auto'; e.target.style.height=Math.min(140,e.target.scrollHeight)+'px'; });
+}
+
+// ===== Vakanties, regio en verjaardag (26-10-2026 MK) =====
+// Adviesdata OCW (rijksoverheid.nl), scholen kunnen afwijken
+const VAKANTIES={
+ noord:[['Herfstvakantie','2026-10-10','2026-10-18'],['Kerstvakantie','2026-12-19','2027-01-03'],['Voorjaarsvakantie','2027-02-20','2027-02-28'],['Meivakantie','2027-04-24','2027-05-02'],['Zomervakantie','2027-07-10','2027-08-22'],
+  ['Herfstvakantie','2027-10-16','2027-10-24'],['Kerstvakantie','2027-12-25','2028-01-09'],['Voorjaarsvakantie','2028-02-19','2028-02-27'],['Meivakantie','2028-04-29','2028-05-07'],['Zomervakantie','2028-07-15','2028-08-27']],
+ midden:[['Herfstvakantie','2026-10-17','2026-10-25'],['Kerstvakantie','2026-12-19','2027-01-03'],['Voorjaarsvakantie','2027-02-20','2027-02-28'],['Meivakantie','2027-04-24','2027-05-02'],['Zomervakantie','2027-07-17','2027-08-29'],
+  ['Herfstvakantie','2027-10-16','2027-10-24'],['Kerstvakantie','2027-12-25','2028-01-09'],['Voorjaarsvakantie','2028-02-26','2028-03-05'],['Meivakantie','2028-04-29','2028-05-07'],['Zomervakantie','2028-07-08','2028-08-20']],
+ zuid:[['Herfstvakantie','2026-10-17','2026-10-25'],['Kerstvakantie','2026-12-19','2027-01-03'],['Voorjaarsvakantie','2027-02-13','2027-02-21'],['Meivakantie','2027-04-24','2027-05-02'],['Zomervakantie','2027-07-24','2027-09-05'],
+  ['Herfstvakantie','2027-10-23','2027-10-31'],['Kerstvakantie','2027-12-25','2028-01-09'],['Voorjaarsvakantie','2028-02-26','2028-03-05'],['Meivakantie','2028-04-29','2028-05-07'],['Zomervakantie','2028-07-22','2028-09-03']]};
+// regio-indeling volgens rijksoverheid.nl (gemeenten met een uitzondering)
+const REGIO_GEM={noord:['hattem','eemnes'],
+ midden:['zeewolde','aalten','apeldoorn','barneveld','berkelland','bronckhorst','brummen','buren','culemborg','doetinchem','ede','elburg','epe','ermelo','harderwijk','heerde','lochem','montferland','neder-betuwe','nijkerk','nunspeet','oldebroek','oost gelre','oost-gelre','oude ijsselstreek','putten','scherpenzeel','tiel','voorst','wageningen','west betuwe','winterswijk','zutphen','altena'],
+ zuid:['arnhem','berg en dal','beuningen','doesburg','druten','duiven','heumen','lingewaard','maasdriel','nijmegen','overbetuwe','renkum','rheden','rozendaal','rijnwaarden','westervoort','west maas en waal','wijchen','zaltbommel','zevenaar']};
+const REGIO_PLAATS={noord:['abcoude','baambrugge'],zuid:['didam','dodewaard','hank','dussen']};
+// grote plaatsen voor als het opzoeken niet lukt
+const PROV_BEKEND={dronten:'Flevoland',biddinghuizen:'Flevoland',swifterbant:'Flevoland',lelystad:'Flevoland',almere:'Flevoland',emmeloord:'Flevoland',urk:'Flevoland',zeewolde:'Flevoland',kampen:'Overijssel',zwolle:'Overijssel',enschede:'Overijssel',deventer:'Overijssel',
+ amsterdam:'Noord-Holland',haarlem:'Noord-Holland',alkmaar:'Noord-Holland',groningen:'Groningen',leeuwarden:'Friesland',assen:'Drenthe',emmen:'Drenthe',harderwijk:'Gelderland',elburg:'Gelderland',apeldoorn:'Gelderland',arnhem:'Gelderland',nijmegen:'Gelderland',
+ utrecht:'Utrecht',amersfoort:'Utrecht',rotterdam:'Zuid-Holland',"den haag":'Zuid-Holland',leiden:'Zuid-Holland',eindhoven:'Noord-Brabant',tilburg:'Noord-Brabant',breda:'Noord-Brabant',"'s-hertogenbosch":'Noord-Brabant',maastricht:'Limburg',venlo:'Limburg',middelburg:'Zeeland'};
+function regioVan(woonplaats,gemeente,provincie){
+  const w=lc(woonplaats||'').trim(), g=lc(gemeente||'').trim(), p=lc(provincie||'');
+  for(const r of ['noord','zuid']) if(REGIO_PLAATS[r].includes(w)) return r;
+  for(const r of ['noord','midden','zuid']) if(REGIO_GEM[r].includes(g)) return r;
+  if(/limburg|zeeland|brabant/.test(p)) return 'zuid';
+  if(/zuid-holland|utrecht|gelderland/.test(p)) return 'midden';
+  if(/flevoland|drenthe|friesland|fryslan|groningen|noord-holland|overijssel/.test(p)) return 'noord';
+  return null;
+}
+async function zoekRegio(plaats){
+  const p=String(plaats||'').trim(); if(!p) return null;
+  try{
+    const ctl=new AbortController(); const tm=setTimeout(()=>ctl.abort(),7000);
+    const r=await fetch('https://api.pdok.nl/bzk/locatieserver/search/v3_1/free?q='+encodeURIComponent(p)+'&fq=type:woonplaats&rows=1&fl=woonplaatsnaam,gemeentenaam,provincienaam',{signal:ctl.signal});
+    clearTimeout(tm); const j=await r.json(); const d=j&&j.response&&j.response.docs&&j.response.docs[0];
+    if(d){ const regio=regioVan(d.woonplaatsnaam,d.gemeentenaam,d.provincienaam); if(regio) return {invoer:p,plaats:d.woonplaatsnaam,gemeente:d.gemeentenaam,provincie:d.provincienaam,regio}; }
+  }catch(e){}
+  const prov=PROV_BEKEND[lc(p)]||''; const regio=regioVan(p,p,prov);
+  return regio?{invoer:p,plaats:p,gemeente:p,provincie:prov,regio}:{invoer:p,regio:null};
+}
+let regioBezig=false;
+async function regioCheck(forceer){
+  if(regioBezig||!S.plaats) return;
+  if(!forceer&&S.regioAuto&&lc(S.regioAuto.invoer||'')===lc(S.plaats)) return;
+  regioBezig=true; const voor=S; const r=await zoekRegio(S.plaats); regioBezig=false;
+  if(voor!==S||!r) return; S.regioAuto=r; save(); renderHome(); renderWeek(); vulProfiel();
+}
+const mijnRegio=()=>S.regio||(S.regioAuto&&S.regioAuto.regio)||null;
+function vakantieOp(iso){ const r=mijnRegio(); if(!r) return null; const v=VAKANTIES[r].find(x=>x[1]<=iso&&iso<=x[2]); return v?{naam:v[0],van:v[1],tot:v[2]}:null; }
+function volgendeVakantie(){ const r=mijnRegio(); if(!r) return null; const nu=VANDAAG(); const v=VAKANTIES[r].find(x=>x[2]>=nu); return v?{naam:v[0],van:v[1],tot:v[2],nu:v[1]<=nu}:null; }
+const kortDM=iso=>`${Number(iso.slice(8))} ${MAANDEN[Number(iso.slice(5,7))-1].slice(0,3)}`;
+
+// verjaardag
+const schrikkel=y=>(y%4===0&&y%100!==0)||y%400===0;
+const geldigeGeboorte=g=>/^\d{4}-\d{2}-\d{2}$/.test(g||'')&&g<=VANDAAG()&&g>='1950-01-01';
+function verjaardagIn(y){ let md=S.geboorte.slice(5); if(md==='02-29'&&!schrikkel(y)) md='02-28'; return y+'-'+md; }
+function verjaardag(){
+  if(!geldigeGeboorte(S.geboorte)) return null; const nu=VANDAAG(), j=+nu.slice(0,4);
+  let v=verjaardagIn(j); if(v<nu) v=verjaardagIn(j+1);
+  return {datum:v,over:dag(v)-dag(nu),leeftijd:+v.slice(0,4)-+S.geboorte.slice(0,4)};
+}
+const jarigOp=iso=>geldigeGeboorte(S.geboorte)&&verjaardagIn(+iso.slice(0,4))===iso;
+let confettiGehad=false;
+function confetti(){
+  const c=$('confetti'); if(!c||(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+  const kl=['#ff5fa2','#ffd84d','#4ade9b','#5cc8ff','#a78bfa','#ff8a3d'];
+  for(let i=0;i<130;i++){ const e=document.createElement('i'); e.style.left=Math.random()*100+'%'; e.style.background=kl[i%kl.length];
+    e.style.setProperty('--dx',(Math.random()*300-150)+'px'); e.style.setProperty('--r',(Math.random()*1080-540)+'deg');
+    e.style.animationDuration=(2.8+Math.random()*2.8)+'s'; e.style.animationDelay=(Math.random()*1.2)+'s'; if(i%3===0){ e.style.width='8px'; e.style.height='8px'; e.style.borderRadius='50%'; } c.appendChild(e); }
+  setTimeout(()=>{ c.innerHTML=''; },7500);
+}
+function renderFeest(){
+  const b=$('feestBanner'); if(!b) return; const j=verjaardag(); const voornaam=String(S.naam||'').split(' ')[0];
+  const hero=document.querySelector('.hero'); const ballonnen=hero?hero.querySelectorAll('.ballon'):[];
+  const feest=!!j&&j.over===0;
+  document.body.classList.toggle('feest',feest);
+  if(feest){
+    b.hidden=false; b.classList.remove('morgen');
+    $('feestKop').textContent=`Gefeliciteerd, ${voornaam}! 🎉`;
+    $('feestTekst').textContent=`Vandaag word je ${j.leeftijd} jaar. Fijne verjaardag! De Leerhulp plant vandaag niks in, geniet ervan.`;
+    $('feestKnop').hidden=false;
+    $('homeNaam').textContent=`Hoera, ${voornaam}!`;
+    if(hero&&!ballonnen.length){ const kl=['#ff5fa2','#ffd84d','#5cc8ff','#4ade9b','#a78bfa'];
+      for(let i=0;i<5;i++){ const s=document.createElement('span'); s.className='ballon'; s.style.left=(52+i*9)+'%'; s.style.background=kl[i]; s.style.animationDelay=(i*1.7)+'s'; hero.appendChild(s); } }
+    if(!confettiGehad){ confettiGehad=true; setTimeout(confetti,500); }
+  } else if(j&&j.over===1){
+    b.hidden=false; b.classList.add('morgen'); $('feestKop').textContent='Morgen ben je jarig!';
+    $('feestTekst').textContent=`Morgen word je ${j.leeftijd}. Alvast gefeliciteerd!`; $('feestKnop').hidden=true;
+    ballonnen.forEach(x=>x.remove());
+  } else { b.hidden=true; ballonnen.forEach(x=>x.remove()); }
+}
+function renderVakChip(){
+  const el=$('homeVakantie'); if(!el) return; const v=volgendeVakantie(); if(!v){ el.hidden=true; return; }
+  const nu=dag(VANDAAG()); el.hidden=false; el.classList.toggle('nu',v.nu);
+  if(v.nu){ const rest=dag(v.tot)-nu; el.textContent=`🌴 Het is ${v.naam.toLowerCase()}! ${rest===0?'Vandaag is de laatste dag.':rest===1?'Nog 1 dag vrij.':'Nog '+rest+' dagen vrij.'}`; }
+  else { const over=dag(v.van)-nu; el.textContent=`🌴 ${v.naam} over ${over===1?'1 dag':over+' dagen'} (${kortDM(v.van)} t/m ${kortDM(v.tot)})`; }
+}
+function vulProfiel(){
+  if(!$('profForm')) return;
+  const act=document.activeElement, bezig=act&&act.closest&&act.closest('#profForm');
+  if(!bezig){ $('pfSchool').value=S.school||''; $('pfPlaats').value=S.plaats||''; $('pfGeboorte').value=S.geboorte||''; $('pfRegio').value=S.regio||''; }
+  $('pfGeboorte').max=VANDAAG();
+  const ra=S.regioAuto, r=mijnRegio(); let t='';
+  if(S.regio) t=`Je hebt zelf regio ${S.regio} gekozen.`;
+  else if(ra&&ra.regio) t=`${ra.plaats}${ra.provincie?` ligt in ${ra.provincie}`:''}, dus je valt onder regio ${ra.regio}.`;
+  else if(ra&&!ra.regio) t=`Ik kon niet vinden in welke regio ${ra.invoer} ligt. Kies je regio hierboven zelf.`;
+  else if(S.plaats) t='Bezig met opzoeken in welke regio je valt…';
+  else t='Vul de plaats van je school in, dan zoekt de app zelf op wanneer jij vakantie hebt.';
+  const v=volgendeVakantie(); if(r&&v) t+=` ${v.nu?'Nu':'Volgende vakantie'}: ${v.naam.toLowerCase()} (${kortDM(v.van)} t/m ${kortDM(v.tot)}).`;
+  $('pfRegioTekst').textContent=t;
+  const delen=[S.school,S.plaats].filter(Boolean).join(', ');
+  $('schoolSub').textContent=delen?(delen+(r?' · regio '+r:'')):'Nog niet ingevuld';
+  if(!CLOUD) $('profSub').textContent=delen?delen:'Ichthus College · vmbo TL';
+  const ms=$('merkSub'); if(ms) ms.textContent=S.school||'Ichthus College · TL4';
+}
+function initProfiel(){
+  $('profForm').addEventListener('submit',e=>{ e.preventDefault(); const m=$('pfMelding'); m.style.color='var(--bad)';
+    const school=$('pfSchool').value.trim().slice(0,60), plaats=$('pfPlaats').value.trim().slice(0,40), geb=$('pfGeboorte').value;
+    if(geb&&!geldigeGeboorte(geb)){ m.textContent='Deze geboortedatum klopt niet.'; return; }
+    const plaatsAnders=lc(plaats)!==lc(S.plaats||'');
+    S.school=school; S.plaats=plaats; S.geboorte=geb; S.regio=$('pfRegio').value; if(plaatsAnders) S.regioAuto=null;
+    save(); m.textContent='Opgeslagen.'; m.style.color='var(--ok)'; setTimeout(()=>{ m.textContent=''; },2500);
+    vulProfiel(); renderHome(); renderWeek(); regioCheck(); });
+  $('pfRegio').addEventListener('change',()=>{ S.regio=$('pfRegio').value; save(); vulProfiel(); renderHome(); renderWeek(); });
+  $('feestKnop').addEventListener('click',confetti);
+  $('profielTipKnop').addEventListener('click',()=>{ setTimeout(()=>{ const p=$('schoolPaneel'); if(!p) return; p.open=true; if(p.scrollIntoView) p.scrollIntoView({behavior:'smooth',block:'start'}); const i=$('pfSchool'); if(i&&!i.value) i.focus({preventScroll:true}); },60); });
 }
 
 // Rondleiding
@@ -1667,7 +1915,7 @@ function go(v,push=true){ if(!VIEWS.includes(v)) v='home';
   window.scrollTo({top:0});
 }
 function renderAll(){
-  renderLeerling(); renderPakket(); renderVakken(); renderUitslag(); renderAgenda(); renderTijdlijn(); document.getElementById('code').value=JSON.stringify(S);
+  renderLeerling(); renderPakket(); renderVakken(); renderUitslag(); renderAgenda(); renderTijdlijn(); vulProfiel(); regioCheck(); document.getElementById('code').value=JSON.stringify(S);
 }
 document.getElementById('kopieer').addEventListener('click',()=>{
   const ta=document.getElementById('code'), m=document.getElementById('codeMelding');
@@ -1703,6 +1951,7 @@ $('mgToepas').addEventListener('click',()=>{ for(const m of mgVoorstel){ S.cijfe
   const n=mgVoorstel.length; mgVoorstel=[]; save(); renderAll(); $('mgResultaat').hidden=true; $('mgTekst').value=''; $('mgMelding').textContent=`${n} cijfers opgeslagen.`; });
 $('beheer').open=false;
 initPlanner();
+initProfiel();
 $('fotoInput').addEventListener('change',async e=>{ const f=e.target.files&&e.target.files[0]; const m=$('fotoMelding'); m.style.color=''; if(!f) return;
   m.textContent='Bezig…';
   try{ S.foto=await maakFoto(f); save(); renderAvatars(); m.textContent='Profielfoto opgeslagen.'; m.style.color='var(--ok)'; }
@@ -1763,6 +2012,8 @@ async function haalOp(){
   if(r.error) throw r.error; return r.data;
 }
 function startMet(s,nieuw){
+  { const m=(USER&&USER.user_metadata)||{}; s={...s}; let aangevuld=false;
+    for(const k of ['school','plaats','geboorte']) if(!s[k]&&m[k]){ s[k]=m[k]; aangevuld=true; } if(aangevuld&&!nieuw) setTimeout(()=>push(),0); }
   S=norm(s); DB={actief:'cloud',leerlingen:{cloud:S}};
   CLOUD={gebr:GEBR,bewaar:bewaarCloud};
   $('login').hidden=true; $('import').hidden=true; $('herstel').hidden=true; toonApp(true); vulAccount();
@@ -1796,7 +2047,7 @@ async function naInloggen(user){
 function zetModus(m){
   modus=m; const nieuw=m==='nieuw', verg=m==='vergeten';
   $('tabIn').setAttribute('aria-selected',String(m==='in')); $('tabNieuw').setAttribute('aria-selected',String(nieuw));
-  $('lNaam').hidden=!nieuw; $('lWw2').hidden=!nieuw; $('lWw').hidden=verg;
+  $('lNaam').hidden=!nieuw; $('lSchool').hidden=!nieuw; $('lGeboorte').hidden=!nieuw; $('lWw2').hidden=!nieuw; $('lWw').hidden=verg;
   $('liTip').hidden=m!=='in'; $('terugTip').hidden=!verg;
   $('liKnop').textContent=nieuw?'Account maken':verg?'Stuur herstelmail':'Inloggen';
   $('liWw').autocomplete=nieuw?'new-password':'current-password'; $('liFout').textContent=''; $('liOk').textContent='';
@@ -1848,8 +2099,12 @@ $('loginForm').addEventListener('submit',async e=>{
       const voor=$('liVoor').value.trim(), achter=$('liAchter').value.trim();
       if(!voor){ fout.textContent='Vul je voornaam in.'; $('liVoor').focus(); knop.disabled=false; return; }
       if(!achter){ fout.textContent='Vul je achternaam in.'; $('liAchter').focus(); knop.disabled=false; return; }
+      const school=$('liSchool').value.trim().slice(0,60), plaats=$('liPlaats').value.trim().slice(0,40), geb=$('liGeboorte').value;
+      if(!school){ fout.textContent='Vul de naam van je school in.'; $('liSchool').focus(); knop.disabled=false; return; }
+      if(!plaats){ fout.textContent='Vul de plaats van je school in.'; $('liPlaats').focus(); knop.disabled=false; return; }
+      if(!/^\d{4}-\d{2}-\d{2}$/.test(geb)||geb>new Date().toISOString().slice(0,10)){ fout.textContent='Vul je geboortedatum in.'; $('liGeboorte').focus(); knop.disabled=false; return; }
       if(w!==$('liWw2').value){ fout.textContent='De wachtwoorden zijn niet hetzelfde.'; $('liWw2').focus(); knop.disabled=false; return; }
-      const r=await sb.auth.signUp({email:mail,password:w,options:{data:{voornaam:voor,achternaam:achter,naam:voor+' '+achter}}});
+      const r=await sb.auth.signUp({email:mail,password:w,options:{data:{voornaam:voor,achternaam:achter,naam:voor+' '+achter,school,plaats,geboorte:geb}}});
       if(r.error) throw r.error;
       if(!r.data.session){ fout.textContent='Account gemaakt, maar direct inloggen lukt niet. Staat Confirm email in Supabase nog aan?'; knop.disabled=false; return; }
       if(r.data.user&&Array.isArray(r.data.user.identities)&&!r.data.user.identities.length) throw new Error('already registered');
