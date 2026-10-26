@@ -224,6 +224,28 @@ details.mini[open]>summary .chev{transform:rotate(90deg)}
 details.mini .leerling{margin-top:8px}
 footer{font-size:.8rem;color:var(--dim);max-width:80ch}
 
+
+/* inloggen */
+.login{position:fixed;inset:0;z-index:50;display:grid;place-items:center;overflow:auto;padding:24px max(16px, env(safe-area-inset-right, 0px)) 24px max(16px, env(safe-area-inset-left, 0px));
+  background:var(--bg);background-image:radial-gradient(700px 500px at 20% 0%,rgba(124,58,237,.45),transparent 65%),radial-gradient(600px 420px at 100% 100%,rgba(255,130,40,.22),transparent 60%)}
+.login-kaart{width:min(420px,100%);display:grid;gap:14px;padding:30px;border-radius:26px;background:rgba(21,25,56,.82);border:1px solid var(--line2);box-shadow:0 30px 80px rgba(0,0,0,.5);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.login-logo{width:72px;height:72px;border-radius:20px;box-shadow:0 10px 34px rgba(139,92,246,.55)}
+.login-tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:12px;background:rgba(255,255,255,.05)}
+.login-tabs button{border:0;background:none;color:var(--muted);padding:8px}
+.login-tabs button[aria-selected="true"]{background:rgba(255,255,255,.1);color:var(--ink)}
+.login-form{display:grid;gap:10px}
+.login-form label{display:grid;gap:4px;font-size:.8rem;color:var(--muted);font-weight:700}
+.login-form input{font-size:1rem;padding:11px 12px}
+.login-form button.primary{padding:12px;font-size:1rem;margin-top:4px}
+.login-fout{margin:0;color:var(--bad);font-size:.9rem;min-height:1.2em}
+.im-lijst{display:grid;gap:8px}
+.im-lijst button{text-align:left;display:grid;gap:2px}
+.im-lijst button span{font-weight:400;font-size:.85rem;color:var(--muted)}
+.sync{font-size:.76rem;color:var(--muted)}
+.sync[data-k="ok"]{color:var(--ok)} .sync[data-k="fout"]{color:var(--warn)}
+.wie b{font-family:var(--f-display);font-size:1.02rem}
+.wie .uitlog{padding:6px 10px;font-size:.84rem}
+
 /* tablet: alleen iconen */
 @media (max-width:980px){
   .app{grid-template-columns:84px minmax(0,1fr)}
@@ -287,7 +309,10 @@ footer{font-size:.8rem;color:var(--dim);max-width:80ch}
       <a href="#magister" data-nav="magister"><span class="ico"><svg><use href="#i-magister"/></svg></span><span class="lbl">Uit Magister</span></a>
       <a href="#instellingen" data-nav="instellingen"><span class="ico"><svg><use href="#i-inst"/></svg></span><span class="lbl">Instellingen</span></a>
     </nav>
-    <div class="wie"><span class="eyebrow">Leerling</span><select id="leerlingKeuze" aria-label="Kies leerling"></select></div>
+    <div class="wie">
+      <div id="wieLokaal"><span class="eyebrow">Leerling</span><select id="leerlingKeuze" aria-label="Kies leerling"></select></div>
+      <div id="wieCloud" hidden><span class="eyebrow">Ingelogd als</span><b id="wieNaam"></b><span class="sync" id="syncStatus"></span><button type="button" class="uitlog">Uitloggen</button></div>
+    </div>
   </aside>
 
   <main>
@@ -422,7 +447,13 @@ footer{font-size:.8rem;color:var(--dim);max-width:80ch}
     <!-- INSTELLINGEN -->
     <section class="view" data-view="instellingen" hidden>
       <div class="vkop"><span class="eyebrow">Instellingen</span><h1 id="naamKop">Examencijfers</h1><p>Ichthus College Dronten · vmbo TL · PTA cohort 2025-2027</p></div>
-      <section class="paneel">
+      <section class="paneel" id="accountPaneel" hidden>
+        <h2>Account</h2>
+        <p style="margin:0">Ingelogd als <b id="accNaam"></b> <span class="small muted">(gebruikersnaam <span id="accGebr"></span>)</span></p>
+        <p class="small muted" style="margin:0">Je cijfers en agenda worden online bewaard en zijn op elk apparaat hetzelfde. <span class="sync" id="syncStatus2"></span></p>
+        <div class="row"><button type="button" class="uitlog">Uitloggen</button></div>
+      </section>
+      <section class="paneel" id="leerlingPaneel">
         <h2>Leerling</h2>
         <div class="leerling"><label for="leerlingKeuze2" class="small muted">Gekozen leerling</label><select id="leerlingKeuze2"></select></div>
         <details class="mini" id="beheer">
@@ -467,6 +498,37 @@ footer{font-size:.8rem;color:var(--dim);max-width:80ch}
   <a href="#instellingen" data-nav="instellingen"><span class="ico g6"><svg><use href="#i-inst"/></svg></span>Instellingen</a>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2/dist/umd/supabase.js"></script>
+<div class="login" id="login" hidden>
+  <div class="login-kaart">
+    <img src="data:image/png;base64,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" alt="" class="login-logo">
+    <h1>Examencijfers</h1>
+    <p class="muted" style="margin:0">Je cijfers, agenda en uitslag op elk apparaat.</p>
+    <div class="login-tabs" role="tablist">
+      <button type="button" role="tab" id="tabIn" aria-selected="true">Inloggen</button>
+      <button type="button" role="tab" id="tabNieuw" aria-selected="false">Account maken</button>
+    </div>
+    <form id="loginForm" class="login-form" novalidate>
+      <label id="lNaam" hidden>Je naam<input id="liNaam" autocomplete="name" placeholder="Bijvoorbeeld Sam de Vries" maxlength="40"></label>
+      <label>Gebruikersnaam<input id="liGebr" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="Bijvoorbeeld samv" maxlength="30"></label>
+      <label>Wachtwoord<input id="liWw" type="password" autocomplete="current-password" placeholder="Minimaal 6 tekens"></label>
+      <label id="lWw2" hidden>Wachtwoord herhalen<input id="liWw2" type="password" autocomplete="new-password"></label>
+      <button type="submit" class="primary" id="liKnop">Inloggen</button>
+      <p class="login-fout" id="liFout" role="alert"></p>
+      <p class="small muted" id="liTip" style="margin:0">Wachtwoord vergeten? Vraag het aan de beheerder van de site.</p>
+    </form>
+  </div>
+</div>
+
+<div class="login" id="import" hidden>
+  <div class="login-kaart">
+    <h1 style="font-size:1.5rem">Welkom, <span id="imNaam"></span></h1>
+    <p class="muted" style="margin:0">Op dit apparaat staan al cijfers. Wil je die in je account zetten?</p>
+    <div id="imLijst" class="im-lijst"></div>
+    <button type="button" id="imLeeg">Nee, leeg beginnen</button>
+  </div>
+</div>
+
 <script>
 // type: ce = vak met centraal examen, se = alleen schoolexamen (telt mee in uitslag), vg = moet voldoende zijn, info = alleen ter info
 // toets: [nummer, periode, omschrijving, weging, herkansbaar]
@@ -495,16 +557,10 @@ const TYPE_LABEL={ce:'Examenvak met CE',se:'Alleen schoolexamen',vg:'Moet voldoe
 const BY_ID=Object.fromEntries(VAKKEN.map(v=>[v.id,v]));
 const KEY='examencijfers-tl4-v6', OUDE_KEY='examencijfers-tl4-v5';
 
-// Startstand: cijfers uit Magister, stand 25-10-2026
-const VOORBEELD={naam:'Liam Kuijk',pakket:['ne','en','wi','nask1','bi','ma','pvtt','lo2','lo','kv1','levo'],
- cijfers:{'nask1-331':9.2,'nask1-341':6.9,'ma-311':7.8,'ma-321':6.9,'ma-331':8.4,'ma-341':7.9,
- 'lo2-311':6.0,'lo2-322':6.0,'lo2-323':7.0,'lo2-331':8.5,'lo2-412':7.5,
- 'lo2-312':'G','lo2-313':'V','lo2-321':'G','lo2-332':'G','lo2-333':'V','lo2-341':'G','lo2-342':'V','lo2-343':'G',
- 'bi-321':6.2,'bi-341':8.4,'bi-342':6.9,
- 'kv1-311':7.0,'kv1-321':6.4,'kv1-322':5.6,'kv1-331':7.0,'kv1-341':6.9,'kv1-342':8.0,
- 'lo-321':'V','lo-331':'V','lo-332':'G','lo-341':'G','lo-342':'G','lo-411':'G','lo-414':'G'},
- ce:{}};
+// Standaard: leeg, cijfers staan in de accounts
+const VOORBEELD={naam:'Leerling',pakket:['ne','en','ma','lo','kv1'],cijfers:{},ce:{},agenda:[]};
 
+var CLOUD=null;
 let DB=load(), S=DB.leerlingen[DB.actief];
 function load(){
   try{const raw=localStorage.getItem(KEY); if(raw){const d=JSON.parse(raw); if(d&&d.leerlingen&&d.leerlingen[d.actief]){for(const k in d.leerlingen) d.leerlingen[k]=norm(d.leerlingen[k]); return d;}}}catch(e){}
@@ -513,7 +569,7 @@ function load(){
   return {actief:'l1',leerlingen:{l1:liam}};
 }
 function norm(s){return {naam:String(s.naam||'Leerling').slice(0,40),pakket:Array.isArray(s.pakket)?s.pakket.filter(id=>BY_ID[id]):[],cijfers:s.cijfers||{},ce:s.ce||{},agenda:Array.isArray(s.agenda)?s.agenda:[]};}
-function save(){DB.leerlingen[DB.actief]=S; try{localStorage.setItem(KEY,JSON.stringify(DB));}catch(e){} document.getElementById('code').value=JSON.stringify(S);}
+function save(){DB.leerlingen[DB.actief]=S; if(CLOUD) CLOUD.bewaar(S); else { try{localStorage.setItem(KEY,JSON.stringify(DB));}catch(e){} } document.getElementById('code').value=JSON.stringify(S);}
 
 const r1=x=>Math.round(x*10+1e-9)/10;
 const r0=x=>Math.floor(x+0.5+1e-9);
@@ -652,7 +708,7 @@ function renderUitslag(){
   const zonder=rows.filter(r=>r.i.se==null).map(r=>r.v.naam);
   const nogOpen=rows.filter(r=>r.i.se!=null&&r.i.rest>0).length;
   const uitleg=document.getElementById('uitslagUitleg'); let u='';
-  if(!tel.length){txt.textContent='Kies eerst het vakkenpakket';pill.className='pill warn';pill.textContent='Geen vakken';u='Open Vakkenpakket hieronder en vink de vakken aan.';}
+  if(!tel.length){txt.textContent='Kies eerst het vakkenpakket';pill.className='pill warn';pill.textContent='Geen vakken';u='Ga naar Instellingen en vink je vakken aan.';}
   else if(gezakt){txt.textContent='Nog niet genoeg om te slagen';pill.className='pill bad';pill.textContent=compleet?'Gezakt':'Let op';u='Met de cijfers tot nu toe voldoet niet alles aan de slaagregels. Kijk bij de rode punten hieronder wat er beter moet.';}
   else if(geslaagd){txt.textContent='Op koers om te slagen';pill.className='pill ok';pill.textContent=compleet?'Geslaagd':'Voorlopig';u=compleet?'Alle PTA cijfers staan erin en alle regels zijn gehaald.':'Met de cijfers tot nu toe worden alle slaagregels gehaald. Dit wordt definitief als alle PTA toetsen en het CE zijn gemaakt.';}
   else {txt.textContent='Op koers met de cijfers tot nu toe';pill.className='pill warn';pill.textContent='Onvolledig';
@@ -665,6 +721,8 @@ function renderUitslag(){
 }
 
 function renderLeerling(){
+  const c=!!CLOUD; $('wieLokaal').hidden=c; $('wieCloud').hidden=!c; $('accountPaneel').hidden=!c; $('leerlingPaneel').hidden=c;
+  if(c){ $('wieNaam').textContent=S.naam; $('accNaam').textContent=S.naam; $('accGebr').textContent=CLOUD.gebr; }
   for(const sid of ['leerlingKeuze','leerlingKeuze2']){ const sel=document.getElementById(sid); sel.innerHTML='';
   for(const [id,l] of Object.entries(DB.leerlingen)){const o=document.createElement('option'); o.value=id; o.textContent=l.naam; o.selected=id===DB.actief; sel.appendChild(o);} }
   document.getElementById('naamKop').textContent='Examencijfers '+S.naam;
@@ -910,6 +968,148 @@ document.addEventListener('click',e=>{ const l=e.target.closest('a[href^="#"]');
 window.addEventListener('hashchange',()=>go(location.hash.slice(1),false));
 renderAll();
 go(location.hash.slice(1)||'home',false);
+
+// 26-10-2026 MK inloggen en online opslag via Supabase
+const SB_URL='https://vciztftatlkjrkmnsztm.supabase.co';
+const SB_KEY='sb_publishable_4J5sf5_TLUr0lYgMbCuaVw_PddCxZVA';
+const MAIL_DOMEIN='marcelkuijkgolf.github.io';
+const NIEUW_PAKKET=['ne','en','ma','lo','kv1'];
+const LOKAAL=DB;
+let sb=null, UID=null, GEBR=null, laatsteSync=null, pushTimer=null, pushBezig=false, nogEens=false, wijzigingOpen=false, modus='in';
+
+const appEl=document.querySelector('.app'), tabEl=document.querySelector('.tabbar');
+function toonApp(ja){ appEl.hidden=!ja; tabEl.hidden=!ja; }
+function syncStatus(t,k){ for(const id of ['syncStatus','syncStatus2']){ const e=$(id); if(e){ e.textContent=t; e.dataset.k=k||''; } } }
+const normGebr=g=>String(g||'').trim().toLowerCase().replace(/\s+/g,'');
+const cacheKey=()=>'examencijfers-cloud-'+UID;
+
+function bewaarCloud(s){
+  try{ localStorage.setItem(cacheKey(),JSON.stringify({s,t:laatsteSync})); }catch(e){}
+  wijzigingOpen=true; syncStatus('Opslaan…','bezig');
+  clearTimeout(pushTimer); pushTimer=setTimeout(push,700);
+}
+async function push(){
+  if(pushBezig){ nogEens=true; return; }
+  pushBezig=true; const nu=new Date().toISOString();
+  let fout=null;
+  try{ const r=await sb.from('profielen').upsert({user_id:UID,gebruikersnaam:GEBR,data:S,bijgewerkt:nu}); fout=r.error; }catch(e){ fout=e; }
+  pushBezig=false;
+  if(fout){ syncStatus(navigator.onLine===false?'Offline, wordt later opgeslagen':'Opslaan mislukt, probeert opnieuw','fout'); clearTimeout(pushTimer); pushTimer=setTimeout(push,6000); return; }
+  laatsteSync=nu; try{ localStorage.setItem(cacheKey(),JSON.stringify({s:S,t:nu})); }catch(e){}
+  if(nogEens){ nogEens=false; push(); return; }
+  wijzigingOpen=false; syncStatus('Opgeslagen','ok');
+}
+async function haalOp(){
+  const r=await sb.from('profielen').select('data,bijgewerkt').eq('user_id',UID).maybeSingle();
+  if(r.error) throw r.error; return r.data;
+}
+function startMet(s,nieuw){
+  S=norm(s); DB={actief:'cloud',leerlingen:{cloud:S}};
+  CLOUD={gebr:GEBR,bewaar:bewaarCloud};
+  $('login').hidden=true; $('import').hidden=true; toonApp(true);
+  openState.clear(); renderAll();
+  go(nieuw?'instellingen':(location.hash.slice(1)||'home'),false);
+  if(nieuw) push(); else if(!wijzigingOpen) syncStatus('Opgeslagen','ok');
+}
+async function naInloggen(user){
+  UID=user.id; const meta=user.user_metadata||{};
+  GEBR=meta.gebruikersnaam||String(user.email||'').split('@')[0];
+  const naam=meta.naam||GEBR;
+  let rij=null, offline=false;
+  try{ rij=await haalOp(); }catch(e){ offline=true; }
+  if(offline){
+    let c=null; try{ c=JSON.parse(localStorage.getItem(cacheKey())||'null'); }catch(e){}
+    if(c&&c.s){ laatsteSync=c.t; startMet(c.s,false); syncStatus('Offline, laatst opgeslagen versie','fout'); return; }
+    toonLogin('Geen verbinding met de server. Probeer het zo opnieuw.'); return;
+  }
+  if(rij&&rij.data&&Array.isArray(rij.data.pakket)){ laatsteSync=rij.bijgewerkt; startMet(rij.data,false); return; }
+  // eerste keer: lokale cijfers aanbieden
+  const kandidaten=Object.values(LOKAAL.leerlingen||{}).filter(l=>Object.keys(l.cijfers||{}).length||(l.agenda||[]).length);
+  if(!kandidaten.length){ startMet({naam,pakket:NIEUW_PAKKET,cijfers:{},ce:{},agenda:[]},true); return; }
+  $('imNaam').textContent=naam; const lijst=$('imLijst'); lijst.innerHTML='';
+  for(const l of kandidaten){ const b=document.createElement('button'); b.type='button';
+    b.innerHTML=`Ja, cijfers van ${esc(l.naam)} overzetten<span>${Object.keys(l.cijfers||{}).length} cijfers, ${(l.agenda||[]).length} toetsen in de agenda</span>`;
+    b.addEventListener('click',()=>startMet({...JSON.parse(JSON.stringify(l)),naam},true)); lijst.appendChild(b); }
+  $('imLeeg').onclick=()=>startMet({naam,pakket:NIEUW_PAKKET,cijfers:{},ce:{},agenda:[]},true);
+  $('login').hidden=true; $('import').hidden=false;
+}
+function zetModus(m){
+  modus=m; const nieuw=m==='nieuw';
+  $('tabIn').setAttribute('aria-selected',String(!nieuw)); $('tabNieuw').setAttribute('aria-selected',String(nieuw));
+  $('lNaam').hidden=!nieuw; $('lWw2').hidden=!nieuw; $('liTip').hidden=nieuw;
+  $('liKnop').textContent=nieuw?'Account maken':'Inloggen';
+  $('liWw').autocomplete=nieuw?'new-password':'current-password'; $('liFout').textContent='';
+}
+function toonLogin(fout){
+  CLOUD=null; UID=null; toonApp(false); $('import').hidden=true; $('login').hidden=false;
+  $('liFout').textContent=fout||''; $('liKnop').disabled=false;
+}
+function vertaal(err){
+  const m=String((err&&(err.code||err.message))||err||'').toLowerCase();
+  if(m.includes('invalid login')||m.includes('invalid_credentials')) return 'Gebruikersnaam of wachtwoord klopt niet.';
+  if(m.includes('already')||m.includes('user_already_exists')) return 'Deze gebruikersnaam is al in gebruik. Kies een andere.';
+  if(m.includes('weak')||m.includes('password should')) return 'Kies een sterker wachtwoord, minimaal 6 tekens.';
+  if(m.includes('rate')||m.includes('too many')) return 'Te veel pogingen achter elkaar. Wacht een paar minuten.';
+  if(m.includes('email')&&m.includes('invalid')) return 'Account maken lukt niet door een instelling in Supabase. Laat dit aan de beheerder weten.';
+  if(m.includes('fetch')||m.includes('network')) return 'Geen verbinding met de server. Controleer je internet.';
+  return 'Er ging iets mis: '+((err&&err.message)||err);
+}
+$('tabIn').addEventListener('click',()=>zetModus('in'));
+$('tabNieuw').addEventListener('click',()=>zetModus('nieuw'));
+$('loginForm').addEventListener('submit',async e=>{
+  e.preventDefault(); const fout=$('liFout'); fout.textContent='';
+  const g=normGebr($('liGebr').value), w=$('liWw').value;
+  if(!/^[a-z0-9._-]{3,30}$/.test(g)){ fout.textContent='Gebruikersnaam: 3 tot 30 tekens, alleen letters, cijfers, punt, streepje of underscore.'; $('liGebr').focus(); return; }
+  if(w.length<6){ fout.textContent='Wachtwoord moet minimaal 6 tekens hebben.'; $('liWw').focus(); return; }
+  if(!sb){ fout.textContent='Geen verbinding met de server. Herlaad de pagina.'; return; }
+  const knop=$('liKnop'); knop.disabled=true;
+  try{
+    if(modus==='nieuw'){
+      const naam=$('liNaam').value.trim();
+      if(!naam){ fout.textContent='Vul je naam in.'; $('liNaam').focus(); knop.disabled=false; return; }
+      if(w!==$('liWw2').value){ fout.textContent='De wachtwoorden zijn niet hetzelfde.'; $('liWw2').focus(); knop.disabled=false; return; }
+      const r=await sb.auth.signUp({email:g+'@'+MAIL_DOMEIN,password:w,options:{data:{gebruikersnaam:g,naam}}});
+      if(r.error) throw r.error;
+      if(!r.data.session){ fout.textContent='Account gemaakt, maar direct inloggen lukt niet. Staat Confirm email in Supabase nog aan?'; knop.disabled=false; return; }
+      if(r.data.user&&Array.isArray(r.data.user.identities)&&!r.data.user.identities.length) throw new Error('already registered');
+      await naInloggen(r.data.session.user);
+    }else{
+      const r=await sb.auth.signInWithPassword({email:g+'@'+MAIL_DOMEIN,password:w});
+      if(r.error) throw r.error;
+      await naInloggen(r.data.user);
+    }
+    $('liWw').value=''; $('liWw2').value='';
+  }catch(err){ fout.textContent=vertaal(err); }
+  knop.disabled=false;
+});
+for(const b of document.querySelectorAll('.uitlog')) b.addEventListener('click',async()=>{
+  if(wijzigingOpen){ clearTimeout(pushTimer); await push(); }
+  try{ await sb.auth.signOut(); }catch(e){}
+  try{ localStorage.removeItem(cacheKey()); }catch(e){}
+  DB=LOKAAL; S=DB.leerlingen[DB.actief]; zetModus('in'); toonLogin('');
+});
+// bij terugkomen in de app de nieuwste versie ophalen
+async function verversVanServer(){
+  if(!UID||wijzigingOpen||pushBezig||document.visibilityState!=='visible') return;
+  let r; try{ r=await haalOp(); }catch(e){ return; }
+  if(r&&r.data&&r.bijgewerkt&&(!laatsteSync||r.bijgewerkt>laatsteSync)&&!wijzigingOpen){
+    laatsteSync=r.bijgewerkt; S=norm(r.data); DB.leerlingen.cloud=S;
+    try{ localStorage.setItem(cacheKey(),JSON.stringify({s:S,t:laatsteSync})); }catch(e){}
+    renderAll(); syncStatus('Bijgewerkt met andere apparaat','ok');
+  }
+}
+document.addEventListener('visibilitychange',verversVanServer);
+window.addEventListener('focus',verversVanServer);
+window.addEventListener('online',()=>{ if(wijzigingOpen) push(); });
+// opstarten
+(async()=>{
+  toonApp(false); zetModus('in');
+  if(!window.supabase||!window.supabase.createClient){ toonLogin('De inlogdienst kon niet laden. Controleer je internet en herlaad de pagina.'); return; }
+  sb=window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:true,autoRefreshToken:true,storageKey:'examencijfers-auth'}});
+  let sessie=null; try{ sessie=(await sb.auth.getSession()).data.session; }catch(e){}
+  if(sessie) await naInloggen(sessie.user); else toonLogin('');
+  sb.auth.onAuthStateChange((ev)=>{ if(ev==='SIGNED_OUT'&&CLOUD){ DB=LOKAAL; S=DB.leerlingen[DB.actief]; toonLogin('Je bent uitgelogd.'); } });
+})();
 
 if('serviceWorker' in navigator && location.protocol==='https:'){ navigator.serviceWorker.register('sw.js').catch(()=>{}); }
 </script>
