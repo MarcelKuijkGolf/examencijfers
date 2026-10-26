@@ -336,6 +336,43 @@ details.set[open]>summary .chev{transform:rotate(90deg)}
 .naam-velden{display:grid!important;grid-template-columns:1fr 1fr auto;gap:8px}
 .naam-velden input{min-width:0;width:100%}
 @media (max-width:640px){.naam-velden{grid-template-columns:1fr 1fr}.naam-velden button{grid-column:1/-1}}
+
+/* lobby v2 */
+.stat{position:relative;overflow:hidden;gap:4px;padding:18px}
+.stat::after{content:"";position:absolute;right:-30px;top:-30px;width:110px;height:110px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.06),transparent 70%);pointer-events:none}
+.stat-ico{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;color:#fff;margin-bottom:6px;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.stat-ico svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.vakken-blok{display:grid;gap:12px}
+.vakken-blok .paneel-kop{padding:0 2px}
+.vak-rij{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(170px,1fr);gap:12px;overflow-x:auto;padding:2px 2px 10px;scroll-snap-type:x mandatory;scrollbar-width:thin}
+.vakchip{scroll-snap-align:start;position:relative;display:grid;gap:8px;align-content:start;text-align:left;padding:16px;border-radius:18px;background:var(--paper);border:1px solid var(--line);color:var(--ink);font-weight:400;transition:transform .18s,border-color .18s;min-height:150px}
+.vakchip:hover{transform:translateY(-3px);border-color:rgba(255,162,58,.45);background:var(--paper)}
+.vakchip::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;border-radius:18px 18px 0 0;background:var(--kl,var(--line2))}
+.vakchip .vc-naam{font-family:var(--f-display);font-weight:700;font-size:.98rem;line-height:1.2;min-height:2.4em}
+.vakchip .vc-cijfer{font-family:var(--f-display);font-size:2.1rem;font-weight:800;line-height:1;color:var(--kl,var(--muted))}
+.vakchip .vc-cijfer.leeg{color:var(--dim);font-size:1.6rem}
+.vakchip .vc-sub{font-size:.78rem;color:var(--muted)}
+.vc-balk{height:6px;border-radius:3px;background:rgba(255,255,255,.08);overflow:hidden}
+.vc-balk i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,var(--accent),var(--pink))}
+.aitem.toets{gap:14px;flex-wrap:nowrap;align-items:center}
+.dagblok{flex:none;width:54px;border-radius:14px;overflow:hidden;text-align:center;background:rgba(255,255,255,.06);border:1px solid var(--line2)}
+.dagblok .dm{display:block;font-size:.66rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 0;background:var(--violet);color:#fff}
+.dagblok .dn{display:block;font-family:var(--f-display);font-weight:800;font-size:1.35rem;line-height:1.5}
+.dagblok.gauw .dm{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#24120a}
+.aitem.toets .wat{min-width:0}
+.wanneer-tag{display:inline-block;font-size:.72rem;font-weight:700;color:var(--accent);margin-bottom:2px}
+.snel{display:grid;gap:12px}
+.tegel{grid-template-columns:auto 1fr;align-items:center;column-gap:12px;row-gap:2px}
+.tegel .ico{grid-row:span 2}
+@media (max-width:640px){
+  .vak-rij{grid-auto-columns:minmax(150px,46%);margin:0 calc(-1 * max(16px, env(safe-area-inset-right, 0px))) 0 0;padding-right:16px}
+  .tegels{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+  .tegel{grid-template-columns:1fr;justify-items:center;text-align:center;padding:14px 8px;row-gap:8px}
+  .tegel .ico{grid-row:auto}
+  .tegel b{font-size:.84rem;line-height:1.2}
+  .tegel span.sub{display:none}
+  .stat{padding:14px} .stat-ico{width:34px;height:34px}
+}
 /* tablet: alleen iconen */
 @media (max-width:980px){
   .app{grid-template-columns:84px minmax(0,1fr)}
@@ -397,6 +434,9 @@ details.set[open]>summary .chev{transform:rotate(90deg)}
   <symbol id="i-boek" viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19a2 2 0 0 1 2-2h13"/><path d="M9 7h6"/></symbol>
   <symbol id="i-deel" viewBox="0 0 24 24"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.8l7.6-4.4M8.2 13.2l7.6 4.4"/></symbol>
   <symbol id="i-opslaan" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></symbol>
+  <symbol id="i-grafiek" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></symbol>
+  <symbol id="i-bel" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/></symbol>
+  <symbol id="i-klok" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></symbol>
   <symbol id="i-ster" viewBox="0 0 24 24"><path d="M12 0 14.6 9.4 24 12 14.6 14.6 12 24 9.4 14.6 0 12 9.4 9.4z"/></symbol>
 </svg>
 
@@ -443,15 +483,20 @@ details.set[open]>summary .chev{transform:rotate(90deg)}
       </div>
 
       <div class="stats">
-        <a class="stat" href="#uitslag"><span class="k">Gemiddeld cijfer</span><span class="v num" id="statGem">–</span><span class="s">van je schooltoetsen</span></a>
-        <a class="stat" href="#agenda"><span class="k">Toetsen gepland</span><span class="v num" id="statToetsen">0</span><span class="s">in je agenda</span></a>
-        <a class="stat" href="#agenda" id="statOpenTile"><span class="k">Nog invullen</span><span class="v num" id="statOpen">0</span><span class="s">cijfers van gemaakte toetsen</span></a>
-        <div class="stat"><span class="k">Weken tot eindexamen</span><span class="v num" id="statCE">–</span><span class="s">start 14 mei 2027</span></div>
+        <a class="stat" href="#uitslag"><span class="stat-ico g2"><svg><use href="#i-grafiek"/></svg></span><span class="k">Gemiddeld cijfer</span><span class="v num" id="statGem">–</span><span class="s">van je schooltoetsen</span></a>
+        <a class="stat" href="#agenda"><span class="stat-ico g1"><svg><use href="#i-agenda"/></svg></span><span class="k">Toetsen gepland</span><span class="v num" id="statToetsen">0</span><span class="s">in je agenda</span></a>
+        <a class="stat" href="#agenda" id="statOpenTile"><span class="stat-ico g3"><svg><use href="#i-bel"/></svg></span><span class="k">Nog invullen</span><span class="v num" id="statOpen">0</span><span class="s">cijfers van gemaakte toetsen</span></a>
+        <div class="stat"><span class="stat-ico g4"><svg><use href="#i-klok"/></svg></span><span class="k">Weken tot eindexamen</span><span class="v num" id="statCE">–</span><span class="s">start 14 mei 2027</span></div>
       </div>
 
       <section class="herinner" id="herinner" hidden aria-labelledby="herinnerKop">
         <h2 id="herinnerKop">Cijfer nog invullen</h2>
         <ul id="herinnerLijst"></ul>
+      </section>
+
+      <section class="vakken-blok" aria-labelledby="mijnKop">
+        <div class="paneel-kop"><h2 id="mijnKop">Mijn vakken</h2><a href="#cijfers">Alle cijfers ›</a></div>
+        <div class="vak-rij" id="homeVakken"></div>
       </section>
 
       <div class="duo">
@@ -467,7 +512,7 @@ details.set[open]>summary .chev{transform:rotate(90deg)}
         </section>
       </div>
 
-      <section aria-labelledby="snelKop" style="display:grid;gap:12px">
+      <section aria-labelledby="snelKop" class="snel">
         <h2 id="snelKop">Snel naar</h2>
         <div class="tegels">
           <a class="tegel" href="#agenda"><span class="ico g1"><svg><use href="#i-agenda"/></svg></span><b>Toetsagenda</b><span class="sub" id="tileAgenda"></span></a>
@@ -1036,7 +1081,7 @@ function renderTijdlijn(){
   const kleur={tw:'var(--blue)',hk:'var(--warn)',ce:'var(--accent)',ce2:'var(--accent)'};
   const ul=$('tlLijst'); ul.innerHTML='';
   for(const e of TL){ const v=dag(e.van), t=dag(e.tot); let w;
-    if(nu>t) w='voorbij'; else if(nu>=v) w='nu bezig'; else { const d=v-nu; w=e.vaag?'± '+Math.round(d/7)+' weken':(d<14?`over ${d} dagen`:`over ${Math.round(d/7)} weken`); }
+    if(nu>t) w='voorbij'; else if(nu>=v) w='nu bezig'; else { const d=v-nu; w=e.vaag?'± '+Math.round(d/7)+' weken':(d===1?'morgen':d<14?`over ${d} dagen`:`over ${Math.round(d/7)} weken`); }
     const li=document.createElement('li'); if(nu>t) li.className='voorbij';
     li.innerHTML=`<span class="sw" style="background:${kleur[e.k]}${e.k==='ce2'?';opacity:.45':''}"></span><span>${e.naam}</span><span class="wanneer">${w}</span>`; ul.appendChild(li); }
   const ce=dag('2027-05-14'), volgende=TL.find(e=>dag(e.tot)>=nu&&e.k==='tw');
@@ -1149,10 +1194,26 @@ function renderHome(){
   $('statToetsen').textContent=kom.length; $('statOpen').textContent=open.length;
   $('statOpenTile').classList.toggle('alarm',open.length>0);
   const ul=$('homeVolgende'); ul.innerHTML='';
-  for(const a of kom.slice(0,4)){ const li=document.createElement('li'); li.className='aitem';
-    li.innerHTML=`<span class="datum">${datumNL(a.datum)}</span><span class="wat">${aTitel(a)}${nodigBij(a,status(a))}</span>`; ul.appendChild(li); }
+  for(const a of kom.slice(0,4)){ const li=document.createElement('li'); li.className='aitem toets';
+    const [y,m,dd]=a.datum.split('-').map(Number), dt=new Date(y,m-1,dd), over=dag(a.datum)-nu;
+    const wann=over===0?'Vandaag':over===1?'Morgen':over<7?dt.toLocaleDateString('nl-NL',{weekday:'long'}).replace(/^./,c=>c.toUpperCase()):`Over ${over} dagen`;
+    li.innerHTML=`<span class="dagblok ${over<=2?'gauw':''}"><span class="dm">${dt.toLocaleDateString('nl-NL',{month:'short'}).replace('.','')}</span><span class="dn">${dd}</span></span><span class="wat"><span class="wanneer-tag">${wann}</span><br>${aTitel(a)}${nodigBij(a,status(a))}</span>`; ul.appendChild(li); }
   if(!kom.length) ul.innerHTML='<li class="leeg">Geen toetsen gepland. <a href="#agenda">Zet je eerste toets in de agenda</a>.</li>';
   $('homeRisico').innerHTML=UIT.risico||'';
+  // mijn vakken
+  const vr=$('homeVakken'); vr.innerHTML='';
+  for(const id of S.pakket){ const v=BY_ID[id]; if(v.type==='info') continue; const i=seInfo(v);
+    const nT=v.toetsen.filter(t=>t[3]).length, nI=v.toetsen.filter(t=>t[3]&&typeof S.cijfers[id+'-'+t[0]]==='number').length;
+    let groot, kl, sub;
+    if(v.type==='hd'){ groot=i.hd.onv?'O':`${i.hd.klaar}/${i.hd.n}`; kl=i.hd.onv?'var(--bad)':i.hd.klaar===i.hd.n?'var(--ok)':'var(--violet)'; sub='onderdelen gehaald'; }
+    else if(i.se==null){ groot='–'; kl=''; sub='nog geen cijfer'; }
+    else { groot=fmt(i.se); kl=i.se<5.5?(i.se<4.5?'var(--bad)':'var(--warn)'):'var(--ok)'; sub=v.type==='ce'?`eindexamen nodig: ${nodigTekst(ceNodig(i.se,6))}`:'gemiddelde'; }
+    const pct=v.type==='hd'?(i.hd.n?i.hd.klaar/i.hd.n:0):(nT?nI/nT:0);
+    const b=document.createElement('button'); b.type='button'; b.className='vakchip'; if(kl) b.style.setProperty('--kl',kl);
+    b.innerHTML=`<span class="vc-naam">${v.naam}</span><span class="vc-cijfer ${groot==='–'?'leeg':''}">${groot}</span><span class="vc-sub">${sub}</span><span class="vc-balk" title="${Math.round(pct*100)}% gehad"><i style="width:${Math.round(pct*100)}%"></i></span>`;
+    b.addEventListener('click',()=>{ go('cijfers'); const d=$('vak-'+id); if(d){ d.open=true; openState.add(id); if(d.scrollIntoView) d.scrollIntoView({behavior:'smooth',block:'start'}); } });
+    vr.appendChild(b); }
+  if(!vr.children.length) vr.innerHTML='<p class="muted small" style="margin:0">Nog geen vakken gekozen. <a href="#instellingen">Kies je vakken</a>.</p>';
   $('navBadge').textContent=open.length||''; $('navBadge').hidden=!open.length; $('navBadgeM').textContent=open.length||''; $('navBadgeM').hidden=!open.length;
   const zet=(id,t)=>{const e=$(id); if(e) e.textContent=t;};
   zet('tileAgenda',kom.length?`${kom.length} toets${kom.length>1?'en':''} gepland`:'Nog niets gepland');
