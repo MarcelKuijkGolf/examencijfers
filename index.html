@@ -373,6 +373,80 @@ details.set[open]>summary .chev{transform:rotate(90deg)}
   .tegel span.sub{display:none}
   .stat{padding:14px} .stat-ico{width:34px;height:34px}
 }
+
+/* agenda week */
+.wk-balk{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.wk-titel{display:grid}
+.wk-titel b{font-family:var(--f-display);font-size:1.35rem}
+.wk-knop{width:40px;padding:8px 0;font-size:1.2rem;line-height:1}
+.wk-legenda{display:flex;gap:16px;flex-wrap:wrap;font-size:.8rem;color:var(--muted);margin-top:-8px}
+.wk-legenda span{display:inline-flex;align-items:center;gap:6px}
+.wk-legenda i{width:12px;height:12px;border-radius:4px;display:inline-block}
+.lg-toets{background:linear-gradient(135deg,var(--accent),var(--accent2))}
+.lg-leer{background:linear-gradient(135deg,var(--violet),#5b3bd6)}
+.lg-vast{background:repeating-linear-gradient(45deg,#4d5280 0 3px,#3a3f66 3px 6px)}
+.week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
+.dagkol{display:grid;grid-template-rows:auto 1fr;min-height:220px;border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.012));border:1px solid var(--line);overflow:hidden}
+.dagkol.vandaag{border-color:rgba(255,162,58,.6);box-shadow:0 0 0 1px rgba(255,162,58,.25),0 10px 30px rgba(255,140,50,.12)}
+.dagkol.voorbij{opacity:.6}
+.dk-kop{display:flex;flex-direction:column;align-items:flex-start;gap:1px;padding:10px 12px;border-bottom:1px solid var(--line)}
+.dk-kop b{font-family:var(--f-body);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.dk-kop b span{font:inherit;color:inherit}
+.dk-dat{font-family:var(--f-display);font-size:1.35rem;font-weight:800;line-height:1.1;color:var(--ink)}
+.dk-dat small{font-size:.75rem;font-weight:600;color:var(--muted);margin-left:4px}
+.dn-kort{display:none}
+.dagkol.vandaag .dk-kop{background:linear-gradient(135deg,rgba(255,162,58,.18),rgba(255,122,42,.06))}
+.dagkol.vandaag .dk-kop b,.dagkol.vandaag .dk-dat{color:var(--accent)}
+.dk-items{display:flex;flex-direction:column;gap:6px;padding:8px}
+.dk-leeg{font-size:.78rem;color:var(--dim);padding:4px 4px}
+.wi{display:grid;gap:2px;padding:8px 9px;border-radius:10px;font-size:.8rem;line-height:1.25;color:#fff;text-align:left;border:0;font-weight:400}
+.wi b{font-size:.84rem;font-weight:700}
+.wi small{opacity:.85;font-size:.74rem}
+.wi-toets{background:linear-gradient(135deg,#ff9f3a,#f0662a);color:#24120a}
+.wi-toets small{opacity:.8}
+.wi-leer{background:linear-gradient(135deg,#7c4dff,#5536c9);display:grid;grid-template-columns:auto 1fr;column-gap:8px;align-items:start;cursor:pointer}
+.wi-leer input{margin:2px 0 0;accent-color:var(--ok);width:16px;height:16px}
+.wi-leer.gedaan{background:linear-gradient(135deg,rgba(74,222,155,.28),rgba(74,222,155,.12));color:var(--ok)}
+.wi-leer.gedaan b{text-decoration:line-through;text-decoration-thickness:2px}
+.wi-vast{background:repeating-linear-gradient(45deg,#3f4470 0 6px,#363a62 6px 12px);color:#d9dcf7}
+.ag-duo{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:20px;align-items:start}
+/* leerhulp */
+.leerhulp{gap:12px;background:linear-gradient(160deg,rgba(124,77,255,.16),rgba(255,255,255,.015) 45%);border-color:rgba(139,92,246,.35)}
+.lh-kop{display:flex;align-items:center;gap:12px}
+.lh-bot{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,#8b5cf6,#e04a8f);box-shadow:0 8px 24px rgba(139,92,246,.45)}
+.lh-bot svg{width:22px;height:22px;fill:currentColor}
+.lh-chat{display:flex;flex-direction:column;gap:10px;max-height:420px;min-height:160px;overflow-y:auto;padding:4px 2px}
+.bericht{max-width:88%;padding:10px 13px;border-radius:16px;font-size:.92rem;line-height:1.45;white-space:pre-wrap;overflow-wrap:anywhere}
+.bericht.bot{align-self:flex-start;background:rgba(255,255,255,.07);border:1px solid var(--line);border-bottom-left-radius:6px}
+.bericht.ik{align-self:flex-end;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#24120a;border-bottom-right-radius:6px}
+.bericht.denk{color:var(--muted)}
+.bericht .stip{display:inline-block;width:6px;height:6px;border-radius:50%;background:currentColor;margin:0 2px;animation:stip 1s infinite}
+.bericht .stip:nth-child(2){animation-delay:.15s}.bericht .stip:nth-child(3){animation-delay:.3s}
+@keyframes stip{50%{opacity:.25;transform:translateY(-2px)}}
+.voorstel{display:grid;gap:6px;margin-top:8px;white-space:normal}
+.vs-dag{display:grid;grid-template-columns:5.6em 1fr auto;gap:8px;align-items:center;padding:6px 9px;border-radius:10px;background:rgba(124,77,255,.18);font-size:.84rem}
+.vs-dag b{font-family:var(--f-num);font-size:.8rem}
+.vs-dag span.min{font-family:var(--f-num);font-weight:700;color:#cdbdff}
+.vs-knoppen{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.vs-knoppen button{padding:7px 12px;font-size:.86rem}
+.lh-tips{display:flex;gap:6px;flex-wrap:wrap}
+.lh-tips button{font-size:.8rem;padding:6px 11px;border-radius:999px;font-weight:700;background:rgba(255,255,255,.05)}
+.lh-invoer{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end}
+.lh-invoer textarea{min-height:46px;max-height:140px;resize:none;font-family:var(--f-body);font-size:.95rem;padding:12px 13px;line-height:1.35}
+.lh-stuur{width:46px;height:46px;padding:0;display:grid;place-items:center;border-radius:14px}
+.lh-stuur svg{width:20px;height:20px;fill:#24120a}
+.vast-form{display:grid;grid-template-columns:1fr auto auto;gap:8px}
+.vast-form input,.vast-form select{padding:8px 10px;min-width:0}
+@media (max-width:980px){.week{grid-template-columns:repeat(2,minmax(0,1fr))}.dagkol{min-height:0}.ag-duo{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:640px){
+  .week{grid-template-columns:minmax(0,1fr);gap:8px}
+  .dagkol{grid-template-rows:auto;grid-template-columns:62px minmax(0,1fr);min-height:0}
+  .dk-kop{flex-direction:column;align-items:center;justify-content:center;gap:0;border-bottom:0;border-right:1px solid var(--line);padding:10px 4px}
+  .dk-kop .dn-lang{display:none}.dk-kop .dn-kort{display:inline}.dk-dat small{display:none}
+  .dk-items{padding:8px}
+  .vast-form{grid-template-columns:1fr 1fr}.vast-form button{grid-column:1/-1}
+  .lh-chat{max-height:360px}
+}
 /* tablet: alleen iconen */
 @media (max-width:980px){
   .app{grid-template-columns:84px minmax(0,1fr)}
@@ -415,6 +489,9 @@ details.set[open]>summary .chev{transform:rotate(90deg)}
   .vstats{justify-content:space-between} .vstats .stat{justify-items:start}
 }
 @media (prefers-reduced-motion:reduce){.view{animation:none}.chev,.tegel,.stat{transition:none}}
+.home-leer{margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+.home-leer h3{margin:0 0 8px;font-size:.95rem}
+.home-leer ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
 </style>
 
 </head>
@@ -503,6 +580,7 @@ details.set[open]>summary .chev{transform:rotate(90deg)}
         <section class="paneel" aria-labelledby="volgKop">
           <div class="paneel-kop"><h2 id="volgKop">Volgende toetsen</h2><a href="#agenda">Naar agenda ›</a></div>
           <ul class="alijst" id="homeVolgende"></ul>
+          <div class="home-leer" id="homeLeerBlok" hidden><h3 id="homeLeerKop">Vandaag leren</h3><ul id="homeLeer"></ul></div>
           <div class="risico" id="homeRisico"></div>
         </section>
         <section class="paneel" aria-labelledby="tlKop">
@@ -527,17 +605,64 @@ details.set[open]>summary .chev{transform:rotate(90deg)}
 
     <!-- AGENDA -->
     <section class="view" data-view="agenda" hidden>
-      <div class="vkop"><span class="eyebrow">Plannen</span><h1>Toetsagenda <span class="small muted" id="agendaAantal"></span></h1><p>Zet je toetsen erin. Bij toetsen die meetellen voor je examen zie je wat je moet halen. Na de toets krijg je een seintje om je cijfer in te vullen.</p></div>
-      <section class="paneel">
-        <form class="aform" id="agendaForm">
-          <label>Datum<input type="date" id="aDatum" required></label>
-          <label>Vak<select id="aVak"></select></label>
-          <label>Toets<select id="aToets"></select></label>
-          <label id="aOmsLabel">Omschrijving<input id="aOms" autocomplete="off" placeholder="Bijvoorbeeld SO hoofdstuk 3"></label>
-          <button type="submit" class="primary">Toevoegen</button>
-        </form>
-      </section>
-      <ul class="alijst" id="agendaLijst"></ul>
+      <div class="vkop"><span class="eyebrow">Plannen</span><h1>Agenda <span class="small muted" id="agendaAantal"></span></h1><p>Je week in één oogopslag: toetsen, leermomenten en vaste afspraken. Laat de Leerhulp je leermomenten inplannen.</p></div>
+
+      <div class="wk-balk">
+        <div class="wk-titel"><b id="wkTitel">Week</b><span class="small muted" id="wkBereik"></span></div>
+        <div class="row">
+          <button type="button" class="wk-knop" id="wkVorige" aria-label="Vorige week">‹</button>
+          <button type="button" id="wkVandaag">Vandaag</button>
+          <button type="button" class="wk-knop" id="wkVolgende" aria-label="Volgende week">›</button>
+        </div>
+      </div>
+      <div class="wk-legenda"><span><i class="lg-toets"></i>Toets</span><span><i class="lg-leer"></i>Leren</span><span><i class="lg-vast"></i>Vaste afspraak</span></div>
+      <div class="week" id="weekGrid"></div>
+
+      <div class="ag-duo">
+        <section class="paneel leerhulp" aria-labelledby="lhKop">
+          <div class="lh-kop">
+            <span class="lh-bot"><svg><use href="#i-ster"/></svg></span>
+            <div><h2 id="lhKop">Leerhulp</h2><span class="small muted" id="lhModus">Je persoonlijke planner</span></div>
+          </div>
+          <div class="lh-chat" id="lhChat" aria-live="polite"></div>
+          <div class="lh-tips" id="lhTips"></div>
+          <form class="lh-invoer" id="lhForm">
+            <textarea id="lhTekst" rows="1" placeholder="Typ je bericht…" aria-label="Bericht aan de Leerhulp"></textarea>
+            <button type="submit" class="primary lh-stuur" aria-label="Versturen"><svg viewBox="0 0 24 24"><path d="M4 12l16-8-6 16-2.5-6.5z"/></svg></button>
+          </form>
+        </section>
+
+        <div class="set-groep ag-zij">
+          <details class="set" id="agToevoegen">
+            <summary><span class="ico g1"><svg><use href="#i-agenda"/></svg></span><span class="set-tekst"><b>Toets toevoegen</b><small>Zet een toets in je agenda</small></span><span class="chev" aria-hidden="true">›</span></summary>
+            <div class="set-body">
+              <form class="aform" id="agendaForm">
+                <label>Datum<input type="date" id="aDatum" required></label>
+                <label>Vak<select id="aVak"></select></label>
+                <label>Toets<select id="aToets"></select></label>
+                <label id="aOmsLabel">Omschrijving<input id="aOms" autocomplete="off" placeholder="Bijvoorbeeld SO hoofdstuk 3"></label>
+                <button type="submit" class="primary">Toevoegen</button>
+              </form>
+            </div>
+          </details>
+          <details class="set" id="agVast">
+            <summary><span class="ico g6"><svg><use href="#i-klok"/></svg></span><span class="set-tekst"><b>Vaste afspraken</b><small id="vastSub">Sport, werk, muziekles</small></span><span class="chev" aria-hidden="true">›</span></summary>
+            <div class="set-body">
+              <p class="small muted" style="margin:0">Op deze dagen plant de Leerhulp geen leermomenten.</p>
+              <form class="vast-form" id="vastForm">
+                <input id="vastNaam" placeholder="Bijvoorbeeld Judo" maxlength="30" autocomplete="off" aria-label="Naam van de afspraak">
+                <select id="vastDag" aria-label="Dag"><option value="1">maandag</option><option value="2">dinsdag</option><option value="3">woensdag</option><option value="4">donderdag</option><option value="5">vrijdag</option><option value="6">zaterdag</option><option value="0">zondag</option></select>
+                <button type="submit">Toevoegen</button>
+              </form>
+              <ul class="alijst" id="vastLijst"></ul>
+            </div>
+          </details>
+          <details class="set" id="agAlle">
+            <summary><span class="ico g2"><svg><use href="#i-boek"/></svg></span><span class="set-tekst"><b>Alle toetsen</b><small id="alleSub">Overzicht en cijfers</small></span><span class="chev" aria-hidden="true">›</span></summary>
+            <div class="set-body"><ul class="alijst" id="agendaLijst"></ul></div>
+          </details>
+        </div>
+      </div>
     </section>
 
     <!-- CIJFERS -->
@@ -827,7 +952,7 @@ function load(){
   try{const oud=localStorage.getItem(OUDE_KEY); if(oud){const o=JSON.parse(oud); if(o&&o.pakket) Object.assign(liam,norm(o),{naam:liam.naam});}}catch(e){}
   return {actief:'l1',leerlingen:{l1:liam}};
 }
-function norm(s){return {naam:String(s.naam||'Leerling').slice(0,40),pakket:Array.isArray(s.pakket)?s.pakket.filter(id=>BY_ID[id]):[],cijfers:s.cijfers||{},ce:s.ce||{},agenda:Array.isArray(s.agenda)?s.agenda:[],tour:!!s.tour,foto:typeof s.foto==='string'&&s.foto.startsWith('data:image/')&&s.foto.length<200000?s.foto:''};}
+function norm(s){return {naam:String(s.naam||'Leerling').slice(0,40),pakket:Array.isArray(s.pakket)?s.pakket.filter(id=>BY_ID[id]):[],cijfers:s.cijfers||{},ce:s.ce||{},agenda:Array.isArray(s.agenda)?s.agenda:[],tour:!!s.tour,vast:Array.isArray(s.vast)?s.vast.filter(v=>v&&v.naam&&v.dag>=0&&v.dag<=6):[],leer:Array.isArray(s.leer)?s.leer.filter(l=>l&&l.datum&&BY_ID[l.vak]):[],foto:typeof s.foto==='string'&&s.foto.startsWith('data:image/')&&s.foto.length<200000?s.foto:''};}
 function save(){DB.leerlingen[DB.actief]=S; if(CLOUD) CLOUD.bewaar(S); else { try{localStorage.setItem(KEY,JSON.stringify(DB));}catch(e){} } document.getElementById('code').value=JSON.stringify(S);}
 
 const r1=x=>Math.round(x*10+1e-9)/10;
@@ -1043,12 +1168,14 @@ function renderAgenda(){
   for(const a of items){ const st=status(a); const {t}=toetsInfo(a);
     const li=document.createElement('li'); li.className='aitem';
     li.innerHTML=`<span class="datum">${datumNL(a.datum)}</span><span class="wat">${aTitel(a)}${nodigBij(a,st)}</span><span class="tag-st ${lab[st][0]}">${lab[st][1]}</span><span class="acties">${!t&&st!=='kom'&&st!=='vandaag'?`<button type="button" data-klaar>${a.klaar?'Terugzetten':'Afvinken'}</button>`:''}<button type="button" data-weg aria-label="Verwijderen uit agenda">Verwijderen</button></span>`;
-    li.querySelector('[data-weg]').addEventListener('click',()=>{S.agenda=S.agenda.filter(x=>x.id!==a.id); save(); renderAgenda();});
+    li.querySelector('[data-weg]').addEventListener('click',()=>{S.agenda=S.agenda.filter(x=>x.id!==a.id); S.leer=S.leer.filter(l=>l.agendaId!==a.id); save(); renderAgenda();});
     const k=li.querySelector('[data-klaar]'); if(k) k.addEventListener('click',()=>{a.klaar=!a.klaar; save(); renderAgenda();});
     lijst.appendChild(li); }
   if(!items.length) lijst.innerHTML='<li class="small muted">Nog geen toetsen gepland. Kies een datum, vak en toets hierboven.</li>';
   const kom=items.filter(a=>['kom','vandaag'].includes(status(a))).length;
   $('agendaAantal').textContent=items.length?`(${kom} aankomend)`:'';
+  if($('alleSub')) $('alleSub').textContent=items.length?`${items.length} toets${items.length>1?'en':''}, waarvan ${kom} aankomend`:'Nog niets gepland';
+  renderWeek(); renderVast(); lhStart(); lhTips();
   // herinneringen
   const open=items.filter(a=>status(a)==='open'); const h=$('herinnerLijst'); h.innerHTML='';
   for(const a of open){ const {t}=toetsInfo(a); const li=document.createElement('li'); li.className='aitem';
@@ -1199,6 +1326,10 @@ function renderHome(){
     const wann=over===0?'Vandaag':over===1?'Morgen':over<7?dt.toLocaleDateString('nl-NL',{weekday:'long'}).replace(/^./,c=>c.toUpperCase()):`Over ${over} dagen`;
     li.innerHTML=`<span class="dagblok ${over<=2?'gauw':''}"><span class="dm">${dt.toLocaleDateString('nl-NL',{month:'short'}).replace('.','')}</span><span class="dn">${dd}</span></span><span class="wat"><span class="wanneer-tag">${wann}</span><br>${aTitel(a)}${nodigBij(a,status(a))}</span>`; ul.appendChild(li); }
   if(!kom.length) ul.innerHTML='<li class="leeg">Geen toetsen gepland. <a href="#agenda">Zet je eerste toets in de agenda</a>.</li>';
+  { const vl=$('homeLeer'); if(vl){ const iso=VANDAAG(); const l=S.leer.filter(x=>x.datum===iso); vl.innerHTML='';
+    for(const x of l){ const li=document.createElement('li'); li.innerHTML=`<label class="wi wi-leer${x.gedaan?' gedaan':''}"><input type="checkbox" ${x.gedaan?'checked':''} aria-label="Leermoment afvinken"><span><b>${BY_ID[x.vak].naam}</b> · ${duurTekst(x.minuten)}<br><small>${esc(x.label)}</small></span></label>`;
+      li.querySelector('input').addEventListener('change',e=>zetGedaan(x.id,e.target.checked)); vl.appendChild(li); }
+    $('homeLeerBlok').hidden=!l.length; $('homeLeerKop').textContent=l.length&&l.every(x=>x.gedaan)?'Vandaag leren · alles klaar!':'Vandaag leren'; } }
   $('homeRisico').innerHTML=UIT.risico||'';
   // mijn vakken
   const vr=$('homeVakken'); vr.innerHTML='';
@@ -1221,13 +1352,293 @@ function renderHome(){
   zet('tileUitslag',UIT.pill?UIT.pill:'');
   zet('tileHerk',$('hkAantal').textContent.replace(/[()]/g,'')||'Nog geen tips');
 }
+// ===== Week, planner en Leerhulp (26-10-2026 MK) =====
+const DAGNAMEN=['zondag','maandag','dinsdag','woensdag','donderdag','vrijdag','zaterdag'];
+const MAANDEN=['januari','februari','maart','april','mei','juni','juli','augustus','september','oktober','november','december'];
+const isoVan=n=>new Date(n*864e5).toISOString().slice(0,10);
+const wdVan=n=>new Date(n*864e5).getUTCDay();
+const kortDatum=iso=>{ const n=dag(iso); return `${DAGNAMEN[wdVan(n)].slice(0,2)} ${Number(iso.slice(8,10))} ${MAANDEN[Number(iso.slice(5,7))-1].slice(0,3)}`; };
+const langDatum=iso=>{ const n=dag(iso); return `${DAGNAMEN[wdVan(n)]} ${Number(iso.slice(8,10))} ${MAANDEN[Number(iso.slice(5,7))-1]}`; };
+function duurTekst(m){ if(m<60) return m+' min'; const u=Math.floor(m/60), r=m%60; return r?`${u} uur en ${r} min`:(u===1?'1 uur':u+' uur'); }
+function duurKort(m){ if(m<60) return m+'m'; const u=Math.floor(m/60), r=m%60; return r?`${u}u${String(r).padStart(2,'0')}`:u+'u'; }
+const kies=a=>a[Math.floor(Math.random()*a.length)];
+const lijstTekst=a=>a.length<2?a.join(''):a.slice(0,-1).join(', ')+' en '+a[a.length-1];
+
+// ---------- weekoverzicht ----------
+let wkOffset=0;
+const maandagVan=n=>n-((wdVan(n)+6)%7);
+function isoWeek(n){ const d=new Date(n*864e5); d.setUTCDate(d.getUTCDate()+3-((d.getUTCDay()+6)%7)); const j=new Date(Date.UTC(d.getUTCFullYear(),0,4)); return 1+Math.round(((d-j)/864e5-3+((j.getUTCDay()+6)%7))/7); }
+function voortgangToets(a){ const l=S.leer.filter(x=>x.agendaId===a.id); return l.length?`${l.filter(x=>x.gedaan).length}/${l.length} leermomenten`:''; }
+function renderWeek(){
+  const g=$('weekGrid'); if(!g) return;
+  const nu=dag(VANDAAG()), ma=maandagVan(nu)+wkOffset*7, zo=ma+6;
+  $('wkTitel').textContent=`Week ${isoWeek(ma)}`+(wkOffset===0?' · deze week':wkOffset===1?' · volgende week':wkOffset===-1?' · vorige week':'');
+  $('wkBereik').textContent=`${Number(isoVan(ma).slice(8))} ${MAANDEN[Number(isoVan(ma).slice(5,7))-1]} t/m ${Number(isoVan(zo).slice(8))} ${MAANDEN[Number(isoVan(zo).slice(5,7))-1]}`;
+  g.innerHTML='';
+  for(let n=ma;n<=zo;n++){
+    const iso=isoVan(n), wd=wdVan(n);
+    const col=document.createElement('div'); col.className='dagkol'+(n===nu?' vandaag':'')+(n<nu?' voorbij':'');
+    let h=`<div class="dk-kop"><b><span class="dn-lang">${DAGNAMEN[wd]}</span><span class="dn-kort">${DAGNAMEN[wd].slice(0,2)}</span></b><span class="dk-dat">${Number(iso.slice(8))}<small>${MAANDEN[Number(iso.slice(5,7))-1].slice(0,3)}</small></span></div><div class="dk-items">`;
+    for(const v of S.vast.filter(v=>v.dag===wd)) h+=`<div class="wi wi-vast"><b>${esc(v.naam)}</b><small>vaste afspraak</small></div>`;
+    for(const a of S.agenda.filter(a=>a.datum===iso)){ const {v,t}=toetsInfo(a); const vt=voortgangToets(a);
+      h+=`<div class="wi wi-toets"><b>${v?v.naam:esc(a.vak)}</b><small>${t?esc(t[2]):esc(a.oms||'Toets')}${vt?' · '+vt:''}</small></div>`; }
+    for(const l of S.leer.filter(l=>l.datum===iso)){ const v=BY_ID[l.vak];
+      h+=`<label class="wi wi-leer${l.gedaan?' gedaan':''}"><input type="checkbox" data-leer="${l.id}" ${l.gedaan?'checked':''} aria-label="Leermoment ${v?v.naam:''} afvinken"><span><b>${v?v.naam:'Leren'}</b><br><small>${duurKort(l.minuten)} · ${esc(l.label)}</small></span></label>`; }
+    if(!h.endsWith('<div class="dk-items">')) h+='</div>'; else h+=`<span class="dk-leeg">Vrij</span></div>`;
+    col.innerHTML=h; g.appendChild(col);
+  }
+  for(const c of g.querySelectorAll('[data-leer]')) c.addEventListener('change',()=>zetGedaan(c.dataset.leer,c.checked));
+}
+function zetGedaan(id,aan){ const l=S.leer.find(x=>x.id===id); if(!l) return; l.gedaan=aan; save(); renderWeek(); renderHome(); }
+function renderVast(){
+  const ul=$('vastLijst'); if(!ul) return; ul.innerHTML='';
+  const lijst=[...S.vast].sort((a,b)=>((a.dag+6)%7)-((b.dag+6)%7));
+  for(const v of lijst){ const li=document.createElement('li'); li.className='aitem';
+    li.innerHTML=`<span class="datum">${DAGNAMEN[v.dag]}</span><span class="wat">${esc(v.naam)}</span><span class="acties"><button type="button">Verwijderen</button></span>`;
+    li.querySelector('button').addEventListener('click',()=>{ S.vast=S.vast.filter(x=>x.id!==v.id); save(); renderAgenda(); }); ul.appendChild(li); }
+  if(!lijst.length) ul.innerHTML='<li class="leeg">Nog geen vaste afspraken.</li>';
+  $('vastSub').textContent=lijst.length?lijst.map(v=>`${v.naam} (${DAGNAMEN[v.dag].slice(0,2)})`).join(', '):'Sport, werk, muziekles';
+}
+
+// ---------- zinsbegrip ----------
+const WD={maandag:1,dinsdag:2,woensdag:3,donderdag:4,vrijdag:5,zaterdag:6,zondag:0};
+const WDRE='(maandag|dinsdag|woensdag|donderdag|vrijdag|zaterdag|zondag)(?:s|en)?';
+const MAANDRE='(januari|februari|maart|april|mei|juni|juli|augustus|september|oktober|november|december|jan|feb|mrt|apr|jun|jul|aug|sep|sept|okt|nov|dec)';
+const VAK_WOORDEN={ne:['nederlands','ned','nl'],en:['engels','eng'],du:['duits'],wi:['wiskunde','wis','wisk'],nask1:['nask1','nask 1','natuurkunde','natuur en scheikunde','nask'],nask2:['nask2','nask 2','scheikunde'],
+ bi:['biologie','bio'],ec:['economie','eco'],ak:['aardrijkskunde','aardrijk','ak'],gs:['geschiedenis','gesch','gs'],ma:['maatschappijleer','maatschappij'],kv1:['ckv','kunstvakken'],te:['tekenen'],
+ pvtt:['pvtt','technologie en toepassing','technologie'],pveo:['pveo'],pvzw:['pvzw','zorg en welzijn'],levo:['levo','levensbeschouwing','levensbeschouwelijke vorming'],lo2:['lo2','lo 2','sportgeschiedenis']};
+const ACTIVITEITEN=['judo','voetbal','voetbaltraining','hockey','tennis','padel','gym','zwemmen','zwemles','training','trainen','werk','werken','bijbaan','muziekles','pianoles','gitaarles','zangles','drumles','dansen','dansles','dans','scouting','korfbal','handbal','basketbal','volleybal','paardrijden','turnen','atletiek','bijles','oppassen','karate','kickboksen','boksen','fitness','golf','sport','sporten','catechisatie','kerk','club','schaken','theater','toneel'];
+const STOP=new Set('ik ik heb heb ga is er een de het en of maar want dan niet geen kan kun wel ook nog al toets toetsen so proefwerk op om te tot naar mijn me met elke iedere iedereen vrij school les uur uren dag dagen week weken avond middag ochtend dus graag zou wil willen'.split(' '));
+const lc=t=>String(t).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+function vakUit(t){
+  const s=' '+lc(t).replace(/[^a-z0-9]+/g,' ')+' '; let beste=null;
+  for(const [id,woorden] of Object.entries(VAK_WOORDEN)) for(const w of woorden){ const i=s.indexOf(' '+w+' '); if(i<0) continue;
+    const score=(S.pakket.includes(id)?100:0)+w.length+(/(toets|so|proefwerk|overhoring|leren)\s+(voor|van)?\s*$/.test(s.slice(0,i+1))?50:0);
+    if(!beste||score>beste.score) beste={id,score}; }
+  return beste?beste.id:null;
+}
+function duurUit(t){
+  t=lc(t); let m;
+  if((m=t.match(/(\d+(?:[.,]\d+)?)\s*(?:uur|uren|uurtjes?|u)\b/))) return Math.round(parseFloat(m[1].replace(',','.'))*60);
+  if((m=t.match(/(\d+)\s*(?:min|minuten|minuutjes|minuut|mins)\b/))) return +m[1];
+  if(/anderhalf\s*uur/.test(t)) return 90;
+  if(/drie\s*kwartier/.test(t)) return 45;
+  if(/half\s*uur|halfuur|half\s*uurtje/.test(t)) return 30;
+  if(/kwartier/.test(t)) return 15;
+  if((m=t.match(/\b(een|twee|drie|vier)\s*(?:uur|uurtje|uren)\b/))) return {een:1,twee:2,drie:3,vier:4}[m[1]]*60;
+  return null;
+}
+function volgendeWd(wd,vanaf){ let n=vanaf+1; while(wdVan(n)!==wd) n++; return n; }
+function datumUit(t,losseDag){
+  t=lc(t); const nu=dag(VANDAAG()); let m;
+  if(/\bovermorgen\b/.test(t)) return {iso:isoVan(nu+2)};
+  if(/\bmorgen\b/.test(t)&&/(toets|so|proefwerk|overhoring)/.test(t)) return {iso:isoVan(nu+1)};
+  if(losseDag&&/\bmorgen\b/.test(t)) return {iso:isoVan(nu+1)};
+  if((m=t.match(/over\s+(\d+|een|twee|drie|vier)\s+(dag|dagen|week|weken)/))){ const g={een:1,twee:2,drie:3,vier:4}[m[1]]||+m[1]; return {iso:isoVan(nu+g*(/week/.test(m[2])?7:1))}; }
+  if((m=t.match(/\b(\d{1,2})[-/](\d{1,2})(?:[-/](\d{2,4}))?\b/))){ const r=maakIso(+m[1],+m[2],m[3]); if(r) return {iso:r}; }
+  if((m=t.match(new RegExp('\\b(\\d{1,2})\\s*'+MAANDRE)))){ const mi=['jan','feb','maa','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec']; let k=m[2].slice(0,3); if(k==='maa') k='mrt';
+    const idx={jan:1,feb:2,mrt:3,apr:4,mei:5,jun:6,jul:7,aug:8,sep:9,okt:10,nov:11,dec:12}[k]; const r=maakIso(+m[1],idx); if(r) return {iso:r}; }
+  const dagRe=new RegExp('(volgende week\\s+)?(?:op\\s+)?'+WDRE);
+  const ctx=new RegExp('(toets|so|proefwerk|overhoring)[^.,]{0,30}?(volgende week\\s+)?(?:op\\s+)?'+WDRE+'|'+WDRE+'\\s+(?:heb ik\\s+)?(?:een\\s+|mijn\\s+)?(toets|so|proefwerk|overhoring)|(volgende week)\\s+'+WDRE);
+  if((m=t.match(ctx))||(losseDag&&(m=t.match(dagRe)))){
+    const woord=(m[3]||m[4]||m[7]||m[2]||m[1]||'').replace(/(s|en)$/,''); const wd=WD[woord]; if(wd==null) return null;
+    const volgendeWeek=/volgende week/.test(m[0]);
+    let n=volgendeWd(wd,nu); if(volgendeWeek){ const maVolg=maandagVan(nu)+7; n=maVolg+((wd+6)%7); }
+    return {iso:isoVan(n),wd};
+  }
+  return null;
+}
+function maakIso(d,m,j){ if(m<1||m>12||d<1||d>31) return null; const nu=new Date(); let y=j?(+j<100?2000+ +j:+j):nu.getFullYear();
+  let iso=`${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`; if(!j&&dag(iso)<dag(VANDAAG())-1){ y++; iso=`${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`; } return iso; }
+function dagenUit(t,datumWd){
+  t=lc(t); const blok=new Set(); let alleen=null;
+  const am=t.match(new RegExp('(?:alleen|enkel|wel)\\s+(?:op\\s+)?(?:de\\s+)?((?:'+WDRE+'(?:\\s*(?:,|en|of)\\s*)?)+)'));
+  if(am){ alleen=new Set(); for(const w of am[1].matchAll(new RegExp(WDRE,'g'))) alleen.add(WD[w[1]]); }
+  if(/door de week|doordeweeks/.test(t)&&/(alleen|enkel)/.test(t)) alleen=new Set([1,2,3,4,5]);
+  if(/(niet|geen)[^.]{0,25}weekend|weekend[^.]{0,20}(niet|vrij|geen|nooit)/.test(t)){ blok.add(0); blok.add(6); }
+  for(const w of t.matchAll(new RegExp(WDRE,'g'))){ const wd=WD[w[1]]; if(wd===datumWd) continue; if(alleen&&alleen.has(wd)) continue; blok.add(wd); }
+  return {blok,alleen};
+}
+function activiteitenUit(t){
+  t=lc(t); const uit=[], zie=new Set();
+  const voeg=(naam,woord)=>{ naam=naam.replace(/[^a-z]/g,''); const wd=WD[woord.replace(/(s|en)$/,'')]; if(!naam||wd==null||STOP.has(naam)||vakUit(naam)&&!ACTIVITEITEN.includes(naam)) return;
+    if(!ACTIVITEITEN.includes(naam)&&naam.length<3) return; const k=naam+wd; if(zie.has(k)) return; zie.add(k); uit.push({naam:naam.charAt(0).toUpperCase()+naam.slice(1),dag:wd}); };
+  for(const m of t.matchAll(new RegExp(WDRE+'\\s+(?:avond\\s+|middag\\s+)?(?:heb ik|heb|ga ik naar|ga ik|moet ik naar|is er|is)?\\s*([a-z]+)','g'))){ if(ACTIVITEITEN.includes(m[2])||/heb ik|ga ik|moet ik/.test(m[0])) voeg(m[2],m[1]); }
+  for(const m of t.matchAll(new RegExp('\\b([a-z]+)\\s+(?:op|elke|iedere)\\s+'+WDRE,'g'))){ if(ACTIVITEITEN.includes(m[1])) voeg(m[1],m[2]); }
+  return uit;
+}
+function eerstvolgendeToets(vak){ const nu=VANDAAG(); return [...S.agenda].filter(a=>a.vak===vak&&a.datum>nu).sort((a,b)=>a.datum.localeCompare(b.datum))[0]||null; }
+
+// ---------- planner ----------
+function maakPlan(vak,toetsIso,min,blok,alleen,agendaId){
+  const nu=dag(VANDAAG()), eind=dag(toetsIso);
+  if(eind<=nu) return {fout:'voorbij'};
+  const vastDagen=new Set(S.vast.map(v=>v.dag)), weg=new Map();
+  let dagen=[];
+  for(let n=nu;n<eind;n++){ const wd=wdVan(n);
+    if(alleen){ if(!alleen.has(wd)){ continue; } }
+    else if(blok.has(wd)||vastDagen.has(wd)){ weg.set(wd,(S.vast.find(v=>v.dag===wd)||{}).naam||''); continue; }
+    dagen.push(n); }
+  if(dagen[0]===nu&&new Date().getHours()>=20) dagen.shift();
+  if(!dagen.length) return {fout:'geen_dagen'};
+  const MAX=14; if(dagen.length>MAX) dagen=dagen.slice(-MAX);
+  const k=dagen.length;
+  const fase=i=>k===1?'Alles herhalen en overhoren':i===k-1?'Herhalen en overhoren':(i/(k-1))<0.34?'Stof doorlezen':(i/(k-1))<0.67?'Samenvatten en begrippen':'Oefenen met opgaven';
+  const druk=[];
+  const items=dagen.map((n,i)=>{ const iso=isoVan(n); const al=S.leer.filter(l=>l.datum===iso&&l.agendaId!==agendaId).reduce((s,l)=>s+l.minuten,0); if(al+min>240) druk.push(iso); return {datum:iso,minuten:min,label:fase(i)}; });
+  return {vak,toetsIso,min,items,weg,druk};
+}
+
+// ---------- leerhulp chat ----------
+let lhLog=[], lhCtx={}, lhVoorstel=null, lhGestart=false;
+function lhStart(){
+  if(lhGestart) return; lhGestart=true;
+  const naam=String(S.naam||'').split(' ')[0]; const hoi=naam&&naam!=='Leerling'?`Hoi ${naam}! `:'Hoi! ';
+  const t=eerstvolgendeToetsAlgemeen();
+  lhBot(hoi+'Ik ben je Leerhulp. Vertel me voor welke toets je wilt leren, hoeveel tijd per dag, en welke dagen je niet kunt. Dan plan ik je leermomenten in.'+(t?`\n\nIk zie dat je ${langDatum(t.datum)} een toets ${(BY_ID[t.vak]||{}).naam||''} hebt. Zal ik die inplannen?`:''),{direct:true});
+  lhTips();
+}
+function eerstvolgendeToetsAlgemeen(){ const nu=VANDAAG(); return [...S.agenda].filter(a=>a.datum>nu&&BY_ID[a.vak]).sort((a,b)=>a.datum.localeCompare(b.datum))[0]||null; }
+function lhTips(){
+  const el=$('lhTips'); if(!el) return; el.innerHTML='';
+  const t=eerstvolgendeToetsAlgemeen(); const tips=[];
+  if(t) tips.push(`Plan ${BY_ID[t.vak].naam} in, 1 uur per dag`);
+  tips.push('Wat moet ik vandaag doen?','Geef me een leertip');
+  if(!S.vast.length) tips.push('Op donderdag heb ik judo');
+  for(const x of tips){ const b=document.createElement('button'); b.type='button'; b.textContent=x; b.addEventListener('click',()=>lhVerstuur(x)); el.appendChild(b); }
+}
+function lhScroll(){ const c=$('lhChat'); if(c) c.scrollTop=c.scrollHeight; }
+function lhIk(tekst){ const c=$('lhChat'); const d=document.createElement('div'); d.className='bericht ik'; d.textContent=tekst; c.appendChild(d); lhScroll(); }
+function lhBot(tekst,opt={}){
+  const c=$('lhChat'); if(!c) return;
+  const toon=()=>{ const d=document.createElement('div'); d.className='bericht bot'; d.textContent=tekst;
+    if(opt.voorstel){ const v=document.createElement('div'); v.className='voorstel';
+      v.innerHTML=opt.voorstel.items.map(i=>`<div class="vs-dag"><b>${kortDatum(i.datum)}</b><span>${esc(i.label)}</span><span class="min">${duurKort(i.minuten)}</span></div>`).join(''); d.appendChild(v); }
+    if(opt.knoppen&&opt.knoppen.length){ const k=document.createElement('div'); k.className='vs-knoppen';
+      for(const kn of opt.knoppen){ const b=document.createElement('button'); b.type='button'; b.textContent=kn.label; if(kn.primair) b.className='primary';
+        b.addEventListener('click',()=>{ k.querySelectorAll('button').forEach(x=>x.disabled=true); kn.actie(); }); k.appendChild(b); } d.appendChild(k); }
+    c.appendChild(d); lhScroll(); };
+  if(opt.direct) return toon();
+  const denk=document.createElement('div'); denk.className='bericht bot denk'; denk.innerHTML='<span class="stip"></span><span class="stip"></span><span class="stip"></span>'; c.appendChild(denk); lhScroll();
+  setTimeout(()=>{ denk.remove(); toon(); }, Math.min(1400, 450+tekst.length*6));
+}
+function lhVerstuur(tekst){ tekst=String(tekst||'').trim(); if(!tekst) return; lhIk(tekst); setTimeout(()=>lhBegrijp(tekst),60); }
+function lhBegrijp(raw){
+  const t=lc(raw);
+  // vervolg op een vraag van de bot
+  if(lhCtx.wacht){
+    const w=lhCtx.wacht; delete lhCtx.wacht;
+    if(w==='datum'){ const d=datumUit(raw,true); if(d){ lhCtx.datum=d.iso; return lhPlan(); } }
+    if(w==='duur'){ const m=duurUit(raw)||(/^\s*\d+\s*$/.test(raw)?(+raw<=6?+raw*60:+raw):null); if(m){ lhCtx.min=m; return lhPlan(); } }
+    if(w==='vak'){ const v=vakUit(raw); if(v){ lhCtx.vak=v; return lhPlan(); } }
+  }
+  if(/^(hoi|hallo|hey|hee|hi|yo|goedemorgen|goedemiddag|goedenavond|hoe gaat het)\b/.test(t)&&t.length<30) return lhBot(kies(['Hoi! Waar kan ik je mee helpen? Je kunt me bijvoorbeeld vragen om een toets in te plannen.','Hey! Zin om te plannen? Vertel me welke toets eraan komt.','Hallo! Ik sta klaar. Welke toets zullen we voorbereiden?']));
+  if(/(bedankt|dankje|dank je|thanks|thx|top|super|nice|chill|lekker|cool)\b/.test(t)&&t.length<40) return lhBot(kies(['Graag gedaan! Succes met leren.','Geen probleem. Jij kan dit!','Fijn dat ik kon helpen. Vergeet niet je leermomenten af te vinken.']));
+  if(/(help|wat kan je|wat kun je|hoe werkt)/.test(t)) return lhBot('Ik kan:\n• leermomenten inplannen voor een toets ("plan 2 uur per dag voor Nederlands, op donderdag kan ik niet")\n• vertellen wat je vandaag of morgen moet doen\n• vaste afspraken onthouden ("op maandag heb ik gym")\n• een planning weghalen ("verwijder de planning voor Engels")\n• leertips geven als je even vastzit');
+  if(/(geen zin|\bmoe\b|stress|zenuw|lukt (me )?niet|\bbang\b|zwaar|te veel|teveel)/.test(t)&&!/(plan|toets)/.test(t)) return lhBot(kies(['Dat is heel normaal, vooral in een toetsweek. Begin klein: zet een timer op 25 minuten en doe alleen het eerste stukje. Vaak komt de zin vanzelf als je eenmaal bezig bent.','Snap ik. Probeer het op te knippen: 25 minuten leren, 5 minuten pauze. Na vier rondes neem je een langere pauze. Zal ik je planning wat lichter maken?','Je doet het al goed door te plannen. Kies vandaag één ding en vink het af. Elke stap telt.']));
+  if(/(tip|hoe leer|hoe kan ik (beter )?leren|hoe moet ik leren|leertip)/.test(t)) return lhBot(kies(['Leertip: overhoor jezelf in plaats van alleen teruglezen. Dek de antwoorden af, of laat iemand je overhoren. Dat onthoud je veel beter.','Leertip: werk met blokjes van 25 minuten en 5 minuten pauze (de pomodoro methode). Telefoon in een andere kamer helpt enorm.','Leertip: leer een beetje elke dag in plaats van alles op de laatste avond. Je brein onthoudt het beter als je het vaker terugziet.','Leertip: maak na elk hoofdstuk een mini samenvatting van 5 regels in je eigen woorden. Lukt dat, dan snap je het.']));
+  if(/(verwijder|wis|haal\b.*weg|annuleer|stop\b|schrap)/.test(t)&&/(planning|leermoment|leren|plan)/.test(t)){
+    const v=vakUit(raw); const nu=VANDAAG(); const voor=S.leer.length;
+    if(/(alles|alle)/.test(t)&&!v) S.leer=S.leer.filter(l=>l.gedaan||l.datum<nu); else if(v) S.leer=S.leer.filter(l=>l.vak!==v||l.gedaan||l.datum<nu);
+    else return lhBot('Van welk vak zal ik de planning weghalen? Zeg bijvoorbeeld "verwijder de planning voor Engels".');
+    const weg=voor-S.leer.length; save(); renderAgenda(); renderHome();
+    return lhBot(weg?`Klaar, ik heb ${weg} leermoment${weg>1?'en':''} weggehaald${v?' voor '+BY_ID[v].naam:''}.`:'Daar stond geen planning voor die ik kon weghalen.');
+  }
+  if(/(vandaag)/.test(t)&&!/(plan|toets)/.test(t)) return lhDag(VANDAAG(),'vandaag');
+  if(/(wat|welke|moet ik).*morgen|^morgen\??$/.test(t)&&!/(plan|toets)/.test(t)) return lhDag(isoVan(dag(VANDAAG())+1),'morgen');
+  if(/(deze week|mijn week|overzicht)/.test(t)&&/(wat|laat|toon|geef)/.test(t)) return lhWeek();
+
+  // planning of vaste afspraken
+  const acts=activiteitenUit(raw), vak=vakUit(raw), min=duurUit(raw);
+  const d=datumUit(raw,false), dg=dagenUit(raw,d&&d.wd);
+  const planWoorden=/(plan|toets|so\b|proefwerk|overhoring|leren|leer|studeren|oefenen|voorbereiden|inplannen)/.test(t);
+  if(acts.length&&!vak&&!min&&!planWoorden) return lhVast(acts);
+  if(vak||min||planWoorden||d){
+    lhCtx={vak:vak||lhCtx.vak, min:min||lhCtx.min, datum:d?d.iso:lhCtx.datum, blok:dg.blok.size?dg.blok:(lhCtx.blok||new Set()), alleen:dg.alleen||lhCtx.alleen||null, acts:acts.length?acts:(lhCtx.acts||[])};
+    return lhPlan();
+  }
+  lhBot(kies(['Hmm, dat snap ik nog niet helemaal. Probeer bijvoorbeeld: "Plan 1 uur per dag voor wiskunde, in het weekend kan ik niet."','Sorry, die begrijp ik niet. Je kunt me vragen een toets in te plannen, of "wat moet ik vandaag doen?"']));
+}
+function lhPlan(){
+  const c=lhCtx;
+  if(!c.vak){ c.wacht='vak'; return lhBot(kies(['Voor welk vak wil je leren?','Leuk! Voor welk vak is de toets?'])); }
+  const v=BY_ID[c.vak]; let ag=null;
+  if(!c.datum){ ag=eerstvolgendeToets(c.vak); if(ag) c.datum=ag.datum; }
+  else ag=S.agenda.find(a=>a.vak===c.vak&&a.datum===c.datum)||null;
+  if(!c.datum){ c.wacht='datum'; return lhBot(`Wanneer is je toets ${v.naam}? Je mag een datum noemen ("4 november") of een dag ("volgende week dinsdag").`); }
+  if(!c.min){ c.wacht='duur'; return lhBot(kies([`Hoeveel tijd wil je per dag aan ${v.naam} besteden? Bijvoorbeeld 45 minuten of 1 uur.`,`Hoe lang wil je per dag leren voor ${v.naam}?`])); }
+  if(c.min<10) c.min=10; if(c.min>240) c.min=240;
+  const p=maakPlan(c.vak,c.datum,c.min,c.blok||new Set(),c.alleen,ag&&ag.id);
+  if(p.fout==='voorbij'){ delete c.datum; c.wacht='datum'; return lhBot('Die datum is al geweest of is vandaag. Wanneer is de toets precies?'); }
+  if(p.fout==='geen_dagen') return lhBot('Er blijft geen dag over om te leren voor deze toets. Misschien kun je op een van je vrije dagen toch een uurtje?');
+  lhVoorstel={...p,agendaId:ag&&ag.id,nieuweToets:!ag,acts:c.acts||[]};
+  let tekst=kies(['Top, hier is mijn voorstel','Oké, dit is je planning','Ik heb het uitgerekend. Zo zou ik het doen'])+` voor ${v.naam} (toets op ${langDatum(c.datum)}), ${duurTekst(c.min)} per dag:`;
+  const wegTekst=[...p.weg.entries()].map(([wd,naam])=>DAGNAMEN[wd]+(naam?` (${naam})`:''));
+  if(wegTekst.length) tekst+=`\nIk sla ${lijstTekst(wegTekst)} over.`;
+  if(c.alleen) tekst+=`\nAlleen op ${lijstTekst([...c.alleen].map(w=>DAGNAMEN[w]))}, zoals je vroeg.`;
+  if(p.druk.length) tekst+=`\nLet op: op ${lijstTekst(p.druk.map(kortDatum))} wordt het samen met andere vakken meer dan 4 uur.`;
+  if(!ag) tekst+=`\nDeze toets stond nog niet in je agenda, die zet ik er ook in.`;
+  lhBot(tekst,{voorstel:p,knoppen:[
+    {label:'Inplannen',primair:true,actie:lhAkkoord},
+    {label:'Andere tijd per dag',actie:()=>{ lhCtx.min=null; lhCtx.wacht='duur'; lhBot('Hoeveel tijd per dag wil je dan leren?'); }},
+    {label:'Laat maar',actie:()=>{ lhVoorstel=null; lhBot(kies(['Prima, ik plan niets in.','Oké, geen probleem.'])); }}]});
+}
+function lhAkkoord(){
+  const p=lhVoorstel; if(!p) return;
+  let agId=p.agendaId;
+  if(!agId){ agId='a'+Date.now(); S.agenda.push({id:agId,datum:p.toetsIso,vak:p.vak,toets:'',oms:'Toets',klaar:false}); }
+  const nu=VANDAAG();
+  S.leer=S.leer.filter(l=>!(l.agendaId===agId&&!l.gedaan&&l.datum>=nu));
+  p.items.forEach((i,k)=>S.leer.push({id:'l'+Date.now()+k,agendaId:agId,vak:p.vak,datum:i.datum,minuten:i.minuten,label:i.label,gedaan:false}));
+  save(); lhVoorstel=null; lhCtx={};
+  const eerste=p.items[0].datum, wkNodig=Math.floor((maandagVan(dag(eerste))-maandagVan(dag(nu)))/7); wkOffset=Math.max(0,wkNodig);
+  renderAgenda(); renderHome();
+  const nieuweActs=(p.acts||[]).filter(a=>!S.vast.some(v=>v.dag===a.dag&&lc(v.naam)===lc(a.naam)));
+  lhBot(kies(['Ingepland!','Staat erin!','Gepland!'])+` Je ziet de ${p.items.length} leermomenten nu in je week. Vink ze af als je klaar bent, dan zie je hoe ver je bent.`,
+    nieuweActs.length?{knoppen:[{label:`Zet ${lijstTekst(nieuweActs.map(a=>`${a.naam.toLowerCase()} (${DAGNAMEN[a.dag]})`))} vast in mijn week`,primair:true,actie:()=>lhVastOpslaan(nieuweActs)},{label:'Niet nodig',actie:()=>lhBot('Oké!')}]}:{});
+  lhTips();
+}
+function lhVast(acts){
+  const nieuw=acts.filter(a=>!S.vast.some(v=>v.dag===a.dag&&lc(v.naam)===lc(a.naam)));
+  if(!nieuw.length) return lhBot('Die staat al in je vaste afspraken.');
+  lhBot(`Zal ik ${lijstTekst(nieuw.map(a=>`${a.naam.toLowerCase()} op ${DAGNAMEN[a.dag]}`))} vast in je week zetten? Dan plan ik op die dag${nieuw.length>1?'en':''} geen leermomenten.`,
+    {knoppen:[{label:'Ja, zet vast',primair:true,actie:()=>lhVastOpslaan(nieuw)},{label:'Nee',actie:()=>lhBot('Oké, ik onthoud het niet.')}]});
+}
+function lhVastOpslaan(acts){ for(const a of acts) S.vast.push({id:'v'+Date.now()+Math.random().toString(36).slice(2,5),naam:a.naam,dag:a.dag}); save(); renderAgenda(); lhBot(kies(['Opgeslagen. Daar houd ik voortaan rekening mee.','Staat in je vaste afspraken!'])); lhTips(); }
+function lhDag(iso,woord){
+  const leer=S.leer.filter(l=>l.datum===iso), toetsen=S.agenda.filter(a=>a.datum===iso);
+  const gisteren=woord==='vandaag'?S.leer.filter(l=>l.datum<iso&&!l.gedaan&&dag(l.datum)>=dag(iso)-3):[];
+  let tekst='';
+  if(toetsen.length) tekst+=`${woord.charAt(0).toUpperCase()+woord.slice(1)} heb je een toets: ${lijstTekst(toetsen.map(a=>{const {v}=toetsInfo(a); return v?v.naam:a.vak;}))}. Succes!\n`;
+  if(leer.length){ tekst+=`${toetsen.length?'Verder':woord.charAt(0).toUpperCase()+woord.slice(1)} staat op je planning:\n`+leer.map(l=>`${l.gedaan?'✓':'•'} ${BY_ID[l.vak].naam}: ${duurTekst(l.minuten)}, ${l.label.toLowerCase()}`).join('\n');
+    const tot=leer.filter(l=>!l.gedaan).reduce((s,l)=>s+l.minuten,0); if(tot) tekst+=`\nSamen nog ${duurTekst(tot)}.`; else tekst+='\nAlles is al afgevinkt. Goed bezig!'; }
+  else if(!toetsen.length) tekst+=kies([`${woord.charAt(0).toUpperCase()+woord.slice(1)} staat er niets gepland. Lekker vrij!`,`Niets op de planning voor ${woord}. Wil je vooruit werken?`]);
+  if(gisteren.length) tekst+=`\n\nEr ${gisteren.length>1?'zijn':'is'} nog ${gisteren.length} leermoment${gisteren.length>1?'en':''} van de afgelopen dagen niet afgevinkt.`;
+  lhBot(tekst.trim());
+}
+function lhWeek(){ const nu=dag(VANDAAG()); const reg=[];
+  for(let n=nu;n<nu+7;n++){ const iso=isoVan(n); const l=S.leer.filter(x=>x.datum===iso), a=S.agenda.filter(x=>x.datum===iso);
+    if(l.length||a.length) reg.push(`${kortDatum(iso)}: `+[...a.map(x=>'toets '+((BY_ID[x.vak]||{}).naam||'')),...l.map(x=>`${(BY_ID[x.vak]||{}).naam} ${duurKort(x.minuten)}`)].join(', ')); }
+  lhBot(reg.length?'Dit staat er de komende 7 dagen op:\n'+reg.join('\n'):'De komende 7 dagen staat er nog niets gepland.'); }
+
+function initPlanner(){
+  $('wkVorige').addEventListener('click',()=>{ wkOffset--; renderWeek(); });
+  $('wkVolgende').addEventListener('click',()=>{ wkOffset++; renderWeek(); });
+  $('wkVandaag').addEventListener('click',()=>{ wkOffset=0; renderWeek(); });
+  $('vastForm').addEventListener('submit',e=>{ e.preventDefault(); const n=$('vastNaam').value.trim(); if(!n){ $('vastNaam').focus(); return; }
+    S.vast.push({id:'v'+Date.now(),naam:n.slice(0,30),dag:+$('vastDag').value}); $('vastNaam').value=''; save(); renderAgenda(); });
+  $('lhForm').addEventListener('submit',e=>{ e.preventDefault(); const v=$('lhTekst').value; $('lhTekst').value=''; $('lhTekst').style.height=''; lhVerstuur(v); });
+  $('lhTekst').addEventListener('keydown',e=>{ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); $('lhForm').requestSubmit(); } });
+  $('lhTekst').addEventListener('input',e=>{ e.target.style.height='auto'; e.target.style.height=Math.min(140,e.target.scrollHeight)+'px'; });
+}
+
 // Rondleiding
 const TOUR=[
  {ico:'home',kl:'g2',titel:n=>`Welkom${n?', '+n:''}!`,tekst:'Met deze app houd je je examencijfers bij en zie je of je op koers ligt om te slagen. In een paar stappen laten we zien waar alles staat.'},
  {ico:'inst',kl:'g6',nav:'instellingen',titel:()=>'Kies je vakken',tekst:'Begin bij Instellingen. Vink daar de vakken aan die jij hebt. Dan weet de app welke toetsen bij jou horen.'},
  {ico:'cijfers',kl:'g2',nav:'cijfers',titel:()=>'Cijfers invullen',tekst:'Na een toets vul je hier je cijfer in. De app rekent meteen je gemiddelde uit, en wat je op het eindexamen nodig hebt.'},
  {ico:'magister',kl:'g5',nav:'magister',titel:()=>'Snel uit Magister',tekst:'Geen zin om alles over te typen? Kopieer je cijferoverzicht uit Magister en plak het hier. De app vult alles zelf in.'},
- {ico:'agenda',kl:'g1',nav:'agenda',titel:()=>'Toetsagenda',tekst:'Zet je toetsen in de agenda. Je ziet welk cijfer je moet halen, en na de toets krijg je een seintje om je cijfer in te vullen.'},
+ {ico:'agenda',kl:'g1',nav:'agenda',titel:()=>'Toetsagenda',tekst:'Zet je toetsen in de agenda en bekijk je hele week in één oogopslag. Vertel de Leerhulp wanneer je toets is en wanneer je kunt, dan plant hij je leermomenten in.'},
  {ico:'uitslag',kl:'g3',nav:'uitslag',titel:()=>'Ga ik slagen?',tekst:'Hier zie je of je met je cijfers van nu zou slagen, en bij welke vakken je extra moet opletten.'},
  {ico:'herk',kl:'g4',nav:'herkansen',titel:()=>'Slim herkansen',tekst:'Je mag drie toetsen opnieuw maken. Hier zie je bij welke toetsen dat het meeste oplevert.'},
  {ico:'ster',kl:'g1',nav:'instellingen',titel:()=>'Snap je een woord niet?',tekst:'Bij Instellingen staat een lijst met alle afkortingen, zoals SE, CE en PTA. Deze rondleiding kun je daar ook opnieuw bekijken.'},
@@ -1288,6 +1699,7 @@ $('mgToepas').addEventListener('click',()=>{ for(const m of mgVoorstel){ S.cijfe
   S.pakket.sort((a,b)=>VAKKEN.indexOf(BY_ID[a])-VAKKEN.indexOf(BY_ID[b]));
   const n=mgVoorstel.length; mgVoorstel=[]; save(); renderAll(); $('mgResultaat').hidden=true; $('mgTekst').value=''; $('mgMelding').textContent=`${n} cijfers opgeslagen.`; });
 $('beheer').open=false;
+initPlanner();
 $('fotoInput').addEventListener('change',async e=>{ const f=e.target.files&&e.target.files[0]; const m=$('fotoMelding'); m.style.color=''; if(!f) return;
   m.textContent='Bezig…';
   try{ S.foto=await maakFoto(f); save(); renderAvatars(); m.textContent='Profielfoto opgeslagen.'; m.style.color='var(--ok)'; }

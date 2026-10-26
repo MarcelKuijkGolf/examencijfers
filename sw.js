@@ -1,5 +1,5 @@
 // Eerst netwerk, bij geen verbinding de laatst bewaarde versie
-const CACHE = 'examencijfers-v7';
+const CACHE = 'examencijfers-v8';
 const CDN = ['https://cdn.jsdelivr.net', 'https://fonts.googleapis.com', 'https://fonts.gstatic.com'];
 self.addEventListener('install', e => { self.skipWaiting(); });
 self.addEventListener('activate', e => { e.waitUntil(self.clients.claim()); });
