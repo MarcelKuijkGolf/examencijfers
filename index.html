@@ -264,6 +264,19 @@ footer{font-size:.8rem;color:var(--dim);max-width:80ch}
 .im-lijst button span{font-weight:400;font-size:.85rem;color:var(--muted)}
 .sync{font-size:.76rem;color:var(--muted)}
 .sync[data-k="ok"]{color:var(--ok)} .sync[data-k="fout"]{color:var(--warn)}
+.avatar{flex:none;border-radius:50%;overflow:hidden;display:grid;place-items:center;padding:0;border:2px solid rgba(255,255,255,.25);background:linear-gradient(135deg,var(--violet),var(--pink));color:#fff;font-family:var(--f-display);font-weight:800;cursor:pointer;background-size:cover;background-position:center}
+.avatar.foto{background-image:var(--foto);color:transparent}
+.av-side{width:52px;height:52px;font-size:1.2rem}
+.av-hero{width:56px;height:56px;font-size:1.3rem;border-color:rgba(255,255,255,.5);box-shadow:0 6px 20px rgba(0,0,0,.3)}
+.av-groot{width:96px;height:96px;font-size:2.1rem;cursor:default}
+button.avatar:hover{border-color:var(--accent);filter:none;background-color:transparent}
+.hero-naam{display:flex;align-items:center;gap:14px;min-width:0}
+.hero-naam h1{min-width:0}
+.foto-rij{display:flex;flex-wrap:wrap;gap:18px;align-items:center}
+label.knop{display:inline-block;font-weight:700;border-radius:10px;padding:8px 14px;cursor:pointer}
+label.knop.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#24120a}
+label.knop:focus-within{outline:2px solid var(--accent);outline-offset:2px}
+.verborgen{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
 #wieLokaal,#wieCloud{display:grid;gap:4px;min-width:0}
 #wieCloud b{display:block;line-height:1.2;overflow-wrap:anywhere}
 #wieCloud .sync{display:block;margin-bottom:6px}
@@ -297,7 +310,9 @@ dl.begrip dd{margin:2px 0 0;font-size:.88rem;color:var(--muted)}
 @media (max-width:980px){
   .app{grid-template-columns:84px minmax(0,1fr)}
   .side{padding:18px 10px;align-items:center}
-  .merk div,.nav a span.lbl,.side .wie{display:none}
+  .merk div,.nav a span.lbl,.side .wie #wieLokaal,.side .wie #wieCloud{display:none}
+  .side .wie{padding:0;background:none;border:0;justify-items:center}
+  .av-side{width:44px;height:44px}
   .nav a{justify-content:center;padding:6px}
   .nav a .badge{position:absolute;top:0;right:4px}
   .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -321,6 +336,7 @@ dl.begrip dd{margin:2px 0 0;font-size:.88rem;color:var(--muted)}
   .hero{grid-template-columns:minmax(0,1fr) 92px;gap:14px;padding:20px;align-items:start}
   .hero h1{font-size:1.65rem}
   .hero .uitleg,.hero .ster{display:none}
+  .av-hero{width:44px;height:44px;font-size:1.05rem}
   .ring{width:92px;height:92px} .ring svg{width:92px;height:92px} .ring .midden b{font-size:1.25rem} .ring .midden span{font-size:.58rem}
   .tegel{padding:14px} .tegel .ico{width:40px;height:40px}
   .stats{gap:10px} .stat .v{font-size:1.7rem}
@@ -357,6 +373,7 @@ dl.begrip dd{margin:2px 0 0;font-size:.88rem;color:var(--muted)}
       <a href="#instellingen" data-nav="instellingen"><span class="ico"><svg><use href="#i-inst"/></svg></span><span class="lbl">Instellingen</span></a>
     </nav>
     <div class="wie">
+      <button type="button" class="avatar av-side" data-av aria-label="Profielfoto wijzigen" data-naar="instellingen"></button>
       <div id="wieLokaal"><span class="eyebrow">Leerling</span><select id="leerlingKeuze" aria-label="Kies leerling"></select></div>
       <div id="wieCloud" hidden><span class="eyebrow">Ingelogd als</span><b id="wieNaam"></b><span class="sync" id="syncStatus"></span><button type="button" class="uitlog">Uitloggen</button></div>
     </div>
@@ -373,7 +390,7 @@ dl.begrip dd{margin:2px 0 0;font-size:.88rem;color:var(--muted)}
         <span class="ster" style="top:24px;right:24px;opacity:.6;color:#ffd08a"><svg width="12" height="12"><use href="#i-ster"/></svg></span>
         <div class="hero-tekst">
           <span class="datum-kop" id="homeDatum"></span>
-          <h1 id="homeNaam">Welkom</h1>
+          <div class="hero-naam"><button type="button" class="avatar av-hero" data-av aria-label="Profielfoto wijzigen" data-naar="instellingen"></button><h1 id="homeNaam">Welkom</h1></div>
           <div class="statusregel"><b id="homeStatus"></b><span class="pill" id="homePill"></span></div>
           <p class="uitleg" id="homeUitleg"></p>
         </div>
@@ -494,6 +511,21 @@ dl.begrip dd{margin:2px 0 0;font-size:.88rem;color:var(--muted)}
     <!-- INSTELLINGEN -->
     <section class="view" data-view="instellingen" hidden>
       <div class="vkop"><span class="eyebrow">Instellingen</span><h1 id="naamKop">Examencijfers</h1><p>Ichthus College Dronten · vmbo TL · PTA cohort 2025-2027</p></div>
+      <section class="paneel" id="fotoPaneel">
+        <h2>Profielfoto</h2>
+        <div class="foto-rij">
+          <span class="avatar av-groot" data-av aria-hidden="true"></span>
+          <div style="display:grid;gap:8px;min-width:0">
+            <p class="small muted" style="margin:0">Kies een foto van je telefoon of computer. De app maakt hem zelf vierkant en klein.</p>
+            <div class="row">
+              <label class="knop primary" for="fotoInput">Foto kiezen</label>
+              <input type="file" id="fotoInput" accept="image/*" class="verborgen">
+              <button type="button" id="fotoWeg">Verwijderen</button>
+            </div>
+            <span class="small" id="fotoMelding" role="status"></span>
+          </div>
+        </div>
+      </section>
       <section class="paneel" id="accountPaneel" hidden>
         <h2>Account</h2>
         <p style="margin:0">Ingelogd als <b id="accNaam"></b> <span class="small muted">(<span id="accGebr"></span>)</span></p>
@@ -676,7 +708,7 @@ function load(){
   try{const oud=localStorage.getItem(OUDE_KEY); if(oud){const o=JSON.parse(oud); if(o&&o.pakket) Object.assign(liam,norm(o),{naam:liam.naam});}}catch(e){}
   return {actief:'l1',leerlingen:{l1:liam}};
 }
-function norm(s){return {naam:String(s.naam||'Leerling').slice(0,40),pakket:Array.isArray(s.pakket)?s.pakket.filter(id=>BY_ID[id]):[],cijfers:s.cijfers||{},ce:s.ce||{},agenda:Array.isArray(s.agenda)?s.agenda:[],tour:!!s.tour};}
+function norm(s){return {naam:String(s.naam||'Leerling').slice(0,40),pakket:Array.isArray(s.pakket)?s.pakket.filter(id=>BY_ID[id]):[],cijfers:s.cijfers||{},ce:s.ce||{},agenda:Array.isArray(s.agenda)?s.agenda:[],tour:!!s.tour,foto:typeof s.foto==='string'&&s.foto.startsWith('data:image/')&&s.foto.length<200000?s.foto:''};}
 function save(){DB.leerlingen[DB.actief]=S; if(CLOUD) CLOUD.bewaar(S); else { try{localStorage.setItem(KEY,JSON.stringify(DB));}catch(e){} } document.getElementById('code').value=JSON.stringify(S);}
 
 const r1=x=>Math.round(x*10+1e-9)/10;
@@ -831,7 +863,26 @@ function renderUitslag(){
   renderHome();
 }
 
+// 26-10-2026 MK profielfoto
+function initialen(n){ const d=String(n||'').trim().split(/\s+/); return ((d[0]||'')[0]||'?').toUpperCase()+(d.length>1?(d[d.length-1][0]||'').toUpperCase():''); }
+function renderAvatars(){
+  for(const el of document.querySelectorAll('[data-av]')){
+    if(S.foto){ el.classList.add('foto'); el.style.setProperty('--foto',`url("${S.foto}")`); el.textContent=''; }
+    else { el.classList.remove('foto'); el.style.removeProperty('--foto'); el.textContent=initialen(S.naam); }
+  }
+  const w=document.getElementById('fotoWeg'); if(w) w.hidden=!S.foto;
+}
+function maakFoto(file){ return new Promise((ok,nee)=>{
+  if(!file||!/^image\//.test(file.type)) return nee(new Error('geen afbeelding'));
+  const url=URL.createObjectURL(file), img=new Image();
+  img.onload=()=>{ const z=Math.min(img.naturalWidth,img.naturalHeight); if(!z){URL.revokeObjectURL(url); return nee(new Error('leeg'));}
+    const c=document.createElement('canvas'); c.width=c.height=192; const x=c.getContext('2d');
+    x.drawImage(img,(img.naturalWidth-z)/2,(img.naturalHeight-z)/2,z,z,0,0,192,192); URL.revokeObjectURL(url);
+    ok(c.toDataURL('image/jpeg',0.82)); };
+  img.onerror=()=>{ URL.revokeObjectURL(url); nee(new Error('kan niet lezen')); };
+  img.src=url; }); }
 function renderLeerling(){
+  renderAvatars();
   const c=!!CLOUD; $('wieLokaal').hidden=c; $('wieCloud').hidden=!c; $('accountPaneel').hidden=!c; $('leerlingPaneel').hidden=c;
   if(c){ $('wieNaam').textContent=S.naam; $('accNaam').textContent=S.naam; $('accGebr').textContent=CLOUD.gebr.includes('@')?CLOUD.gebr:'gebruikersnaam '+CLOUD.gebr; }
   for(const sid of ['leerlingKeuze','leerlingKeuze2']){ const sel=document.getElementById(sid); sel.innerHTML='';
@@ -1097,6 +1148,13 @@ $('mgToepas').addEventListener('click',()=>{ for(const m of mgVoorstel){ S.cijfe
   S.pakket.sort((a,b)=>VAKKEN.indexOf(BY_ID[a])-VAKKEN.indexOf(BY_ID[b]));
   const n=mgVoorstel.length; mgVoorstel=[]; save(); renderAll(); $('mgResultaat').hidden=true; $('mgTekst').value=''; $('mgMelding').textContent=`${n} cijfers opgeslagen.`; });
 $('beheer').open=false;
+$('fotoInput').addEventListener('change',async e=>{ const f=e.target.files&&e.target.files[0]; const m=$('fotoMelding'); m.style.color=''; if(!f) return;
+  m.textContent='Bezig…';
+  try{ S.foto=await maakFoto(f); save(); renderAvatars(); m.textContent='Profielfoto opgeslagen.'; m.style.color='var(--ok)'; }
+  catch(err){ m.textContent='Deze foto kon niet worden gelezen. Probeer een andere (JPG of PNG).'; m.style.color='var(--bad)'; }
+  e.target.value=''; });
+$('fotoWeg').addEventListener('click',()=>{ S.foto=''; save(); renderAvatars(); $('fotoMelding').textContent='Profielfoto verwijderd.'; $('fotoMelding').style.color=''; });
+for(const b of document.querySelectorAll('button[data-av]')) b.addEventListener('click',()=>{ go('instellingen'); const p=$('fotoPaneel'); if(p&&p.scrollIntoView) p.scrollIntoView({behavior:'smooth',block:'start'}); });
 $('tourVolgende').addEventListener('click',()=>{ if(tourStap<TOUR.length-1) toonTour(tourStap+1); else { sluitTour(); if(!S.pakket.length) go('instellingen'); } });
 $('tourTerug').addEventListener('click',()=>toonTour(Math.max(0,tourStap-1)));
 $('tourSkip').addEventListener('click',sluitTour);
@@ -1299,7 +1357,7 @@ async function verversVanServer(){
   if(r&&r.data&&r.bijgewerkt&&(!laatsteSync||r.bijgewerkt>laatsteSync)&&!wijzigingOpen){
     laatsteSync=r.bijgewerkt; S=norm(r.data); DB.leerlingen.cloud=S;
     try{ localStorage.setItem(cacheKey(),JSON.stringify({s:S,t:laatsteSync})); }catch(e){}
-    renderAll(); syncStatus('Bijgewerkt met andere apparaat','ok');
+    renderAll(); syncStatus('Bijgewerkt','ok');
   }
 }
 document.addEventListener('visibilitychange',verversVanServer);
