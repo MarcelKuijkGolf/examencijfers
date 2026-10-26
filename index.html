@@ -251,6 +251,9 @@ footer{font-size:.8rem;color:var(--dim);max-width:80ch}
 .deel{display:flex;flex-wrap:wrap;gap:18px;align-items:center}
 .qr{width:180px;height:180px;border-radius:18px;background:#fff;padding:6px;flex:none}
 .deel-link{font-family:var(--f-num);font-size:.85rem;color:var(--accent);word-break:break-all}
+.naam-rij{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.naam-rij label{min-width:0}
+.naam-rij input{width:100%;min-width:0}
 .acc-form{display:grid;gap:6px}
 .acc-form label{font-size:.8rem;color:var(--muted);font-weight:700}
 .acc-form input{padding:9px 11px;min-width:0;flex:1 1 220px}
@@ -467,10 +470,15 @@ footer{font-size:.8rem;color:var(--dim);max-width:80ch}
       <div class="vkop"><span class="eyebrow">Instellingen</span><h1 id="naamKop">Examencijfers</h1><p>Ichthus College Dronten · vmbo TL · PTA cohort 2025-2027</p></div>
       <section class="paneel" id="accountPaneel" hidden>
         <h2>Account</h2>
-        <p style="margin:0">Ingelogd als <b id="accNaam"></b> <span class="small muted">(gebruikersnaam <span id="accGebr"></span>)</span></p>
+        <p style="margin:0">Ingelogd als <b id="accNaam"></b> <span class="small muted">(<span id="accGebr"></span>)</span></p>
+        <p class="small" id="accOud" hidden style="margin:0;color:var(--warn)">Je logt nog in met een gebruikersnaam. Vul hieronder je e-mailadres in, dan log je voortaan daarmee in en kun je je wachtwoord herstellen.</p>
         <p class="small muted" style="margin:0">Je cijfers en agenda worden online bewaard en zijn op elk apparaat hetzelfde. <span class="sync" id="syncStatus2"></span></p>
+        <form class="acc-form" id="accNaamForm">
+          <label for="accVoor">Naam</label>
+          <div class="row"><input id="accVoor" autocomplete="given-name" placeholder="Voornaam" maxlength="30"><input id="accAchter" autocomplete="family-name" placeholder="Achternaam" maxlength="40"><button type="submit">Opslaan</button></div>
+        </form>
         <form class="acc-form" id="accMailForm">
-          <label for="accMail">E-mailadres voor wachtwoord vergeten</label>
+          <label for="accMail">E-mailadres (hiermee log je in)</label>
           <div class="row"><input id="accMail" type="email" autocomplete="email" autocapitalize="none" spellcheck="false" placeholder="naam@voorbeeld.nl"><button type="submit">Opslaan</button></div>
         </form>
         <form class="acc-form" id="accWwForm">
@@ -547,10 +555,12 @@ footer{font-size:.8rem;color:var(--dim);max-width:80ch}
       <button type="button" role="tab" id="tabNieuw" aria-selected="false">Account maken</button>
     </div>
     <form id="loginForm" class="login-form" novalidate>
-      <label id="lNaam" hidden>Je naam<input id="liNaam" autocomplete="name" placeholder="Bijvoorbeeld Sam de Vries" maxlength="40"></label>
-      <label>Gebruikersnaam<input id="liGebr" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="Bijvoorbeeld samv" maxlength="30"></label>
+      <div class="naam-rij" id="lNaam" hidden>
+        <label>Voornaam<input id="liVoor" autocomplete="given-name" maxlength="30"></label>
+        <label>Achternaam<input id="liAchter" autocomplete="family-name" maxlength="40"></label>
+      </div>
+      <label>E-mailadres<input id="liMail" type="email" inputmode="email" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="naam@voorbeeld.nl" maxlength="120"></label>
       <label id="lWw">Wachtwoord<span class="ww-veld"><input id="liWw" type="password" autocomplete="current-password" placeholder="Minimaal 6 tekens"><button type="button" class="oog" data-voor="liWw" aria-label="Wachtwoord tonen" aria-pressed="false"><svg viewBox="0 0 24 24" class="o-open"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><svg viewBox="0 0 24 24" class="o-dicht"><path d="M3 3l18 18M10.6 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4.1M6.6 6.6C3.8 8.4 2 12 2 12s3.6 7 10 7a9.6 9.6 0 0 0 4.4-1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg></button></span></label>
-      <label id="lMail" hidden>E-mailadres <span class="opt">voor wachtwoord vergeten, mag leeg</span><input id="liMail" type="email" autocomplete="email" autocapitalize="none" spellcheck="false" placeholder="naam@voorbeeld.nl"></label>
       <label id="lWw2" hidden>Wachtwoord herhalen<span class="ww-veld"><input id="liWw2" type="password" autocomplete="new-password"><button type="button" class="oog" data-voor="liWw2" aria-label="Wachtwoord tonen" aria-pressed="false"><svg viewBox="0 0 24 24" class="o-open"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><svg viewBox="0 0 24 24" class="o-dicht"><path d="M3 3l18 18M10.6 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4.1M6.6 6.6C3.8 8.4 2 12 2 12s3.6 7 10 7a9.6 9.6 0 0 0 4.4-1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg></button></span></label>
       <button type="submit" class="primary" id="liKnop">Inloggen</button>
       <p class="login-fout" id="liFout" role="alert"></p>
@@ -776,7 +786,7 @@ function renderUitslag(){
 
 function renderLeerling(){
   const c=!!CLOUD; $('wieLokaal').hidden=c; $('wieCloud').hidden=!c; $('accountPaneel').hidden=!c; $('leerlingPaneel').hidden=c;
-  if(c){ $('wieNaam').textContent=S.naam; $('accNaam').textContent=S.naam; $('accGebr').textContent=CLOUD.gebr; }
+  if(c){ $('wieNaam').textContent=S.naam; $('accNaam').textContent=S.naam; $('accGebr').textContent=CLOUD.gebr.includes('@')?CLOUD.gebr:'gebruikersnaam '+CLOUD.gebr; }
   for(const sid of ['leerlingKeuze','leerlingKeuze2']){ const sel=document.getElementById(sid); sel.innerHTML='';
   for(const [id,l] of Object.entries(DB.leerlingen)){const o=document.createElement('option'); o.value=id; o.textContent=l.naam; o.selected=id===DB.actief; sel.appendChild(o);} }
   document.getElementById('naamKop').textContent='Examencijfers '+S.naam;
@@ -1038,6 +1048,9 @@ const appEl=document.querySelector('.app'), tabEl=document.querySelector('.tabba
 function toonApp(ja){ appEl.hidden=!ja; tabEl.hidden=!ja; }
 function syncStatus(t,k){ for(const id of ['syncStatus','syncStatus2']){ const e=$(id); if(e){ e.textContent=t; e.dataset.k=k||''; } } }
 const normGebr=g=>String(g||'').trim().toLowerCase().replace(/\s+/g,'');
+const isOud=u=>String((u&&u.email)||'').endsWith('@'+MAIL_DOMEIN);
+function loginMail(v){ v=normGebr(v); if(!v) return null; if(v.includes('@')) return geldigeMail(v)?v:null; return /^[a-z0-9._-]{3,30}$/.test(v)?v+'@'+MAIL_DOMEIN:null; }
+function naamVan(u){ const m=(u&&u.user_metadata)||{}; return m.naam||[m.voornaam,m.achternaam].filter(Boolean).join(' ')||m.gebruikersnaam||String((u&&u.email)||'').split('@')[0]; }
 const cacheKey=()=>'examencijfers-cloud-'+UID;
 
 function bewaarCloud(s){
@@ -1070,8 +1083,8 @@ function startMet(s,nieuw){
 }
 async function naInloggen(user){
   USER=user; UID=user.id; const meta=user.user_metadata||{};
-  GEBR=meta.gebruikersnaam||String(user.email||'').split('@')[0];
-  const naam=meta.naam||GEBR;
+  GEBR=isOud(user)?(meta.gebruikersnaam||user.email.split('@')[0]):user.email;
+  const naam=naamVan(user);
   let rij=null, offline=false;
   try{ rij=await haalOp(); }catch(e){ offline=true; }
   if(offline){
@@ -1093,7 +1106,7 @@ async function naInloggen(user){
 function zetModus(m){
   modus=m; const nieuw=m==='nieuw', verg=m==='vergeten';
   $('tabIn').setAttribute('aria-selected',String(m==='in')); $('tabNieuw').setAttribute('aria-selected',String(nieuw));
-  $('lNaam').hidden=!nieuw; $('lMail').hidden=!nieuw; $('lWw2').hidden=!nieuw; $('lWw').hidden=verg;
+  $('lNaam').hidden=!nieuw; $('lWw2').hidden=!nieuw; $('lWw').hidden=verg;
   $('liTip').hidden=m!=='in'; $('terugTip').hidden=!verg;
   $('liKnop').textContent=nieuw?'Account maken':verg?'Stuur herstelmail':'Inloggen';
   $('liWw').autocomplete=nieuw?'new-password':'current-password'; $('liFout').textContent=''; $('liOk').textContent='';
@@ -1104,11 +1117,11 @@ function toonLogin(fout){
 }
 function vertaal(err){
   const m=String((err&&(err.code||err.message))||err||'').toLowerCase();
-  if(m.includes('invalid login')||m.includes('invalid_credentials')) return 'Gebruikersnaam of wachtwoord klopt niet.';
-  if(m.includes('already')||m.includes('user_already_exists')) return 'Deze gebruikersnaam is al in gebruik. Kies een andere.';
+  if(m.includes('invalid login')||m.includes('invalid_credentials')) return 'E-mailadres of wachtwoord klopt niet.';
+  if(m.includes('already')||m.includes('user_already_exists')) return 'Er is al een account met dit e-mailadres. Log in, of kies Wachtwoord vergeten.';
   if(m.includes('weak')||m.includes('password should')) return 'Kies een sterker wachtwoord, minimaal 6 tekens.';
   if(m.includes('rate')||m.includes('too many')) return 'Te veel pogingen achter elkaar. Wacht een paar minuten.';
-  if(m.includes('email')&&m.includes('invalid')) return 'Account maken lukt niet door een instelling in Supabase. Laat dit aan de beheerder weten.';
+  if(m.includes('email')&&m.includes('invalid')) return 'Dit e-mailadres wordt niet geaccepteerd. Controleer het adres.';
   if(m.includes('fetch')||m.includes('network')) return 'Geen verbinding met de server. Controleer je internet.';
   return 'Er ging iets mis: '+((err&&err.message)||err);
 }
@@ -1118,21 +1131,22 @@ for(const b of document.querySelectorAll('.oog')) b.addEventListener('click',()=
 });
 function verbergWw(){ for(const b of document.querySelectorAll('.oog')){ $(b.dataset.voor).type='password'; b.setAttribute('aria-pressed','false'); b.setAttribute('aria-label','Wachtwoord tonen'); } }
 $('tabIn').addEventListener('click',()=>zetModus('in'));
-$('vergetenKnop').addEventListener('click',()=>{ zetModus('vergeten'); $('liGebr').focus(); });
+$('vergetenKnop').addEventListener('click',()=>{ zetModus('vergeten'); $('liMail').focus(); });
 $('terugKnop').addEventListener('click',()=>zetModus('in'));
 $('tabNieuw').addEventListener('click',()=>zetModus('nieuw'));
 $('loginForm').addEventListener('submit',async e=>{
   e.preventDefault(); const fout=$('liFout'); fout.textContent='';
-  const g=normGebr($('liGebr').value), w=$('liWw').value;
-  if(!/^[a-z0-9._-]{3,30}$/.test(g)){ fout.textContent='Gebruikersnaam: 3 tot 30 tekens, alleen letters, cijfers, punt, streepje of underscore.'; $('liGebr').focus(); return; }
+  const invoer=normGebr($('liMail').value), w=$('liWw').value;
+  const mail=modus==='nieuw'?(geldigeMail(invoer)?invoer:null):loginMail(invoer);
+  if(!mail){ fout.textContent='Vul een geldig e-mailadres in.'; $('liMail').focus(); return; }
   if(modus==='vergeten'){
     if(!sb){ fout.textContent='Geen verbinding met de server. Herlaad de pagina.'; return; }
     const knop=$('liKnop'); knop.disabled=true; $('liOk').textContent='';
     try{
-      const r=await sb.functions.invoke('wachtwoord-vergeten',{body:{gebruikersnaam:g}});
+      const r=await sb.functions.invoke('wachtwoord-vergeten',{body:{login:invoer}});
       if(r.error) throw r.error;
       if(r.data&&r.data.reden==='mail_niet_ingesteld') fout.textContent='Wachtwoord herstellen via mail is nog niet ingesteld. Vraag het aan de beheerder.';
-      else $('liOk').textContent='Als er een e-mailadres bij dit account hoort, is er nu een mail met een link onderweg. Kijk ook in je spam.';
+      else $('liOk').textContent='Als er een account bij dit e-mailadres hoort, is er nu een mail met een link onderweg. Kijk ook in je spam.';
     }catch(err){ fout.textContent=vertaal(err); }
     knop.disabled=false; return;
   }
@@ -1141,18 +1155,17 @@ $('loginForm').addEventListener('submit',async e=>{
   const knop=$('liKnop'); knop.disabled=true;
   try{
     if(modus==='nieuw'){
-      const naam=$('liNaam').value.trim();
-      if(!naam){ fout.textContent='Vul je naam in.'; $('liNaam').focus(); knop.disabled=false; return; }
-      const mail=$('liMail').value.trim();
-      if(mail&&!geldigeMail(mail)){ fout.textContent='Dit e-mailadres klopt niet. Laat het leeg of vul het goed in.'; $('liMail').focus(); knop.disabled=false; return; }
+      const voor=$('liVoor').value.trim(), achter=$('liAchter').value.trim();
+      if(!voor){ fout.textContent='Vul je voornaam in.'; $('liVoor').focus(); knop.disabled=false; return; }
+      if(!achter){ fout.textContent='Vul je achternaam in.'; $('liAchter').focus(); knop.disabled=false; return; }
       if(w!==$('liWw2').value){ fout.textContent='De wachtwoorden zijn niet hetzelfde.'; $('liWw2').focus(); knop.disabled=false; return; }
-      const r=await sb.auth.signUp({email:g+'@'+MAIL_DOMEIN,password:w,options:{data:mail?{gebruikersnaam:g,naam,herstel_email:mail}:{gebruikersnaam:g,naam}}});
+      const r=await sb.auth.signUp({email:mail,password:w,options:{data:{voornaam:voor,achternaam:achter,naam:voor+' '+achter}}});
       if(r.error) throw r.error;
       if(!r.data.session){ fout.textContent='Account gemaakt, maar direct inloggen lukt niet. Staat Confirm email in Supabase nog aan?'; knop.disabled=false; return; }
       if(r.data.user&&Array.isArray(r.data.user.identities)&&!r.data.user.identities.length) throw new Error('already registered');
       await naInloggen(r.data.session.user);
     }else{
-      const r=await sb.auth.signInWithPassword({email:g+'@'+MAIL_DOMEIN,password:w});
+      const r=await sb.auth.signInWithPassword({email:mail,password:w});
       if(r.error) throw r.error;
       await naInloggen(r.data.user);
     }
@@ -1170,19 +1183,29 @@ $('deelKopieer').addEventListener('click',()=>{ const u='https://marcelkuijkgolf
   (navigator.clipboard?navigator.clipboard.writeText(u):Promise.reject()).then(()=>{$('deelMelding').textContent='Gekopieerd';},()=>{$('deelMelding').textContent=u;}); });
 // account: herstelmail en wachtwoord
 function accMeld(t,ok){ const e=$('accMelding'); e.textContent=t; e.style.color=ok?'var(--ok)':'var(--bad)'; }
-$('accMailForm').addEventListener('submit',async e=>{ e.preventDefault(); const m=$('accMail').value.trim();
-  if(m&&!geldigeMail(m)){ accMeld('Dit e-mailadres klopt niet.',false); return; }
-  const r=await sb.auth.updateUser({data:{...(USER&&USER.user_metadata||{}),herstel_email:m}});
-  if(r.error){ accMeld(vertaal(r.error),false); return; } USER=r.data.user; accMeld(m?'E-mailadres opgeslagen. Hiermee kun je je wachtwoord herstellen.':'E-mailadres verwijderd.',true); });
+$('accMailForm').addEventListener('submit',async e=>{ e.preventDefault(); const m=normGebr($('accMail').value);
+  if(!geldigeMail(m)){ accMeld('Vul een geldig e-mailadres in.',false); return; }
+  let r; try{ r=await sb.functions.invoke('account-email',{body:{email:m}}); }catch(err){ accMeld(vertaal(err),false); return; }
+  const d=r.data||{}; if(r.error||!d.ok){ accMeld(d.reden==='bezet'?'Dit e-mailadres hoort al bij een ander account.':d.reden==='ongeldig'?'Vul een geldig e-mailadres in.':'Opslaan lukte niet. Probeer het later opnieuw.',false); return; }
+  try{ const s=await sb.auth.refreshSession(); if(s.data&&s.data.user) USER=s.data.user; }catch(err){}
+  GEBR=d.email||m; if(CLOUD) CLOUD.gebr=GEBR; renderLeerling(); vulAccount(); push();
+  accMeld('E-mailadres opgeslagen. Je logt voortaan in met '+GEBR+'.',true); });
+$('accNaamForm').addEventListener('submit',async e=>{ e.preventDefault(); const v=$('accVoor').value.trim(), a=$('accAchter').value.trim();
+  if(!v||!a){ accMeld('Vul je voornaam en achternaam in.',false); return; }
+  const r=await sb.auth.updateUser({data:{...(USER&&USER.user_metadata||{}),voornaam:v,achternaam:a,naam:v+' '+a}});
+  if(r.error){ accMeld(vertaal(r.error),false); return; } USER=r.data.user; S.naam=v+' '+a; save(); renderAll(); accMeld('Naam opgeslagen.',true); });
 $('accWwForm').addEventListener('submit',async e=>{ e.preventDefault(); const w=$('accWw').value;
   if(w.length<6){ accMeld('Wachtwoord moet minimaal 6 tekens hebben.',false); return; }
   const r=await sb.auth.updateUser({password:w});
   if(r.error){ accMeld(/same|different/i.test(r.error.message)?'Dit is je huidige wachtwoord. Kies een ander.':vertaal(r.error),false); return; }
   $('accWw').value=''; verbergWw(); accMeld('Wachtwoord gewijzigd.',true); });
-function vulAccount(){ if(USER) $('accMail').value=(USER.user_metadata||{}).herstel_email||''; $('accMelding').textContent=''; }
+function vulAccount(){ if(!USER) return; const m=USER.user_metadata||{}, oud=isOud(USER);
+  $('accMail').value=oud?(m.herstel_email||''):USER.email; $('accOud').hidden=!oud;
+  const delen=(m.voornaam?[m.voornaam,m.achternaam||'']:String(S.naam||'').split(' ').reduce((p,w,i)=>i?[p[0],(p[1]+' '+w).trim()]:[w,''],['','']));
+  $('accVoor').value=delen[0]||''; $('accAchter').value=delen[1]||''; $('accMelding').textContent=''; }
 function toonHerstel(user){
   USER=user; toonApp(false); $('login').hidden=true; $('import').hidden=true; $('herstel').hidden=false;
-  $('hsGebr').textContent=(user.user_metadata||{}).gebruikersnaam||String(user.email||'').split('@')[0]; $('hsWw').focus();
+  $('hsGebr').textContent=isOud(user)?((user.user_metadata||{}).gebruikersnaam||'je account'):user.email; $('hsWw').focus();
 }
 $('herstelForm').addEventListener('submit',async e=>{ e.preventDefault(); const f=$('hsFout'); f.textContent='';
   const w=$('hsWw').value; if(w.length<6){ f.textContent='Wachtwoord moet minimaal 6 tekens hebben.'; return; }
