@@ -650,7 +650,7 @@ details.set[open]>summary .chev{transform:rotate(90deg)}
             <div class="set-body">
               <p class="small muted" style="margin:0">Op deze dagen plant de Leerhulp geen leermomenten.</p>
               <form class="vast-form" id="vastForm">
-                <input id="vastNaam" placeholder="Bijvoorbeeld Judo" maxlength="30" autocomplete="off" aria-label="Naam van de afspraak">
+                <input id="vastNaam" placeholder="Bijvoorbeeld Sport" maxlength="30" autocomplete="off" aria-label="Naam van de afspraak">
                 <select id="vastDag" aria-label="Dag"><option value="1">maandag</option><option value="2">dinsdag</option><option value="3">woensdag</option><option value="4">donderdag</option><option value="5">vrijdag</option><option value="6">zaterdag</option><option value="0">zondag</option></select>
                 <button type="submit">Toevoegen</button>
               </form>
@@ -952,7 +952,7 @@ function load(){
   try{const oud=localStorage.getItem(OUDE_KEY); if(oud){const o=JSON.parse(oud); if(o&&o.pakket) Object.assign(liam,norm(o),{naam:liam.naam});}}catch(e){}
   return {actief:'l1',leerlingen:{l1:liam}};
 }
-function norm(s){return {naam:String(s.naam||'Leerling').slice(0,40),pakket:Array.isArray(s.pakket)?s.pakket.filter(id=>BY_ID[id]):[],cijfers:s.cijfers||{},ce:s.ce||{},agenda:Array.isArray(s.agenda)?s.agenda:[],tour:!!s.tour,vast:Array.isArray(s.vast)?s.vast.filter(v=>v&&v.naam&&v.dag>=0&&v.dag<=6):[],leer:Array.isArray(s.leer)?s.leer.filter(l=>l&&l.datum&&BY_ID[l.vak]):[],foto:typeof s.foto==='string'&&s.foto.startsWith('data:image/')&&s.foto.length<200000?s.foto:''};}
+function norm(s){return {naam:String(s.naam||'Leerling').slice(0,40),pakket:Array.isArray(s.pakket)?s.pakket.filter(id=>BY_ID[id]):[],cijfers:s.cijfers||{},ce:s.ce||{},agenda:Array.isArray(s.agenda)?s.agenda:[],tour:!!s.tour,vast:Array.isArray(s.vast)?s.vast.filter(v=>v&&v.naam&&v.dag>=0&&v.dag<=6).map(v=>({...v,naam:vastNaamVan(v.naam)})).filter((v,i,a)=>a.findIndex(x=>x.naam===v.naam&&x.dag===v.dag)===i):[],leer:Array.isArray(s.leer)?s.leer.filter(l=>l&&l.datum&&BY_ID[l.vak]):[],foto:typeof s.foto==='string'&&s.foto.startsWith('data:image/')&&s.foto.length<200000?s.foto:''};}
 function save(){DB.leerlingen[DB.actief]=S; if(CLOUD) CLOUD.bewaar(S); else { try{localStorage.setItem(KEY,JSON.stringify(DB));}catch(e){} } document.getElementById('code').value=JSON.stringify(S);}
 
 const r1=x=>Math.round(x*10+1e-9)/10;
@@ -1408,6 +1408,7 @@ const VAK_WOORDEN={ne:['nederlands','ned','nl'],en:['engels','eng'],du:['duits']
  bi:['biologie','bio'],ec:['economie','eco'],ak:['aardrijkskunde','aardrijk','ak'],gs:['geschiedenis','gesch','gs'],ma:['maatschappijleer','maatschappij'],kv1:['ckv','kunstvakken'],te:['tekenen'],
  pvtt:['pvtt','technologie en toepassing','technologie'],pveo:['pveo'],pvzw:['pvzw','zorg en welzijn'],levo:['levo','levensbeschouwing','levensbeschouwelijke vorming'],lo2:['lo2','lo 2','sportgeschiedenis']};
 const ACTIVITEITEN=['judo','voetbal','voetbaltraining','hockey','tennis','padel','gym','zwemmen','zwemles','training','trainen','werk','werken','bijbaan','muziekles','pianoles','gitaarles','zangles','drumles','dansen','dansles','dans','scouting','korfbal','handbal','basketbal','volleybal','paardrijden','turnen','atletiek','bijles','oppassen','karate','kickboksen','boksen','fitness','golf','sport','sporten','catechisatie','kerk','club','schaken','theater','toneel'];
+function vastNaamVan(n){ return /^(judo|voetbal|voetbaltraining|hockey|tennis|padel|gym|zwemmen|zwemles|training|trainen|sport|sporten|dansen|dansles|dans|korfbal|handbal|basketbal|volleybal|paardrijden|turnen|atletiek|karate|kickboksen|boksen|fitness|golf)$/.test(String(n).toLowerCase().replace(/[^a-z]/g,''))?'Sport':n; }
 const STOP=new Set('ik ik heb heb ga is er een de het en of maar want dan niet geen kan kun wel ook nog al toets toetsen so proefwerk op om te tot naar mijn me met elke iedere iedereen vrij school les uur uren dag dagen week weken avond middag ochtend dus graag zou wil willen'.split(' '));
 const lc=t=>String(t).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
 function vakUit(t){
@@ -1462,7 +1463,7 @@ function dagenUit(t,datumWd){
 function activiteitenUit(t){
   t=lc(t); const uit=[], zie=new Set();
   const voeg=(naam,woord)=>{ naam=naam.replace(/[^a-z]/g,''); const wd=WD[woord.replace(/(s|en)$/,'')]; if(!naam||wd==null||STOP.has(naam)||vakUit(naam)&&!ACTIVITEITEN.includes(naam)) return;
-    if(!ACTIVITEITEN.includes(naam)&&naam.length<3) return; const k=naam+wd; if(zie.has(k)) return; zie.add(k); uit.push({naam:naam.charAt(0).toUpperCase()+naam.slice(1),dag:wd}); };
+    if(!ACTIVITEITEN.includes(naam)&&naam.length<3) return; const k=naam+wd; if(zie.has(k)) return; zie.add(k); const nm=vastNaamVan(naam.charAt(0).toUpperCase()+naam.slice(1)); if(uit.some(x=>x.naam===nm&&x.dag===wd)) return; uit.push({naam:nm,dag:wd}); };
   for(const m of t.matchAll(new RegExp(WDRE+'\\s+(?:avond\\s+|middag\\s+)?(?:heb ik|heb|ga ik naar|ga ik|moet ik naar|is er|is)?\\s*([a-z]+)','g'))){ if(ACTIVITEITEN.includes(m[2])||/heb ik|ga ik|moet ik/.test(m[0])) voeg(m[2],m[1]); }
   for(const m of t.matchAll(new RegExp('\\b([a-z]+)\\s+(?:op|elke|iedere)\\s+'+WDRE,'g'))){ if(ACTIVITEITEN.includes(m[1])) voeg(m[1],m[2]); }
   return uit;
@@ -1504,7 +1505,7 @@ function lhTips(){
   const t=eerstvolgendeToetsAlgemeen(); const tips=[];
   if(t) tips.push(`Plan ${BY_ID[t.vak].naam} in, 1 uur per dag`);
   tips.push('Wat moet ik vandaag doen?','Geef me een leertip');
-  if(!S.vast.length) tips.push('Op donderdag heb ik judo');
+  if(!S.vast.length) tips.push('Op donderdag heb ik sport');
   for(const x of tips){ const b=document.createElement('button'); b.type='button'; b.textContent=x; b.addEventListener('click',()=>lhVerstuur(x)); el.appendChild(b); }
 }
 function lhScroll(){ const c=$('lhChat'); if(c) c.scrollTop=c.scrollHeight; }
@@ -1595,13 +1596,15 @@ function lhAkkoord(){
   renderAgenda(); renderHome();
   const nieuweActs=(p.acts||[]).filter(a=>!S.vast.some(v=>v.dag===a.dag&&lc(v.naam)===lc(a.naam)));
   lhBot(kies(['Ingepland!','Staat erin!','Gepland!'])+` Je ziet de ${p.items.length} leermomenten nu in je week. Vink ze af als je klaar bent, dan zie je hoe ver je bent.`,
-    nieuweActs.length?{knoppen:[{label:`Zet ${lijstTekst(nieuweActs.map(a=>`${a.naam.toLowerCase()} (${DAGNAMEN[a.dag]})`))} vast in mijn week`,primair:true,actie:()=>lhVastOpslaan(nieuweActs)},{label:'Niet nodig',actie:()=>lhBot('Oké!')}]}:{});
+    nieuweActs.length?{knoppen:[{label:`Zet ${actsTekst(nieuweActs)} vast in mijn week`,primair:true,actie:()=>lhVastOpslaan(nieuweActs)},{label:'Niet nodig',actie:()=>lhBot('Oké!')}]}:{});
   lhTips();
 }
+function actsTekst(acts){ const g=new Map(); for(const a of acts){ const k=a.naam.toLowerCase(); if(!g.has(k)) g.set(k,[]); g.get(k).push(a.dag); }
+  return lijstTekst([...g.entries()].map(([n,d])=>`${n} op ${lijstTekst(d.sort((x,y)=>((x+6)%7)-((y+6)%7)).map(w=>DAGNAMEN[w]))}`)); }
 function lhVast(acts){
   const nieuw=acts.filter(a=>!S.vast.some(v=>v.dag===a.dag&&lc(v.naam)===lc(a.naam)));
   if(!nieuw.length) return lhBot('Die staat al in je vaste afspraken.');
-  lhBot(`Zal ik ${lijstTekst(nieuw.map(a=>`${a.naam.toLowerCase()} op ${DAGNAMEN[a.dag]}`))} vast in je week zetten? Dan plan ik op die dag${nieuw.length>1?'en':''} geen leermomenten.`,
+  lhBot(`Zal ik ${actsTekst(nieuw)} vast in je week zetten? Dan plan ik op die dag${nieuw.length>1?'en':''} geen leermomenten.`,
     {knoppen:[{label:'Ja, zet vast',primair:true,actie:()=>lhVastOpslaan(nieuw)},{label:'Nee',actie:()=>lhBot('Oké, ik onthoud het niet.')}]});
 }
 function lhVastOpslaan(acts){ for(const a of acts) S.vast.push({id:'v'+Date.now()+Math.random().toString(36).slice(2,5),naam:a.naam,dag:a.dag}); save(); renderAgenda(); lhBot(kies(['Opgeslagen. Daar houd ik voortaan rekening mee.','Staat in je vaste afspraken!'])); lhTips(); }
@@ -1626,7 +1629,7 @@ function initPlanner(){
   $('wkVolgende').addEventListener('click',()=>{ wkOffset++; renderWeek(); });
   $('wkVandaag').addEventListener('click',()=>{ wkOffset=0; renderWeek(); });
   $('vastForm').addEventListener('submit',e=>{ e.preventDefault(); const n=$('vastNaam').value.trim(); if(!n){ $('vastNaam').focus(); return; }
-    S.vast.push({id:'v'+Date.now(),naam:n.slice(0,30),dag:+$('vastDag').value}); $('vastNaam').value=''; save(); renderAgenda(); });
+    S.vast.push({id:'v'+Date.now(),naam:vastNaamVan(n.slice(0,30)),dag:+$('vastDag').value}); $('vastNaam').value=''; save(); renderAgenda(); });
   $('lhForm').addEventListener('submit',e=>{ e.preventDefault(); const v=$('lhTekst').value; $('lhTekst').value=''; $('lhTekst').style.height=''; lhVerstuur(v); });
   $('lhTekst').addEventListener('keydown',e=>{ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); $('lhForm').requestSubmit(); } });
   $('lhTekst').addEventListener('input',e=>{ e.target.style.height='auto'; e.target.style.height=Math.min(140,e.target.scrollHeight)+'px'; });
