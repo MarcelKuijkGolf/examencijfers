@@ -267,6 +267,28 @@ footer{font-size:.8rem;color:var(--dim);max-width:80ch}
 .wie b{font-family:var(--f-display);font-size:1.02rem}
 .wie .uitlog{padding:6px 10px;font-size:.84rem}
 
+/* rondleiding en begrippen */
+.tour{position:fixed;inset:0;z-index:40;display:grid;place-items:center;padding:20px max(16px, env(safe-area-inset-right, 0px)) 20px max(16px, env(safe-area-inset-left, 0px));background:rgba(6,8,22,.62);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+.tour-kaart{position:relative;width:min(440px,100%);display:grid;gap:12px;padding:28px;border-radius:24px;background:linear-gradient(160deg,#241c5e,#151938 70%);border:1px solid var(--line2);box-shadow:0 30px 80px rgba(0,0,0,.55);animation:in .3s ease}
+.tour-kaart h2{font-size:1.45rem}
+.tour-kaart p{margin:0;color:#d6d9f5;line-height:1.55}
+.tour-ico{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;color:#fff}
+.tour-ico svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.tour-skip{position:absolute;top:14px;right:14px;border:0;background:none;color:var(--muted);font-size:.85rem;padding:6px 8px}
+.tour-voet{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:6px}
+.tour-stippen{display:flex;gap:6px}
+.tour-stippen span{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.2);transition:all .2s}
+.tour-stippen span.aan{width:22px;border-radius:4px;background:var(--accent)}
+.tour-licht{position:relative;z-index:41}
+.nav a.tour-licht .ico,.tabbar a.tour-licht .ico{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#24120a;box-shadow:0 0 0 4px rgba(255,162,58,.25),0 0 26px rgba(255,140,50,.7);animation:puls 1.4s ease-in-out infinite}
+.nav a.tour-licht,.tabbar a.tour-licht{color:var(--ink)}
+@keyframes puls{50%{box-shadow:0 0 0 8px rgba(255,162,58,.08),0 0 30px rgba(255,140,50,.8)}}
+.side:has(.tour-licht),.tabbar:has(.tour-licht){z-index:41}
+dl.begrip{margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:8px}
+dl.begrip div{padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid var(--line)}
+dl.begrip dt{font-family:var(--f-display);font-weight:700;color:var(--accent)}
+dl.begrip dd{margin:2px 0 0;font-size:.88rem;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.tour-licht .ico{animation:none!important}.tour-kaart{animation:none}}
 /* tablet: alleen iconen */
 @media (max-width:980px){
   .app{grid-template-columns:84px minmax(0,1fr)}
@@ -355,15 +377,15 @@ footer{font-size:.8rem;color:var(--dim);max-width:80ch}
           <svg viewBox="0 0 120 120"><defs><linearGradient id="ringGr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffa23a"/><stop offset="1" stop-color="#e04a8f"/></linearGradient></defs>
             <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="11"/>
             <circle id="ringBoog" cx="60" cy="60" r="52" fill="none" stroke="url(#ringGr)" stroke-width="11" stroke-linecap="round" stroke-dasharray="0 400"/></svg>
-          <div class="midden"><b id="ringPct">0%</b><span>PTA klaar</span></div>
+          <div class="midden"><b id="ringPct">0%</b><span>toetsen gehad</span></div>
         </div>
       </div>
 
       <div class="stats">
-        <a class="stat" href="#uitslag"><span class="k">Gemiddeld SE</span><span class="v num" id="statGem">–</span><span class="s">over je examenvakken</span></a>
+        <a class="stat" href="#uitslag"><span class="k">Gemiddeld cijfer</span><span class="v num" id="statGem">–</span><span class="s">van je schooltoetsen</span></a>
         <a class="stat" href="#agenda"><span class="k">Toetsen gepland</span><span class="v num" id="statToetsen">0</span><span class="s">in je agenda</span></a>
-        <a class="stat" href="#agenda" id="statOpenTile"><span class="k">Cijfers invullen</span><span class="v num" id="statOpen">0</span><span class="s">na gemaakte toetsen</span></a>
-        <div class="stat"><span class="k">Weken tot CE</span><span class="v num" id="statCE">–</span><span class="s">start 14 mei 2027</span></div>
+        <a class="stat" href="#agenda" id="statOpenTile"><span class="k">Nog invullen</span><span class="v num" id="statOpen">0</span><span class="s">cijfers van gemaakte toetsen</span></a>
+        <div class="stat"><span class="k">Weken tot eindexamen</span><span class="v num" id="statCE">–</span><span class="s">start 14 mei 2027</span></div>
       </div>
 
       <section class="herinner" id="herinner" hidden aria-labelledby="herinnerKop">
@@ -399,7 +421,7 @@ footer{font-size:.8rem;color:var(--dim);max-width:80ch}
 
     <!-- AGENDA -->
     <section class="view" data-view="agenda" hidden>
-      <div class="vkop"><span class="eyebrow">Plannen</span><h1>Toetsagenda <span class="small muted" id="agendaAantal"></span></h1><p>Zet je toetsen erin. Bij PTA toetsen zie je wat je moet halen, en na de toets krijg je een herinnering om het cijfer in te vullen.</p></div>
+      <div class="vkop"><span class="eyebrow">Plannen</span><h1>Toetsagenda <span class="small muted" id="agendaAantal"></span></h1><p>Zet je toetsen erin. Bij toetsen die meetellen voor je examen zie je wat je moet halen. Na de toets krijg je een seintje om je cijfer in te vullen.</p></div>
       <section class="paneel">
         <form class="aform" id="agendaForm">
           <label>Datum<input type="date" id="aDatum" required></label>
@@ -414,13 +436,13 @@ footer{font-size:.8rem;color:var(--dim);max-width:80ch}
 
     <!-- CIJFERS -->
     <section class="view" data-view="cijfers" hidden>
-      <div class="vkop"><span class="eyebrow">Invoeren</span><h1>Cijfers per vak</h1><p>Open een vak en vul de cijfers uit Magister in. Bij handelingsdelen vul je V, G of O in.</p></div>
+      <div class="vkop"><span class="eyebrow">Invoeren</span><h1>Cijfers per vak</h1><p>Tik op een vak en vul je cijfers uit Magister in. Bij onderdelen zonder cijfer (zoals bij gym) vul je V (voldoende), G (goed) of O (onvoldoende) in.</p></div>
       <div class="vakken" id="vakken"></div>
     </section>
 
     <!-- UITSLAG -->
     <section class="view" data-view="uitslag" hidden>
-      <div class="vkop"><span class="eyebrow">Slaag of zak</span><h1>Verwachte uitslag</h1></div>
+      <div class="vkop"><span class="eyebrow">Slaag of zak</span><h1>Verwachte uitslag</h1><p>Zo sta je ervoor als je eindexamens net zo gaan als je schooltoetsen.</p></div>
       <section class="paneel">
         <div class="status"><div class="big" id="uitslagTekst">…</div><span class="pill" id="uitslagPill"></span></div>
         <p class="uitleg" id="uitslagUitleg"></p>
@@ -430,19 +452,19 @@ footer{font-size:.8rem;color:var(--dim);max-width:80ch}
       <section class="paneel">
         <h2>Per vak</h2>
         <div class="tablewrap"><table>
-          <thead><tr><th>Vak</th><th class="r">SE</th><th class="r">CE verwacht</th><th class="r">Eindcijfer</th><th class="r">CE nodig voor 6</th></tr></thead>
+          <thead><tr><th>Vak</th><th class="r">Gemiddelde school</th><th class="r">Eindexamen (gok)</th><th class="r">Eindcijfer</th><th class="r">Eindexamen nodig voor 6</th></tr></thead>
           <tbody id="overzicht"></tbody>
         </table></div>
-        <p class="small muted" style="margin:0">Vul je bij CE verwacht niets in, dan rekent de site met je SE cijfer als CE cijfer.</p>
+        <p class="small muted" style="margin:0">Bij Eindexamen (gok) kun je invullen welk cijfer je denkt te halen. Laat je het leeg, dan rekent de app met je gemiddelde van school.</p>
       </section>
-      <footer>Rekenregels: SE cijfer is het gewogen gemiddelde volgens het PTA, afgerond op één decimaal. Eindcijfer is (SE + CE) / 2, afgerond op een heel cijfer. Geslaagd als het CE gemiddelde 5,5 of hoger is, Nederlands minimaal een 5 heeft, er geen cijfer onder de 4 is, en: alles 6 of hoger, of één 5, of één 4 met minstens één 7, of twee 5en met minstens één 7. Het officiële examenreglement 2026-2027 van school is leidend.</footer>
+      <footer><b>Hoe rekent de app?</b> Je gemiddelde van school telt de toetsen mee zoals in het PTA staat (een toets die 2x meetelt, weegt dubbel). Je eindcijfer is het gemiddelde van school en je eindexamen samen, afgerond op een heel cijfer. Je slaagt als: je eindexamens gemiddeld een 5,5 of hoger zijn, Nederlands minstens een 5 is, je geen cijfer onder de 4 hebt, en je hooguit één 5 hebt. Een 4 of twee 5en mag ook, als je dan minstens één 7 of hoger hebt. Het examenreglement van school is altijd leidend.</footer>
     </section>
 
     <!-- HERKANSEN -->
     <section class="view" data-view="herkansen" hidden>
-      <div class="vkop"><span class="eyebrow">Slim kiezen</span><h1>Herkansingsadviseur <span class="small muted" id="hkAantal"></span></h1><p>In het examenjaar mag je na periode 3 drie toetsen herkansen, uit periode 4 van klas 3 en periode 1 tot en met 3 van klas 4. Het hoogste cijfer telt. Hier zie je waar een herkansing het meeste oplevert.</p></div>
+      <div class="vkop"><span class="eyebrow">Slim kiezen</span><h1>Herkansingsadviseur <span class="small muted" id="hkAantal"></span></h1><p>Na periode 3 van klas 4 mag je drie toetsen opnieuw maken. Het hoogste cijfer telt. Hier zie je bij welke toetsen dat je het meeste oplevert. De groene zijn je beste keuzes.</p></div>
       <section class="paneel">
-        <div class="hk-ctrl"><label for="hkDoel">Stel dat de herkansing een</label><input class="cell" id="hkDoel" inputmode="decimal" value="7,0" autocomplete="off"><span>wordt.</span></div>
+        <div class="hk-ctrl"><label for="hkDoel">Stel dat je bij de herkansing een</label><input class="cell" id="hkDoel" inputmode="decimal" value="7,0" autocomplete="off"><span>haalt.</span></div>
         <ul class="hk-lijst" id="hkLijst"></ul>
       </section>
     </section>
@@ -453,7 +475,7 @@ footer{font-size:.8rem;color:var(--dim);max-width:80ch}
       <section class="paneel">
         <ol class="stappen">
           <li>Open Magister in de browser en ga naar Cijfers, Cijferoverzicht.</li>
-          <li>Kies bij Cijfersoort "PTA kolommen" en bij Cijferperiodes LJ3 en LJ4.</li>
+          <li>Kies bij Cijfersoort "PTA kolommen" en bij Cijferperiodes LJ3 en LJ4 (dat zijn klas 3 en klas 4).</li>
           <li>Selecteer de hele tabel, kopieer hem en plak hem hieronder. De lijst Laatste cijfers werkt ook.</li>
         </ol>
         <textarea id="mgTekst" aria-label="Geplakte tabel uit Magister" spellcheck="false" placeholder="Plak hier de tabel uit Magister"></textarea>
@@ -504,6 +526,11 @@ footer{font-size:.8rem;color:var(--dim);max-width:80ch}
           </div>
         </details>
       </section>
+      <section class="paneel" id="begrippen">
+        <div class="paneel-kop"><h2>Wat betekent dat?</h2><button type="button" id="tourOpnieuw">Rondleiding bekijken</button></div>
+        <p class="small muted" style="margin:0">Alle afkortingen en woorden die je in de app tegenkomt.</p>
+        <dl class="begrip"><div><dt>PTA</dt><dd>Programma van Toetsing en Afsluiting. De lijst van school met alle toetsen die meetellen voor je examen, en hoe zwaar ze tellen.</dd></div><div><dt>SE</dt><dd>Schoolexamen. Alle PTA toetsen die je op school maakt in klas 3 en 4. Samen geven ze je gemiddelde van school.</dd></div><div><dt>CE</dt><dd>Centraal examen. Het landelijke eindexamen in mei, voor iedereen in Nederland hetzelfde.</dd></div><div><dt>Eindcijfer</dt><dd>Het gemiddelde van je schoolexamen en je centraal examen samen, afgerond op een heel cijfer. Heeft een vak geen centraal examen, dan is je schoolcijfer je eindcijfer.</dd></div><div><dt>Telt mee (weging)</dt><dd>Hoe zwaar een toets meetelt. Een toets met 2x telt dubbel zo zwaar als een toets met 1x.</dd></div><div><dt>HD</dt><dd>Handelingsdeel. Een onderdeel zonder cijfer, zoals bij gym. Je moet het met een V of G afronden.</dd></div><div><dt>V, G, O</dt><dd>Voldoende, Goed, Onvoldoende. Zo worden handelingsdelen beoordeeld.</dd></div><div><dt>LJ3, LJ4</dt><dd>Leerjaar 3 en leerjaar 4. In de app staat dit als klas 3 en klas 4.</dd></div><div><dt>P1, P2, P3, P4</dt><dd>Periode 1 tot en met 4 van het schooljaar.</dd></div><div><dt>TW1, TW2, TW3</dt><dd>Toetsweek 1, 2 en 3.</dd></div><div><dt>Herkansbaar</dt><dd>Deze toets mag je opnieuw maken. In klas 4 mag je na periode 3 drie toetsen herkansen. Het hoogste cijfer telt.</dd></div><div><dt>Herexamen</dt><dd>Een tweede kans voor een centraal examen. Dit heet ook het 2e tijdvak, in juni.</dd></div><div><dt>LOB</dt><dd>Loopbaanoriëntatie en begeleiding. Opdrachten over je vervolgopleiding en beroep.</dd></div><div><dt>PWS</dt><dd>Profielwerkstuk. Een groot werkstuk in klas 4 dat je voldoende of goed moet afronden.</dd></div><div><dt>TL</dt><dd>Theoretische leerweg van het vmbo.</dd></div><div><dt>ckv, KV1</dt><dd>Culturele en kunstzinnige vorming. Moet gemiddeld voldoende zijn.</dd></div><div><dt>LO</dt><dd>Lichamelijke opvoeding, oftewel gym. LO2 is het examenvak met cijfers.</dd></div><div><dt>nask</dt><dd>Natuur- en scheikunde. Nask1 gaat vooral over natuurkunde, nask2 over scheikunde.</dd></div><div><dt>pvtt, pveo, pvzw</dt><dd>Praktijkvakken: technologie en toepassing, economie en ondernemen, zorg en welzijn.</dd></div><div><dt>Levo</dt><dd>Levensbeschouwelijke vorming. Eigen vak van school, telt niet mee voor slagen.</dd></div></dl>
+      </section>
       <section class="paneel" id="deelPaneel">
         <h2>App delen</h2>
         <div class="deel">
@@ -531,6 +558,15 @@ footer{font-size:.8rem;color:var(--dim);max-width:80ch}
   </main>
 </div>
 
+<div class="tour" id="tour" hidden role="dialog" aria-modal="true" aria-labelledby="tourTitel">
+  <div class="tour-kaart">
+    <button type="button" class="tour-skip" id="tourSkip">Overslaan</button>
+    <span class="tour-ico g2" id="tourIco"></span>
+    <h2 id="tourTitel"></h2>
+    <p id="tourTekst"></p>
+    <div class="tour-voet"><div class="tour-stippen" id="tourStippen"></div><div class="row"><button type="button" id="tourTerug">Terug</button><button type="button" class="primary" id="tourVolgende">Volgende</button></div></div>
+  </div>
+</div>
 <nav class="tabbar" aria-label="Menu">
   <a href="#home" data-nav="home"><span class="ico"><svg><use href="#i-home"/></svg></span>Lobby</a>
   <a href="#agenda" data-nav="agenda"><span class="ico"><svg><use href="#i-agenda"/></svg></span>Agenda<span class="badge" id="navBadgeM" hidden></span></a>
@@ -617,7 +653,11 @@ const VAKKEN = [
  {id:'kv1',naam:'Kunstvakken inclusief ckv',type:'vg',toetsen:[['311','LJ3 P1','CZP 1',1,0],['321','LJ3 P2','Architectuur',1,0],['322','LJ3 P2','Reflectie 1 en 2',1,0],['331','LJ3 P3','Reflectie 3 en 4',1,0],['341','LJ3 P4','CZP 2',1,0],['342','LJ3 P4','Fotografie',1,0]]},
  {id:'levo',naam:'Levensbeschouwelijke vorming',type:'info',toetsen:[['411','LJ4 TW1','Hindoeïsme',1,1],['421','LJ4 P2','Boeddhisme',1,0],['422','LJ4 P2','Gesprek over levensvragen',1,0]]},
 ];
-const TYPE_LABEL={ce:'Examenvak met CE',se:'Alleen schoolexamen',vg:'Moet voldoende zijn',hd:'Handelingsdelen, voldoende of goed',info:'Eigen examenstof school'};
+const TYPE_LABEL={ce:'Vak met eindexamen',se:'Alleen schooltoetsen',vg:'Moet voldoende zijn',hd:'Onderdelen voldoende of goed',info:'Telt niet mee voor slagen'};
+// 26-10-2026 MK periodes leesbaar maken: LJ4 TW1 wordt Klas 4, toetsweek 1
+function wanneer(p){ const m=String(p).match(/^LJ(\d)\s+(TW|P)\s*([\d/]+)$/); if(!m) return p;
+  const n=m[3].split('/'); const deel=n.length>1?`${m[2]==='TW'?'toetsweek':'periode'} ${n.length>2?n[0]+' t/m '+n[n.length-1]:n.join(' of ')}`:`${m[2]==='TW'?'toetsweek':'periode'} ${n[0]}`;
+  return `Klas ${m[1]}, ${deel}`; }
 const BY_ID=Object.fromEntries(VAKKEN.map(v=>[v.id,v]));
 const KEY='examencijfers-tl4-v6', OUDE_KEY='examencijfers-tl4-v5';
 
@@ -632,7 +672,7 @@ function load(){
   try{const oud=localStorage.getItem(OUDE_KEY); if(oud){const o=JSON.parse(oud); if(o&&o.pakket) Object.assign(liam,norm(o),{naam:liam.naam});}}catch(e){}
   return {actief:'l1',leerlingen:{l1:liam}};
 }
-function norm(s){return {naam:String(s.naam||'Leerling').slice(0,40),pakket:Array.isArray(s.pakket)?s.pakket.filter(id=>BY_ID[id]):[],cijfers:s.cijfers||{},ce:s.ce||{},agenda:Array.isArray(s.agenda)?s.agenda:[]};}
+function norm(s){return {naam:String(s.naam||'Leerling').slice(0,40),pakket:Array.isArray(s.pakket)?s.pakket.filter(id=>BY_ID[id]):[],cijfers:s.cijfers||{},ce:s.ce||{},agenda:Array.isArray(s.agenda)?s.agenda:[],tour:!!s.tour};}
 function save(){DB.leerlingen[DB.actief]=S; if(CLOUD) CLOUD.bewaar(S); else { try{localStorage.setItem(KEY,JSON.stringify(DB));}catch(e){} } document.getElementById('code').value=JSON.stringify(S);}
 
 const r1=x=>Math.round(x*10+1e-9)/10;
@@ -652,7 +692,7 @@ function seInfo(v){
 }
 function hdInfo(v){ let n=0,klaar=0,onv=0; for(const t of v.toetsen){ if(t[3]) continue; n++; const c=S.cijfers[v.id+'-'+t[0]]; if(c==='V'||c==='G') klaar++; else if(c==='O') onv++; } return {n,klaar,onv}; }
 function ceNodig(se,doel){ if(se==null) return null; return r1(2*doel-1-se); }
-function nodigTekst(n){ if(n==null) return '–'; if(n<=1) return 'altijd'; if(n>10) return 'niet haalbaar'; return fmt(n); }
+function nodigTekst(n){ if(n==null) return '–'; if(n<=1) return 'heb je al'; if(n>10) return 'lukt niet meer'; return fmt(n); }
 
 function renderPakket(){
   const el=document.getElementById('pakket'); el.innerHTML='';
@@ -678,19 +718,19 @@ function renderVakken(){
     d.addEventListener('toggle',()=>{d.open?openState.add(id):openState.delete(id);});
     d.innerHTML=`<summary>
         <div class="vhead"><span class="tag">${TYPE_LABEL[v.type]}</span><h3>${v.naam}</h3><span class="small muted" data-voortgang></span></div>
-        <div class="vstats"><div class="stat"><span class="k">SE nu</span><span class="v" data-se></span></div>
-        ${v.type==='ce'?'<div class="stat"><span class="k">CE nodig voor 6</span><span class="v" data-nodig></span></div>':''}
+        <div class="vstats"><div class="stat"><span class="k">Gemiddelde nu</span><span class="v" data-se></span></div>
+        ${v.type==='ce'?'<div class="stat"><span class="k">Eindexamen nodig voor 6</span><span class="v" data-nodig></span></div>':''}
         <span class="chev" aria-hidden="true">›</span></div>
       </summary>
       <div class="vbody">
-        <div class="tablewrap"><table><thead><tr><th>Nr</th><th>Wanneer</th><th>Toets</th><th class="r">Weging</th><th class="r">Cijfer</th></tr></thead><tbody></tbody></table></div>
+        <div class="tablewrap"><table><thead><tr><th>Nr</th><th>Wanneer</th><th>Toets</th><th class="r">Telt mee</th><th class="r">Cijfer</th></tr></thead><tbody></tbody></table></div>
         <div class="need" data-need></div>
       </div>`;
     const tb=d.querySelector('tbody');
     for(const t of v.toetsen){
       const key=id+'-'+t[0]; const c=S.cijfers[key];
       const tr=document.createElement('tr');
-      tr.innerHTML=`<td class="per">${t[0]}</td><td class="per">${t[1]}</td><td style="white-space:normal;min-width:180px">${t[2]}${t[4]?' <span class="hk">herkansbaar</span>':''}</td><td class="r num">${t[3]||'HD'}</td>
+      tr.innerHTML=`<td class="per">${t[0]}</td><td class="per" title="${t[1]}">${wanneer(t[1])}</td><td style="white-space:normal;min-width:180px">${t[2]}${t[4]?' <span class="hk">herkansbaar</span>':''}</td><td class="r num">${t[3]?t[3]+'x':'<span class="hk" title="Handelingsdeel: alleen voldoende of goed">V/G</span>'}</td>
         <td class="r"><input class="cell" id="c-${key}" inputmode="decimal" autocomplete="off" placeholder="${t[3]?'–':'V/G'}" aria-label="${t[3]?'Cijfer':'Beoordeling'} ${v.naam} ${t[0]}" value="${c!=null?String(c).replace('.',','):''}"></td>`;
       const inp=tr.querySelector('input');
       inp.addEventListener('input',()=>{
@@ -706,22 +746,23 @@ function renderVakken(){
 function updateVak(id){
   const v=BY_ID[id], d=document.getElementById('vak-'+id); if(!d) return;
   const i=seInfo(v);
-  const seEl=d.querySelector('[data-se]'); if(v.type==='hd'){ seEl.innerHTML=i.hd.onv?`<span class="grade g-bad">O</span>`:`<span class="grade ${i.hd.klaar===i.hd.n?'g-ok':''}">${i.hd.klaar}/${i.hd.n}</span>`; d.querySelector('.stat .k').textContent='Afgerond'; }
+  const seEl=d.querySelector('[data-se]'); if(v.type==='hd'){ seEl.innerHTML=i.hd.onv?`<span class="grade g-bad">O</span>`:`<span class="grade ${i.hd.klaar===i.hd.n?'g-ok':''}">${i.hd.klaar}/${i.hd.n}</span>`; d.querySelector('.stat .k').textContent='Gehaald'; }
   else seEl.innerHTML=i.se==null?'–':`<span class="grade ${gcls(i.se)}">${fmt(i.se)}</span>`;
-  d.querySelector('[data-voortgang]').textContent=(i.wTot?`${i.w} van ${i.wTot} wegingspunten ingevuld`:'')+(i.hd.n?`${i.wTot?' · ':''}${i.hd.klaar} van ${i.hd.n} handelingsdelen V of G`:'');
+  const nT=v.toetsen.filter(t=>t[3]).length, nI=v.toetsen.filter(t=>t[3]&&typeof S.cijfers[v.id+'-'+t[0]]==='number').length;
+  d.querySelector('[data-voortgang]').textContent=(nT?`${nI} van ${nT} cijfers ingevuld`:'')+(i.hd.n?`${nT?' · ':''}${i.hd.klaar} van ${i.hd.n} onderdelen gehaald (V of G)`:'');
   const nd=d.querySelector('[data-nodig]'); if(nd) nd.textContent=nodigTekst(ceNodig(i.se,6));
   const need=d.querySelector('[data-need]'); let h='';
   if(v.type==='ce'&&i.se!=null){
-    for(const doel of [5,6,7]) h+=`<div><span class="k">CE nodig voor eindcijfer ${doel}</span><span class="v">${nodigTekst(ceNodig(i.se,doel))}</span></div>`;
+    for(const doel of [5,6,7]) h+=`<div><span class="k">Op het eindexamen nodig voor een ${doel}</span><span class="v">${nodigTekst(ceNodig(i.se,doel))}</span></div>`;
   }
   if(i.rest>0&&i.w>0){
     const doelSE= v.type==='ce'?6.0:5.5;
     const n=(doelSE*i.wTot-i.sum)/i.rest;
-    h+=`<div><span class="k">Gemiddeld nodig op resterende toetsen voor SE ${fmt(doelSE)}</span><span class="v">${n<=1?'haalbaar':n>10?'niet haalbaar':fmt(Math.ceil(n*10-1e-9)/10)}</span></div>`;
+    h+=`<div><span class="k">Wat je gemiddeld nog moet halen voor een ${fmt(doelSE)}</span><span class="v">${n<=1?'heb je al':n>10?'lukt niet meer':fmt(Math.ceil(n*10-1e-9)/10)}</span></div>`;
   }
-  if(v.type==='vg') h+=`<div><span class="k">Eis</span><span class="v small">gemiddeld voldoende</span></div>`;
-  if(i.hd.n) h+=`<div><span class="k">Handelingsdelen (HD)</span><span class="v small">${i.hd.onv?i.hd.onv+' onvoldoende':'allemaal V of G nodig'}</span></div>`;
-  if(v.type==='info') h+=`<div><span class="k">Telt niet mee</span><span class="v small">in de slaag/zakregeling</span></div>`;
+  if(v.type==='vg') h+=`<div><span class="k">Wat moet je halen</span><span class="v small">gemiddeld een voldoende</span></div>`;
+  if(i.hd.n) h+=`<div><span class="k">Onderdelen met V of G (handelingsdelen)</span><span class="v small">${i.hd.onv?i.hd.onv+' nog onvoldoende':'allemaal V of G nodig'}</span></div>`;
+  if(v.type==='info') h+=`<div><span class="k">Telt niet mee</span><span class="v small">voor slagen of zakken</span></div>`;
   need.innerHTML=h; need.hidden=!h;
 }
 
@@ -757,13 +798,15 @@ function renderUitslag(){
   const n4=ein.filter(e=>e===4).length, n5=ein.filter(e=>e===5).length, onder4=ein.some(e=>e<4), n7=ein.filter(e=>e>=7).length;
   const comp = !onder4 && ((n4===0&&n5<=1)||(n4===1&&n5===0&&n7>=1)||(n4===0&&n5===2&&n7>=1));
   const checks=[];
-  checks.push({ok:ceAvg==null?null:ceAvg>=5.5,t:`CE gemiddelde ${ceAvg==null?'–':fmt(r1(ceAvg))} (minimaal 5,5)`});
-  checks.push({ok:ne&&ne.eind!=null?ne.eind>=5:null,t:ne?`Nederlands eindcijfer ${ne.eind??'–'} (minimaal 5)`:'Nederlands staat niet in het pakket'});
-  checks.push({ok:ein.length?comp:null,t:`Eindcijfers: ${n4} keer een 4, ${n5} keer een 5, ${n7} keer 7 of hoger${onder4?', en een cijfer onder de 4':''}`});
-    if(kv1) checks.push({ok:kv1.se==null?null:kv1.se>=5.5,t:`Kunstvakken inclusief ckv gemiddeld ${fmt(kv1.se)} (voldoende nodig)`});
+  checks.push({ok:ceAvg==null?null:ceAvg>=5.5,t:ceAvg==null?'Gemiddelde van je eindexamens: nog niet bekend (je hebt minstens een 5,5 nodig)':`Gemiddelde van je eindexamens: ${fmt(r1(ceAvg))}${tel.some(v=>v.type==='ce'&&S.ce[v.id]==null)?' (geschat)':''}. Je hebt minstens een 5,5 nodig.`});
+  checks.push({ok:ne&&ne.eind!=null?ne.eind>=5:null,t:!ne?'Nederlands staat niet in je vakkenpakket':ne.eind==null?'Nederlands: je eindcijfer moet minstens een 5 zijn. Nog niet bekend.':`Nederlands: eindcijfer ${ne.eind}. Dit moet minstens een 5 zijn.`});
+  { const onv=[]; if(n5) onv.push(n5===1?'één 5':n5+' keer een 5'); if(n4) onv.push(n4===1?'één 4':n4+' keer een 4');
+    const tk=!ein.length?'Eindcijfers: nog niet bekend':onder4?'Je hebt een eindcijfer lager dan een 4. Dan slaag je niet.':!onv.length?'Geen onvoldoendes bij je eindcijfers':comp?`Je hebt ${onv.join(' en ')}. Dat mag${n4||n5===2?', omdat je ook een 7 of hoger hebt':''}.`:`Je hebt ${onv.join(' en ')}. Dat is te veel${(n4||n5===2)&&!n7?', of je mist een 7 of hoger om het goed te maken':''}.`;
+    checks.push({ok:ein.length?comp:null,t:tk}); }
+    if(kv1) checks.push({ok:kv1.se==null?null:kv1.se>=5.5,t:kv1.se==null?'Kunstvakken (ckv): moet gemiddeld voldoende zijn. Nog geen cijfers.':`Kunstvakken (ckv): gemiddeld ${fmt(kv1.se)}${kv1.se>=5.5?', dat is voldoende':', dit moet een voldoende worden'}.`});
   for(const id of ['lo','lo2']){ if(!S.pakket.includes(id)) continue; const h=seInfo(BY_ID[id]).hd; if(!h.n) continue;
-    checks.push({ok:h.onv?false:(h.klaar===h.n?true:null),t:`${BY_ID[id].naam}: ${h.klaar} van ${h.n} handelingsdelen V of G${h.onv?', '+h.onv+' onvoldoende':''}`}); }
-  checks.push({ok:null,t:'LOB en profielwerkstuk: moeten voldoende of goed zijn afgerond',info:true});
+    checks.push({ok:h.onv?false:(h.klaar===h.n?true:null),t:`${BY_ID[id].naam}: ${h.klaar} van de ${h.n} onderdelen gehaald (V of G)${h.onv?'. Nog '+h.onv+' onvoldoende':''}`}); }
+  checks.push({ok:null,t:'Je loopbaanopdrachten (LOB) en je profielwerkstuk moet je ook voldoende afronden. Die staan niet in deze app.',info:true});
   const ul=document.getElementById('checks'); ul.innerHTML='';
   for(const c of checks){const li=document.createElement('li'); li.innerHTML=`<span class="dot ${c.ok===true?'ok':c.ok===false?'bad':'warn'}"></span><span>${c.t}</span>`; ul.appendChild(li);}
   const hard=checks.filter(c=>!c.info);
@@ -773,10 +816,10 @@ function renderUitslag(){
   const nogOpen=rows.filter(r=>r.i.se!=null&&r.i.rest>0).length;
   const uitleg=document.getElementById('uitslagUitleg'); let u='';
   if(!tel.length){txt.textContent='Kies eerst het vakkenpakket';pill.className='pill warn';pill.textContent='Geen vakken';u='Ga naar Instellingen en vink je vakken aan.';}
-  else if(gezakt){txt.textContent='Nog niet genoeg om te slagen';pill.className='pill bad';pill.textContent=compleet?'Gezakt':'Let op';u='Met de cijfers tot nu toe voldoet niet alles aan de slaagregels. Kijk bij de rode punten hieronder wat er beter moet.';}
-  else if(geslaagd){txt.textContent='Op koers om te slagen';pill.className='pill ok';pill.textContent=compleet?'Geslaagd':'Voorlopig';u=compleet?'Alle PTA cijfers staan erin en alle regels zijn gehaald.':'Met de cijfers tot nu toe worden alle slaagregels gehaald. Dit wordt definitief als alle PTA toetsen en het CE zijn gemaakt.';}
-  else {txt.textContent='Op koers met de cijfers tot nu toe';pill.className='pill warn';pill.textContent='Onvolledig';
-    u='Er gaat nog niets mis, maar nog niet elke regel is te controleren.'+(zonder.length?' Nog geen cijfers voor: '+zonder.join(', ')+'.':'')+(checks.some(c=>!c.info&&c.ok===null&&/handelingsdelen/.test(c.t))?' Ook staan nog niet alle handelingsdelen van LO op V of G.':'')+' Zodra die er zijn, toont dit blok Op koers of Let op.';}
+  else if(gezakt){txt.textContent='Nog niet genoeg om te slagen';pill.className='pill bad';pill.textContent=compleet?'Niet geslaagd':'Let op';u='Met je cijfers van nu zou je nog niet slagen. Bij de rode bolletjes hieronder zie je wat er beter moet. Je hebt nog tijd om het op te halen.';}
+  else if(geslaagd){txt.textContent='Op koers om te slagen';pill.className='pill ok';pill.textContent=compleet?'Geslaagd':'Voorlopig';u=compleet?'Al je cijfers staan erin en je haalt alle regels om te slagen.':'Met je cijfers van nu zou je slagen. Dat is pas zeker als al je toetsen en eindexamens gemaakt zijn.';}
+  else {txt.textContent='Goed bezig tot nu toe';pill.className='pill warn';pill.textContent='Nog niet compleet';
+    u='Tot nu toe gaat alles goed. Alleen kunnen we nog niet alles uitrekenen.'+(zonder.length?' Er zijn nog geen cijfers voor '+zonder.join(', ').replace(/, ([^,]*)$/,' en $1')+'.':'')+(checks.some(c=>!c.info&&c.ok===null&&/onderdelen/.test(c.t))?' Ook heb je bij gym (LO) nog niet alle onderdelen gehaald.':'')+' Zodra dat er is, zie je hier of je op koers ligt.';}
   uitleg.textContent=u;
   renderRisico(rows); renderHerkansing();
   let wS=0,wT=0,seS=0,seN=0; for(const id of S.pakket){ const v=BY_ID[id]; const i=seInfo(v); wS+=i.w; wT+=i.wTot; if(['ce','se'].includes(v.type)&&i.se!=null){seS+=i.se;seN++;} }
@@ -802,12 +845,13 @@ function status(a){ const {t}=toetsInfo(a); const c=t?S.cijfers[a.vak+'-'+t[0]]:
 function aTitel(a){ const {v,t}=toetsInfo(a); return `<strong>${v?v.naam:a.vak}</strong> · ${t?t[0]+' '+t[2]:esc(a.oms||'Toets')}`; }
 function esc(x){return String(x).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 function nodigBij(a,st){ const {v,t}=toetsInfo(a); if(!t||!t[3]||!['kom','vandaag'].includes(st)||!['ce','se','vg'].includes(v.type)) return '';
-  const i=seInfo(v); const f=T=>{ const n=(T*(i.w+t[3])-i.sum)/t[3]; return n<=1?'altijd':n>10?'niet haalbaar':fmt(Math.ceil(n*10-1e-9)/10); };
-  return `<span class="nodig">Nodig voor SE 6,0: ${f(5.95)} · voor SE 7,0: ${f(6.95)}${i.w?'':' (eerste cijfer)'}</span>`; }
+  const i=seInfo(v); const f=T=>{ const n=(T*(i.w+t[3])-i.sum)/t[3]; return n<=1?'lukt altijd':n>10?'lukt niet meer':fmt(Math.ceil(n*10-1e-9)/10); };
+  if(!i.w) return `<span class="nodig">Je eerste cijfer voor dit vak · haal een 6,0 voor een voldoende</span>`;
+  return `<span class="nodig">Voor gemiddeld een 6: haal ${f(5.95)} · voor een 7: ${f(6.95)}</span>`; }
 function vulToetsKeuze(){
   const vak=$('aVak').value, sel=$('aToets'); sel.innerHTML='';
   const v=BY_ID[vak]; if(v) for(const t of v.toetsen){ if(S.cijfers[vak+'-'+t[0]]!=null) continue; const o=document.createElement('option'); o.value=t[0]; o.textContent=`${t[0]} ${t[2]}`; sel.appendChild(o); }
-  const o=document.createElement('option'); o.value=''; o.textContent='Andere toets (niet PTA)'; sel.appendChild(o);
+  const o=document.createElement('option'); o.value=''; o.textContent='Andere toets (telt niet mee voor examen)'; sel.appendChild(o);
   $('aOmsLabel').hidden=sel.value!=='';
 }
 function renderAgenda(){
@@ -844,9 +888,9 @@ const TL=[
  {k:'tw',naam:'Toetsweek 1',van:'2026-10-27',tot:'2026-11-03'},
  {k:'tw',naam:'Toetsweek 2',van:'2027-01-07',tot:'2027-01-14'},
  {k:'tw',naam:'Toetsweek 3',van:'2027-03-18',tot:'2027-03-25'},
- {k:'hk',naam:'Herkansingen (na periode 3, datum volgt)',van:'2027-03-29',tot:'2027-04-09',vaag:true},
- {k:'ce',naam:'Centraal examen 1e tijdvak',van:'2027-05-14',tot:'2027-06-01'},
- {k:'ce2',naam:'2e tijdvak (herexamen)',van:'2027-06-22',tot:'2027-06-29'},
+ {k:'hk',naam:'Herkansingen (datum volgt nog)',van:'2027-03-29',tot:'2027-04-09',vaag:true},
+ {k:'ce',naam:'Eindexamen (centraal examen)',van:'2027-05-14',tot:'2027-06-01'},
+ {k:'ce2',naam:'Herexamen (2e tijdvak)',van:'2027-06-22',tot:'2027-06-29'},
 ];
 const dag=iso=>{const [y,m,d]=iso.split('-').map(Number); return Date.UTC(y,m-1,d)/864e5;};
 function renderTijdlijn(){
@@ -862,7 +906,7 @@ function renderTijdlijn(){
     const li=document.createElement('li'); if(nu>t) li.className='voorbij';
     li.innerHTML=`<span class="sw" style="background:${kleur[e.k]}${e.k==='ce2'?';opacity:.45':''}"></span><span>${e.naam}</span><span class="wanneer">${w}</span>`; ul.appendChild(li); }
   const ce=dag('2027-05-14'), volgende=TL.find(e=>dag(e.tot)>=nu&&e.k==='tw');
-  $('tlAftel').textContent= nu<ce ? `Nog ${Math.ceil((ce-nu)/7)} weken tot het centraal examen` : (nu<=dag('2027-06-01')?'Het centraal examen is bezig':'Het centraal examen is voorbij');
+  $('tlAftel').textContent= nu<ce ? `Nog ${Math.ceil((ce-nu)/7)} weken tot het eindexamen` : (nu<=dag('2027-06-01')?'Het eindexamen is bezig':'Het eindexamen is voorbij');
   $('tlSub').textContent= volgende ? (nu>=dag(volgende.van)?`${volgende.naam} is nu bezig`:`${volgende.naam} begint ${datumNL(volgende.van)}`) : '';
 }
 
@@ -879,11 +923,11 @@ function renderHerkansing(){
       if(seNa>i.se) kand.push({v,t,c,i,seNa,winst:rawNa-i.raw}); } }
   kand.sort((p,q)=>q.winst-p.winst);
   const ul=$('hkLijst'); ul.innerHTML='';
-  if(!kand.length){ ul.innerHTML=`<li><span></span><span class="small muted">Nog geen toetsen waar een herkansing met een ${fmt(doel)} iets oplevert. De adviseur vult zich zodra er cijfers zijn van herkansbare toetsen uit klas 4.</span><span></span></li>`; $('hkAantal').textContent=''; return; }
+  if(!kand.length){ ul.innerHTML=`<li><span></span><span class="small muted">Er is nog geen toets waar een herkansing met een ${fmt(doel)} iets oplevert. Zodra je cijfers hebt van toetsen die je mag herkansen, zie je hier je beste keuzes.</span><span></span></li>`; $('hkAantal').textContent=''; return; }
   kand.forEach((k,n)=>{ const li=document.createElement('li'); if(n<3) li.className='top';
-    let sub=`Nu ${fmt(k.c)} · weging ${k.t[3]} · SE ${fmt(k.i.se)} wordt ${fmt(k.seNa)}`;
-    if(k.v.type==='ce'){ const a=ceNodig(k.i.se,6), b=ceNodig(k.seNa,6); if(a!==b) sub+=` · CE nodig voor 6: ${nodigTekst(a)} wordt ${nodigTekst(b)}`; }
-    else { const a=r0(k.i.se), b=r0(k.seNa); if(a!==b) sub+=` · eindcijfer ${a} wordt ${b}`; }
+    let sub=`Nu een ${fmt(k.c)} · telt ${k.t[3]}x mee · je gemiddelde gaat van ${fmt(k.i.se)} naar ${fmt(k.seNa)}`;
+    if(k.v.type==='ce'){ const a=ceNodig(k.i.se,6), b=ceNodig(k.seNa,6); if(a!==b) sub+=` · op het eindexamen heb je dan ${nodigTekst(b)} nodig in plaats van ${nodigTekst(a)}`; }
+    else { const a=r0(k.i.se), b=r0(k.seNa); if(a!==b) sub+=` · eindcijfer ${a} wordt een ${b}`; }
     li.innerHTML=`<span class="hk-rang">${n<3?n+1:''}</span><span class="hk-wat"><strong>${k.v.naam}</strong> · ${k.t[0]} ${k.t[2]}</span><span class="hk-effect">+${fmt(k.seNa-k.i.se)}</span><span class="hk-sub">${sub}</span>`;
     ul.appendChild(li); });
   {const n=Math.min(3,kand.length); $("hkAantal").textContent=`(${n} tip${n>1?"s":""})`;}
@@ -893,12 +937,12 @@ function renderHerkansing(){
 function renderRisico(rows){
   const el=$('risico'); const r=[];
   for(const {v,i,eind} of rows){ if(i.se==null) continue;
-    if(v.type==='ce'){ const n=ceNodig(i.se,6); if(i.se<5.5||n>=6.5) r.push({v,ernst:n>=7.5||i.se<5?'':'w',why:`SE ${fmt(i.se)}, CE nodig voor 6: ${nodigTekst(n)}`}); }
-    else if(eind!=null&&eind<6) r.push({v,ernst:eind<5?'':'w',why:`SE ${fmt(i.se)}, eindcijfer ${eind}`}); }
+    if(v.type==='ce'){ const n=ceNodig(i.se,6); if(i.se<5.5||n>=6.5) r.push({v,ernst:n>=7.5||i.se<5?'':'w',why:`gemiddeld ${fmt(i.se)}, eindexamen nodig: ${nodigTekst(n)}`}); }
+    else if(eind!=null&&eind<6) r.push({v,ernst:eind<5?'':'w',why:`gemiddeld ${fmt(i.se)}, eindcijfer ${eind}`}); }
   const metCijfer=rows.filter(x=>x.i.se!=null).length;
   if(!metCijfer){el.innerHTML='';return;}
-  el.innerHTML= r.length ? `<span class="small muted">Let op bij:</span>`+r.map(x=>`<span class="chip ${x.ernst}" title="${x.why}">${x.v.naam} · ${x.why}</span>`).join('')
-    : `<span class="chip ok">Geen risicovakken</span><span class="small muted">Bij alle vakken met cijfers is een 6 haalbaar met een CE onder de 6,5.</span>`;
+  el.innerHTML= r.length ? `<span class="small muted">Extra aandacht voor:</span>`+r.map(x=>`<span class="chip ${x.ernst}" title="${x.why}">${x.v.naam} · ${x.why}</span>`).join('')
+    : `<span class="chip ok">Geen zorgenvakken</span><span class="small muted">Bij al je vakken heb je op het eindexamen minder dan een 6,5 nodig voor een voldoende.</span>`;
 }
 
 // Magister plakken
@@ -978,10 +1022,32 @@ function renderHome(){
   $('navBadge').textContent=open.length||''; $('navBadge').hidden=!open.length; $('navBadgeM').textContent=open.length||''; $('navBadgeM').hidden=!open.length;
   const zet=(id,t)=>{const e=$(id); if(e) e.textContent=t;};
   zet('tileAgenda',kom.length?`${kom.length} toets${kom.length>1?'en':''} gepland`:'Nog niets gepland');
-  zet('tileCijfers',`${p}% van de PTA ingevuld`);
+  zet('tileCijfers',`${p}% van je toetsen gehad`);
   zet('tileUitslag',UIT.pill?UIT.pill:'');
   zet('tileHerk',$('hkAantal').textContent.replace(/[()]/g,'')||'Nog geen tips');
 }
+// Rondleiding
+const TOUR=[
+ {ico:'home',kl:'g2',titel:n=>`Welkom${n?', '+n:''}!`,tekst:'Met deze app houd je je examencijfers bij en zie je of je op koers ligt om te slagen. In een paar stappen laten we zien waar alles staat.'},
+ {ico:'inst',kl:'g6',nav:'instellingen',titel:()=>'Kies je vakken',tekst:'Begin bij Instellingen. Vink daar de vakken aan die jij hebt. Dan weet de app welke toetsen bij jou horen.'},
+ {ico:'cijfers',kl:'g2',nav:'cijfers',titel:()=>'Cijfers invullen',tekst:'Na een toets vul je hier je cijfer in. De app rekent meteen je gemiddelde uit, en wat je op het eindexamen nodig hebt.'},
+ {ico:'magister',kl:'g5',nav:'magister',titel:()=>'Snel uit Magister',tekst:'Geen zin om alles over te typen? Kopieer je cijferoverzicht uit Magister en plak het hier. De app vult alles zelf in.'},
+ {ico:'agenda',kl:'g1',nav:'agenda',titel:()=>'Toetsagenda',tekst:'Zet je toetsen in de agenda. Je ziet welk cijfer je moet halen, en na de toets krijg je een seintje om je cijfer in te vullen.'},
+ {ico:'uitslag',kl:'g3',nav:'uitslag',titel:()=>'Ga ik slagen?',tekst:'Hier zie je of je met je cijfers van nu zou slagen, en bij welke vakken je extra moet opletten.'},
+ {ico:'herk',kl:'g4',nav:'herkansen',titel:()=>'Slim herkansen',tekst:'Je mag drie toetsen opnieuw maken. Hier zie je bij welke toetsen dat het meeste oplevert.'},
+ {ico:'ster',kl:'g1',nav:'instellingen',titel:()=>'Snap je een woord niet?',tekst:'Bij Instellingen staat een lijst met alle afkortingen, zoals SE, CE en PTA. Deze rondleiding kun je daar ook opnieuw bekijken.'},
+];
+let tourStap=0;
+function tourLicht(nav){ for(const a of document.querySelectorAll('[data-nav]')) a.classList.toggle('tour-licht',!!nav&&(a.dataset.nav===nav||(a.dataset.nav==='meer'&&['herkansen','magister','instellingen'].includes(nav)&&a.closest('.tabbar')))); }
+function toonTour(stap){
+  tourStap=stap; const s=TOUR[stap]; const voornaam=String(S.naam||'').split(' ')[0];
+  $('tourIco').className='tour-ico '+s.kl; $('tourIco').innerHTML=`<svg><use href="#i-${s.ico}"/></svg>`;
+  $('tourTitel').textContent=s.titel(voornaam==='Leerling'?'':voornaam); $('tourTekst').textContent=s.tekst;
+  $('tourStippen').innerHTML=TOUR.map((_,i)=>`<span class="${i===stap?'aan':''}"></span>`).join('');
+  $('tourTerug').hidden=stap===0; $('tourVolgende').textContent=stap===TOUR.length-1?'Aan de slag':'Volgende';
+  $('tour').hidden=false; tourLicht(s.nav); $('tourVolgende').focus();
+}
+function sluitTour(){ $('tour').hidden=true; tourLicht(null); if(!S.tour){ S.tour=true; save(); } }
 // Navigatie
 const VIEWS=['home','agenda','cijfers','uitslag','herkansen','magister','instellingen'];
 function go(v,push=true){ if(!VIEWS.includes(v)) v='home';
@@ -1027,11 +1093,17 @@ $('mgToepas').addEventListener('click',()=>{ for(const m of mgVoorstel){ S.cijfe
   S.pakket.sort((a,b)=>VAKKEN.indexOf(BY_ID[a])-VAKKEN.indexOf(BY_ID[b]));
   const n=mgVoorstel.length; mgVoorstel=[]; save(); renderAll(); $('mgResultaat').hidden=true; $('mgTekst').value=''; $('mgMelding').textContent=`${n} cijfers opgeslagen.`; });
 $('beheer').open=false;
+$('tourVolgende').addEventListener('click',()=>{ if(tourStap<TOUR.length-1) toonTour(tourStap+1); else { sluitTour(); if(!S.pakket.length) go('instellingen'); } });
+$('tourTerug').addEventListener('click',()=>toonTour(Math.max(0,tourStap-1)));
+$('tourSkip').addEventListener('click',sluitTour);
+$('tourOpnieuw').addEventListener('click',()=>toonTour(0));
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&!$('tour').hidden) sluitTour(); });
 for(const a of document.querySelectorAll('[data-nav]')) a.addEventListener('click',e=>{ const v=a.dataset.nav; if(v==='meer'){ e.preventDefault(); $('meerMenu').hidden=!$('meerMenu').hidden; return; } e.preventDefault(); go(v); });
 document.addEventListener('click',e=>{ const l=e.target.closest('a[href^="#"]'); if(l&&!l.dataset.nav){ const v=l.getAttribute('href').slice(1); if(VIEWS.includes(v)){ e.preventDefault(); go(v); } } if(!e.target.closest('#meerMenu')&&!e.target.closest('[data-nav="meer"]')) $('meerMenu').hidden=true; });
 window.addEventListener('hashchange',()=>go(location.hash.slice(1),false));
 renderAll();
 go(location.hash.slice(1)||'home',false);
+if(!window.supabase&&!S.tour) setTimeout(()=>toonTour(0),400);
 
 // 26-10-2026 MK inloggen en online opslag via Supabase
 const SB_URL='https://vciztftatlkjrkmnsztm.supabase.co';
@@ -1080,6 +1152,7 @@ function startMet(s,nieuw){
   openState.clear(); renderAll();
   go(nieuw?'instellingen':(location.hash.slice(1)||'home'),false);
   if(nieuw) push(); else if(!wijzigingOpen) syncStatus('Opgeslagen','ok');
+  if(!S.tour) setTimeout(()=>toonTour(0),400);
 }
 async function naInloggen(user){
   USER=user; UID=user.id; const meta=user.user_metadata||{};
