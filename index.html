@@ -235,7 +235,9 @@ footer{font-size:.8rem;color:var(--dim);max-width:80ch}
 .login-tabs button[aria-selected="true"]{background:rgba(255,255,255,.1);color:var(--ink)}
 .login-form{display:grid;gap:10px}
 .login-form label{display:grid;gap:4px;font-size:.8rem;color:var(--muted);font-weight:700}
-.login-form input{font-size:1rem;padding:11px 12px}
+.login-form input,.login-form select{font-size:1rem;padding:11px 12px;width:100%;min-width:0}
+.login-form .pakket label{display:inline-flex;grid-template-columns:none;flex-direction:row;align-items:center;gap:6px;font-weight:600;color:var(--ink)}
+.login-form .pakket input{width:auto;padding:0}
 .login-form button.primary{padding:12px;font-size:1rem;margin-top:4px}
 .ww-veld{position:relative;display:block}
 .ww-veld input{width:100%;padding-right:48px}
@@ -340,6 +342,8 @@ details.set[open]>summary .chev{transform:rotate(90deg)}
 /* lobby v2 */
 .stat{position:relative;overflow:hidden;gap:4px;padding:18px}
 .stat::after{content:"";position:absolute;right:-30px;top:-30px;width:110px;height:110px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.06),transparent 70%);pointer-events:none}
+.vstats .stat{padding:0;overflow:visible}
+.vstats .stat::after{display:none}
 .stat-ico{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;color:#fff;margin-bottom:6px;box-shadow:0 6px 18px rgba(0,0,0,.25)}
 .stat-ico svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .vakken-blok{display:grid;gap:12px}
@@ -529,6 +533,17 @@ body.feest{background-image:radial-gradient(800px 400px at 90% -10%,rgba(255,95,
 .vast-leren.aan{border-color:rgba(74,222,155,.5);color:var(--ok)}
 @media (max-width:640px){.prof-grid{grid-template-columns:minmax(0,1fr)}.feest-banner,.profiel-tip{grid-template-columns:auto minmax(0,1fr)}.feest-banner button,.profiel-tip .knop{grid-column:1/-1}}
 @media (prefers-reduced-motion:reduce){.confetti,.ballon{display:none}.feest-banner .taart{animation:none}}
+.eigen-form{display:grid;grid-template-columns:minmax(0,2fr) auto minmax(70px,90px) auto;gap:8px;margin-top:10px}
+.eigen-form input,.eigen-form select{padding:8px 10px;min-width:0}
+.mini-weg{padding:2px 9px;font-size:1rem;line-height:1.2;background:transparent;border:1px solid var(--line2);color:var(--muted)}
+.mini-weg:hover{color:var(--bad);border-color:var(--bad)}
+.pakket-knoppen{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.pakket-knoppen button{font-size:.8rem;padding:6px 11px}
+.login-vakken{border:1px solid var(--line2);border-radius:12px;padding:8px 12px}
+.login-vakken summary{cursor:pointer;font-weight:700;font-size:.9rem}
+.login-vakken .pakket{margin-top:10px}
+.login-vakken .pakket label{font-size:.82rem;padding:5px 10px}
+@media (max-width:640px){.eigen-form{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.eigen-form input[name=naam]{grid-column:1/-1}}
 </style>
 
 </head>
@@ -593,7 +608,7 @@ body.feest{background-image:radial-gradient(800px 400px at 90% -10%,rgba(255,95,
           <svg viewBox="0 0 120 120"><defs><linearGradient id="ringGr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffa23a"/><stop offset="1" stop-color="#e04a8f"/></linearGradient></defs>
             <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="11"/>
             <circle id="ringBoog" cx="60" cy="60" r="52" fill="none" stroke="url(#ringGr)" stroke-width="11" stroke-linecap="round" stroke-dasharray="0 400"/></svg>
-          <div class="midden"><b id="ringPct">0%</b><span>toetsen gehad</span></div>
+          <div class="midden"><b id="ringPct">0%</b><span id="ringLabel">toetsen gehad</span></div>
         </div>
       </div>
 
@@ -606,12 +621,17 @@ body.feest{background-image:radial-gradient(800px 400px at 90% -10%,rgba(255,95,
         <a class="stat" href="#uitslag"><span class="stat-ico g2"><svg><use href="#i-grafiek"/></svg></span><span class="k">Gemiddeld cijfer</span><span class="v num" id="statGem">–</span><span class="s">van je schooltoetsen</span></a>
         <a class="stat" href="#agenda"><span class="stat-ico g1"><svg><use href="#i-agenda"/></svg></span><span class="k">Toetsen gepland</span><span class="v num" id="statToetsen">0</span><span class="s">in je agenda</span></a>
         <a class="stat" href="#agenda" id="statOpenTile"><span class="stat-ico g3"><svg><use href="#i-bel"/></svg></span><span class="k">Nog invullen</span><span class="v num" id="statOpen">0</span><span class="s">cijfers van gemaakte toetsen</span></a>
-        <div class="stat"><span class="stat-ico g4"><svg><use href="#i-klok"/></svg></span><span class="k">Weken tot eindexamen</span><span class="v num" id="statCE">–</span><span class="s">start 14 mei 2027</span></div>
+        <div class="stat"><span class="stat-ico g4"><svg><use href="#i-klok"/></svg></span><span class="k" id="statCEk">Weken tot eindexamen</span><span class="v num" id="statCE">–</span><span class="s" id="statCEs">start 14 mei 2027</span></div>
       </div>
 
+      <section class="profiel-tip" id="jaarTip" hidden>
+        <span class="ico g2"><svg><use href="#i-ster"/></svg></span>
+        <div><b>Nieuw schooljaar!</b><small id="jaarTipTekst"></small></div>
+        <div class="row"><button type="button" class="primary" id="jaarJa">Ja, klopt</button><button type="button" id="jaarNee">Nee</button></div>
+      </section>
       <section class="profiel-tip" id="profielTip" hidden>
         <span class="ico g1"><svg><use href="#i-school"/></svg></span>
-        <div><b>Maak de app van jou</b><small>Vul je school, plaats en verjaardag in. Dan zie je je schoolvakanties in de agenda.</small></div>
+        <div><b>Maak de app van jou</b><small>Vul je school, klas, plaats en verjaardag in. Dan zie je je schoolvakanties in de agenda.</small></div>
         <a class="knop primary" href="#instellingen" id="profielTipKnop">Invullen</a>
       </section>
       <section class="herinner" id="herinner" hidden aria-labelledby="herinnerKop">
@@ -689,6 +709,7 @@ body.feest{background-image:radial-gradient(800px 400px at 90% -10%,rgba(255,95,
                 <label>Vak<select id="aVak"></select></label>
                 <label>Toets<select id="aToets"></select></label>
                 <label id="aOmsLabel">Omschrijving<input id="aOms" autocomplete="off" placeholder="Bijvoorbeeld SO hoofdstuk 3"></label>
+                <label id="aWegingLabel" hidden>Telt mee<select id="aWeging"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="0.5">0,5x</option></select></label>
                 <button type="submit" class="primary">Toevoegen</button>
               </form>
             </div>
@@ -715,13 +736,13 @@ body.feest{background-image:radial-gradient(800px 400px at 90% -10%,rgba(255,95,
 
     <!-- CIJFERS -->
     <section class="view" data-view="cijfers" hidden>
-      <div class="vkop"><span class="eyebrow">Invoeren</span><h1>Cijfers per vak</h1><p>Tik op een vak en vul je cijfers uit Magister in. Bij onderdelen zonder cijfer (zoals bij gym) vul je V (voldoende), G (goed) of O (onvoldoende) in.</p></div>
+      <div class="vkop"><span class="eyebrow">Invoeren</span><h1>Cijfers per vak</h1><p id="cijfersIntro">Tik op een vak en vul je cijfers uit Magister in. Bij onderdelen zonder cijfer (zoals bij gym) vul je V (voldoende), G (goed) of O (onvoldoende) in.</p></div>
       <div class="vakken" id="vakken"></div>
     </section>
 
     <!-- UITSLAG -->
     <section class="view" data-view="uitslag" hidden>
-      <div class="vkop"><span class="eyebrow">Slaag of zak</span><h1>Verwachte uitslag</h1><p>Zo sta je ervoor als je eindexamens net zo gaan als je schooltoetsen.</p></div>
+      <div class="vkop"><span class="eyebrow" id="uitslagEyebrow">Slaag of zak</span><h1 id="uitslagTitel">Verwachte uitslag</h1><p id="uitslagIntro">Zo sta je ervoor als je eindexamens net zo gaan als je schooltoetsen.</p></div>
       <section class="paneel">
         <div class="status"><div class="big" id="uitslagTekst">…</div><span class="pill" id="uitslagPill"></span></div>
         <p class="uitleg" id="uitslagUitleg"></p>
@@ -731,12 +752,12 @@ body.feest{background-image:radial-gradient(800px 400px at 90% -10%,rgba(255,95,
       <section class="paneel">
         <h2>Per vak</h2>
         <div class="tablewrap"><table>
-          <thead><tr><th>Vak</th><th class="r">Gemiddelde school</th><th class="r">Eindexamen (gok)</th><th class="r">Eindcijfer</th><th class="r">Eindexamen nodig voor 6</th></tr></thead>
+          <thead id="overzichtKop"><tr><th>Vak</th><th class="r">Gemiddelde school</th><th class="r">Eindexamen (gok)</th><th class="r">Eindcijfer</th><th class="r">Eindexamen nodig voor 6</th></tr></thead>
           <tbody id="overzicht"></tbody>
         </table></div>
-        <p class="small muted" style="margin:0">Bij Eindexamen (gok) kun je invullen welk cijfer je denkt te halen. Laat je het leeg, dan rekent de app met je gemiddelde van school.</p>
+        <p class="small muted" style="margin:0" id="uitslagCeTip">Bij Eindexamen (gok) kun je invullen welk cijfer je denkt te halen. Laat je het leeg, dan rekent de app met je gemiddelde van school.</p>
       </section>
-      <footer><b>Hoe rekent de app?</b> Je gemiddelde van school telt de toetsen mee zoals in het PTA staat (een toets die 2x meetelt, weegt dubbel). Je eindcijfer is het gemiddelde van school en je eindexamen samen, afgerond op een heel cijfer. Je slaagt als: je eindexamens gemiddeld een 5,5 of hoger zijn, Nederlands minstens een 5 is, je geen cijfer onder de 4 hebt, en je hooguit één 5 hebt. Een 4 of twee 5en mag ook, als je dan minstens één 7 of hoger hebt. Het examenreglement van school is altijd leidend.</footer>
+      <footer id="uitslagVoet"><b>Hoe rekent de app?</b> Je gemiddelde van school telt de toetsen mee zoals in het PTA staat (een toets die 2x meetelt, weegt dubbel). Je eindcijfer is het gemiddelde van school en je eindexamen samen, afgerond op een heel cijfer. Je slaagt als: je eindexamens gemiddeld een 5,5 of hoger zijn, Nederlands minstens een 5 is, je geen cijfer onder de 4 hebt, en je hooguit één 5 hebt. Een 4 of twee 5en mag ook, als je dan minstens één 7 of hoger hebt. Het examenreglement van school is altijd leidend.</footer>
     </section>
 
     <!-- HERKANSEN -->
@@ -798,12 +819,14 @@ body.feest{background-image:radial-gradient(800px 400px at 90% -10%,rgba(255,95,
           </div>
         </details>
         <details class="set" id="schoolPaneel">
-          <summary><span class="ico g1"><svg><use href="#i-school"/></svg></span><span class="set-tekst"><b>School en verjaardag</b><small id="schoolSub">Nog niet ingevuld</small></span><span class="chev" aria-hidden="true">›</span></summary>
+          <summary><span class="ico g1"><svg><use href="#i-school"/></svg></span><span class="set-tekst"><b>School, klas en verjaardag</b><small id="schoolSub">Nog niet ingevuld</small></span><span class="chev" aria-hidden="true">›</span></summary>
           <div class="set-body">
         <form class="acc-form" id="profForm" novalidate>
           <div class="prof-grid">
             <label>Naam van je school<input id="pfSchool" maxlength="60" placeholder="Bijvoorbeeld Ichthus College" autocomplete="organization"></label>
             <label>Plaats van je school<input id="pfPlaats" maxlength="40" placeholder="Bijvoorbeeld Dronten" autocomplete="off"></label>
+            <label>Niveau<select id="pfNiveau"></select></label>
+            <label>Klas<select id="pfLeerjaar"></select></label>
             <label>Geboortedatum<input id="pfGeboorte" type="date" min="1990-01-01"></label>
             <label>Vakantieregio<select id="pfRegio"><option value="">Automatisch (via de plaats)</option><option value="noord">Regio noord</option><option value="midden">Regio midden</option><option value="zuid">Regio zuid</option></select></label>
           </div>
@@ -859,6 +882,8 @@ body.feest{background-image:radial-gradient(800px 400px at 90% -10%,rgba(255,95,
         <details class="set" id="pakketPaneel">
           <summary><span class="ico g1"><svg><use href="#i-school"/></svg></span><span class="set-tekst"><b>Vakkenpakket</b><small id="pakketAantal"></small></span><span class="chev" aria-hidden="true">›</span></summary>
           <div class="set-body">
+        <p class="small muted" id="pakketTip" style="margin:0 0 8px" hidden></p>
+        <div class="pakket-knoppen" id="pakketKnoppen"></div>
         <div class="pakket" id="pakket"></div>
           </div>
         </details>
@@ -943,6 +968,11 @@ body.feest{background-image:radial-gradient(800px 400px at 90% -10%,rgba(255,95,
         <label>School<input id="liSchool" maxlength="60" placeholder="Ichthus College" autocomplete="organization"></label>
         <label>Plaats van school<input id="liPlaats" maxlength="40" placeholder="Dronten" autocomplete="off"></label>
       </div>
+      <div class="naam-rij" id="lNiveau" hidden>
+        <label>Niveau<select id="liNiveau"></select></label>
+        <label>Klas<select id="liLeerjaar"></select></label>
+      </div>
+      <details class="login-vakken" id="lVakken" hidden><summary>Vakken kiezen <span class="muted" style="font-weight:400">(mag ook later)</span></summary><div class="pakket" id="liVakken"></div></details>
       <label id="lGeboorte" hidden>Geboortedatum<input id="liGeboorte" type="date" min="1990-01-01"></label>
       <label>E-mailadres<input id="liMail" type="email" inputmode="email" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="naam@voorbeeld.nl" maxlength="120"></label>
       <label id="lWw">Wachtwoord<span class="ww-veld"><input id="liWw" type="password" autocomplete="current-password" placeholder="Minimaal 6 tekens"><button type="button" class="oog" data-voor="liWw" aria-label="Wachtwoord tonen" aria-pressed="false"><svg viewBox="0 0 24 24" class="o-open"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><svg viewBox="0 0 24 24" class="o-dicht"><path d="M3 3l18 18M10.6 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4.1M6.6 6.6C3.8 8.4 2 12 2 12s3.6 7 10 7a9.6 9.6 0 0 0 4.4-1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg></button></span></label>
@@ -1002,9 +1032,11 @@ const VAKKEN = [
  {id:'kv1',naam:'Kunstvakken inclusief ckv',type:'vg',toetsen:[['311','LJ3 P1','CZP 1',1,0],['321','LJ3 P2','Architectuur',1,0],['322','LJ3 P2','Reflectie 1 en 2',1,0],['331','LJ3 P3','Reflectie 3 en 4',1,0],['341','LJ3 P4','CZP 2',1,0],['342','LJ3 P4','Fotografie',1,0]]},
  {id:'levo',naam:'Levensbeschouwelijke vorming',type:'info',toetsen:[['411','LJ4 TW1','Hindoeïsme',1,1],['421','LJ4 P2','Boeddhisme',1,0],['422','LJ4 P2','Gesprek over levensvragen',1,0]]},
 ];
-const TYPE_LABEL={ce:'Vak met eindexamen',se:'Alleen schooltoetsen',vg:'Moet voldoende zijn',hd:'Onderdelen voldoende of goed',info:'Telt niet mee voor slagen'};
+// 27-10-2026 MK extra vakken voor andere niveaus en leerjaren (eigen toetsen)
+for(const [id,naam] of [['fa','Frans'],['sp','Spaans'],['la','Latijn'],['gr','Grieks'],['na','Natuurkunde'],['sk','Scheikunde'],['nask','Nask (natuur- en scheikunde)'],['wa','Wiskunde A'],['wb','Wiskunde B'],['wc','Wiskunde C'],['wd','Wiskunde D'],['in','Informatica'],['mu','Muziek'],['ha','Handvaardigheid'],['dr','Drama'],['beco','Bedrijfseconomie'],['fi','Filosofie'],['ckv','CKV'],['maw','Maatschappijwetenschappen'],['nlt','NLT'],['bsm','BSM (bewegen, sport en maatschappij)'],['prof','Beroepsgericht profielvak'],['tech','Techniek'],['ve','Verzorging']]) VAKKEN.push({id,naam,type:'x',toetsen:[]});
+const TYPE_LABEL={ce:'Vak met eindexamen',se:'Alleen schooltoetsen',vg:'Moet voldoende zijn',hd:'Onderdelen voldoende of goed',info:'Telt niet mee voor slagen',eigen:'Je eigen toetsen',x:''};
 // 26-10-2026 MK periodes leesbaar maken: LJ4 TW1 wordt Klas 4, toetsweek 1
-function wanneer(p){ const m=String(p).match(/^LJ(\d)\s+(TW|P)\s*([\d/]+)$/); if(!m) return p;
+function wanneer(p){ if(!p) return '–'; if(/^\d{4}-\d{2}-\d{2}$/.test(p)) return datumNL(p); const m=String(p).match(/^LJ(\d)\s+(TW|P)\s*([\d/]+)$/); if(!m) return p;
   const n=m[3].split('/'); const deel=n.length>1?`${m[2]==='TW'?'toetsweek':'periode'} ${n.length>2?n[0]+' t/m '+n[n.length-1]:n.join(' of ')}`:`${m[2]==='TW'?'toetsweek':'periode'} ${n[0]}`;
   return `Klas ${m[1]}, ${deel}`; }
 const BY_ID=Object.fromEntries(VAKKEN.map(v=>[v.id,v]));
@@ -1021,7 +1053,7 @@ function load(){
   try{const oud=localStorage.getItem(OUDE_KEY); if(oud){const o=JSON.parse(oud); if(o&&o.pakket) Object.assign(liam,norm(o),{naam:liam.naam});}}catch(e){}
   return {actief:'l1',leerlingen:{l1:liam}};
 }
-function norm(s){return {naam:String(s.naam||'Leerling').slice(0,40),pakket:Array.isArray(s.pakket)?s.pakket.filter(id=>BY_ID[id]):[],cijfers:s.cijfers||{},ce:s.ce||{},agenda:Array.isArray(s.agenda)?s.agenda:[],tour:!!s.tour,school:String(s.school||'').slice(0,60),plaats:String(s.plaats||'').slice(0,40),geboorte:/^\d{4}-\d{2}-\d{2}$/.test(s.geboorte||'')?s.geboorte:'',regio:['noord','midden','zuid'].includes(s.regio)?s.regio:'',regioAuto:s.regioAuto&&typeof s.regioAuto==='object'?s.regioAuto:null,vast:Array.isArray(s.vast)?s.vast.filter(v=>v&&v.naam&&v.dag>=0&&v.dag<=6).map(v=>({...v,naam:vastNaamVan(v.naam),leren:!!v.leren})).filter((v,i,a)=>a.findIndex(x=>x.naam===v.naam&&x.dag===v.dag)===i):[],leer:Array.isArray(s.leer)?s.leer.filter(l=>l&&l.datum&&BY_ID[l.vak]):[],foto:typeof s.foto==='string'&&s.foto.startsWith('data:image/')&&s.foto.length<200000?s.foto:''};}
+function norm(s){return {naam:String(s.naam||'Leerling').slice(0,40),pakket:Array.isArray(s.pakket)?s.pakket.filter(id=>BY_ID[id]):[],cijfers:s.cijfers||{},ce:s.ce||{},agenda:Array.isArray(s.agenda)?s.agenda:[],tour:!!s.tour,niveau:['vmbo-bb','vmbo-kb','vmbo-gl','vmbo-tl','havo','vwo'].includes(s.niveau)?s.niveau:'vmbo-tl',leerjaar:Math.max(1,Math.min(6,parseInt(s.leerjaar)||4)),leerjaarSJ:typeof s.leerjaarSJ==='string'?s.leerjaarSJ:'',pakketen:s.pakketen&&typeof s.pakketen==='object'&&!Array.isArray(s.pakketen)?s.pakketen:{},eigen:s.eigen&&typeof s.eigen==='object'&&!Array.isArray(s.eigen)?s.eigen:{},school:String(s.school||'').slice(0,60),plaats:String(s.plaats||'').slice(0,40),geboorte:/^\d{4}-\d{2}-\d{2}$/.test(s.geboorte||'')?s.geboorte:'',regio:['noord','midden','zuid'].includes(s.regio)?s.regio:'',regioAuto:s.regioAuto&&typeof s.regioAuto==='object'?s.regioAuto:null,vast:Array.isArray(s.vast)?s.vast.filter(v=>v&&v.naam&&v.dag>=0&&v.dag<=6).map(v=>({...v,naam:vastNaamVan(v.naam),leren:!!v.leren})).filter((v,i,a)=>a.findIndex(x=>x.naam===v.naam&&x.dag===v.dag)===i):[],leer:Array.isArray(s.leer)?s.leer.filter(l=>l&&l.datum&&BY_ID[l.vak]):[],foto:typeof s.foto==='string'&&s.foto.startsWith('data:image/')&&s.foto.length<200000?s.foto:''};}
 function save(){DB.leerlingen[DB.actief]=S; if(CLOUD) CLOUD.bewaar(S); else { try{localStorage.setItem(KEY,JSON.stringify(DB));}catch(e){} } document.getElementById('code').value=JSON.stringify(S);}
 
 const r1=x=>Math.round(x*10+1e-9)/10;
@@ -1045,20 +1077,22 @@ function nodigTekst(n){ if(n==null) return '–'; if(n<=1) return 'heb je al'; i
 
 function renderPakket(){
   const el=document.getElementById('pakket'); el.innerHTML='';
-  for(const v of VAKKEN){
+  const zet=()=>{ document.getElementById('pakketAantal').textContent=S.pakket.length?`${S.pakket.length} vakken gekozen · ${klasLabel()}`:'Nog geen vakken gekozen'; };
+  for(const vid of katalogIds()){ const v=BY_ID[vid]||ORIGINEEL[vid]; if(!v) continue;
     const id='pk-'+v.id; const lab=document.createElement('label');
-    lab.innerHTML=`<input type="checkbox" id="${id}" ${S.pakket.includes(v.id)?'checked':''}> ${v.naam}`;
+    lab.innerHTML=`<input type="checkbox" id="${id}" ${S.pakket.includes(v.id)?'checked':''}> ${esc(EIGEN()?(NAAM_EIGEN[v.id]||v.naam):v.naam)}`;
     lab.querySelector('input').addEventListener('change',e=>{
       if(e.target.checked){ if(!S.pakket.includes(v.id)) S.pakket.push(v.id); } else S.pakket=S.pakket.filter(x=>x!==v.id);
-      S.pakket.sort((a,b)=>VAKKEN.indexOf(BY_ID[a])-VAKKEN.indexOf(BY_ID[b])); document.getElementById('pakketAantal').textContent=S.pakket.length?`${S.pakket.length} vakken gekozen`:'Nog geen vakken gekozen';
-      save(); renderVakken(); renderUitslag(); renderAgenda();
+      sorteerPakket(); zet(); save(); bouwVakken(); renderVakken(); renderUitslag(); renderAgenda();
     });
     el.appendChild(lab);
   }
+  zet(); renderPakketKnoppen();
 }
 
 const openState=new Set();
 function renderVakken(){
+  if(EIGEN()) return renderEigenVakken();
   const el=document.getElementById('vakken'); el.innerHTML='';
   if(!S.pakket.length){el.innerHTML='<p class="muted">Kies hierboven de vakken uit het pakket.</p>';return;}
   for(const id of S.pakket){
@@ -1111,11 +1145,13 @@ function updateVak(id){
   }
   if(v.type==='vg') h+=`<div><span class="k">Wat moet je halen</span><span class="v small">gemiddeld een voldoende</span></div>`;
   if(i.hd.n) h+=`<div><span class="k">Onderdelen met V of G (handelingsdelen)</span><span class="v small">${i.hd.onv?i.hd.onv+' nog onvoldoende':'allemaal V of G nodig'}</span></div>`;
+  if(v.eigen&&i.w&&v.type!=='info'){ const f=T=>{ const n=(T*(i.w+1)-i.sum); return n<=1?'lukt altijd':n>10?'lukt niet meer':fmt(Math.ceil(n*10-1e-9)/10); }; h+=`<div><span class="k">Bij je volgende toets (telt 1x) nodig voor gemiddeld een 5,5</span><span class="v">${f(5.45)}</span></div><div><span class="k">en voor gemiddeld een 7</span><span class="v">${f(6.95)}</span></div>`; }
   if(v.type==='info') h+=`<div><span class="k">Telt niet mee</span><span class="v small">voor slagen of zakken</span></div>`;
   need.innerHTML=h; need.hidden=!h;
 }
 
 function renderUitslag(){
+  if(EIGEN()&&!examJaar()) return renderRapport();
   const tb=document.getElementById('overzicht'); tb.innerHTML='';
   const tel=S.pakket.map(id=>BY_ID[id]).filter(v=>v.type==='ce'||v.type==='se');
   const rows=[]; let ceSom=0,ceN=0,compleet=true;
@@ -1143,17 +1179,21 @@ function renderUitslag(){
   const ein=rows.filter(r=>r.eind!=null).map(r=>r.eind);
   const ceAvg=ceN?ceSom/ceN:null;
   const ne=rows.find(r=>r.v.id==='ne');
-  const kv1=S.pakket.includes('kv1')?seInfo(BY_ID.kv1):null;
+  const kvId=S.pakket.includes('kv1')?'kv1':S.pakket.includes('ckv')?'ckv':null; const kv1=kvId?seInfo(BY_ID[kvId]):null;
   const n4=ein.filter(e=>e===4).length, n5=ein.filter(e=>e===5).length, onder4=ein.some(e=>e<4), n7=ein.filter(e=>e>=7).length;
-  const comp = !onder4 && ((n4===0&&n5<=1)||(n4===1&&n5===0&&n7>=1)||(n4===0&&n5===2&&n7>=1));
+  const hv=EIGEN()&&!isVmbo(S.niveau); const gemEind=ein.length?ein.reduce((a,b)=>a+b,0)/ein.length:0;
+  const comp = hv ? (!onder4 && ((n4===0&&n5<=1)||((n4===1&&n5===0)||(n4===0&&n5===2)||(n4===1&&n5===1))&&gemEind>=6)) : (!onder4 && ((n4===0&&n5<=1)||(n4===1&&n5===0&&n7>=1)||(n4===0&&n5===2&&n7>=1)));
   const checks=[];
   checks.push({ok:ceAvg==null?null:ceAvg>=5.5,t:ceAvg==null?'Gemiddelde van je eindexamens: nog niet bekend (je hebt minstens een 5,5 nodig)':`Gemiddelde van je eindexamens: ${fmt(r1(ceAvg))}${tel.some(v=>v.type==='ce'&&S.ce[v.id]==null)?' (geschat)':''}. Je hebt minstens een 5,5 nodig.`});
-  checks.push({ok:ne&&ne.eind!=null?ne.eind>=5:null,t:!ne?'Nederlands staat niet in je vakkenpakket':ne.eind==null?'Nederlands: je eindcijfer moet minstens een 5 zijn. Nog niet bekend.':`Nederlands: eindcijfer ${ne.eind}. Dit moet minstens een 5 zijn.`});
+  if(hv){ const kern=rows.filter(r=>['ne','en','wa','wb','wc'].includes(r.v.id)&&r.eind!=null), k5=kern.filter(r=>r.eind===5).length, k4=kern.some(r=>r.eind<5);
+    checks.push({ok:kern.length?(!k4&&k5<=1):null,t:!kern.length?'Kernvakken (Nederlands, Engels, wiskunde): je mag er hooguit één 5 hebben. Nog niet bekend.':k4||k5>1?'Kernvakken (Nederlands, Engels, wiskunde): je hebt daar te veel onvoldoendes. Je mag er hooguit één 5 hebben.':'Kernvakken (Nederlands, Engels, wiskunde): in orde. Je mag er hooguit één 5 hebben.'}); }
+  else checks.push({ok:ne&&ne.eind!=null?ne.eind>=5:null,t:!ne?'Nederlands staat niet in je vakkenpakket':ne.eind==null?'Nederlands: je eindcijfer moet minstens een 5 zijn. Nog niet bekend.':`Nederlands: eindcijfer ${ne.eind}. Dit moet minstens een 5 zijn.`});
   { const onv=[]; if(n5) onv.push(n5===1?'één 5':n5+' keer een 5'); if(n4) onv.push(n4===1?'één 4':n4+' keer een 4');
-    const tk=!ein.length?'Eindcijfers: nog niet bekend':onder4?'Je hebt een eindcijfer lager dan een 4. Dan slaag je niet.':!onv.length?'Geen onvoldoendes bij je eindcijfers':comp?`Je hebt ${onv.join(' en ')}. Dat mag${n4||n5===2?', omdat je ook een 7 of hoger hebt':''}.`:`Je hebt ${onv.join(' en ')}. Dat is te veel${(n4||n5===2)&&!n7?', of je mist een 7 of hoger om het goed te maken':''}.`;
+    const tk=!ein.length?'Eindcijfers: nog niet bekend':onder4?'Je hebt een eindcijfer lager dan een 4. Dan slaag je niet.':!onv.length?'Geen onvoldoendes bij je eindcijfers':comp?`Je hebt ${onv.join(' en ')}. Dat mag${n4||n5===2?(hv?', omdat je gemiddelde 6 of hoger is':', omdat je ook een 7 of hoger hebt'):''}.`:`Je hebt ${onv.join(' en ')}. Dat is te veel${(n4||n5===2)&&!n7?', of je mist een 7 of hoger om het goed te maken':''}.`;
     checks.push({ok:ein.length?comp:null,t:tk}); }
     if(kv1) checks.push({ok:kv1.se==null?null:kv1.se>=5.5,t:kv1.se==null?'Kunstvakken (ckv): moet gemiddeld voldoende zijn. Nog geen cijfers.':`Kunstvakken (ckv): gemiddeld ${fmt(kv1.se)}${kv1.se>=5.5?', dat is voldoende':', dit moet een voldoende worden'}.`});
-  for(const id of ['lo','lo2']){ if(!S.pakket.includes(id)) continue; const h=seInfo(BY_ID[id]).hd; if(!h.n) continue;
+  if(EIGEN()&&S.pakket.includes('lo')){ const l=seInfo(BY_ID.lo); checks.push({ok:l.se==null?null:l.se>=5.5,t:l.se==null?'Lichamelijke opvoeding: moet voldoende zijn. Nog geen cijfers.':`Lichamelijke opvoeding: gemiddeld ${fmt(l.se)}${l.se>=5.5?', dat is voldoende':', dit moet een voldoende worden'}.`}); }
+  for(const id of ['lo','lo2']){ if(EIGEN()||!S.pakket.includes(id)) continue; const h=seInfo(BY_ID[id]).hd; if(!h.n) continue;
     checks.push({ok:h.onv?false:(h.klaar===h.n?true:null),t:`${BY_ID[id].naam}: ${h.klaar} van de ${h.n} onderdelen gehaald (V of G)${h.onv?'. Nog '+h.onv+' onvoldoende':''}`}); }
   checks.push({ok:null,t:'Je loopbaanopdrachten (LOB) en je profielwerkstuk moet je ook voldoende afronden. Die staan niet in deze app.',info:true});
   const ul=document.getElementById('checks'); ul.innerHTML='';
@@ -1202,7 +1242,7 @@ function renderLeerling(){
   for(const sid of ['leerlingKeuze','leerlingKeuze2']){ const sel=document.getElementById(sid); sel.innerHTML='';
   for(const [id,l] of Object.entries(DB.leerlingen)){const o=document.createElement('option'); o.value=id; o.textContent=l.naam; o.selected=id===DB.actief; sel.appendChild(o);} }
   document.getElementById('naamKop').textContent=S.naam;
-  $('profSub').textContent=c?(CLOUD.gebr.includes('@')?CLOUD.gebr:'Gebruikersnaam '+CLOUD.gebr):'Ichthus College · vmbo TL';
+  $('profSub').textContent=c?(CLOUD.gebr.includes('@')?CLOUD.gebr:'Gebruikersnaam '+CLOUD.gebr):klasLabel();
   $('profUitlog').hidden=!c; $('accSub').textContent=c?'Naam, e-mailadres en wachtwoord':'';
   $('leerSub').textContent=Object.keys(DB.leerlingen).length>1?Object.keys(DB.leerlingen).length+' leerlingen op dit apparaat':'Wissel of voeg een leerling toe';
   $('bewSub').textContent=c?'Je cijfers staan al veilig online':'Code om cijfers over te zetten';
@@ -1215,21 +1255,22 @@ function toetsInfo(a){ const v=BY_ID[a.vak]; const t=v&&a.toets?v.toetsen.find(t
 function status(a){ const {t}=toetsInfo(a); const c=t?S.cijfers[a.vak+'-'+t[0]]:null;
   if(t ? (c!=null&&c!=='') : a.klaar) return 'klaar';
   return a.datum>VANDAAG()?'kom':(a.datum===VANDAAG()?'vandaag':'open'); }
-function aTitel(a){ const {v,t}=toetsInfo(a); return `<strong>${v?v.naam:a.vak}</strong> · ${t?t[0]+' '+t[2]:esc(a.oms||'Toets')}`; }
+function aTitel(a){ const {v,t}=toetsInfo(a); return `<strong>${v?esc(v.naam):a.vak}</strong> · ${t?(v.eigen?esc(t[2]):t[0]+' '+t[2]):esc(a.oms||'Toets')}`; }
 function esc(x){return String(x).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
-function nodigBij(a,st){ const {v,t}=toetsInfo(a); if(!t||!t[3]||!['kom','vandaag'].includes(st)||!['ce','se','vg'].includes(v.type)) return '';
+function nodigBij(a,st){ const {v,t}=toetsInfo(a); if(!t||!t[3]||!['kom','vandaag'].includes(st)||!['ce','se','vg','eigen'].includes(v.type)) return '';
   const i=seInfo(v); const f=T=>{ const n=(T*(i.w+t[3])-i.sum)/t[3]; return n<=1?'lukt altijd':n>10?'lukt niet meer':fmt(Math.ceil(n*10-1e-9)/10); };
   if(!i.w) return `<span class="nodig">Je eerste cijfer voor dit vak · haal een 6,0 voor een voldoende</span>`;
   return `<span class="nodig">Voor gemiddeld een 6: haal ${f(5.95)} · voor een 7: ${f(6.95)}</span>`; }
 function vulToetsKeuze(){
-  const vak=$('aVak').value, sel=$('aToets'); sel.innerHTML='';
-  const v=BY_ID[vak]; if(v) for(const t of v.toetsen){ if(S.cijfers[vak+'-'+t[0]]!=null) continue; const o=document.createElement('option'); o.value=t[0]; o.textContent=`${t[0]} ${t[2]}`; sel.appendChild(o); }
-  const o=document.createElement('option'); o.value=''; o.textContent='Andere toets (telt niet mee voor examen)'; sel.appendChild(o);
-  $('aOmsLabel').hidden=sel.value!=='';
+  const vak=$('aVak').value, sel=$('aToets'); sel.innerHTML=''; const eigen=EIGEN();
+  const v=BY_ID[vak]; if(v) for(const t of v.toetsen){ if(S.cijfers[vak+'-'+t[0]]!=null) continue; if(eigen&&S.agenda.some(a=>a.vak===vak&&a.toets===t[0])) continue; const o=document.createElement('option'); o.value=t[0]; o.textContent=eigen?t[2]:`${t[0]} ${t[2]}`; sel.appendChild(o); }
+  const o=document.createElement('option'); o.value=''; o.textContent=eigen?'Nieuwe toets':'Andere toets (telt niet mee voor examen)'; sel.appendChild(o);
+  if(eigen) sel.value='';
+  $('aOmsLabel').hidden=sel.value!==''; $('aWegingLabel').hidden=!eigen||sel.value!=='';
 }
 function renderAgenda(){
   const vs=$('aVak'), oud=vs.value; vs.innerHTML='';
-  for(const id of S.pakket){const o=document.createElement('option'); o.value=id; o.textContent=BY_ID[id].naam; vs.appendChild(o);}
+  for(const id of S.pakket){ if(!BY_ID[id]) continue; const o=document.createElement('option'); o.value=id; o.textContent=BY_ID[id].naam; vs.appendChild(o);}
   if(S.pakket.includes(oud)) vs.value=oud; vulToetsKeuze();
   const lijst=$('agendaLijst'); lijst.innerHTML='';
   const items=[...S.agenda].sort((a,b)=>a.datum.localeCompare(b.datum));
@@ -1237,7 +1278,7 @@ function renderAgenda(){
   for(const a of items){ const st=status(a); const {t}=toetsInfo(a);
     const li=document.createElement('li'); li.className='aitem';
     li.innerHTML=`<span class="datum">${datumNL(a.datum)}</span><span class="wat">${aTitel(a)}${nodigBij(a,st)}</span><span class="tag-st ${lab[st][0]}">${lab[st][1]}</span><span class="acties">${!t&&st!=='kom'&&st!=='vandaag'?`<button type="button" data-klaar>${a.klaar?'Terugzetten':'Afvinken'}</button>`:''}<button type="button" data-weg aria-label="Verwijderen uit agenda">Verwijderen</button></span>`;
-    li.querySelector('[data-weg]').addEventListener('click',()=>{S.agenda=S.agenda.filter(x=>x.id!==a.id); S.leer=S.leer.filter(l=>l.agendaId!==a.id); save(); renderAgenda();});
+    li.querySelector('[data-weg]').addEventListener('click',()=>{S.agenda=S.agenda.filter(x=>x.id!==a.id); S.leer=S.leer.filter(l=>l.agendaId!==a.id); if(EIGEN()&&a.toets&&S.cijfers[a.vak+'-'+a.toets]==null){ verwijderEigenToets(a.vak,a.toets); bouwVakken(); renderVakken(); } save(); renderAgenda();});
     const k=li.querySelector('[data-klaar]'); if(k) k.addEventListener('click',()=>{a.klaar=!a.klaar; save(); renderAgenda();});
     lijst.appendChild(li); }
   if(!items.length) lijst.innerHTML='<li class="small muted">Nog geen toetsen gepland. Kies een datum, vak en toets hierboven.</li>';
@@ -1384,7 +1425,9 @@ function renderHome(){
   const p=Math.round((UIT.voortgang||0)*100); $('ringPct').textContent=p+'%';
   const C=2*Math.PI*52; $('ringBoog').setAttribute('stroke-dasharray',`${C*p/100} ${C}`);
   $('statGem').textContent=UIT.gem==null?'–':fmt(r1(UIT.gem));
-  const nu=dag(VANDAAG()), ce=dag('2027-05-14'); $('statCE').textContent=nu<ce?Math.ceil((ce-nu)/7):'0';
+  const nu=dag(VANDAAG()), ce=dag('2027-05-14');
+  if(examJaar()){ $('statCE').textContent=nu<ce?Math.ceil((ce-nu)/7):'0'; $('statCEs').textContent=ptaModus()?'start 14 mei 2027':'begint half mei'; }
+  else { const z=zomerStart(); $('statCE').textContent=z&&dag(z)>nu?Math.ceil((dag(z)-nu)/7):'–'; $('statCEs').textContent=z?'vanaf '+kortDM(z):'vul je plaats in'; }
   const items=[...S.agenda].sort((a,b)=>a.datum.localeCompare(b.datum));
   const kom=items.filter(a=>['kom','vandaag'].includes(status(a))), open=items.filter(a=>status(a)==='open');
   $('statToetsen').textContent=kom.length; $('statOpen').textContent=open.length;
@@ -1403,8 +1446,8 @@ function renderHome(){
   { const tip=$('profielTip'); if(tip) tip.hidden=!!(S.school&&S.plaats&&geldigeGeboorte(S.geboorte)); }
   // mijn vakken
   const vr=$('homeVakken'); vr.innerHTML='';
-  for(const id of S.pakket){ const v=BY_ID[id]; if(v.type==='info') continue; const i=seInfo(v);
-    const nT=v.toetsen.filter(t=>t[3]).length, nI=v.toetsen.filter(t=>t[3]&&typeof S.cijfers[id+'-'+t[0]]==='number').length;
+  for(const id of S.pakket){ const v=BY_ID[id]; if(!v||v.type==='info') continue; const i=seInfo(v);
+    if(!v) continue; const nT=v.toetsen.filter(t=>t[3]).length, nI=v.toetsen.filter(t=>t[3]&&typeof S.cijfers[id+'-'+t[0]]==='number').length;
     let groot, kl, sub;
     if(v.type==='hd'){ groot=i.hd.onv?'O':`${i.hd.klaar}/${i.hd.n}`; kl=i.hd.onv?'var(--bad)':i.hd.klaar===i.hd.n?'var(--ok)':'var(--violet)'; sub='onderdelen gehaald'; }
     else if(i.se==null){ groot='–'; kl=''; sub='nog geen cijfer'; }
@@ -1418,7 +1461,8 @@ function renderHome(){
   $('navBadge').textContent=open.length||''; $('navBadge').hidden=!open.length; $('navBadgeM').textContent=open.length||''; $('navBadgeM').hidden=!open.length;
   const zet=(id,t)=>{const e=$(id); if(e) e.textContent=t;};
   zet('tileAgenda',kom.length?`${kom.length} toets${kom.length>1?'en':''} gepland`:'Nog niets gepland');
-  zet('tileCijfers',`${p}% van je toetsen gehad`);
+  zet('tileCijfers',EIGEN()&&!examJaar()?(UIT.gem==null?'Vul je eerste toets in':`Gemiddeld ${fmt(r1(UIT.gem))}`):`${p}% van je toetsen gehad`);
+  renderJaarTip();
   zet('tileUitslag',UIT.pill?UIT.pill:'');
   renderFeest(); renderVakChip();
   zet('tileHerk',$('hkAantal').textContent.replace(/[()]/g,'')||'Nog geen tips');
@@ -1482,7 +1526,7 @@ const WDRE='(maandag|dinsdag|woensdag|donderdag|vrijdag|zaterdag|zondag)(?:s|en)
 const MAANDRE='(januari|februari|maart|april|mei|juni|juli|augustus|september|oktober|november|december|jan|feb|mrt|apr|jun|jul|aug|sep|sept|okt|nov|dec)';
 const VAK_WOORDEN={ne:['nederlands','ned','nl'],en:['engels','eng'],du:['duits'],wi:['wiskunde','wis','wisk'],nask1:['nask1','nask 1','natuurkunde','natuur en scheikunde','nask'],nask2:['nask2','nask 2','scheikunde'],
  bi:['biologie','bio'],ec:['economie','eco'],ak:['aardrijkskunde','aardrijk','ak'],gs:['geschiedenis','gesch','gs'],ma:['maatschappijleer','maatschappij'],kv1:['ckv','kunstvakken'],te:['tekenen'],
- pvtt:['pvtt','technologie en toepassing','technologie'],pveo:['pveo'],pvzw:['pvzw','zorg en welzijn'],levo:['levo','levensbeschouwing','levensbeschouwelijke vorming'],lo2:['lo2','lo 2','sportgeschiedenis']};
+ pvtt:['pvtt','technologie en toepassing','technologie'],pveo:['pveo'],pvzw:['pvzw','zorg en welzijn'],levo:['levo','levensbeschouwing','levensbeschouwelijke vorming'],lo2:['lo2','lo 2','sportgeschiedenis'],fa:['frans'],sp:['spaans'],la:['latijn'],gr:['grieks'],na:['natuurkunde','nat'],sk:['scheikunde','schei'],nask:['nask','natuur en scheikunde'],wa:['wiskunde a','wis a','wiskunde'],wb:['wiskunde b','wis b','wiskunde'],wc:['wiskunde c','wiskunde'],wd:['wiskunde d'],in:['informatica'],mu:['muziek'],ha:['handvaardigheid'],dr:['drama'],beco:['bedrijfseconomie','beco'],fi:['filosofie'],ckv:['ckv'],maw:['maatschappijwetenschappen','maw'],nlt:['nlt'],bsm:['bsm'],prof:['profielvak'],tech:['techniek'],ve:['verzorging']};
 const ACTIVITEITEN=['judo','voetbal','voetbaltraining','hockey','tennis','padel','gym','zwemmen','zwemles','training','trainen','werk','werken','bijbaan','muziekles','pianoles','gitaarles','zangles','drumles','dansen','dansles','dans','scouting','korfbal','handbal','basketbal','volleybal','paardrijden','turnen','atletiek','bijles','oppassen','karate','kickboksen','boksen','fitness','golf','sport','sporten','catechisatie','kerk','club','schaken','theater','toneel'];
 function vastNaamVan(n){ return /^(judo|voetbal|voetbaltraining|hockey|tennis|padel|gym|zwemmen|zwemles|training|trainen|sport|sporten|dansen|dansles|dans|korfbal|handbal|basketbal|volleybal|paardrijden|turnen|atletiek|karate|kickboksen|boksen|fitness|golf)$/.test(String(n).toLowerCase().replace(/[^a-z]/g,''))?'Sport':n; }
 const STOP=new Set('ik ik heb heb ga is er een de het en of maar want dan niet geen kan kun wel ook nog al toets toetsen so proefwerk op om te tot naar mijn me met elke iedere iedereen vrij school les uur uren dag dagen week weken avond middag ochtend dus graag zou wil willen'.split(' '));
@@ -1490,7 +1534,7 @@ const lc=t=>String(t).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
 function vakUit(t){
   const s=' '+lc(t).replace(/[^a-z0-9]+/g,' ')+' '; let beste=null;
   for(const [id,woorden] of Object.entries(VAK_WOORDEN)) for(const w of woorden){ const i=s.indexOf(' '+w+' '); if(i<0) continue;
-    const score=(S.pakket.includes(id)?100:0)+w.length+(/(toets|so|proefwerk|overhoring|leren)\s+(voor|van)?\s*$/.test(s.slice(0,i+1))?50:0);
+    if(!BY_ID[id]) continue; const score=(S.pakket.includes(id)?100:0)+w.length+(/(toets|so|proefwerk|overhoring|leren)\s+(voor|van)?\s*$/.test(s.slice(0,i+1))?50:0);
     if(!beste||score>beste.score) beste={id,score}; }
   return beste?beste.id:null;
 }
@@ -1699,7 +1743,7 @@ function lhPlan(){
 function lhAkkoord(){
   const p=lhVoorstel; if(!p) return;
   let agId=p.agendaId;
-  if(!agId){ agId='a'+Date.now(); S.agenda.push({id:agId,datum:p.toetsIso,vak:p.vak,toets:'',oms:'Toets',klaar:false}); }
+  if(!agId){ agId=maakAgendaToets(p.toetsIso,p.vak,'Toets',1); if(EIGEN()) renderVakken(); }
   const nu=VANDAAG();
   S.leer=S.leer.filter(l=>!(l.agendaId===agId&&!l.gedaan&&l.datum>=nu));
   p.items.forEach((i,k)=>S.leer.push({id:'l'+Date.now()+k,agendaId:agId,vak:p.vak,datum:i.datum,minuten:i.minuten,label:i.label,gedaan:false}));
@@ -1866,9 +1910,10 @@ function vulProfiel(){
   const v=volgendeVakantie(); if(r&&v) t+=` ${v.nu?'Nu':'Volgende vakantie'}: ${v.naam.toLowerCase()} (${kortDM(v.van)} t/m ${kortDM(v.tot)}).`;
   $('pfRegioTekst').textContent=t;
   const delen=[S.school,S.plaats].filter(Boolean).join(', ');
-  $('schoolSub').textContent=delen?(delen+(r?' · regio '+r:'')):'Nog niet ingevuld';
-  if(!CLOUD) $('profSub').textContent=delen?delen:'Ichthus College · vmbo TL';
-  const ms=$('merkSub'); if(ms) ms.textContent=S.school||'Ichthus College · TL4';
+  $('schoolSub').textContent=(delen?delen+' · ':'')+klasLabel()+(r?' · regio '+r:'');
+  if(!CLOUD) $('profSub').textContent=(S.school?S.school+' · ':'')+klasLabel();
+  const ms=$('merkSub'); if(ms) ms.textContent=(S.school?S.school+' · ':'')+(NIV_KORT[S.niveau]||'').replace('vmbo ','')+' '+S.leerjaar;
+  if(!bezig||!$('pfNiveau').options.length) vulNiveauKeuze($('pfNiveau'),$('pfLeerjaar'),S.niveau,S.leerjaar);
 }
 function initProfiel(){
   $('profForm').addEventListener('submit',e=>{ e.preventDefault(); const m=$('pfMelding'); m.style.color='var(--bad)';
@@ -1876,15 +1921,196 @@ function initProfiel(){
     if(geb&&!geldigeGeboorte(geb)){ m.textContent='Deze geboortedatum klopt niet.'; return; }
     const plaatsAnders=lc(plaats)!==lc(S.plaats||'');
     S.school=school; S.plaats=plaats; S.geboorte=geb; S.regio=$('pfRegio').value; if(plaatsAnders) S.regioAuto=null;
-    save(); m.textContent='Opgeslagen.'; m.style.color='var(--ok)'; setTimeout(()=>{ m.textContent=''; },2500);
+    zetKlas($('pfNiveau').value,+$('pfLeerjaar').value||1);
+    save(); renderAll(); m.textContent='Opgeslagen.'; m.style.color='var(--ok)'; setTimeout(()=>{ m.textContent=''; },2500);
     vulProfiel(); renderHome(); renderWeek(); regioCheck(); });
   $('pfRegio').addEventListener('change',()=>{ S.regio=$('pfRegio').value; save(); vulProfiel(); renderHome(); renderWeek(); });
   $('feestKnop').addEventListener('click',confetti);
   $('profielTipKnop').addEventListener('click',()=>{ setTimeout(()=>{ const p=$('schoolPaneel'); if(!p) return; p.open=true; if(p.scrollIntoView) p.scrollIntoView({behavior:'smooth',block:'start'}); const i=$('pfSchool'); if(i&&!i.value) i.focus({preventScroll:true}); },60); });
 }
 
+// ===== Niveau, leerjaar en eigen toetsen (27-10-2026 MK) =====
+const NIVEAUS=[['vmbo-bb','vmbo basis (BB)',4],['vmbo-kb','vmbo kader (KB)',4],['vmbo-gl','vmbo gemengd (GL)',4],['vmbo-tl','vmbo theoretisch (TL/mavo)',4],['havo','havo',5],['vwo','vwo',6]];
+const NIV=Object.fromEntries(NIVEAUS.map(n=>[n[0],{naam:n[1],max:n[2]}]));
+const NIV_KORT={'vmbo-bb':'vmbo BB','vmbo-kb':'vmbo KB','vmbo-gl':'vmbo GL','vmbo-tl':'vmbo TL',havo:'havo',vwo:'vwo'};
+const isVmbo=n=>String(n).startsWith('vmbo');
+const klasLabel=(s=S)=>`${NIV_KORT[s.niveau]||'vmbo TL'} ${s.leerjaar||4}`;
+const examJaar=(s=S)=>(s.leerjaar||4)>=(NIV[s.niveau]||{max:4}).max;
+// Het PTA met toetsen en weging hebben we alleen van Ichthus College, vmbo GL/TL klas 3 en 4
+const ptaModus=(s=S)=>['vmbo-tl','vmbo-gl'].includes(s.niveau)&&(s.leerjaar||4)>=3&&(!s.school||/ichthus/i.test(s.school));
+const EIGEN=()=>!ptaModus();
+function huidigSchooljaar(){ const d=new Date(), y=d.getFullYear(); return d.getMonth()>=7?`${y}-${y+1}`:`${y-1}-${y}`; }
+const NAAM_EIGEN={te:'Tekenen',nask1:'Nask 1',nask2:'Nask 2',kv1:'Kunstvakken (ckv)',lo:'Lichamelijke opvoeding',lo2:'LO 2',levo:'Levensbeschouwing',ma:'Maatschappijleer'};
+function katalog(niveau,lj){
+  const vmbo=isVmbo(niveau), vwo=niveau==='vwo';
+  if(vmbo&&lj<=2) return {alle:['ne','en','du','fa','wi','nask','bi','gs','ak','ec','te','mu','ha','tech','ve','in','lo','levo'],std:['ne','en','wi','nask','bi','gs','ak','te','lo','levo']};
+  if(!vmbo&&lj<=3){ const alle=['ne','en','fa','du','sp','wi','nask','na','sk','bi','gs','ak','ec','te','mu','ha','dr','in','lo','levo']; if(vwo) alle.splice(6,0,'la','gr');
+    const std=['ne','en','fa','du','wi','bi','gs','ak','lo','levo',...(lj<=2?['nask','te']:['na','sk','ec'])]; if(vwo) std.push('la'); return {alle,std}; }
+  if(vmbo){ const alle=['ne','en','du','fa','sp','wi','nask1','nask2','bi','ec','ak','gs','ma','prof','te','mu','in','kv1','lo','levo'];
+    const std=['ne','en','ma','kv1','lo',...(niveau==='vmbo-tl'?['wi']:['wi','prof'])]; return {alle,std}; }
+  const alle=['ne','en','fa','du','sp',...(vwo?['la','gr']:[]),'wa','wb',...(vwo?['wc']:[]),'wd','na','sk','bi','nlt','ec','beco','gs','ak','maw','fi','in','te','mu','ha','dr','bsm','ma','ckv','lo','levo'];
+  return {alle,std:['ne','en','ma','ckv','lo']};
+}
+const PROFIELEN={NT:{naam:'Natuur & Techniek',vakken:['wb','na','sk']},NG:{naam:'Natuur & Gezondheid',vakken:['wa','bi','sk']},EM:{naam:'Economie & Maatschappij',vakken:['wa','ec','gs']},CM:{naam:'Cultuur & Maatschappij',vakken:['gs','ak']}};
+function katalogIds(s=S){ return ptaModus(s)?VAKKEN.filter(v=>v.type!=='x').map(v=>v.id):katalog(s.niveau,s.leerjaar).alle; }
+function standaardPakket(niveau,lj){ const s={niveau,leerjaar:lj,school:''}; return ptaModus(s)?['ne','en','wi','ma','lo','kv1']:katalog(niveau,lj).std.slice(); }
+const SE_ALLEEN=['ma','in','nlt','bsm'], VG_VAKKEN=['lo','ckv','kv1','lo2'];
+function eigenType(id){ if(!examJaar()) return 'eigen'; if(id==='levo') return 'info'; if(VG_VAKKEN.includes(id)) return 'vg'; if(SE_ALLEEN.includes(id)) return 'se'; return 'ce'; }
+const ORIGINEEL=Object.fromEntries(VAKKEN.map(v=>[v.id,v]));
+// in eigen modus krijgt elk vak "virtuele" toetsen: [nr, datum, naam, weging, 0]
+function bouwVakken(){
+  for(const v of VAKKEN) BY_ID[v.id]=ORIGINEEL[v.id];
+  if(!EIGEN()) return;
+  const ids=new Set([...katalog(S.niveau,S.leerjaar).alle,...S.pakket]);
+  for(const id of ids){ const o=ORIGINEEL[id]; if(!o) continue;
+    BY_ID[id]={id,naam:NAAM_EIGEN[id]||o.naam,type:eigenType(id),eigen:true,toetsen:(S.eigen[id]||[]).map(e=>[e.nr,e.datum||'',e.naam,e.weging,0])}; }
+}
+function sorteerPakket(){ const k=katalogIds(); S.pakket.sort((a,b)=>(k.indexOf(a)+1||99)-(k.indexOf(b)+1||99)); }
+function pasPakketAan(){ const k=katalogIds(); S.pakket=S.pakket.filter(id=>k.includes(id)); if(!S.pakket.length) S.pakket=standaardPakket(S.niveau,S.leerjaar); sorteerPakket(); }
+const pakketSleutel=()=>ptaModus()?'pta':S.niveau+'|'+katalogIds().join();
+function zetKlas(niveau,lj){
+  const oudSleutel=pakketSleutel();
+  S.niveau=niveau; S.leerjaar=Math.min(lj,NIV[niveau].max); S.leerjaarSJ=huidigSchooljaar();
+  const nieuw=pakketSleutel(); if(nieuw===oudSleutel) return;
+  S.pakketen[oudSleutel]=S.pakket.slice();
+  const k=katalogIds(), bewaard=S.pakketen[nieuw];
+  S.pakket=bewaard&&bewaard.length?bewaard.filter(id=>k.includes(id)):[...new Set([...standaardPakket(S.niveau,S.leerjaar),...S.pakket.filter(id=>k.includes(id))])];
+  sorteerPakket();
+}
+// eigen toetsen
+function maakEigenToets(vak,naam,weging,datum,cijfer){
+  const nr='e'+Date.now().toString(36)+Math.random().toString(36).slice(2,5);
+  (S.eigen[vak]=S.eigen[vak]||[]).push({nr,naam:String(naam||'Toets').slice(0,60),weging:Math.max(0.5,Math.min(10,+weging||1)),datum:datum||''});
+  if(cijfer!=null) S.cijfers[vak+'-'+nr]=cijfer; return nr;
+}
+function maakAgendaToets(datum,vak,oms,weging){
+  const id='a'+Date.now(); let toets='';
+  if(EIGEN()&&BY_ID[vak]){ toets=maakEigenToets(vak,oms||'Toets',weging||1,datum); bouwVakken(); }
+  S.agenda.push({id,datum,vak,toets,oms:toets?'':(oms||'Toets'),klaar:false}); return id;
+}
+function verwijderEigenToets(vak,nr){ S.eigen[vak]=(S.eigen[vak]||[]).filter(e=>e.nr!==nr); delete S.cijfers[vak+'-'+nr];
+  for(const a of S.agenda) if(a.vak===vak&&a.toets===nr){ a.toets=''; a.oms=a.oms||'Toets'; } }
+function renderEigenVakken(){
+  const el=$('vakken'); el.innerHTML='';
+  if(!S.pakket.length){ el.innerHTML='<p class="muted">Kies eerst je vakken bij Instellingen, onder Vakkenpakket.</p>'; return; }
+  for(const id of S.pakket){ const v=BY_ID[id]; if(!v) continue;
+    const d=document.createElement('details'); d.className='vak'; d.id='vak-'+id; if(openState.has(id)) d.open=true;
+    d.addEventListener('toggle',()=>{ d.open?openState.add(id):openState.delete(id); });
+    d.innerHTML=`<summary>
+        <div class="vhead"><span class="tag">${TYPE_LABEL[v.type]||''}</span><h3>${esc(v.naam)}</h3><span class="small muted" data-voortgang></span></div>
+        <div class="vstats"><div class="stat"><span class="k">Gemiddelde nu</span><span class="v" data-se></span></div>
+        ${v.type==='ce'?'<div class="stat"><span class="k">Eindexamen nodig voor 6</span><span class="v" data-nodig></span></div>':''}
+        <span class="chev" aria-hidden="true">›</span></div></summary>
+      <div class="vbody">
+        <div class="tablewrap"><table class="eigen-tabel"><thead><tr><th>Toets</th><th class="r">Telt</th><th class="r">Cijfer</th><th></th></tr></thead><tbody></tbody></table></div>
+        <form class="eigen-form" autocomplete="off">
+          <input name="naam" placeholder="Naam van de toets, bijv. SO hoofdstuk 2" maxlength="60" aria-label="Naam van de toets">
+          <select name="weging" aria-label="Hoe vaak telt hij mee?"><option value="1">telt 1x</option><option value="2">telt 2x</option><option value="3">telt 3x</option><option value="4">telt 4x</option><option value="0.5">telt 0,5x</option></select>
+          <input name="cijfer" inputmode="decimal" placeholder="Cijfer" aria-label="Cijfer (mag ook later)">
+          <button type="submit">Toevoegen</button>
+        </form>
+        <div class="need" data-need></div>
+      </div>`;
+    const tb=d.querySelector('tbody');
+    const lijst=[...(S.eigen[id]||[])].sort((a,b)=>(a.datum||'9').localeCompare(b.datum||'9'));
+    for(const e of lijst){ const key=id+'-'+e.nr, c=S.cijfers[key]; const tr=document.createElement('tr');
+      tr.innerHTML=`<td style="white-space:normal">${esc(e.naam)}${e.datum?`<br><small class="muted">${datumNL(e.datum)}</small>`:''}</td><td class="r num">${String(e.weging).replace('.',',')}x</td>
+        <td class="r"><input class="cell" id="c-${key}" inputmode="decimal" autocomplete="off" placeholder="–" aria-label="Cijfer ${esc(v.naam)} ${esc(e.naam)}" value="${c!=null?String(c).replace('.',','):''}"></td>
+        <td class="r"><button type="button" class="mini-weg" aria-label="Toets verwijderen" title="Verwijderen">×</button></td>`;
+      const inp=tr.querySelector('input');
+      inp.addEventListener('input',()=>{ const n=parse(inp.value); inp.classList.toggle('invalid',Number.isNaN(n));
+        if(n==null) delete S.cijfers[key]; else if(!Number.isNaN(n)) S.cijfers[key]=n; else return;
+        save(); updateVak(id); renderUitslag(); renderAgenda(); });
+      tr.querySelector('.mini-weg').addEventListener('click',()=>{ verwijderEigenToets(id,e.nr); save(); bouwVakken(); renderEigenVakken(); renderUitslag(); renderAgenda(); });
+      tb.appendChild(tr); }
+    if(!lijst.length) tb.innerHTML='<tr><td colspan="4" class="small muted" style="white-space:normal">Nog geen toetsen. Voeg hieronder je eerste toets toe, of zet hem in de agenda.</td></tr>';
+    const f=d.querySelector('form');
+    const veld=n=>f.querySelector(`[name=${n}]`);
+    f.addEventListener('submit',ev=>{ ev.preventDefault(); const naam=veld('naam').value.trim(); if(!naam){ veld('naam').focus(); return; }
+      const c=parse(veld('cijfer').value); if(Number.isNaN(c)){ veld('cijfer').classList.add('invalid'); veld('cijfer').focus(); return; }
+      maakEigenToets(id,naam,veld('weging').value,VANDAAG(),c); openState.add(id); save(); bouwVakken(); renderEigenVakken(); renderUitslag(); renderAgenda();
+      const nf=$('vak-'+id); if(nf){ const n=nf.querySelector('form [name=naam]'); if(n) n.focus({preventScroll:true}); } });
+    el.appendChild(d); updateVak(id);
+  }
+}
+function renderRapport(){
+  const tb=$('overzicht'); tb.innerHTML='';
+  $('overzichtKop').innerHTML='<tr><th>Vak</th><th class="r">Gem.</th><th class="r">Rapport</th><th class="r">Tekort</th><th class="r">Nodig voor 5,5</th></tr>';
+  const rows=[]; let tekort=0, n5=0, n4=0, laag=0, som=0, aantal=0;
+  for(const id of S.pakket){ const v=BY_ID[id]; if(!v||v.type==='info') continue; const i=seInfo(v);
+    const rap=i.se==null?null:r0(i.se); const tk=rap==null?0:Math.max(0,6-rap); tekort+=tk; if(rap===5) n5++; if(rap===4) n4++; if(rap!=null&&rap<4) laag++;
+    if(i.se!=null){ som+=i.se; aantal++; }
+    const volg=i.w?(5.45*(i.w+1)-i.sum):null;
+    rows.push({v,i,rap,tk});
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${esc(v.naam)}</td><td class="r"><span class="grade ${gcls(i.se)}">${fmt(i.se)}</span></td><td class="r"><span class="grade ${rap==null?'':rap<5?'g-bad':rap<6?'g-warn':'g-ok'}">${rap==null?'–':rap}</span></td><td class="r num">${rap==null?'–':tk||'0'}</td><td class="r num">${volg==null?'–':volg<=1?'lukt altijd':volg>10?'lukt niet meer':fmt(Math.ceil(volg*10-1e-9)/10)}</td>`;
+    tb.appendChild(tr); }
+  const kern=['ne','en','wi','wa','wb','wc','wd'].filter(id=>S.pakket.includes(id)).map(id=>rows.find(r=>r.v.id===id)).filter(Boolean);
+  const kernOnv=kern.filter(r=>r.rap!=null&&r.rap<6);
+  const checks=[];
+  checks.push({ok:aantal?(tekort===0):null,t:aantal?(tekort?`Je hebt samen ${tekort} tekortpunt${tekort>1?'en':''} (een 5 is 1 punt, een 4 is 2 punten).`:'Geen tekortpunten. Al je rapportcijfers zijn 6 of hoger.'):'Nog geen cijfers ingevuld.'});
+  if(kern.length){ const metC=kern.filter(r=>r.rap!=null), zonder=kern.filter(r=>r.rap==null);
+    checks.push({ok:!metC.length?null:kernOnv.length?false:(zonder.length?null:true),t:!metC.length?`Kernvakken (${lijstTekst(kern.map(r=>r.v.naam))}): nog geen cijfers. Die tellen op veel scholen extra zwaar.`:kernOnv.length?`Let op bij ${lijstTekst(kernOnv.map(r=>r.v.naam))}: kernvakken tellen op veel scholen extra zwaar.`:`${lijstTekst(metC.map(r=>r.v.naam))} ${metC.length>1?'staan':'staat'} voldoende${zonder.length?`. Van ${lijstTekst(zonder.map(r=>r.v.naam))} is nog geen cijfer bekend`:''}.`}); }
+  checks.push({ok:null,info:true,t:'Elke school heeft eigen regels voor overgaan. Deze app geeft een schatting. Kijk in je schoolgids voor de echte regels.'});
+  const ul=$('checks'); ul.innerHTML='';
+  for(const c of checks){ const li=document.createElement('li'); li.innerHTML=`<span class="dot ${c.ok===true?'ok':c.ok===false?'bad':'warn'}"></span><span>${c.t}</span>`; ul.appendChild(li); }
+  let tekst, pk, pt, u;
+  if(!S.pakket.length){ tekst='Kies eerst je vakken'; pk='pill warn'; pt='Geen vakken'; u='Ga naar Instellingen en kies je vakken.'; }
+  else if(!aantal){ tekst='Nog geen cijfers'; pk='pill warn'; pt='Begin maar'; u='Vul bij Cijfers je eerste toetsen in. Dan zie je hier hoe je ervoor staat.'; }
+  else if(tekort===0){ tekst='Op koers om over te gaan'; pk='pill ok'; pt='Goed bezig'; u=`Al je vakken staan op een voldoende. Je gemiddelde is ${fmt(r1(som/aantal))}. Houd het zo vast!`; }
+  else if(tekort<=2&&!laag&&kernOnv.length<=1){ tekst='Bijna overal voldoende'; pk='pill warn'; pt='Let op'; u=`Je hebt ${tekort} tekortpunt${tekort>1?'en':''}. Op de meeste scholen mag dat nog, maar het is slim om die vakken op te halen.`; }
+  else { tekst='Hier moet je aan werken'; pk='pill bad'; pt='Extra aandacht'; u=`Je hebt ${tekort} tekortpunten. Daarmee kom je op veel scholen in de gevarenzone. Kijk hieronder welke vakken je het beste kunt ophalen. Je hebt nog tijd!`; }
+  $('uitslagTekst').textContent=tekst; $('uitslagPill').className=pk; $('uitslagPill').textContent=pt; $('uitslagUitleg').textContent=u;
+  const zorg=rows.filter(r=>r.rap!=null&&r.rap<6);
+  $('risico').innerHTML=!aantal?'':zorg.length?`<span class="small muted">Extra aandacht voor:</span>`+zorg.map(r=>`<span class="chip ${r.rap<5?'':'w'}">${esc(r.v.naam)} · gemiddeld ${fmt(r.i.se)}</span>`).join(''):`<span class="chip ok">Geen zorgenvakken</span>`;
+  const met=rows.filter(r=>r.rap!=null);
+  UIT={tekst,pillKlasse:pk,pill:pt,uitleg:u,voortgang:met.length?met.filter(r=>r.rap>=6).length/met.length:0,gem:aantal?som/aantal:null,risico:$('risico').innerHTML};
+  renderHome();
+}
+function zetModusUI(){
+  const eigen=EIGEN(), exam=examJaar(), rapport=eigen&&!exam;
+  for(const a of document.querySelectorAll('[data-nav="herkansen"],[data-nav="magister"],a.tegel[href="#herkansen"]')) a.hidden=eigen;
+  const tl=document.querySelector('[aria-labelledby="tlKop"]'); if(tl) tl.hidden=eigen;
+  const lbl=rapport?'Rapport':'Uitslag';
+  for(const a of document.querySelectorAll('[data-nav="uitslag"]')){ const s=a.querySelector('.lbl'); if(s) s.textContent=lbl; else { const t=[...a.childNodes].reverse().find(n=>n.nodeType===3&&n.textContent.trim()); if(t) t.textContent=lbl; } }
+  const tg=document.querySelector('a.tegel[href="#uitslag"] b'); if(tg) tg.textContent=lbl;
+  $('uitslagEyebrow').textContent=rapport?'Rapport':'Slaag of zak';
+  $('uitslagTitel').textContent=rapport?'Hoe sta ik ervoor?':'Verwachte uitslag';
+  $('uitslagIntro').textContent=rapport?'Je rapportcijfers per vak, berekend uit je eigen toetsen.':eigen?'Zo sta je ervoor als je eindexamens net zo gaan als je schooltoetsen. Je gemiddelde van school komt uit de toetsen die je zelf invult.':'Zo sta je ervoor als je eindexamens net zo gaan als je schooltoetsen.';
+  $('uitslagVoet').hidden=rapport; $('uitslagCeTip').hidden=rapport;
+  if(!rapport) $('overzichtKop').innerHTML='<tr><th>Vak</th><th class="r">Gemiddelde school</th><th class="r">Eindexamen (gok)</th><th class="r">Eindcijfer</th><th class="r">Eindexamen nodig voor 6</th></tr>';
+  $('ringLabel').textContent=rapport?'vakken voldoende':'toetsen gehad';
+  $('statCEk').textContent=exam?'Weken tot eindexamen':'Weken tot zomervakantie';
+  $('cijfersIntro').textContent=eigen?'Tik op een vak. Voeg je toetsen toe met het cijfer en hoe vaak hij meetelt. De app rekent je gemiddelde uit. Toetsen uit je agenda staan er vanzelf in, het cijfer vul je na de toets in.':'Tik op een vak en vul je cijfers uit Magister in. Bij onderdelen zonder cijfer (zoals bij gym) vul je V (voldoende), G (goed) of O (onvoldoende) in.';
+  $('pakketTip').hidden=!eigen;
+  $('pakketTip').textContent=eigen?`Dit zijn de vakken voor ${NIV[S.niveau].naam}, klas ${S.leerjaar}. Je eigen toetsen en weging vul je zelf in bij Cijfers.`:'';
+}
+function zomerStart(){ const r=mijnRegio()||'midden', nu=VANDAAG(); const z=VAKANTIES[r].find(x=>x[0]==='Zomervakantie'&&x[2]>=nu); return z?z[1]:null; }
+function renderJaarTip(){
+  const el=$('jaarTip'); if(!el) return; const sj=huidigSchooljaar(); const max=(NIV[S.niveau]||{max:4}).max;
+  const toon=!!S.leerjaarSJ&&S.leerjaarSJ!==sj&&S.leerjaar<max;
+  el.hidden=!toon; if(toon) $('jaarTipTekst').textContent=`Zit je nu in klas ${S.leerjaar+1}? Dan passen we je vakken en de app daarop aan.`;
+}
+function renderPakketKnoppen(){
+  const el=$('pakketKnoppen'); if(!el) return; el.innerHTML='';
+  const knop=(t,f)=>{ const b=document.createElement('button'); b.type='button'; b.textContent=t; b.addEventListener('click',f); el.appendChild(b); };
+  knop('Standaardvakken aanvinken',()=>{ for(const id of standaardPakket(S.niveau,S.leerjaar)) if(!S.pakket.includes(id)) S.pakket.push(id); sorteerPakket(); save(); renderAll(); });
+  if(EIGEN()&&!isVmbo(S.niveau)&&S.leerjaar>=4) for(const [k,p] of Object.entries(PROFIELEN)) knop('+ '+p.naam,()=>{ for(const id of p.vakken) if(!S.pakket.includes(id)) S.pakket.push(id); if(S.niveau==='vwo'&&k==='CM'&&!S.pakket.includes('wc')) S.pakket.push('wc'); sorteerPakket(); save(); renderAll(); });
+}
+function vulNiveauKeuze(selN,selL,niveau,lj){
+  if(!selN.options.length) for(const [k,naam] of NIVEAUS){ const o=document.createElement('option'); o.value=k; o.textContent=naam; selN.appendChild(o); }
+  selN.value=niveau; const max=NIV[niveau].max; selL.innerHTML='';
+  for(let i=1;i<=max;i++){ const o=document.createElement('option'); o.value=i; o.textContent='klas '+i+(i===max?' (examenjaar)':''); selL.appendChild(o); }
+  selL.value=String(Math.min(lj,max));
+}
+function initNiveau(){
+  $('pfNiveau').addEventListener('change',()=>vulNiveauKeuze($('pfNiveau'),$('pfLeerjaar'),$('pfNiveau').value,+$('pfLeerjaar').value||1));
+  $('jaarJa').addEventListener('click',()=>{ zetKlas(S.niveau,S.leerjaar+1); save(); renderAll(); });
+  $('jaarNee').addEventListener('click',()=>{ S.leerjaarSJ=huidigSchooljaar(); save(); renderJaarTip(); });
+}
+
 // Rondleiding
-const TOUR=[
+const TOUR_ALLE=[
  {ico:'home',kl:'g2',titel:n=>`Welkom${n?', '+n:''}!`,tekst:'Met deze app houd je je examencijfers bij en zie je of je op koers ligt om te slagen. In een paar stappen laten we zien waar alles staat.'},
  {ico:'inst',kl:'g6',nav:'instellingen',titel:()=>'Kies je vakken',tekst:'Begin bij Instellingen. Vink daar de vakken aan die jij hebt. Dan weet de app welke toetsen bij jou horen.'},
  {ico:'cijfers',kl:'g2',nav:'cijfers',titel:()=>'Cijfers invullen',tekst:'Na een toets vul je hier je cijfer in. De app rekent meteen je gemiddelde uit, en wat je op het eindexamen nodig hebt.'},
@@ -1894,14 +2120,15 @@ const TOUR=[
  {ico:'herk',kl:'g4',nav:'herkansen',titel:()=>'Slim herkansen',tekst:'Je mag drie toetsen opnieuw maken. Hier zie je bij welke toetsen dat het meeste oplevert.'},
  {ico:'ster',kl:'g1',nav:'instellingen',titel:()=>'Snap je een woord niet?',tekst:'Bij Instellingen staat een lijst met alle afkortingen, zoals SE, CE en PTA. Deze rondleiding kun je daar ook opnieuw bekijken.'},
 ];
+const TOURF=()=>TOUR_ALLE.filter(s=>!(EIGEN()&&['herkansen','magister'].includes(s.nav)));
 let tourStap=0;
 function tourLicht(nav){ for(const a of document.querySelectorAll('[data-nav]')) a.classList.toggle('tour-licht',!!nav&&(a.dataset.nav===nav||(a.dataset.nav==='meer'&&['herkansen','magister','instellingen'].includes(nav)&&a.closest('.tabbar')))); }
 function toonTour(stap){
-  tourStap=stap; const s=TOUR[stap]; const voornaam=String(S.naam||'').split(' ')[0];
+  tourStap=stap; const s=TOURF()[stap]; const voornaam=String(S.naam||'').split(' ')[0];
   $('tourIco').className='tour-ico '+s.kl; $('tourIco').innerHTML=`<svg><use href="#i-${s.ico}"/></svg>`;
   $('tourTitel').textContent=s.titel(voornaam==='Leerling'?'':voornaam); $('tourTekst').textContent=s.tekst;
-  $('tourStippen').innerHTML=TOUR.map((_,i)=>`<span class="${i===stap?'aan':''}"></span>`).join('');
-  $('tourTerug').hidden=stap===0; $('tourVolgende').textContent=stap===TOUR.length-1?'Aan de slag':'Volgende';
+  $('tourStippen').innerHTML=TOURF().map((_,i)=>`<span class="${i===stap?'aan':''}"></span>`).join('');
+  $('tourTerug').hidden=stap===0; $('tourVolgende').textContent=stap===TOURF().length-1?'Aan de slag':'Volgende';
   $('tour').hidden=false; tourLicht(s.nav); $('tourVolgende').focus();
 }
 function sluitTour(){ $('tour').hidden=true; tourLicht(null); if(!S.tour){ S.tour=true; save(); } }
@@ -1915,7 +2142,7 @@ function go(v,push=true){ if(!VIEWS.includes(v)) v='home';
   window.scrollTo({top:0});
 }
 function renderAll(){
-  renderLeerling(); renderPakket(); renderVakken(); renderUitslag(); renderAgenda(); renderTijdlijn(); vulProfiel(); regioCheck(); document.getElementById('code').value=JSON.stringify(S);
+  bouwVakken(); zetModusUI(); renderLeerling(); renderPakket(); renderVakken(); renderUitslag(); renderAgenda(); renderTijdlijn(); vulProfiel(); regioCheck(); document.getElementById('code').value=JSON.stringify(S);
 }
 document.getElementById('kopieer').addEventListener('click',()=>{
   const ta=document.getElementById('code'), m=document.getElementById('codeMelding');
@@ -1939,10 +2166,11 @@ $('verwijderKnop').addEventListener('click',()=>{$('verwijderTekst').textContent
 $('verwijderNee').addEventListener('click',()=>{$('verwijderBevestig').hidden=true;});
 $('verwijderJa').addEventListener('click',()=>{delete DB.leerlingen[DB.actief]; DB.actief=Object.keys(DB.leerlingen)[0]; S=DB.leerlingen[DB.actief]; $('verwijderBevestig').hidden=true; save(); openState.clear(); renderAll();});
 $('aVak').addEventListener('change',vulToetsKeuze);
-$('aToets').addEventListener('change',()=>{$('aOmsLabel').hidden=$('aToets').value!=='';});
+$('aToets').addEventListener('change',()=>{$('aOmsLabel').hidden=$('aToets').value!==''; $('aWegingLabel').hidden=!EIGEN()||$('aToets').value!=='';});
 $('agendaForm').addEventListener('submit',e=>{e.preventDefault(); const datum=$('aDatum').value; if(!datum){$('aDatum').focus();return;}
   const toets=$('aToets').value, oms=$('aOms').value.trim(); if(!$('aVak').value) return;
-  S.agenda.push({id:'a'+Date.now(),datum,vak:$('aVak').value,toets,oms:toets?'':oms,klaar:false}); $('aOms').value=''; save(); renderAgenda();});
+  if(EIGEN()&&!toets){ maakAgendaToets(datum,$('aVak').value,oms||'Toets',+$('aWeging').value||1); renderVakken(); } else S.agenda.push({id:'a'+Date.now(),datum,vak:$('aVak').value,toets,oms:toets?'':oms,klaar:false});
+  $('aOms').value=''; save(); renderAgenda();});
 $('hkDoel').addEventListener('input',renderHerkansing);
 $('mgLees').addEventListener('click',mgLees);
 $('mgAnnuleer').addEventListener('click',()=>{$('mgResultaat').hidden=true; mgVoorstel=[]; $('mgMelding').textContent='';});
@@ -1952,6 +2180,7 @@ $('mgToepas').addEventListener('click',()=>{ for(const m of mgVoorstel){ S.cijfe
 $('beheer').open=false;
 initPlanner();
 initProfiel();
+initNiveau();
 $('fotoInput').addEventListener('change',async e=>{ const f=e.target.files&&e.target.files[0]; const m=$('fotoMelding'); m.style.color=''; if(!f) return;
   m.textContent='Bezig…';
   try{ S.foto=await maakFoto(f); save(); renderAvatars(); m.textContent='Profielfoto opgeslagen.'; m.style.color='var(--ok)'; }
@@ -1959,7 +2188,7 @@ $('fotoInput').addEventListener('change',async e=>{ const f=e.target.files&&e.ta
   e.target.value=''; });
 $('fotoWeg').addEventListener('click',()=>{ S.foto=''; save(); renderAvatars(); $('fotoMelding').textContent='Profielfoto verwijderd.'; $('fotoMelding').style.color=''; });
 for(const b of document.querySelectorAll('button[data-av]')) b.addEventListener('click',()=>{ go('instellingen'); const p=$('fotoPaneel'); if(p) p.open=true; if(p&&p.scrollIntoView) p.scrollIntoView({behavior:'smooth',block:'start'}); });
-$('tourVolgende').addEventListener('click',()=>{ if(tourStap<TOUR.length-1) toonTour(tourStap+1); else { sluitTour(); if(!S.pakket.length) go('instellingen'); } });
+$('tourVolgende').addEventListener('click',()=>{ if(tourStap<TOURF().length-1) toonTour(tourStap+1); else { sluitTour(); if(!S.pakket.length) go('instellingen'); } });
 $('tourTerug').addEventListener('click',()=>toonTour(Math.max(0,tourStap-1)));
 $('tourSkip').addEventListener('click',sluitTour);
 $('tourOpnieuw').addEventListener('click',()=>toonTour(0));
@@ -2013,7 +2242,8 @@ async function haalOp(){
 }
 function startMet(s,nieuw){
   { const m=(USER&&USER.user_metadata)||{}; s={...s}; let aangevuld=false;
-    for(const k of ['school','plaats','geboorte']) if(!s[k]&&m[k]){ s[k]=m[k]; aangevuld=true; } if(aangevuld&&!nieuw) setTimeout(()=>push(),0); }
+    if(nieuw&&!s.leerjaarSJ) s.leerjaarSJ=huidigSchooljaar();
+    for(const k of ['school','plaats','geboorte','niveau','leerjaar']) if(!s[k]&&m[k]){ s[k]=m[k]; aangevuld=true; } if(aangevuld&&!nieuw) setTimeout(()=>push(),0); }
   S=norm(s); DB={actief:'cloud',leerlingen:{cloud:S}};
   CLOUD={gebr:GEBR,bewaar:bewaarCloud};
   $('login').hidden=true; $('import').hidden=true; $('herstel').hidden=true; toonApp(true); vulAccount();
@@ -2036,18 +2266,19 @@ async function naInloggen(user){
   if(rij&&rij.data&&Array.isArray(rij.data.pakket)){ laatsteSync=rij.bijgewerkt; startMet(rij.data,false); return; }
   // eerste keer: lokale cijfers aanbieden
   const kandidaten=Object.values(LOKAAL.leerlingen||{}).filter(l=>Object.keys(l.cijfers||{}).length||(l.agenda||[]).length);
-  if(!kandidaten.length){ startMet({naam,pakket:NIEUW_PAKKET,cijfers:{},ce:{},agenda:[]},true); return; }
+  const nieuwPakket=Array.isArray(meta.pakket)&&meta.pakket.length?meta.pakket:(meta.niveau?standaardPakket(meta.niveau,+meta.leerjaar||1):NIEUW_PAKKET);
+  if(!kandidaten.length){ startMet({naam,pakket:nieuwPakket,cijfers:{},ce:{},agenda:[]},true); return; }
   $('imNaam').textContent=naam; const lijst=$('imLijst'); lijst.innerHTML='';
   for(const l of kandidaten){ const b=document.createElement('button'); b.type='button';
     b.innerHTML=`Ja, cijfers van ${esc(l.naam)} overzetten<span>${Object.keys(l.cijfers||{}).length} cijfers, ${(l.agenda||[]).length} toetsen in de agenda</span>`;
     b.addEventListener('click',()=>startMet({...JSON.parse(JSON.stringify(l)),naam},true)); lijst.appendChild(b); }
-  $('imLeeg').onclick=()=>startMet({naam,pakket:NIEUW_PAKKET,cijfers:{},ce:{},agenda:[]},true);
+  $('imLeeg').onclick=()=>startMet({naam,pakket:nieuwPakket,cijfers:{},ce:{},agenda:[]},true);
   $('login').hidden=true; $('import').hidden=false;
 }
 function zetModus(m){
   modus=m; const nieuw=m==='nieuw', verg=m==='vergeten';
   $('tabIn').setAttribute('aria-selected',String(m==='in')); $('tabNieuw').setAttribute('aria-selected',String(nieuw));
-  $('lNaam').hidden=!nieuw; $('lSchool').hidden=!nieuw; $('lGeboorte').hidden=!nieuw; $('lWw2').hidden=!nieuw; $('lWw').hidden=verg;
+  $('lNaam').hidden=!nieuw; $('lNiveau').hidden=!nieuw; $('lVakken').hidden=!nieuw; $('lSchool').hidden=!nieuw; $('lGeboorte').hidden=!nieuw; $('lWw2').hidden=!nieuw; $('lWw').hidden=verg;
   $('liTip').hidden=m!=='in'; $('terugTip').hidden=!verg;
   $('liKnop').textContent=nieuw?'Account maken':verg?'Stuur herstelmail':'Inloggen';
   $('liWw').autocomplete=nieuw?'new-password':'current-password'; $('liFout').textContent=''; $('liOk').textContent='';
@@ -2104,7 +2335,7 @@ $('loginForm').addEventListener('submit',async e=>{
       if(!plaats){ fout.textContent='Vul de plaats van je school in.'; $('liPlaats').focus(); knop.disabled=false; return; }
       if(!/^\d{4}-\d{2}-\d{2}$/.test(geb)||geb>new Date().toISOString().slice(0,10)){ fout.textContent='Vul je geboortedatum in.'; $('liGeboorte').focus(); knop.disabled=false; return; }
       if(w!==$('liWw2').value){ fout.textContent='De wachtwoorden zijn niet hetzelfde.'; $('liWw2').focus(); knop.disabled=false; return; }
-      const r=await sb.auth.signUp({email:mail,password:w,options:{data:{voornaam:voor,achternaam:achter,naam:voor+' '+achter,school,plaats,geboorte:geb}}});
+      const r=await sb.auth.signUp({email:mail,password:w,options:{data:{voornaam:voor,achternaam:achter,naam:voor+' '+achter,school,plaats,geboorte:geb,niveau:$('liNiveau').value,leerjaar:+$('liLeerjaar').value,pakket:liGekozen()}}});
       if(r.error) throw r.error;
       if(!r.data.session){ fout.textContent='Account gemaakt, maar direct inloggen lukt niet. Staat Confirm email in Supabase nog aan?'; knop.disabled=false; return; }
       if(r.data.user&&Array.isArray(r.data.user.identities)&&!r.data.user.identities.length) throw new Error('already registered');
@@ -2184,6 +2415,21 @@ window.addEventListener('online',()=>{ if(wijzigingOpen) push(); });
   else toonLogin(HERSTEL?'Deze herstellink is verlopen of al gebruikt. Vraag een nieuwe aan via Wachtwoord vergeten.':'');
   sb.auth.onAuthStateChange((ev,s)=>{ if(ev==='PASSWORD_RECOVERY'&&s&&$('herstel').hidden) toonHerstel(s.user); if(ev==='SIGNED_OUT'&&CLOUD){ DB=LOKAAL; S=DB.leerlingen[DB.actief]; toonLogin('Je bent uitgelogd.'); } });
 })();
+
+// 27-10-2026 MK niveau, klas en vakken bij het aanmaken van een account
+let liAangeraakt=false;
+function liGekozen(){ return [...document.querySelectorAll('#liVakken input:checked')].map(i=>i.value); }
+function liVakkenTonen(){
+  const niv=$('liNiveau').value, lj=+$('liLeerjaar').value||1, s={niveau:niv,leerjaar:lj,school:$('liSchool').value.trim()};
+  const ids=katalogIds(s), std=standaardPakket(niv,lj), oud=liGekozen(); const el=$('liVakken'); el.innerHTML='';
+  for(const id of ids){ const v=ORIGINEEL[id]; if(!v) continue; const aan=liAangeraakt?oud.includes(id):std.includes(id);
+    const l=document.createElement('label'); l.innerHTML=`<input type="checkbox" value="${id}" ${aan?'checked':''}> ${esc(ptaModus(s)?v.naam:(NAAM_EIGEN[id]||v.naam))}`;
+    l.querySelector('input').addEventListener('change',()=>{ liAangeraakt=true; }); el.appendChild(l); }
+}
+vulNiveauKeuze($('liNiveau'),$('liLeerjaar'),'vmbo-tl',1); liVakkenTonen();
+$('liNiveau').addEventListener('change',()=>{ vulNiveauKeuze($('liNiveau'),$('liLeerjaar'),$('liNiveau').value,+$('liLeerjaar').value||1); liVakkenTonen(); });
+$('liLeerjaar').addEventListener('change',liVakkenTonen);
+$('liSchool').addEventListener('change',liVakkenTonen);
 
 if('serviceWorker' in navigator && location.protocol==='https:'){ navigator.serviceWorker.register('sw.js').catch(()=>{}); }
 </script>
