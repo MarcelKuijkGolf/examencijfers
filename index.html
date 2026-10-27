@@ -2803,7 +2803,7 @@ reactieproduct|Stof die bij een reactie ontstaat.
 exotherm|Reactie waarbij energie vrijkomt.
 endotherm|Reactie waarvoor je steeds energie moet toevoegen.
 water aantonen|Wit kopersulfaat wordt blauw.`},
- {id:'stoffen',t:'Stoffen en deeltjes',s:['dichtheid'],k:`molecuul|Het kleinste deeltje van een stof.
+ {id:'stoffen',t:'Stoffen en deeltjes',h:'9',s:['dichtheid'],k:`molecuul|Het kleinste deeltje van een stof.
 atoom|Bouwsteen van moleculen.
 element|Stof die uit één soort atomen bestaat.
 verbinding|Stof waarvan de moleculen uit verschillende soorten atomen bestaan.
@@ -2818,7 +2818,7 @@ emulsie|Mengsel van twee vloeistoffen die niet mengen, met een emulgator.
 filtreren|Vaste stof en vloeistof scheiden met een filter.
 destilleren|Scheiden op basis van verschil in kookpunt.
 indampen|De vloeistof laten verdampen zodat de opgeloste stof overblijft.`},
- {id:'zuren',t:'Zouten, zuren en basen',k:`zout|Stof die is opgebouwd uit ionen.
+ {id:'zuren',t:'Zouten, zuren en basen',h:'10',k:`zout|Stof die is opgebouwd uit ionen.
 ion|Een elektrisch geladen deeltje.
 positief ion|Atoom dat elektronen heeft afgestaan, meestal een metaal.
 negatief ion|Atoom dat elektronen heeft opgenomen.
@@ -3229,7 +3229,9 @@ function eigenSets(vak){ return (S.kaartjes[vak]||[]); }
 function leerTopics(vak){
   const bron=[...(LEERSTOF[vak]||[]),...(LEER_ALIAS[vak]||[]).flatMap(a=>(LEERSTOF[a]||[]).map(t=>({...t,id:a+'_'+t.id})))];
   const eigen=eigenSets(vak).map(e=>({id:'e_'+e.id,t:e.titel,eigen:true,[TAALVAKKEN.includes(vak)?'w':'k']:e.regels}));
-  return [...bron,...eigen].map(t=>{ const eigenNr=S.hnr[vak+'.'+t.id]; const auto=t.h!=null?t.h:(/^(?:.*_)?h(\d+)$/.exec(t.id)||[])[1]||'';
+  let volg=0;
+  return [...bron,...eigen].map(t=>{ const eigenNr=S.hnr[vak+'.'+t.id]; if(!t.eigen) volg++;
+    const auto=t.h!=null?t.h:(/^(?:.*_)?h(\d+)$/.exec(t.id)||[])[1]||(t.eigen?'':String(volg));
     const nr=eigenNr!=null?eigenNr:auto; return {...t,titel:t.t,hnr:nr,t:nr?`H${nr} · ${t.t}`:t.t}; });
 }
 const TOPIC_CACHE=new Map();
@@ -3498,7 +3500,7 @@ function renderLerenVak(el,vak){
       <form id="lrEigenForm" class="lr-eigen-form"><input id="lrEigenTitel" maxlength="60" placeholder="Naam, bijv. Hoofdstuk 3 woordjes" aria-label="Naam van de set">
       <textarea id="lrEigenRegels" rows="6" placeholder="${TAALVAKKEN.includes(vak)?'Eén per regel, bijvoorbeeld:\nde hond = the dog\nhet huis = the house':'Eén per regel, bijvoorbeeld:\nfotosynthese = planten maken glucose met licht\nproducent = organisme dat zelf voedsel maakt'}" aria-label="Kaartjes, één per regel"></textarea>
       <div class="row"><button type="submit" class="primary">Opslaan</button><span class="small muted" id="lrEigenMelding"></span></div></form></details>
-    <p class="small muted lr-hnr-tip">Klopt een hoofdstuknummer niet met je boek? Tik op het nummer (of op <b>+ H</b>) en vul het nummer uit je eigen boek in.</p>`;
+    <p class="small muted lr-hnr-tip">De hoofdstuknummers volgen de volgorde van de stof en het PTA. Staat een hoofdstuk in jouw boek onder een ander nummer? Tik op het nummer om het aan te passen.</p>`;
   if(oef.length) h+=`<section class="lr-geschiedenis"><h3>Je laatste oefentoetsen</h3><ul>${oef.map(o=>`<li><span>${datumNL(o.d)}</span><span>${esc(o.t)}</span><b class="${o.c<5.5?'t-bad':'t-ok'}">${fmt(o.c)}</b></li>`).join('')}</ul></section>`;
   el.innerHTML=h;
   $('lrTerug').addEventListener('click',()=>{ lrVak=null; renderLeren(); });
