@@ -544,6 +544,106 @@ body.feest{background-image:radial-gradient(800px 400px at 90% -10%,rgba(255,95,
 .login-vakken .pakket{margin-top:10px}
 .login-vakken .pakket label{font-size:.82rem;padding:5px 10px}
 @media (max-width:640px){.eigen-form{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.eigen-form input[name=naam]{grid-column:1/-1}}
+
+/* leren */
+.lr-banner{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center;padding:14px 18px;margin-bottom:16px;border-radius:18px;background:linear-gradient(135deg,rgba(255,162,58,.18),rgba(224,74,143,.1));border:1px solid rgba(255,162,58,.45)}
+.lr-banner b{display:block;font-family:var(--f-display)} .lr-banner small{color:var(--muted)}
+.lr-vakken{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.lr-vak{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;align-items:center;text-align:left;padding:16px;border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid var(--line);color:var(--ink);transition:transform .15s,border-color .15s}
+.lr-vak:hover{transform:translateY(-2px);border-color:var(--line2)}
+.lr-vt{display:grid;gap:3px;min-width:0} .lr-vt b{font-family:var(--f-display);font-size:1.02rem} .lr-vt small{color:var(--muted)}
+.lr-toetschip{justify-self:start;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--accent-soft);color:var(--accent)}
+.lr-ring{--p:0;flex:none;display:grid;place-items:center;border-radius:50%;background:conic-gradient(var(--accent) calc(var(--p)*1%),rgba(255,255,255,.1) 0);position:relative}
+.lr-ring::before{content:"";position:absolute;inset:6px;border-radius:50%;background:var(--paper)}
+.lr-ring b{position:relative;font-family:var(--f-num);font-size:.8rem}
+.lr-ring.leeg{width:56px;height:56px;background:rgba(255,255,255,.06)} .lr-ring.leeg::before{display:none} .lr-ring.leeg b{font-size:1.4rem;color:var(--muted)}
+.lr-analyse .lr-ring::before{inset:9px} .lr-analyse .lr-ring b{font-size:1.15rem}
+.lr-terug{margin-bottom:12px;background:transparent;border:1px solid var(--line2)}
+.lr-analyse{display:grid;grid-template-columns:auto minmax(0,1fr);gap:20px;align-items:start;padding:20px;border-radius:22px;background:linear-gradient(135deg,#21195a,#38206f 60%,#5a2a7c);border:1px solid rgba(255,255,255,.14);margin-bottom:16px}
+.lr-an-tekst{display:grid;gap:8px;min-width:0} .lr-an-tekst h2{margin:0;font-size:1.5rem} .lr-an-kop{margin:0;color:#e3defa}
+.lr-an-tekst ul{margin:0;padding-left:18px;display:grid;gap:4px;color:#d9d4f5;font-size:.92rem} .lr-an-tekst button{justify-self:start;margin-top:4px}
+.t-ok{color:var(--ok)} .t-bad{color:var(--bad)}
+.lr-topics{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:12px}
+.lr-topic{display:grid;gap:10px;padding:16px;border-radius:18px;background:var(--paper);border:1px solid var(--line)}
+.lr-topic.eigen{border-style:dashed}
+.lr-tkop{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:8px;align-items:start}
+.lr-tkop b{display:block;font-family:var(--f-display)} .lr-tkop small{color:var(--muted);font-size:.78rem}
+.lr-pct{font-family:var(--f-num);font-weight:700;color:var(--accent)}
+.lr-bar{display:block;height:7px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden} .lr-bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--pink))}
+.lr-knoppen{display:flex;flex-wrap:wrap;gap:6px} .lr-knoppen button{font-size:.82rem;padding:7px 11px}
+.lr-knoppen .lr-toetsknop{background:var(--accent-soft);border-color:rgba(255,162,58,.45);color:var(--accent)}
+.lr-eigen{margin-top:16px;padding:14px 18px;border-radius:18px;border:1px dashed var(--line2);background:rgba(255,255,255,.02)}
+.lr-eigen summary{cursor:pointer;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;list-style:none} .lr-eigen summary::-webkit-details-marker{display:none} .lr-eigen summary small{color:var(--muted)}
+.lr-eigen-form{display:grid;gap:8px;margin-top:12px} .lr-eigen-form input,.lr-eigen-form textarea{padding:10px 12px;width:100%;font:inherit}
+.lr-geschiedenis{margin-top:16px} .lr-geschiedenis h3{font-size:1rem;margin:0 0 8px}
+.lr-geschiedenis ul{list-style:none;margin:0;padding:0;display:grid;gap:6px} .lr-geschiedenis li{display:grid;grid-template-columns:7em minmax(0,1fr) auto;gap:10px;padding:8px 12px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid var(--line);font-size:.9rem}
+.lr-geschiedenis li span:first-child{color:var(--muted)} .lr-geschiedenis li b{font-family:var(--f-num)}
+/* studiescherm */
+body.studie-open{overflow:hidden}
+.studie{position:fixed;inset:0;z-index:250;display:flex;flex-direction:column;background:radial-gradient(900px 500px at 50% -10%,#2a2070,transparent 70%),var(--bg);padding:max(14px,env(safe-area-inset-top)) 16px max(16px,env(safe-area-inset-bottom))}
+.st-kop{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;max-width:720px;width:100%;margin:0 auto}
+.st-x{width:42px;height:42px;padding:0;border-radius:12px;font-size:1.5rem;line-height:1}
+.st-info b{display:block;font-family:var(--f-display);font-size:1.05rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} .st-info small{color:var(--muted)}
+.st-teller{font-family:var(--f-num);color:var(--muted)}
+.st-balk{max-width:720px;width:100%;margin:12px auto 0;height:6px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden} .st-balk i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--pink));transition:width .3s}
+.st-body{flex:1;overflow-y:auto;max-width:720px;width:100%;margin:0 auto;padding:22px 2px 10px;display:flex;flex-direction:column;gap:14px}
+.st-wissel{display:flex;justify-content:center} .st-wissel button{font-size:.82rem;padding:6px 12px}
+.flipkaart{perspective:1200px;min-height:300px;cursor:pointer;touch-action:pan-y;transition:transform .25s;user-select:none;outline:none}
+.fk-binnen{position:relative;width:100%;min-height:300px;transition:transform .5s cubic-bezier(.3,.7,.3,1);transform-style:preserve-3d}
+.flipkaart.om .fk-binnen{transform:rotateY(180deg)}
+.fk-voor,.fk-achter{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:24px;padding:26px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;border:1px solid rgba(255,255,255,.16)}
+.fk-voor{background:linear-gradient(145deg,#2b2370,#3d2580)} .fk-achter{background:linear-gradient(145deg,#3a1f6b,#7a2a78);transform:rotateY(180deg)}
+.fk-voor b,.fk-achter b{font-family:var(--f-display);font-size:clamp(1.3rem,4.5vw,1.9rem);line-height:1.25;overflow-wrap:anywhere}
+.fk-achter b{font-size:clamp(1.05rem,3.6vw,1.45rem)} .fk-voor small,.fk-achter small{color:#cfc7f3}
+.fk-label{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.flipkaart.veeg-ja .fk-binnen{box-shadow:0 0 0 3px var(--ok);border-radius:24px} .flipkaart.veeg-nee .fk-binnen{box-shadow:0 0 0 3px var(--bad);border-radius:24px}
+.flipkaart:focus-visible .fk-binnen{box-shadow:0 0 0 3px var(--accent);border-radius:24px}
+.st-knoppen{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.st-knoppen button{padding:12px 18px;font-size:1rem}
+.st-ja{background:rgba(74,222,155,.16);border-color:rgba(74,222,155,.55);color:var(--ok)} .st-nee{background:rgba(255,107,122,.13);border-color:rgba(255,107,122,.5);color:var(--bad)}
+.st-tip{text-align:center;margin:0}
+.st-kaart,.st-uitleg,.st-eind,.st-stop{display:grid;gap:14px;padding:22px;border-radius:22px;background:var(--paper);border:1px solid var(--line)}
+.st-uitleg p{margin:0;line-height:1.55} .st-uitleg button{justify-self:start}
+.st-stop{border-color:rgba(255,204,92,.5)} .st-stop p{margin:0}
+.st-vraag{margin:0;font-family:var(--f-display);font-size:1.2rem} .st-somvraag{font-family:var(--f-body);font-size:1.08rem;line-height:1.5}
+.st-detail{margin:0;padding:14px;border-radius:14px;background:rgba(255,255,255,.05);font-size:1.05rem}
+.st-detail b{font-family:var(--f-display);font-size:1.3rem}
+.st-zin{margin:0;font-size:1.15rem;line-height:2.1}
+.st-gat{display:inline-block;width:9.5em;max-width:100%;padding:4px 10px;font-size:1.05rem;margin:0 4px}
+.st-invoer{padding:12px 14px;font-size:1.1rem;width:100%}
+.st-somrij{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center} .st-eenheid{font-weight:700;color:var(--muted)}
+.st-opties{display:grid;gap:8px}
+.st-opties button{text-align:left;padding:13px 16px;font-weight:600;line-height:1.35;white-space:normal}
+.st-opties button.goed{background:rgba(74,222,155,.18);border-color:var(--ok);color:#d6ffe9} .st-opties button.fout{background:rgba(255,107,122,.15);border-color:var(--bad)}
+.st-opties button:disabled{opacity:1}
+.st-feedback:empty{display:none}
+.st-feedback{padding:12px 14px;border-radius:14px;line-height:1.45}
+.st-feedback small{display:block;margin-top:6px;color:var(--muted)}
+.st-feedback.ok{background:rgba(74,222,155,.12);border:1px solid rgba(74,222,155,.4)} .st-feedback.nee{background:rgba(255,107,122,.1);border:1px solid rgba(255,107,122,.4)}
+.st-eind{text-align:center;justify-items:center} .st-eind h3{margin:0} .st-eind p{margin:0}
+.st-groot{font-family:var(--f-display);font-size:3rem;font-weight:800}
+.st-lijst{list-style:none;margin:0;padding:0;display:grid;gap:6px;text-align:left;width:100%}
+.st-lijst li{display:grid;gap:2px;padding:9px 12px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid var(--line)} .st-lijst li span{color:var(--muted);font-size:.9rem}
+.st-cijfer{display:grid;justify-items:center;gap:2px;padding:18px 34px;border-radius:24px;border:2px solid}
+.st-cijfer span{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)} .st-cijfer b{font-family:var(--f-display);font-size:3.6rem;line-height:1} .st-cijfer small{color:var(--muted)}
+.st-cijfer.ok{border-color:var(--ok);background:var(--ok-soft)} .st-cijfer.ok b{color:var(--ok)} .st-cijfer.warn{border-color:var(--warn);background:var(--warn-soft)} .st-cijfer.warn b{color:var(--warn)} .st-cijfer.bad{border-color:var(--bad);background:var(--bad-soft)} .st-cijfer.bad b{color:var(--bad)}
+.st-analyse{display:grid;gap:6px;text-align:left;width:100%;padding:14px;border-radius:14px;background:rgba(255,255,255,.04)}
+.st-pert{display:grid;gap:6px;width:100%;text-align:left} .st-pert div{display:grid;grid-template-columns:minmax(0,1fr) 90px auto;gap:10px;align-items:center;font-size:.88rem}
+.st-fouten{width:100%;text-align:left} .st-fouten summary{cursor:pointer;font-weight:700;margin-bottom:8px}
+/* vegen en toast */
+.veegbaar{touch-action:pan-y;transition:transform .2s,opacity .2s;position:relative}
+.veeg-klaar{box-shadow:inset 4px 0 0 var(--bad)}
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);opacity:0;z-index:300;display:flex;gap:12px;align-items:center;padding:10px 12px 10px 16px;border-radius:14px;background:#2a2f5a;border:1px solid var(--line2);box-shadow:0 12px 30px rgba(0,0,0,.4);transition:all .25s;max-width:calc(100vw - 32px)}
+.toast.aan{opacity:1;transform:translate(-50%,0)} .toast button{padding:6px 10px;font-size:.85rem;color:var(--accent);background:transparent;border-color:rgba(255,162,58,.45)}
+@media (min-width:981px){.toast{bottom:24px}}
+.wi-hw{background:linear-gradient(135deg,#1f8f8a,#176a72);display:grid;grid-template-columns:auto 1fr;column-gap:8px;align-items:start;cursor:pointer}
+.wi-hw input{margin:2px 0 0;accent-color:var(--ok);width:16px;height:16px}
+.wi-hw.gedaan{background:linear-gradient(135deg,rgba(74,222,155,.28),rgba(74,222,155,.12));color:var(--ok)} .wi-hw.gedaan b{text-decoration:line-through}
+.hw-vink input{width:18px;height:18px;accent-color:var(--ok)}
+.hw-wat{grid-column:1/-1}
+.home-leer li{position:relative}
+.oefen-link{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:.78rem;padding:5px 9px;background:rgba(255,255,255,.14);border:0;color:#fff}
+@media (max-width:640px){.lr-analyse{grid-template-columns:minmax(0,1fr);justify-items:start}.lr-banner{grid-template-columns:auto minmax(0,1fr)}.lr-banner button{grid-column:1/-1}.flipkaart,.fk-binnen{min-height:260px}.lr-geschiedenis li{grid-template-columns:minmax(0,1fr) auto}.lr-geschiedenis li span:first-child{display:none}}
 </style>
 
 </head>
@@ -566,6 +666,7 @@ body.feest{background-image:radial-gradient(800px 400px at 90% -10%,rgba(255,95,
   <symbol id="i-grafiek" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></symbol>
   <symbol id="i-bel" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/></symbol>
   <symbol id="i-klok" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></symbol>
+  <symbol id="i-leren" viewBox="0 0 24 24"><path d="M12 3 2 8l10 5 10-5z"/><path d="M6 10.5V16c2 2 10 2 12 0v-5.5"/><path d="M22 8v6"/></symbol>
   <symbol id="i-ster" viewBox="0 0 24 24"><path d="M12 0 14.6 9.4 24 12 14.6 14.6 12 24 9.4 14.6 0 12 9.4 9.4z"/></symbol>
 </svg>
 
@@ -575,6 +676,7 @@ body.feest{background-image:radial-gradient(800px 400px at 90% -10%,rgba(255,95,
     <nav class="nav" aria-label="Hoofdmenu">
       <a href="#home" data-nav="home"><span class="ico"><svg><use href="#i-home"/></svg></span><span class="lbl">Lobby</span></a>
       <a href="#agenda" data-nav="agenda"><span class="ico"><svg><use href="#i-agenda"/></svg></span><span class="lbl">Toetsagenda</span><span class="badge" id="navBadge" hidden></span></a>
+      <a href="#leren" data-nav="leren"><span class="ico"><svg><use href="#i-leren"/></svg></span><span class="lbl">Leren</span></a>
       <a href="#cijfers" data-nav="cijfers"><span class="ico"><svg><use href="#i-cijfers"/></svg></span><span class="lbl">Cijfers invoeren</span></a>
       <a href="#uitslag" data-nav="uitslag"><span class="ico"><svg><use href="#i-uitslag"/></svg></span><span class="lbl">Uitslag</span></a>
       <a href="#herkansen" data-nav="herkansen"><span class="ico"><svg><use href="#i-herk"/></svg></span><span class="lbl">Herkansen</span></a>
@@ -714,6 +816,19 @@ body.feest{background-image:radial-gradient(800px 400px at 90% -10%,rgba(255,95,
               </form>
             </div>
           </details>
+          <details class="set" id="agHuiswerk">
+            <summary><span class="ico g4"><svg><use href="#i-boek"/></svg></span><span class="set-tekst"><b>Huiswerk</b><small id="hwSub">Opdrachten, lezen, woordjes leren</small></span><span class="chev" aria-hidden="true">›</span></summary>
+            <div class="set-body">
+              <form class="aform" id="hwForm">
+                <label>Af op<input type="date" id="hwDatum"></label>
+                <label>Vak<select id="hwVak"></select></label>
+                <label class="hw-wat">Wat moet je doen?<input id="hwTekst" maxlength="120" autocomplete="off" placeholder="Bijvoorbeeld opdracht 4 t/m 8 blz. 32"></label>
+                <button type="submit" class="primary">Toevoegen</button>
+              </form>
+              <ul class="alijst" id="hwLijst"></ul>
+              <p class="small muted" style="margin:0">Klaar? Vink het af, of veeg het naar rechts om het weg te halen.</p>
+            </div>
+          </details>
           <details class="set" id="agVast">
             <summary><span class="ico g6"><svg><use href="#i-klok"/></svg></span><span class="set-tekst"><b>Vaste afspraken</b><small id="vastSub">Sport, werk, muziekles</small></span><span class="chev" aria-hidden="true">›</span></summary>
             <div class="set-body">
@@ -785,6 +900,12 @@ body.feest{background-image:radial-gradient(800px 400px at 90% -10%,rgba(255,95,
           <div class="row"><button type="button" class="primary" id="mgToepas">Deze wijzigingen opslaan</button><button type="button" id="mgAnnuleer">Annuleren</button></div>
         </div>
       </section>
+    </section>
+
+    <!-- LEREN -->
+    <section class="view" data-view="leren" hidden>
+      <div class="vkop"><span class="eyebrow">Oefenen</span><h1>Leren</h1><p>Kies een vak en oefen per onderwerp met kaartjes, begrippen, grammatica en sommen. Met een oefentoets zie je of je klaar bent voor de toets.</p></div>
+      <div id="lrInhoud"></div>
     </section>
 
     <!-- INSTELLINGEN -->
@@ -927,6 +1048,12 @@ body.feest{background-image:radial-gradient(800px 400px at 90% -10%,rgba(255,95,
 </div>
 
 <div class="confetti" id="confetti" aria-hidden="true"></div>
+<div class="studie" id="studie" hidden role="dialog" aria-modal="true" aria-labelledby="stTitel">
+  <div class="st-kop"><button type="button" class="st-x" id="stSluit" aria-label="Stoppen">×</button><div class="st-info"><b id="stTitel"></b><small id="stSub"></small></div><span class="st-teller" id="stTeller"></span></div>
+  <div class="st-balk"><i id="stVoortgang"></i></div>
+  <div class="st-body" id="stBody"></div>
+</div>
+<div class="toast" id="toast" hidden role="status"></div>
 <div class="tour" id="tour" hidden role="dialog" aria-modal="true" aria-labelledby="tourTitel">
   <div class="tour-kaart">
     <button type="button" class="tour-skip" id="tourSkip">Overslaan</button>
@@ -939,11 +1066,12 @@ body.feest{background-image:radial-gradient(800px 400px at 90% -10%,rgba(255,95,
 <nav class="tabbar" aria-label="Menu">
   <a href="#home" data-nav="home"><span class="ico"><svg><use href="#i-home"/></svg></span>Lobby</a>
   <a href="#agenda" data-nav="agenda"><span class="ico"><svg><use href="#i-agenda"/></svg></span>Agenda<span class="badge" id="navBadgeM" hidden></span></a>
+  <a href="#leren" data-nav="leren"><span class="ico"><svg><use href="#i-leren"/></svg></span>Leren</a>
   <a href="#cijfers" data-nav="cijfers"><span class="ico"><svg><use href="#i-cijfers"/></svg></span>Cijfers</a>
-  <a href="#uitslag" data-nav="uitslag"><span class="ico"><svg><use href="#i-uitslag"/></svg></span>Uitslag</a>
   <a href="#meer" data-nav="meer"><span class="ico"><svg><use href="#i-meer"/></svg></span>Meer</a>
 </nav>
 <div class="meer" id="meerMenu" hidden>
+  <a href="#uitslag" data-nav="uitslag"><span class="ico g3"><svg><use href="#i-uitslag"/></svg></span>Uitslag</a>
   <a href="#herkansen" data-nav="herkansen"><span class="ico g4"><svg><use href="#i-herk"/></svg></span>Herkansen</a>
   <a href="#magister" data-nav="magister"><span class="ico g5"><svg><use href="#i-magister"/></svg></span>Uit Magister</a>
   <a href="#instellingen" data-nav="instellingen"><span class="ico g6"><svg><use href="#i-inst"/></svg></span>Instellingen</a>
@@ -1053,7 +1181,7 @@ function load(){
   try{const oud=localStorage.getItem(OUDE_KEY); if(oud){const o=JSON.parse(oud); if(o&&o.pakket) Object.assign(liam,norm(o),{naam:liam.naam});}}catch(e){}
   return {actief:'l1',leerlingen:{l1:liam}};
 }
-function norm(s){return {naam:String(s.naam||'Leerling').slice(0,40),pakket:Array.isArray(s.pakket)?s.pakket.filter(id=>BY_ID[id]):[],cijfers:s.cijfers||{},ce:s.ce||{},agenda:Array.isArray(s.agenda)?s.agenda:[],tour:!!s.tour,niveau:['vmbo-bb','vmbo-kb','vmbo-gl','vmbo-tl','havo','vwo'].includes(s.niveau)?s.niveau:'vmbo-tl',leerjaar:Math.max(1,Math.min(6,parseInt(s.leerjaar)||4)),leerjaarSJ:typeof s.leerjaarSJ==='string'?s.leerjaarSJ:'',pakketen:s.pakketen&&typeof s.pakketen==='object'&&!Array.isArray(s.pakketen)?s.pakketen:{},eigen:s.eigen&&typeof s.eigen==='object'&&!Array.isArray(s.eigen)?s.eigen:{},school:String(s.school||'').slice(0,60),plaats:String(s.plaats||'').slice(0,40),geboorte:/^\d{4}-\d{2}-\d{2}$/.test(s.geboorte||'')?s.geboorte:'',regio:['noord','midden','zuid'].includes(s.regio)?s.regio:'',regioAuto:s.regioAuto&&typeof s.regioAuto==='object'?s.regioAuto:null,vast:Array.isArray(s.vast)?s.vast.filter(v=>v&&v.naam&&v.dag>=0&&v.dag<=6).map(v=>({...v,naam:vastNaamVan(v.naam),leren:!!v.leren})).filter((v,i,a)=>a.findIndex(x=>x.naam===v.naam&&x.dag===v.dag)===i):[],leer:Array.isArray(s.leer)?s.leer.filter(l=>l&&l.datum&&BY_ID[l.vak]):[],foto:typeof s.foto==='string'&&s.foto.startsWith('data:image/')&&s.foto.length<200000?s.foto:''};}
+function norm(s){return {naam:String(s.naam||'Leerling').slice(0,40),pakket:Array.isArray(s.pakket)?s.pakket.filter(id=>BY_ID[id]):[],cijfers:s.cijfers||{},ce:s.ce||{},agenda:Array.isArray(s.agenda)?s.agenda:[],tour:!!s.tour,niveau:['vmbo-bb','vmbo-kb','vmbo-gl','vmbo-tl','havo','vwo'].includes(s.niveau)?s.niveau:'vmbo-tl',leerjaar:Math.max(1,Math.min(6,parseInt(s.leerjaar)||4)),leerjaarSJ:typeof s.leerjaarSJ==='string'?s.leerjaarSJ:'',kennis:s.kennis&&typeof s.kennis==='object'&&!Array.isArray(s.kennis)?s.kennis:{},oefen:s.oefen&&typeof s.oefen==='object'&&!Array.isArray(s.oefen)?s.oefen:{},kaartjes:s.kaartjes&&typeof s.kaartjes==='object'&&!Array.isArray(s.kaartjes)?s.kaartjes:{},huiswerk:Array.isArray(s.huiswerk)?s.huiswerk.filter(h=>h&&h.datum&&h.tekst):[],pakketen:s.pakketen&&typeof s.pakketen==='object'&&!Array.isArray(s.pakketen)?s.pakketen:{},eigen:s.eigen&&typeof s.eigen==='object'&&!Array.isArray(s.eigen)?s.eigen:{},school:String(s.school||'').slice(0,60),plaats:String(s.plaats||'').slice(0,40),geboorte:/^\d{4}-\d{2}-\d{2}$/.test(s.geboorte||'')?s.geboorte:'',regio:['noord','midden','zuid'].includes(s.regio)?s.regio:'',regioAuto:s.regioAuto&&typeof s.regioAuto==='object'?s.regioAuto:null,vast:Array.isArray(s.vast)?s.vast.filter(v=>v&&v.naam&&v.dag>=0&&v.dag<=6).map(v=>({...v,naam:vastNaamVan(v.naam),leren:!!v.leren})).filter((v,i,a)=>a.findIndex(x=>x.naam===v.naam&&x.dag===v.dag)===i):[],leer:Array.isArray(s.leer)?s.leer.filter(l=>l&&l.datum&&BY_ID[l.vak]):[],foto:typeof s.foto==='string'&&s.foto.startsWith('data:image/')&&s.foto.length<200000?s.foto:''};}
 function save(){DB.leerlingen[DB.actief]=S; if(CLOUD) CLOUD.bewaar(S); else { try{localStorage.setItem(KEY,JSON.stringify(DB));}catch(e){} } document.getElementById('code').value=JSON.stringify(S);}
 
 const r1=x=>Math.round(x*10+1e-9)/10;
@@ -1280,6 +1408,8 @@ function renderAgenda(){
     li.innerHTML=`<span class="datum">${datumNL(a.datum)}</span><span class="wat">${aTitel(a)}${nodigBij(a,st)}</span><span class="tag-st ${lab[st][0]}">${lab[st][1]}</span><span class="acties">${!t&&st!=='kom'&&st!=='vandaag'?`<button type="button" data-klaar>${a.klaar?'Terugzetten':'Afvinken'}</button>`:''}<button type="button" data-weg aria-label="Verwijderen uit agenda">Verwijderen</button></span>`;
     li.querySelector('[data-weg]').addEventListener('click',()=>{S.agenda=S.agenda.filter(x=>x.id!==a.id); S.leer=S.leer.filter(l=>l.agendaId!==a.id); if(EIGEN()&&a.toets&&S.cijfers[a.vak+'-'+a.toets]==null){ verwijderEigenToets(a.vak,a.toets); bouwVakken(); renderVakken(); } save(); renderAgenda();});
     const k=li.querySelector('[data-klaar]'); if(k) k.addEventListener('click',()=>{a.klaar=!a.klaar; save(); renderAgenda();});
+    maakVeegbaar(li,()=>{ const ix=S.agenda.indexOf(a), leer=S.leer.filter(l=>l.agendaId===a.id); S.agenda=S.agenda.filter(x=>x.id!==a.id); S.leer=S.leer.filter(l=>l.agendaId!==a.id); save(); renderAgenda();
+      toonToast(`Toets ${vakNaam(a.vak)} verwijderd`,()=>{ S.agenda.splice(Math.max(0,ix),0,a); S.leer.push(...leer); save(); renderAgenda(); }); });
     lijst.appendChild(li); }
   if(!items.length) lijst.innerHTML='<li class="small muted">Nog geen toetsen gepland. Kies een datum, vak en toets hierboven.</li>';
   const kom=items.filter(a=>['kom','vandaag'].includes(status(a))).length;
@@ -1438,10 +1568,16 @@ function renderHome(){
     const wann=over===0?'Vandaag':over===1?'Morgen':over<7?dt.toLocaleDateString('nl-NL',{weekday:'long'}).replace(/^./,c=>c.toUpperCase()):`Over ${over} dagen`;
     li.innerHTML=`<span class="dagblok ${over<=2?'gauw':''}"><span class="dm">${dt.toLocaleDateString('nl-NL',{month:'short'}).replace('.','')}</span><span class="dn">${dd}</span></span><span class="wat"><span class="wanneer-tag">${wann}</span><br>${aTitel(a)}${nodigBij(a,status(a))}</span>`; ul.appendChild(li); }
   if(!kom.length) ul.innerHTML='<li class="leeg">Geen toetsen gepland. <a href="#agenda">Zet je eerste toets in de agenda</a>.</li>';
-  { const vl=$('homeLeer'); if(vl){ const iso=VANDAAG(); const l=S.leer.filter(x=>x.datum===iso); vl.innerHTML='';
-    for(const x of l){ const li=document.createElement('li'); li.innerHTML=`<label class="wi wi-leer${x.gedaan?' gedaan':''}"><input type="checkbox" ${x.gedaan?'checked':''} aria-label="Leermoment afvinken"><span><b>${BY_ID[x.vak].naam}</b> · ${duurTekst(x.minuten)}<br><small>${esc(x.label)}</small></span></label>`;
-      li.querySelector('input').addEventListener('change',e=>zetGedaan(x.id,e.target.checked)); vl.appendChild(li); }
-    $('homeLeerBlok').hidden=!l.length; $('homeLeerKop').textContent=l.length&&l.every(x=>x.gedaan)?'Vandaag leren · alles klaar!':'Vandaag leren'; } }
+  { const vl=$('homeLeer'); if(vl){ const iso=VANDAAG(), morgen=isoVan(dag(iso)+1); const l=S.leer.filter(x=>x.datum===iso);
+    const hw=S.huiswerk.filter(x=>(x.datum<=morgen&&!x.gedaan)||(x.datum===morgen&&x.gedaan)).sort((a,b)=>a.datum.localeCompare(b.datum)); vl.innerHTML='';
+    for(const x of hw){ const li=document.createElement('li'); const wanneer=x.datum<iso?'te laat':x.datum===iso?'vandaag af':'morgen af';
+      li.innerHTML=`<label class="wi wi-hw${x.gedaan?' gedaan':''}"><input type="checkbox" ${x.gedaan?'checked':''} aria-label="Huiswerk afvinken"><span><b>${esc(vakNaam(x.vak))}</b> · huiswerk, ${wanneer}<br><small>${esc(x.tekst)}</small></span></label>`;
+      li.querySelector('input').addEventListener('change',e=>zetHuiswerk(x.id,e.target.checked)); maakVeegbaar(li,()=>verwijderHuiswerk(x.id)); vl.appendChild(li); }
+    for(const x of l){ const li=document.createElement('li'); li.innerHTML=`<label class="wi wi-leer${x.gedaan?' gedaan':''}"><input type="checkbox" ${x.gedaan?'checked':''} aria-label="Leermoment afvinken"><span><b>${BY_ID[x.vak].naam}</b> · ${duurTekst(x.minuten)}<br><small>${esc(x.label)}</small></span></label>${leerTopics(x.vak).length?`<button type="button" class="oefen-link">Oefen ›</button>`:''}`;
+      li.querySelector('input').addEventListener('change',e=>zetGedaan(x.id,e.target.checked));
+      const ob=li.querySelector('.oefen-link'); if(ob) ob.addEventListener('click',()=>{ lrVak=x.vak; go('leren'); });
+      maakVeegbaar(li,()=>verwijderLeer(x.id)); vl.appendChild(li); }
+    const alles=[...l,...hw]; $('homeLeerBlok').hidden=!alles.length; $('homeLeerKop').textContent=alles.length&&alles.every(x=>x.gedaan)?'Vandaag te doen · alles klaar!':'Vandaag te doen'; } }
   $('homeRisico').innerHTML=UIT.risico||'';
   { const tip=$('profielTip'); if(tip) tip.hidden=!!(S.school&&S.plaats&&geldigeGeboorte(S.geboorte)); }
   // mijn vakken
@@ -1502,12 +1638,16 @@ function renderWeek(){
     for(const v of S.vast.filter(v=>v.dag===wd)) h+=`<div class="wi wi-vast"><b>${esc(v.naam)}</b><small>${v.leren?'leren kan ook':'vaste afspraak'}</small></div>`;
     for(const a of S.agenda.filter(a=>a.datum===iso)){ const {v,t}=toetsInfo(a); const vt=voortgangToets(a);
       h+=`<div class="wi wi-toets"><b>${v?v.naam:esc(a.vak)}</b><small>${t?esc(t[2]):esc(a.oms||'Toets')}${vt?' · '+vt:''}</small></div>`; }
+    for(const x of S.huiswerk.filter(x=>x.datum===iso)) h+=`<label class="wi wi-hw${x.gedaan?' gedaan':''}" data-hwid="${x.id}"><input type="checkbox" data-hw="${x.id}" ${x.gedaan?'checked':''} aria-label="Huiswerk afvinken"><span><b>${esc(vakNaam(x.vak))}</b><br><small>${esc(x.tekst)}</small></span></label>`;
     for(const l of S.leer.filter(l=>l.datum===iso)){ const v=BY_ID[l.vak];
-      h+=`<label class="wi wi-leer${l.gedaan?' gedaan':''}"><input type="checkbox" data-leer="${l.id}" ${l.gedaan?'checked':''} aria-label="Leermoment ${v?v.naam:''} afvinken"><span><b>${v?v.naam:'Leren'}</b><br><small>${duurKort(l.minuten)} · ${esc(l.label)}</small></span></label>`; }
+      h+=`<label data-leerid="${l.id}" class="wi wi-leer${l.gedaan?' gedaan':''}"><input type="checkbox" data-leer="${l.id}" ${l.gedaan?'checked':''} aria-label="Leermoment ${v?v.naam:''} afvinken"><span><b>${v?v.naam:'Leren'}</b><br><small>${duurKort(l.minuten)} · ${esc(l.label)}</small></span></label>`; }
     if(!h.endsWith('<div class="dk-items">')) h+='</div>'; else h+=`<span class="dk-leeg">Vrij</span></div>`;
     col.innerHTML=h; g.appendChild(col);
   }
   for(const c of g.querySelectorAll('[data-leer]')) c.addEventListener('change',()=>zetGedaan(c.dataset.leer,c.checked));
+  for(const c of g.querySelectorAll('[data-hw]')) c.addEventListener('change',()=>zetHuiswerk(c.dataset.hw,c.checked));
+  for(const el of g.querySelectorAll('[data-leerid]')) maakVeegbaar(el,()=>verwijderLeer(el.dataset.leerid));
+  for(const el of g.querySelectorAll('[data-hwid]')) maakVeegbaar(el,()=>verwijderHuiswerk(el.dataset.hwid));
 }
 function zetGedaan(id,aan){ const l=S.leer.find(x=>x.id===id); if(!l) return; l.gedaan=aan; save(); renderWeek(); renderHome(); }
 function renderVast(){
@@ -1775,6 +1915,7 @@ function lhVakantie(){
 function lhJarig(){ const j=verjaardag(); if(!j) return lhBot('Dat weet ik nog niet! Vul je geboortedatum in bij Instellingen, onder School en verjaardag.');
   lhBot(j.over===0?'Vandaag! Gefeliciteerd! 🎉':j.over===1?`Morgen al! Dan word je ${j.leeftijd}. 🎂`:`Over ${j.over} dagen, op ${langDatum(j.datum)}. Dan word je ${j.leeftijd}. 🎂`); }
 function lhDag(iso,woord){
+  const hwOpen=S.huiswerk.filter(h=>!h.gedaan&&h.datum===isoVan(dag(iso)+1));
   const leer=S.leer.filter(l=>l.datum===iso), toetsen=S.agenda.filter(a=>a.datum===iso);
   const gisteren=woord==='vandaag'?S.leer.filter(l=>l.datum<iso&&!l.gedaan&&dag(l.datum)>=dag(iso)-3):[];
   let tekst=jarigOp(iso)?(woord==='vandaag'?'Je bent vandaag jarig, gefeliciteerd! 🎉\n':'Morgen ben je jarig! 🎂\n'):'';
@@ -1782,6 +1923,7 @@ function lhDag(iso,woord){
   if(leer.length){ tekst+=`${toetsen.length?'Verder':woord.charAt(0).toUpperCase()+woord.slice(1)} staat op je planning:\n`+leer.map(l=>`${l.gedaan?'✓':'•'} ${BY_ID[l.vak].naam}: ${duurTekst(l.minuten)}, ${l.label.toLowerCase()}`).join('\n');
     const tot=leer.filter(l=>!l.gedaan).reduce((s,l)=>s+l.minuten,0); if(tot) tekst+=`\nSamen nog ${duurTekst(tot)}.`; else tekst+='\nAlles is al afgevinkt. Goed bezig!'; }
   else if(!toetsen.length) tekst+=kies([`${woord.charAt(0).toUpperCase()+woord.slice(1)} staat er niets gepland. Lekker vrij!`,`Niets op de planning voor ${woord}. Wil je vooruit werken?`]);
+  if(hwOpen.length) tekst+=`\n\nHuiswerk voor de dag erna: ${hwOpen.map(h=>vakNaam(h.vak)+' ('+h.tekst+')').join(', ')}.`;
   if(gisteren.length) tekst+=`\n\nEr ${gisteren.length>1?'zijn':'is'} nog ${gisteren.length} leermoment${gisteren.length>1?'en':''} van de afgelopen dagen niet afgevinkt.`;
   lhBot(tekst.trim());
 }
@@ -2109,6 +2251,1314 @@ function initNiveau(){
   $('jaarNee').addEventListener('click',()=>{ S.leerjaarSJ=huidigSchooljaar(); save(); renderJaarTip(); });
 }
 
+// ===== Leerstof per vak (27-10-2026 MK) =====
+// k = begrippen (term|uitleg), w = woordjes (Nederlands|vreemde taal), irr = onregelmatige werkwoorden,
+// g = grammatica {u: uitleg, o: oefenzinnen zin|antwoord(en met ;)}, s = somgeneratoren
+const LEERSTOF={
+en:[
+ {id:'w1',t:'Woordjes: school en werk',w:`de baan|job
+het salaris|salary;wage
+solliciteren|to apply;apply
+de sollicitatiebrief|letter of application;cover letter
+de werkgever|employer
+de werknemer|employee
+de ervaring|experience
+de vaardigheid|skill
+het rooster|timetable;schedule
+het huiswerk|homework
+het examen|exam;examination
+slagen (voor een examen)|to pass;pass
+zakken (voor een examen)|to fail;fail
+het vak (op school)|subject
+de opleiding|education;training;course
+de stage|internship;work placement
+verantwoordelijk|responsible
+betrouwbaar|reliable
+de vergadering|meeting
+de collega|colleague
+het beroep|profession;occupation
+de werkloosheid|unemployment
+de vacature|vacancy`},
+ {id:'w2',t:'Woordjes: reizen en vervoer',w:`het vliegveld|airport
+de vertraging|delay
+de bagage|luggage;baggage
+het kaartje (trein, bus)|ticket
+de bestemming|destination
+vertrekken|to leave;to depart;leave;depart
+aankomen|to arrive;arrive
+overstappen|to change;to transfer;change;transfer
+het perron|platform
+de douane|customs
+het paspoort|passport
+de accommodatie|accommodation
+reserveren|to book;to reserve;book;reserve
+de reis|journey;trip
+de rotonde|roundabout
+het verkeerslicht|traffic light;traffic lights
+de snelweg|motorway;highway
+huren|to rent;to hire;rent;hire
+het buitenland|abroad
+de dienstregeling|timetable;schedule`},
+ {id:'w3',t:'Woordjes: gezondheid en lichaam',w:`de hersenen|brain;brains
+het hart|heart
+de longen|lungs
+de schouder|shoulder
+de knie|knee
+de enkel|ankle
+de pols|wrist
+het bot|bone
+ziek|ill;sick
+de hoofdpijn|headache
+de koorts|fever;temperature
+hoesten|to cough;cough
+de verkoudheid|cold
+het recept (van de dokter)|prescription
+de apotheek|pharmacy;chemist;chemist's
+gewond|injured;wounded
+de pijn|pain
+herstellen (beter worden)|to recover;recover
+gezond|healthy
+het ziekenhuis|hospital
+de afspraak (bij de dokter)|appointment`},
+ {id:'w4',t:'Woordjes: media en technologie',w:`het scherm|screen
+het wachtwoord|password
+de oplader|charger
+de advertentie|advertisement;advert;ad
+de krant|newspaper
+het tijdschrift|magazine
+het nieuws|news
+uitzenden|to broadcast;broadcast
+de aflevering|episode
+het abonnement|subscription
+de gebruiker|user
+opslaan|to save;save
+verwijderen|to delete;to remove;delete;remove
+nepnieuws|fake news
+delen|to share;share
+het toetsenbord|keyboard
+de bijlage|attachment
+zoeken|to search;search
+betrouwbare bron|reliable source`},
+ {id:'w5',t:'Woordjes: natuur en milieu',w:`het milieu|environment
+de vervuiling|pollution
+het afval|waste;rubbish;garbage
+het klimaat|climate
+de opwarming van de aarde|global warming
+de overstroming|flood
+de droogte|drought
+duurzaam|sustainable
+uitsterven|to become extinct;to die out;die out
+de diersoort|species
+het bos|forest;wood;woods
+de woestijn|desert
+de kust|coast
+de zonne-energie|solar energy;solar power
+verspillen|to waste;waste
+beschermen|to protect;protect
+de omgeving|surroundings;environment
+het landschap|landscape`},
+ {id:'w6',t:'Zinnen voor brieven en gesprekken',w:`Geachte heer/mevrouw (naam onbekend)|Dear Sir or Madam;Dear Sir/Madam
+Met vriendelijke groet (na Dear Sir or Madam)|Yours faithfully
+Met vriendelijke groet (na Dear Mr Smith)|Yours sincerely
+Ik schrijf u om ...|I am writing to;I'm writing to
+Ik kijk uit naar uw antwoord|I look forward to hearing from you
+Kunt u mij vertellen ...?|Could you tell me;Can you tell me
+Wat bedoel je?|What do you mean
+Kun je dat herhalen?|Could you repeat that;Can you repeat that
+Ik ben het met je eens|I agree with you;I agree
+Ik ben het niet met je eens|I disagree;I don't agree;I do not agree
+Volgens mij ...|In my opinion;I think
+Bovendien|Moreover;Furthermore;Besides
+Daarom|Therefore;That's why
+Echter|However
+Bijvoorbeeld|For example;For instance
+Tot slot|Finally;In conclusion
+Bijgevoegd vindt u ...|Please find attached
+Hoeveel kost het?|How much is it;How much does it cost`},
+ {id:'irr',t:'Onregelmatige werkwoorden',irr:`be|was/were|been|zijn
+begin|began|begun|beginnen
+break|broke|broken|breken
+bring|brought|brought|brengen
+buy|bought|bought|kopen
+catch|caught|caught|vangen
+choose|chose|chosen|kiezen
+come|came|come|komen
+do|did|done|doen
+drink|drank|drunk|drinken
+drive|drove|driven|rijden (auto)
+eat|ate|eaten|eten
+fall|fell|fallen|vallen
+feel|felt|felt|voelen
+find|found|found|vinden
+fly|flew|flown|vliegen
+forget|forgot|forgotten|vergeten
+give|gave|given|geven
+go|went|gone|gaan
+hear|heard|heard|horen
+know|knew|known|weten, kennen
+leave|left|left|vertrekken
+lose|lost|lost|verliezen
+make|made|made|maken
+meet|met|met|ontmoeten
+pay|paid|paid|betalen
+put|put|put|zetten, leggen
+read|read|read|lezen
+ride|rode|ridden|rijden (fiets, paard)
+run|ran|run|rennen
+say|said|said|zeggen
+see|saw|seen|zien
+sell|sold|sold|verkopen
+send|sent|sent|sturen
+sing|sang|sung|zingen
+sit|sat|sat|zitten
+sleep|slept|slept|slapen
+speak|spoke|spoken|spreken
+spend|spent|spent|uitgeven, doorbrengen
+stand|stood|stood|staan
+swim|swam|swum|zwemmen
+take|took|taken|nemen
+teach|taught|taught|lesgeven
+tell|told|told|vertellen
+think|thought|thought|denken
+throw|threw|thrown|gooien
+understand|understood|understood|begrijpen
+wear|wore|worn|dragen (kleding)
+win|won|won|winnen
+write|wrote|written|schrijven`},
+ {id:'g1',t:'Present simple of continuous',g:{u:`<p><b>Present simple</b> gebruik je voor gewoontes en feiten. Signaalwoorden: <i>always, usually, often, never, every day</i>. Bij he/she/it komt er <b>-s</b> achter het werkwoord: <i>She walks.</i> Ontkenning: <i>don't / doesn't</i>.</p><p><b>Present continuous</b> gebruik je voor iets wat <b>nu</b> bezig is: <b>am/is/are + -ing</b>. Signaalwoorden: <i>now, at the moment, right now, Look!, Listen!</i></p>`,o:`She ___ (walk) to school every day.|walks
+Look! The dog ___ (chase) the cat.|is chasing;'s chasing
+I ___ (not like) spinach.|don't like;do not like
+They ___ (play) football right now.|are playing;'re playing
+Water ___ (boil) at 100 degrees.|boils
+My brother ___ (study) for his exam at the moment.|is studying;'s studying
+He never ___ (watch) TV in the morning.|watches
+Listen! Someone ___ (knock) on the door.|is knocking;'s knocking
+My dad ___ (not work) on Sundays.|doesn't work;does not work`}},
+ {id:'g2',t:'Past simple of present perfect',g:{u:`<p><b>Past simple</b>: iets is gebeurd op een afgesloten moment in het verleden. Signaalwoorden: <i>yesterday, last week, in 2020, two days ago</i>. Regelmatig: werkwoord + <b>-ed</b>.</p><p><b>Present perfect</b>: <b>have/has + voltooid deelwoord</b>. Voor ervaringen en dingen die tot nu toe doorlopen. Signaalwoorden: <i>ever, never, already, yet, just, since, for</i>.</p>`,o:`I ___ (see) that film last week.|saw
+She ___ (never/be) to London.|has never been;'s never been
+We ___ (live) here since 2015.|have lived;'ve lived
+They ___ (visit) their grandparents two days ago.|visited
+He ___ (just/finish) his homework.|has just finished;'s just finished
+My parents ___ (buy) a new car in 2023.|bought
+I ___ (know) him for ten years.|have known;'ve known
+She ___ (lose) her keys yesterday.|lost`}},
+ {id:'g3',t:'Toekomst: will of going to',g:{u:`<p><b>will</b> + hele werkwoord: een voorspelling zonder bewijs, een belofte, of een besluit dat je op dat moment neemt. <i>I think it will rain. I'll help you.</i></p><p><b>am/is/are going to</b> + hele werkwoord: een plan, of een voorspelling waarvoor je bewijs ziet. <i>Look at those clouds! It's going to rain.</i></p>`,o:`Look at those clouds! It ___ (rain).|is going to rain;'s going to rain
+I'm thirsty. - I ___ (get) you a drink.|will get;'ll get
+We ___ (visit) Spain next summer. We've already booked the hotel.|are going to visit;'re going to visit
+I promise I ___ (help) you.|will help;'ll help
+I think Ajax ___ (win) the match.|will win;'ll win
+She has bought paint. She ___ (paint) her room.|is going to paint;'s going to paint`}},
+ {id:'g4',t:'If-zinnen (conditionals)',g:{u:`<p><b>1st conditional</b> (echte mogelijkheid): <i>If + present simple, will + hele werkwoord.</i> <br>If it rains, we will stay at home.</p><p><b>2nd conditional</b> (denkbeeldig, onwaarschijnlijk): <i>If + past simple, would + hele werkwoord.</i> <br>If I had a million euros, I would travel. Let op: <i>If I were you...</i></p>`,o:`If it rains, we ___ (stay) at home.|will stay;'ll stay
+If I ___ (have) a million euros, I would travel the world.|had
+If you ___ (study) hard, you will pass.|study
+If I were you, I ___ (call) her.|would call;'d call
+She would buy a car if she ___ (can) drive.|could
+If we ___ (miss) the bus, we will be late.|miss`}},
+ {id:'g5',t:'Vergelijken (bigger, the biggest)',g:{u:`<p>Korte woorden: <b>-er / the -est</b>: tall, taller, the tallest. Eindigt op -y: easy, easier, the easiest.</p><p>Lange woorden: <b>more / the most</b>: expensive, more expensive, the most expensive.</p><p>Onregelmatig: good - better - the best, bad - worse - the worst. Vergelijken doe je met <b>than</b>. Gelijk: <b>as ... as</b>.</p>`,o:`My brother is ___ (tall) than me.|taller
+This is the ___ (expensive) phone in the shop.|most expensive
+Today is ___ (good) than yesterday.|better
+That was the ___ (bad) film I have ever seen.|worst
+A car is ___ (fast) than a bike.|faster
+English is ___ (easy) than German.|easier
+She is as ___ (old) as her cousin.|old`}},
+ {id:'g6',t:'Lijdende vorm (passive)',g:{u:`<p>De lijdende vorm maak je met <b>een vorm van to be + voltooid deelwoord</b>. Wie het doet, zet je achter <b>by</b>.</p><p>Nu: <i>is/are made</i>. Verleden: <i>was/were made</i>.</p>`,o:`English ___ (speak) in many countries.|is spoken
+The Mona Lisa ___ (paint) by Leonardo da Vinci.|was painted
+These cars ___ (make) in Germany.|are made
+The letter ___ (send) yesterday.|was sent
+The windows ___ (clean) every week.|are cleaned`}},
+ {id:'g7',t:'Some, any, much, many',g:{u:`<p><b>some</b> in gewone zinnen en bij een aanbod of verzoek. <b>any</b> in ontkennende zinnen en vragen.</p><p><b>much</b> bij dingen die je niet kunt tellen (water, money, time). <b>many</b> bij dingen die je wel kunt tellen (books, people). <i>a lot of</i> kan bij allebei.</p>`,o:`There isn't ___ milk left.|any
+Would you like ___ tea?|some
+How ___ people were at the party?|many
+I don't have ___ time.|much
+Have you got ___ brothers or sisters?|any
+There are ___ apples in the basket.|some
+How ___ money do you need?|much`}},
+ {id:'g8',t:'Bijvoeglijk of bijwoord (quick / quickly)',g:{u:`<p>Een <b>bijvoeglijk naamwoord</b> zegt iets over een persoon of ding: <i>a quick runner</i>. Ook na be, look, feel, taste: <i>The soup tastes good.</i></p><p>Een <b>bijwoord</b> zegt iets over hoe je iets doet: <i>he runs quickly</i>. Meestal bijvoeglijk naamwoord + <b>-ly</b>. Let op: good wordt <b>well</b>.</p>`,o:`She sings very ___ (beautiful).|beautifully
+He is a ___ (careful) driver.|careful
+Please drive ___ (careful).|carefully
+You did that ___ (good)!|well
+The soup tastes ___ (good).|good
+They worked ___ (quiet).|quietly`}},
+ {id:'g9',t:'Vragen met do, does en did',g:{u:`<p>Een vraag in de present simple maak je met <b>do</b> of <b>does</b> (bij he/she/it). In het verleden gebruik je <b>did</b>. Het werkwoord zelf blijft dan in de hele vorm: <i>Does she live here? Did you see it?</i></p>`,o:`___ she live in Dronten?|Does
+Where ___ you go yesterday?|did
+___ they like pizza?|Do
+What time ___ the train leave?|does
+___ he play football last Saturday?|Did`}}
+],
+du:[
+ {id:'w1',t:'Woordjes: dagelijks leven',w:`het huis|das Haus
+de school|die Schule
+de vriend|der Freund
+de vriendin|die Freundin
+de broer|der Bruder
+de zus|die Schwester
+het weer|das Wetter
+gisteren|gestern
+vandaag|heute
+altijd|immer
+nooit|nie;niemals
+werken|arbeiten
+kopen|kaufen
+spreken|sprechen
+begrijpen|verstehen
+de trein|der Zug
+de fiets|das Fahrrad
+de stad|die Stadt
+het geld|das Geld
+drinken|trinken
+de tijd|die Zeit
+ziek|krank
+mooi|schön
+groot|groß;gross
+snel|schnell
+duur|teuer
+goedkoop|billig`},
+ {id:'g1',t:'Werkwoorden: sein, haben en regelmatig',g:{u:`<p><b>sein</b>: ich bin, du bist, er/sie/es ist, wir sind, ihr seid, sie/Sie sind.</p><p><b>haben</b>: ich habe, du hast, er hat, wir haben, ihr habt, sie haben.</p><p>Regelmatig (wohnen): ich wohn<b>e</b>, du wohn<b>st</b>, er wohn<b>t</b>, wir wohn<b>en</b>, ihr wohn<b>t</b>, sie wohn<b>en</b>.</p>`,o:`Ich ___ (sein) 15 Jahre alt.|bin
+Du ___ (haben) einen Hund.|hast
+Er ___ (sein) krank.|ist
+Wir ___ (haben) heute Deutsch.|haben
+Ihr ___ (sein) zu spät.|seid
+Ich ___ (wohnen) in Dronten.|wohne
+Er ___ (spielen) Fußball.|spielt
+Du ___ (kaufen) ein Buch.|kaufst`}},
+ {id:'g2',t:'Lidwoorden in de 4e naamval',g:{u:`<p>Na de meeste werkwoorden (haben, sehen, kaufen) staat het lijdend voorwerp in de <b>4e naamval (Akkusativ)</b>. Alleen bij mannelijke woorden verandert het lidwoord: <b>der → den</b>, <b>ein → einen</b>. Die, das en eine blijven hetzelfde.</p>`,o:`Ich habe ___ Bruder. (een, der Bruder)|einen
+Ich sehe ___ Mann. (de, der Mann)|den
+Er kauft ___ Tasche. (een, die Tasche)|eine
+Wir besuchen ___ Museum. (het, das Museum)|das
+Sie hat ___ Hund. (een, der Hund)|einen`}}
+],
+fa:[
+ {id:'w1',t:'Woordjes: basis',w:`het huis|la maison
+de school|l'école;l'ecole
+de broer|le frère;le frere
+de zus|la sœur;la soeur
+de moeder|la mère;la mere
+de vader|le père;le pere
+het boek|le livre
+de stad|la ville
+de appel|la pomme
+het brood|le pain
+het water|l'eau
+de kat|le chat
+de hond|le chien
+groot|grand
+klein|petit
+vandaag|aujourd'hui
+morgen|demain
+gisteren|hier
+altijd|toujours
+nooit|jamais
+spreken|parler
+eten|manger
+wonen|habiter
+houden van|aimer
+gaan|aller
+doen, maken|faire
+dank je|merci`},
+ {id:'g1',t:'être, avoir en -er werkwoorden',g:{u:`<p><b>être</b> (zijn): je suis, tu es, il/elle est, nous sommes, vous êtes, ils/elles sont.</p><p><b>avoir</b> (hebben): j'ai, tu as, il a, nous avons, vous avez, ils ont.</p><p><b>-er</b> (parler): je parl<b>e</b>, tu parl<b>es</b>, il parl<b>e</b>, nous parl<b>ons</b>, vous parl<b>ez</b>, ils parl<b>ent</b>.</p>`,o:`Je ___ (être) content.|suis
+Nous ___ (avoir) un chat.|avons
+Il ___ (être) en retard.|est
+Tu ___ (avoir) quel âge?|as
+Vous ___ (parler) français?|parlez
+Ils ___ (habiter) à Paris.|habitent
+Je ___ (manger) une pomme.|mange`}}
+],
+ne:[
+ {id:'lees',t:'Leesvaardigheid',k:`onderwerp|Waar de tekst in het kort over gaat, in een paar woorden.
+hoofdgedachte|De belangrijkste mededeling van de hele tekst, in één zin.
+kernzin|De zin in een alinea met de belangrijkste informatie van die alinea.
+tekstdoel informeren|De schrijver wil je iets vertellen of uitleggen.
+tekstdoel overtuigen|De schrijver wil dat je het met zijn mening eens wordt.
+tekstdoel activeren|De schrijver wil dat je iets gaat doen.
+tekstdoel amuseren|De schrijver wil je vermaken.
+feit|Iets wat waar is en wat je kunt controleren.
+mening|Wat iemand ergens van vindt; dat kun je niet controleren.
+argument|Een reden die een mening ondersteunt.
+inleiding|Het begin van een tekst: maakt nieuwsgierig en noemt het onderwerp.
+slot|Het einde van een tekst, bijvoorbeeld met een samenvatting of conclusie.
+doelgroep|De mensen voor wie de tekst geschreven is.
+verband opsomming|Signaalwoorden: ten eerste, bovendien, ook, daarnaast.
+verband tegenstelling|Signaalwoorden: maar, echter, toch, daarentegen.
+verband oorzaak-gevolg|Signaalwoorden: doordat, daardoor, het gevolg is.
+verband reden|Signaalwoorden: omdat, want, daarom (bij een bewuste keuze).
+verband voorbeeld|Signaalwoorden: bijvoorbeeld, zoals, zo.
+verband conclusie|Signaalwoorden: dus, kortom, concluderend.
+verband vergelijking|Signaalwoorden: net als, evenals, in vergelijking met.
+verband voorwaarde|Signaalwoorden: als, mits, tenzij, indien.
+verband tijd|Signaalwoorden: eerst, daarna, vervolgens, toen.`},
+ {id:'fictie',t:'Fictie en verhalen',k:`personage|Een persoon in een verhaal.
+hoofdpersoon|Het belangrijkste personage in het verhaal.
+ik-perspectief|Het verhaal wordt verteld door een personage dat 'ik' zegt.
+hij-perspectief|Het verhaal wordt in de derde persoon verteld, vanuit één personage.
+alwetende verteller|Een verteller die weet wat alle personages denken en voelen.
+thema|Het hoofdonderwerp van het verhaal, vaak in één of twee woorden (bijvoorbeeld vriendschap).
+motief|Iets wat steeds terugkomt in het verhaal en met het thema te maken heeft.
+tijd (van het verhaal)|Wanneer het verhaal zich afspeelt.
+ruimte|De plaats(en) waar het verhaal zich afspeelt.
+flashback|Een terugblik naar iets wat eerder gebeurde.
+flashforward|Een vooruitblik naar iets wat later gebeurt.
+chronologisch|De gebeurtenissen worden verteld in de volgorde waarin ze gebeurden.
+open einde|Hoe het afloopt staat niet vast; de lezer bedenkt het zelf.
+gesloten einde|Het verhaal is duidelijk afgelopen.
+genre|Soort verhaal, zoals thriller, fantasy of liefdesroman.
+verteltijd|De tijd die je nodig hebt om het verhaal te lezen.
+vertelde tijd|De tijd die de gebeurtenissen in het verhaal beslaan.
+climax|Het spannendste moment van het verhaal.
+round character|Een personage met meerdere kanten dat zich ontwikkelt.
+flat character|Een personage met maar één kant dat niet verandert.`},
+ {id:'zakelijk',t:'Zakelijk schrijven',k:`afzender|De persoon die de brief of e-mail stuurt; staat linksboven in een brief.
+geadresseerde|Degene aan wie de brief gericht is.
+aanhef|De begroeting, bijvoorbeeld 'Geachte heer De Vries,'.
+afsluiting|De slotgroet, bijvoorbeeld 'Met vriendelijke groet,'.
+betreft|De onderwerpregel: kort waar de brief over gaat.
+plaats en datum|Bijvoorbeeld 'Dronten, 27 oktober 2026'.
+klachtbrief|Brief waarin je een probleem meldt en om een oplossing vraagt.
+sollicitatiebrief|Brief waarin je reageert op een vacature.
+cc|Iemand die een kopie van de e-mail krijgt.
+bijlage|Een document dat je met de brief of e-mail meestuurt.
+u-vorm|In een zakelijke brief spreek je de lezer aan met 'u'.
+alinea|Een tekstdeel over één onderwerp, met een witregel ertussen.`},
+ {id:'ww',t:'Werkwoordspelling',g:{u:`<p><b>Tegenwoordige tijd</b>: ik-vorm = stam (ik werk, ik word). Bij jij/hij komt er <b>t</b> achter de stam (hij werkt, hij wordt). Staat jij <b>achter</b> het werkwoord, dan geen t: <i>Word jij ook zestien?</i></p><p><b>Verleden tijd</b> van zwakke werkwoorden: eindigt de stam op een letter uit <b>'t kofschip</b> (t, k, f, s, ch, p), dan -te(n), anders -de(n). Fietsen: stam fiets → fietste. Branden: stam brand → brandde.</p><p><b>Voltooid deelwoord</b>: ge + stam + t (kofschip) of d: gefietst, gebrand. Geen dubbele letter als de stam al op t of d eindigt: beantwoord.</p>`,o:`Hij ___ (worden) morgen zestien.|wordt
+___ (worden) jij ook zestien?|Word
+Ik ___ (vinden) dit moeilijk.|vind
+Gisteren ___ (fietsen) wij naar school.|fietsten
+Zij (één persoon) ___ (antwoorden) meteen.|antwoordt
+Vorige week ___ (verhuizen) mijn buren.|verhuisden
+Ik heb het hele boek ___ (lezen).|gelezen
+Wij hebben de hele middag ___ (fietsen).|gefietst
+Gisteren ___ (zetten) hij de fiets in de schuur.|zette
+De vraag is goed ___ (beantwoorden).|beantwoord
+Jij ___ (houden) van muziek.|houdt
+___ (houden) jij van muziek?|Houd
+Gisteren ___ (branden) de kaarsen de hele avond.|brandden
+Hij ___ (wachten) gisteren een uur op de bus.|wachtte`}}
+],
+wi:[
+ {id:'proc',t:'Procenten en verhoudingen',s:['proc_van','korting','toename','btw','schaal','recept']},
+ {id:'meet',t:'Omtrek, oppervlakte en inhoud',s:['opp_rechthoek','opp_driehoek','opp_cirkel','omtrek_cirkel','inh_balk','inh_cilinder','inh_piramide','liter']},
+ {id:'pyth',t:'Pythagoras en goniometrie',s:['pyth_schuin','pyth_rechth','gonio_tan','gonio_sin','gonio_hoek']},
+ {id:'verb',t:'Verbanden en formules',s:['lin_invullen','lin_helling','lin_vergelijking','groei']},
+ {id:'stat',t:'Statistiek',s:['stat_gem','stat_mediaan','stat_spreiding'],k:`gemiddelde|Alle waarden bij elkaar opgeteld en gedeeld door het aantal waarden.
+mediaan|De middelste waarde als je alle waarden op volgorde zet.
+modus|De waarde die het vaakst voorkomt.
+spreidingsbreedte|Grootste waarde min kleinste waarde.
+frequentie|Hoe vaak een waarde voorkomt.
+relatieve frequentie|De frequentie als percentage van het totaal.
+kwartiel|De waarden die de geordende gegevens in vier gelijke delen verdelen.
+boxplot|Diagram met minimum, eerste kwartiel, mediaan, derde kwartiel en maximum.
+steekproef|Een deel van de groep dat je onderzoekt om iets over de hele groep te zeggen.
+cirkeldiagram|Diagram waarin de delen als taartpunten van een cirkel worden getoond.`},
+ {id:'begr',t:'Begrippen meetkunde en formules',k:`hypotenusa|De schuine zijde van een rechthoekige driehoek, tegenover de rechte hoek.
+rechthoekszijde|Een van de twee zijden die de rechte hoek vormen.
+stelling van Pythagoras|a² + b² = c², met c de schuine zijde.
+SOS CAS TOA|sin = overstaande : schuine, cos = aanliggende : schuine, tan = overstaande : aanliggende.
+straal|Afstand van het middelpunt van een cirkel tot de rand.
+diameter|Twee keer de straal: een lijn dwars door het middelpunt.
+prisma|Ruimtefiguur met twee gelijke evenwijdige grondvlakken; inhoud = grondvlak × hoogte.
+piramide|Ruimtefiguur met een grondvlak en een top; inhoud = ⅓ × grondvlak × hoogte.
+cilinder|Ruimtefiguur met twee cirkels als grondvlak; inhoud = π × r² × h.
+kegel|Ruimtefiguur met een cirkel als grondvlak en een punt als top.
+bol|Ronde ruimtefiguur; alle punten liggen even ver van het middelpunt.
+lineair verband|Verband waarvan de grafiek een rechte lijn is: y = a·x + b.
+hellingsgetal|Het getal a in y = a·x + b: hoeveel y verandert als x één groter wordt.
+startgetal|Het getal b in y = a·x + b: de waarde van y als x = 0.
+groeifactor|Het getal waarmee je steeds vermenigvuldigt bij exponentiële groei, bijv. 1,05 bij 5% groei.
+exponentiële groei|Groei waarbij elke periode met dezelfde factor wordt vermenigvuldigd.
+uitslag|Een ruimtefiguur opengevouwen tot een plat vlak.
+assenstelsel|Twee loodrechte assen (x en y) om punten aan te geven met coördinaten.`}
+],
+nask1:[
+ {id:'licht',t:'Licht en beeld',s:['lens_beeld','vergroting'],k:`lichtbron|Een voorwerp dat zelf licht geeft, zoals de zon of een lamp.
+lichtsnelheid|Ongeveer 300 000 km per seconde.
+terugkaatsing|Bij een spiegel is de hoek van inval gelijk aan de hoek van terugkaatsing.
+breking|Licht verandert van richting als het van de ene stof naar de andere gaat.
+bolle lens|Positieve lens die lichtstralen naar elkaar toe buigt.
+holle lens|Negatieve lens die lichtstralen van elkaar af buigt.
+brandpunt|Punt waar evenwijdige lichtstralen na een bolle lens samenkomen.
+brandpuntsafstand|Afstand van het midden van de lens tot het brandpunt (f).
+voorwerpsafstand|Afstand van het voorwerp tot de lens (v).
+beeldafstand|Afstand van de lens tot het scherpe beeld (b).
+lenzenformule|1/f = 1/v + 1/b
+vergroting|N = b : v (beeldafstand gedeeld door voorwerpsafstand).
+reëel beeld|Beeld dat je op een scherm kunt opvangen.
+virtueel beeld|Beeld dat je niet op een scherm kunt opvangen, zoals bij een loep of spiegel.
+bijziend|Je ziet dichtbij scherp en veraf wazig; je hebt een holle (negatieve) bril nodig.
+verziend|Je ziet veraf scherp en dichtbij wazig; je hebt een bolle (positieve) bril nodig.
+netvlies|Laag achter in het oog waar het beeld op valt.
+spectrum|Wit licht gesplitst in kleuren, zoals bij een regenboog.`},
+ {id:'weer',t:'Het weer',k:`luchtdruk|De druk van de lucht, gemeten in hectopascal (hPa) met een barometer.
+hogedrukgebied|Gebied met hoge luchtdruk; meestal droog en zonnig weer.
+lagedrukgebied|Gebied met lage luchtdruk; vaak bewolking, wind en neerslag.
+wind|Lucht die van een gebied met hoge druk naar een gebied met lage druk stroomt.
+front|Grens tussen warme en koude lucht; vaak met wolken en regen.
+neerslag|Water dat uit de lucht valt: regen, sneeuw of hagel.
+relatieve luchtvochtigheid|Hoeveel waterdamp er in de lucht zit vergeleken met het maximum, in procenten.
+condenseren|Waterdamp wordt vloeibaar water, bijvoorbeeld wolken of dauw.
+verdampen|Vloeibaar water wordt waterdamp.
+isobaren|Lijnen op de weerkaart die plaatsen met dezelfde luchtdruk verbinden.
+dauwpunt|De temperatuur waarbij waterdamp gaat condenseren.
+hygrometer|Meet de luchtvochtigheid.
+windkracht|Sterkte van de wind op de schaal van Beaufort (0 tot 12).
+broeikaseffect|Gassen in de atmosfeer houden warmte vast, waardoor de aarde warmer blijft.`},
+ {id:'stral',t:'Straling',s:['halvering'],k:`ioniserende straling|Straling die atomen elektrisch geladen kan maken: alfa, bèta, gamma en röntgen.
+alfastraling|Heliumkernen; worden al door een vel papier tegengehouden.
+bètastraling|Elektronen; worden door een paar millimeter aluminium tegengehouden.
+gammastraling|Elektromagnetische straling die diep doordringt; dik lood of beton houdt hem tegen.
+röntgenstraling|Straling die door zacht weefsel gaat en botten zichtbaar maakt.
+halveringstijd|De tijd waarin de helft van de radioactieve kernen vervalt.
+besmetting|Een radioactieve stof komt op of in je lichaam.
+bestraling|Je wordt van buitenaf aan straling blootgesteld; je wordt zelf niet radioactief.
+dosis|De hoeveelheid straling die je lichaam opneemt, in sievert (Sv).
+achtergrondstraling|Straling die er altijd is, uit de ruimte en uit de bodem.
+uv-straling|Straling van de zon waardoor je huid bruin wordt of verbrandt.
+infraroodstraling|Warmtestraling.
+geiger-müllerteller|Apparaat dat radioactieve straling meet.`},
+ {id:'elek',t:'Elektriciteit',s:['ohm_U','ohm_I','ohm_R','vermogen','vermogen_I','kwh','kosten'],k:`spanning|De 'duw' van de spanningsbron, in volt (V); meet je met een voltmeter, parallel.
+stroomsterkte|Hoeveel stroom er loopt, in ampère (A); meet je met een ampèremeter, in serie.
+weerstand|Hoe moeilijk stroom door iets gaat, in ohm (Ω).
+wet van Ohm|U = I × R
+vermogen|P = U × I, in watt (W).
+energie (elektrisch)|E = P × t, in joule (J) of kilowattuur (kWh).
+serieschakeling|Alles achter elkaar in één stroomkring; de stroomsterkte is overal gelijk.
+parallelschakeling|Onderdelen naast elkaar; over elke tak staat dezelfde spanning.
+kortsluiting|De stroom gaat buiten het apparaat om, met een heel grote stroomsterkte.
+zekering|Onderbreekt de stroom als die te groot wordt.
+aardlekschakelaar|Schakelt de stroom uit als er stroom weglekt, bijvoorbeeld via je lichaam.
+geleider|Stof die stroom goed doorlaat, zoals metaal.
+isolator|Stof die geen stroom doorlaat, zoals plastic of rubber.
+randaarde|Extra draad die stroom bij een defect veilig naar de aarde afvoert.
+LDR|Weerstand die kleiner wordt als er meer licht op valt.
+NTC|Weerstand die kleiner wordt als de temperatuur stijgt.`},
+ {id:'geluid',t:'Geluid',s:['echo','frequentie'],k:`geluidsbron|Een voorwerp dat trilt en zo geluid maakt.
+frequentie|Aantal trillingen per seconde, in hertz (Hz).
+toonhoogte|Hoe hoog een toon klinkt: hoe hoger de frequentie, hoe hoger de toon.
+amplitude|Grootte van de uitwijking: hoe groter, hoe harder het geluid.
+decibel|Eenheid van geluidsniveau (dB).
+gehoorgrens|Mensen horen ongeveer van 20 Hz tot 20 000 Hz.
+ultrasoon|Geluid met een frequentie boven 20 000 Hz.
+infrasoon|Geluid met een frequentie onder 20 Hz.
+geluidssnelheid|In lucht ongeveer 343 meter per seconde.
+echo|Geluid dat wordt teruggekaatst.
+trillingstijd|De tijd van één trilling: T = 1 : f.
+oscilloscoop|Apparaat dat trillingen als grafiek laat zien.
+geluid in vacuüm|Kan niet: geluid heeft een stof nodig om zich te verplaatsen.
+gehoorschade|Kan ontstaan bij langdurig geluid boven ongeveer 80 dB.`},
+ {id:'constr',t:'Krachten en constructies',s:['zwaartekracht','hefboom','druk'],k:`kracht|Een duw of trek, in newton (N).
+zwaartekracht|Fz = m × g, met g ≈ 10 N/kg op aarde (precies 9,8).
+massa|Hoeveelheid stof, in kilogram (kg).
+hefboom|Een staaf die om een draaipunt kan draaien.
+hefboomwet|F1 × r1 = F2 × r2
+moment|Kracht × arm: M = F × r.
+arm|Loodrechte afstand van het draaipunt tot de lijn waarlangs de kracht werkt.
+druk|p = F : A, in N/m² (pascal).
+zwaartepunt|Het punt waar de zwaartekracht aangrijpt.
+stabiliteit|Hoe moeilijk iets omvalt: laag zwaartepunt en groot steunvlak is stabiel.
+profiel|Vorm zoals een I- of T-profiel die een balk stevig maakt met weinig materiaal.
+trekkracht|Kracht die iets uitrekt.
+drukkracht|Kracht die iets samendrukt.`},
+ {id:'veilig',t:'Veilig bewegen',s:['snelheid','kmh_ms','reactie','stopafstand'],k:`snelheid|v = s : t (afstand gedeeld door tijd).
+gemiddelde snelheid|Totale afstand gedeeld door totale tijd.
+km/h naar m/s|Delen door 3,6.
+reactietijd|Tijd tussen het zien van gevaar en het begin van remmen.
+reactieafstand|Afstand die je aflegt tijdens de reactietijd.
+remweg|Afstand die je aflegt tijdens het remmen.
+stopafstand|Reactieafstand + remweg.
+traagheid|Een voorwerp wil zijn beweging (of stilstand) behouden.
+autogordel|Houdt je vast, zodat je door traagheid niet naar voren schiet.
+kreukelzone|Deel van de auto dat bij een botsing vervormt, zodat de klap minder hard is.
+airbag|Kussen dat de klap opvangt doordat de botsing langer duurt.
+versnelling|De toename van de snelheid per seconde.
+eenparige beweging|Beweging met een constante snelheid.
+(v,t)-diagram|Grafiek van de snelheid tegen de tijd.`},
+ {id:'energie',t:'Bewegen en energie',s:['ez','ek','rendement'],k:`energie|Wat nodig is om iets te laten bewegen, verwarmen of veranderen; in joule (J).
+bewegingsenergie|Ek = ½ × m × v²
+zwaarte-energie|Ez = m × g × h
+energieomzetting|Energie verandert van vorm, bijvoorbeeld van chemische energie in bewegingsenergie.
+wet van behoud van energie|Energie gaat nooit verloren, maar verandert alleen van vorm.
+rendement|Nuttige energie gedeeld door totale energie × 100%.
+arbeid|W = F × s (kracht maal afstand).
+vermogen (energie)|Energie per seconde: P = E : t.
+chemische energie|Energie die in brandstof of voedsel zit.
+warmte|Energievorm die vaak als 'verlies' ontstaat.
+wrijving|Kracht die een beweging tegenwerkt.
+luchtweerstand|Wrijving door lucht; wordt groter bij hogere snelheid.`}
+],
+nask2:[
+ {id:'verbr',t:'Verbrandingen',k:`verbranding|Een reactie van een stof met zuurstof.
+branddriehoek|Brandstof, zuurstof en de ontbrandingstemperatuur.
+ontbrandingstemperatuur|De laagste temperatuur waarbij een stof gaat branden.
+volledige verbranding|Genoeg zuurstof: er ontstaan koolstofdioxide en water.
+onvolledige verbranding|Te weinig zuurstof: er ontstaat ook koolstofmonoxide en roet.
+koolstofmonoxide|Giftig gas (CO) zonder kleur en geur.
+koolstofdioxide|Gas (CO₂) dat bij verbranding ontstaat; maakt kalkwater troebel.
+blussen|Eén van de drie voorwaarden van de branddriehoek weghalen.
+ontleding|Eén stof wordt gesplitst in twee of meer andere stoffen.
+beginstof|Stof die je gebruikt bij het begin van een reactie.
+reactieproduct|Stof die bij een reactie ontstaat.
+exotherm|Reactie waarbij energie vrijkomt.
+endotherm|Reactie waarvoor je steeds energie moet toevoegen.
+water aantonen|Wit kopersulfaat wordt blauw.`},
+ {id:'stoffen',t:'Stoffen en deeltjes',s:['dichtheid'],k:`molecuul|Het kleinste deeltje van een stof.
+atoom|Bouwsteen van moleculen.
+element|Stof die uit één soort atomen bestaat.
+verbinding|Stof waarvan de moleculen uit verschillende soorten atomen bestaan.
+mengsel|Stof die uit meer soorten moleculen bestaat.
+zuivere stof|Stof die uit één soort moleculen bestaat.
+smeltpunt|Temperatuur waarbij een vaste stof vloeibaar wordt.
+kookpunt|Temperatuur waarbij een vloeistof gaat koken.
+dichtheid|Massa per volume: ρ = m : V, bijvoorbeeld in g/cm³.
+oplossing|Een stof opgelost in een oplosmiddel; helder.
+suspensie|Troebel mengsel met kleine vaste deeltjes in een vloeistof.
+emulsie|Mengsel van twee vloeistoffen die niet mengen, met een emulgator.
+filtreren|Vaste stof en vloeistof scheiden met een filter.
+destilleren|Scheiden op basis van verschil in kookpunt.
+indampen|De vloeistof laten verdampen zodat de opgeloste stof overblijft.`},
+ {id:'zuren',t:'Zouten, zuren en basen',k:`zout|Stof die is opgebouwd uit ionen.
+ion|Een elektrisch geladen deeltje.
+positief ion|Atoom dat elektronen heeft afgestaan, meestal een metaal.
+negatief ion|Atoom dat elektronen heeft opgenomen.
+zuur|Oplossing met een pH lager dan 7.
+basisch|Oplossing met een pH hoger dan 7.
+neutraal|Oplossing met een pH van 7.
+pH|Maat voor hoe zuur of basisch een oplossing is, van 0 tot 14.
+indicator|Stof die van kleur verandert afhankelijk van de pH, zoals rodekoolsap.
+neutraliseren|Een zuur en een base heffen elkaars werking op.
+zure regen|Regen met opgeloste zwaveldioxide en stikstofoxiden, door verbranding van fossiele brandstoffen.
+universeel indicatorpapier|Papier dat met een kleur de pH aangeeft.`}
+],
+bi:[
+ {id:'h1',t:'Cellen en organen',k:`cel|De kleinste bouwsteen van een organisme.
+celkern|Bevat het erfelijk materiaal (DNA) en regelt de cel.
+celmembraan|Dun vlies om de cel dat regelt wat erin en eruit gaat.
+cytoplasma|Vloeistof in de cel.
+celwand|Stevige laag om plantencellen.
+bladgroenkorrel|Bevat bladgroen; hier vindt de fotosynthese plaats (alleen bij planten).
+vacuole|Blaasje met vocht in een plantencel.
+weefsel|Groep cellen met dezelfde vorm en functie.
+orgaan|Deel van een organisme met een bepaalde functie, uit meerdere weefsels.
+orgaanstelsel|Groep organen die samenwerken, zoals het verteringsstelsel.
+levenskenmerken|Onder andere voeding, groei, voortplanting, ademhaling, uitscheiding en reageren op prikkels.`},
+ {id:'h2',t:'Bewegen',k:`skelet|Alle botten samen: zorgt voor stevigheid, bescherming en beweging.
+gewricht|Beweegbare verbinding tussen twee botten.
+kogelgewricht|Gewricht dat in alle richtingen kan bewegen, zoals schouder en heup.
+scharniergewricht|Gewricht dat in één richting beweegt, zoals knie en elleboog.
+kraakbeen|Glad, buigzaam weefsel op de uiteinden van botten in een gewricht.
+gewrichtssmeer|Vloeistof die de wrijving in een gewricht vermindert.
+kapselband|Band om het gewricht die de botten bij elkaar houdt.
+pees|Verbindt een spier met een bot.
+antagonisten|Spieren die elkaar tegenwerken, zoals een buigspier en een strekspier.
+verstuiking|De kapselbanden zijn overrekt.
+ontwrichting|Een bot schiet uit het gewricht.
+RSI|Klachten door steeds dezelfde beweging, bijvoorbeeld met een muis.`},
+ {id:'h6',t:'Mens en milieu',k:`ecosysteem|Alle levende en niet-levende factoren in een gebied die elkaar beïnvloeden.
+biotische factoren|Levende factoren, zoals planten en dieren.
+abiotische factoren|Niet-levende factoren, zoals licht, temperatuur, water en bodem.
+voedselketen|Reeks organismen waarin elk organisme wordt gegeten door het volgende.
+voedselweb|Voedselketens die met elkaar verbonden zijn.
+producent|Organisme dat zelf voedsel maakt, zoals een plant.
+consument|Organisme dat andere organismen eet.
+reducent|Organisme dat dode resten afbreekt, zoals bacteriën en schimmels.
+fotosynthese|Planten maken met lichtenergie glucose en zuurstof uit koolstofdioxide en water.
+populatie|Groep organismen van dezelfde soort in een gebied.
+biodiversiteit|Verscheidenheid aan soorten in een gebied.
+kringloop|Stoffen worden steeds opnieuw gebruikt, zoals in de koolstofkringloop.
+duurzaam|Zo leven dat volgende generaties ook genoeg hebben.
+exoot|Soort die van nature niet in een gebied voorkomt.`},
+ {id:'h7',t:'Ademen en eten',k:`voedingsstoffen|Koolhydraten, vetten, eiwitten, vitaminen, mineralen, water en voedingsvezels.
+koolhydraten|Brandstof voor energie, zoals suiker en zetmeel.
+vetten|Brandstof en reservestof.
+eiwitten|Bouwstof voor groei en herstel.
+vitaminen|Beschermende stoffen die je in kleine hoeveelheden nodig hebt.
+vertering|Voedsel wordt afgebroken tot kleine deeltjes die in het bloed kunnen worden opgenomen.
+enzymen|Stoffen die de vertering versnellen.
+speeksel|Begint in de mond met de vertering van zetmeel.
+maag|Maagsap met zoutzuur en enzymen begint de vertering van eiwitten.
+dunne darm|Hier wordt de vertering afgerond en worden voedingsstoffen in het bloed opgenomen.
+darmvlokken|Plooitjes in de dunne darm die het oppervlak vergroten.
+dikke darm|Hier wordt water teruggewonnen.
+gal|Wordt gemaakt door de lever en maakt vet tot kleine druppeltjes (emulgeren).
+alvleesklier|Maakt alvleessap met enzymen.
+luchtpijp|Buis met kraakbeenringen die lucht naar de longen voert.
+longblaasjes|Hier vindt de gaswisseling plaats.
+gaswisseling|Zuurstof gaat het bloed in en koolstofdioxide gaat eruit.
+middenrif|Spier onder de longen; bij inademen trekt hij samen en wordt platter.
+verbranding in cellen|Glucose + zuurstof geeft koolstofdioxide + water + energie.`},
+ {id:'h8',t:'Bloed en bloedsomloop',k:`rode bloedcellen|Vervoeren zuurstof met behulp van hemoglobine.
+witte bloedcellen|Ruimen ziekteverwekkers op.
+bloedplaatjes|Zorgen voor bloedstolling.
+bloedplasma|Vloeibaar deel van het bloed; vervoert voedingsstoffen en afvalstoffen.
+slagader|Bloedvat dat bloed van het hart af vervoert; dikke, stevige wand.
+ader|Bloedvat dat bloed naar het hart vervoert; heeft kleppen.
+haarvaten|Heel dunne bloedvaten waar stoffen worden uitgewisseld.
+kleine bloedsomloop|Hart → longen → hart.
+grote bloedsomloop|Hart → lichaam → hart.
+rechterharthelft|Pompt zuurstofarm bloed naar de longen.
+linkerharthelft|Pompt zuurstofrijk bloed het lichaam in; heeft de dikste wand.
+hartkleppen|Zorgen dat het bloed maar één kant op stroomt.
+kransslagader|Bloedvat dat de hartspier zelf van bloed voorziet.
+aorta|De grote lichaamsslagader.
+longslagader|Vervoert zuurstofarm bloed van het hart naar de longen.
+longader|Vervoert zuurstofrijk bloed van de longen naar het hart.
+bloeddruk|Druk van het bloed tegen de wand van de slagaders.`},
+ {id:'h9',t:'Afweer',k:`ziekteverwekker|Bacterie, virus of schimmel die je ziek kan maken.
+huid|De eerste barrière tegen ziekteverwekkers.
+slijmvliezen|Vangen ziekteverwekkers op in neus en luchtwegen.
+antigeen|Stof op een ziekteverwekker die het afweersysteem herkent.
+antistof|Eiwit dat witte bloedcellen maken tegen één bepaald antigeen.
+geheugencellen|Witte bloedcellen die een ziekteverwekker onthouden.
+immuun|Je wordt niet meer ziek van een bepaalde ziekteverwekker.
+actieve immunisatie|Je lichaam maakt zelf antistoffen, bijvoorbeeld na een vaccinatie.
+passieve immunisatie|Je krijgt kant-en-klare antistoffen toegediend (serum).
+vaccinatie|Inenting met verzwakte of dode ziekteverwekkers, of delen ervan.
+antibiotica|Medicijnen tegen bacteriën; ze werken niet tegen virussen.
+resistentie|Bacteriën worden ongevoelig voor antibiotica.
+allergie|Afweerreactie op een onschuldige stof.
+ontsteking|Reactie van het lichaam: rood, warm, gezwollen en pijnlijk.`},
+ {id:'h10',t:'Voortplanting',k:`puberteit|Periode waarin je lichaam geslachtsrijp wordt.
+hormonen|Stoffen die via het bloed organen beïnvloeden.
+zaadcel|Mannelijke geslachtscel.
+eicel|Vrouwelijke geslachtscel.
+bevruchting|Een zaadcel versmelt met een eicel.
+eileider|Hier vindt meestal de bevruchting plaats.
+baarmoeder|Hier groeit het embryo.
+menstruatiecyclus|Cyclus van ongeveer 28 dagen waarin baarmoederslijmvlies wordt opgebouwd en afgestoten.
+ovulatie|Eisprong: een eicel komt vrij uit de eierstok.
+placenta|Hier worden stoffen uitgewisseld tussen het bloed van moeder en kind.
+navelstreng|Verbindt het embryo met de placenta.
+foetus|Zo heet het ongeboren kind vanaf ongeveer acht weken.
+anticonceptie|Middelen om zwangerschap te voorkomen, zoals de pil of een condoom.
+soa|Seksueel overdraagbare aandoening; een condoom beschermt.
+zaadleider|Vervoert zaadcellen van de zaadbal naar de plasbuis.
+zaadballen|Maken zaadcellen en het hormoon testosteron.`},
+ {id:'h11',t:'Erfelijkheid',s:['kruising'],k:`DNA|Stof in de celkern met de erfelijke informatie.
+chromosoom|Opgerold DNA; mensen hebben 23 paar (46 chromosomen).
+gen|Stukje DNA met de informatie voor één eigenschap.
+allel|Een variant van een gen.
+dominant|Allel dat altijd tot uiting komt; schrijf je met een hoofdletter (A).
+recessief|Allel dat alleen tot uiting komt als je het twee keer hebt (aa).
+homozygoot|Twee dezelfde allelen: AA of aa.
+heterozygoot|Twee verschillende allelen: Aa.
+genotype|De combinatie van allelen, bijvoorbeeld Aa.
+fenotype|De eigenschap die je kunt zien.
+geslachtschromosomen|XX is een vrouw, XY is een man.
+geslachtscel|Bevat de helft van de chromosomen: 23.
+mutatie|Een verandering in het DNA.
+kruisingsschema|Schema om te voorspellen welke nakomelingen er kunnen ontstaan.`},
+ {id:'h12',t:'Evolutie',k:`evolutie|Soorten veranderen heel geleidelijk over veel generaties.
+natuurlijke selectie|Organismen die het best aangepast zijn overleven en krijgen meer nakomelingen.
+Darwin|Bedacht de evolutietheorie met natuurlijke selectie.
+variatie|Verschillen tussen individuen van dezelfde soort.
+mutatie (evolutie)|Bron van nieuwe variatie.
+fossiel|Overblijfsel of afdruk van een organisme van heel lang geleden.
+soort|Groep organismen die samen vruchtbare nakomelingen kunnen krijgen.
+aanpassing|Eigenschap waardoor een organisme beter kan overleven in zijn omgeving.
+kunstmatige selectie|De mens kiest welke dieren of planten zich voortplanten (veredeling).
+uitsterven|Een soort verdwijnt helemaal.`}
+],
+ma:[
+ {id:'wat',t:'Wat is maatschappijleer?',k:`maatschappelijk probleem|Probleem dat veel mensen raakt, waarover verschillende meningen zijn en waar de overheid iets aan kan doen.
+socialisatie|Het aanleren van normen en waarden.
+normen|Regels voor hoe je je gedraagt.
+waarden|Dingen die mensen belangrijk vinden, zoals vrijheid of eerlijkheid.
+identiteit|Wie je bent en hoe je jezelf ziet.
+vooroordeel|Een oordeel over iemand zonder dat je diegene kent.
+stereotype|Een vast beeld van een groep mensen.
+discriminatie|Mensen ongelijk behandelen vanwege bijvoorbeeld afkomst, geloof of geslacht.`},
+ {id:'pol',t:'Politiek',k:`democratie|Het volk regeert, via gekozen vertegenwoordigers.
+Tweede Kamer|150 gekozen leden; controleert de regering en maakt mee de wetten.
+Eerste Kamer|75 leden; controleert of nieuwe wetten goed zijn.
+regering|De koning en de ministers.
+kabinet|De ministers en staatssecretarissen samen.
+coalitie|Partijen die samen een kabinet vormen.
+oppositie|Partijen die niet in de regering zitten.
+motie|Voorstel van Kamerleden waarmee ze de regering iets vragen.
+recht van amendement|Het recht om een wetsvoorstel te veranderen.
+recht van initiatief|Het recht van Kamerleden om zelf een wet voor te stellen.
+recht van enquête|Grondig onderzoek door de Kamer, met verhoren onder ede.
+formatie|Het vormen van een nieuw kabinet na verkiezingen.
+trias politica|Scheiding van de wetgevende, uitvoerende en rechterlijke macht.
+actief kiesrecht|Het recht om te stemmen (vanaf 18 jaar).
+passief kiesrecht|Het recht om gekozen te worden.
+gemeenteraad|Gekozen bestuur van de gemeente.`},
+ {id:'recht',t:'Rechtsstaat',k:`rechtsstaat|Staat waarin ook de overheid zich aan de wet moet houden en grondrechten beschermt.
+grondwet|De belangrijkste wet van Nederland, met de grondrechten.
+klassieke grondrechten|Vrijheidsrechten, zoals vrijheid van meningsuiting.
+sociale grondrechten|Rechten waarvoor de overheid moet zorgen, zoals onderwijs en zorg.
+strafrecht|Conflict tussen een burger en de staat over misdrijven en overtredingen.
+civiel recht|Conflict tussen burgers onderling.
+Openbaar Ministerie|Vervolgt verdachten; de officier van justitie hoort hierbij.
+verdachte|Iemand van wie men denkt dat hij een strafbaar feit heeft gepleegd.
+onschuldpresumptie|Iemand is onschuldig tot het tegendeel is bewezen.
+misdrijf|Ernstig strafbaar feit, zoals diefstal.
+overtreding|Lichter strafbaar feit, zoals door rood rijden.
+taakstraf|Onbetaald werk als straf.
+Halt|Alternatieve straf voor jongeren van 12 tot 18 bij lichte vergrijpen.
+advocaat|Staat de verdachte bij.
+rechter|Beslist onafhankelijk over schuld en straf.`},
+ {id:'wereld',t:'Nederland en de wereld',k:`Europese Unie|Economische en politieke samenwerking van 27 Europese landen.
+euro|Munt die in een groot deel van de EU-landen wordt gebruikt.
+Verenigde Naties|Wereldwijde organisatie voor vrede, veiligheid en mensenrechten.
+NAVO|Militair bondgenootschap van onder andere Europa, de VS en Canada.
+mensenrechten|Rechten die voor ieder mens gelden.
+globalisering|Landen raken economisch en cultureel steeds meer met elkaar verbonden.
+ontwikkelingssamenwerking|Hulp aan arme landen.
+vluchteling|Iemand die zijn land ontvlucht door oorlog of vervolging.
+asielzoeker|Iemand die in een ander land om bescherming vraagt.
+migratie|Verhuizen naar een ander land of gebied.`},
+ {id:'burger',t:'Burgerschap en samenleving',k:`pluriforme samenleving|Samenleving met mensen met verschillende culturen en levensovertuigingen.
+integratie|Nieuwkomers doen mee in de samenleving en houden hun eigen cultuur.
+assimilatie|Nieuwkomers nemen de cultuur van het nieuwe land helemaal over.
+cultuur|Alles wat mensen van elkaar aanleren: taal, gewoonten, normen en waarden.
+tolerantie|Verdraagzaamheid: anderen hun mening en levenswijze gunnen.
+burgerschap|Meedoen in de samenleving en je er verantwoordelijk voor voelen.
+polarisatie|Groepen in de samenleving komen steeds verder van elkaar af te staan.`}
+],
+gs:[
+ {id:'wo1',t:'Nederland en de Eerste Wereldoorlog',k:`Eerste Wereldoorlog|Oorlog van 1914 tot 1918.
+aanleiding WO1|De moord op Frans Ferdinand in Sarajevo in 1914.
+Centralen|Duitsland, Oostenrijk-Hongarije en het Ottomaanse Rijk.
+Geallieerden (WO1)|Frankrijk, Groot-Brittannië, Rusland en later de VS.
+loopgravenoorlog|Oorlog vanuit ingegraven stellingen aan het westfront.
+neutraliteit|Nederland deed niet mee aan de Eerste Wereldoorlog.
+mobilisatie|Het leger wordt klaargemaakt voor oorlog.
+Vrede van Versailles|1919: Duitsland kreeg de schuld en moest herstelbetalingen doen.
+Volkenbond|Organisatie na WO1 om oorlogen te voorkomen.
+nationalisme|Sterke liefde voor het eigen land en volk.
+imperialisme|Landen veroveren gebieden buiten Europa.
+algemeen kiesrecht|In Nederland voor mannen in 1917 en voor vrouwen in 1919.`},
+ {id:'wo2',t:'Interbellum en Tweede Wereldoorlog',k:`interbellum|De periode tussen de twee wereldoorlogen (1918-1939).
+crisis van de jaren '30|Grote economische crisis na de beurskrach van 1929.
+Hitler|Leider van de NSDAP; vanaf 1933 aan de macht in Duitsland.
+nationaalsocialisme|Ideologie van de nazi's: sterke leider, rassenleer en één volk.
+dictatuur|Eén persoon of partij heeft alle macht.
+propaganda|Eenzijdige informatie om mensen te beïnvloeden.
+Tweede Wereldoorlog|1939-1945; begon met de Duitse inval in Polen.
+bombardement van Rotterdam|14 mei 1940; daarna gaf Nederland zich over.
+Holocaust|De moord op ongeveer zes miljoen Joden door de nazi's.
+Februaristaking|1941: protest in Amsterdam tegen de Jodenvervolging.
+verzet|Mensen die zich tegen de Duitse bezetter verzetten.
+collaboratie|Samenwerken met de vijand.
+NSB|Nederlandse nationaalsocialistische partij.
+D-Day|6 juni 1944: geallieerde landing in Normandië.
+Hongerwinter|Winter 1944-1945 met grote hongersnood in West-Nederland.
+bevrijding|Nederland werd op 5 mei 1945 bevrijd.`},
+ {id:'koud',t:'Koude Oorlog',k:`Koude Oorlog|Spanning tussen de VS en de Sovjet-Unie (ongeveer 1947-1991) zonder directe oorlog tussen die twee.
+kapitalisme|Economie met een vrije markt en privébezit, zoals in de VS.
+communisme|De staat bezit de bedrijven en streeft naar gelijkheid, zoals in de Sovjet-Unie.
+IJzeren Gordijn|De grens tussen West- en Oost-Europa.
+Berlijnse Muur|Muur door Berlijn van 1961 tot 1989.
+Warschaupact|Militair bondgenootschap van het Oostblok (1955).
+Marshallplan|Amerikaanse hulp voor de wederopbouw van Europa.
+wapenwedloop|Steeds meer en sterkere (kern)wapens maken.
+Cubacrisis|1962: crisis rond Russische raketten op Cuba.
+val van de Muur|9 november 1989.
+dekolonisatie|Koloniën worden onafhankelijk; Indonesië in 1949.`}
+],
+ak:[
+ {id:'klimaat',t:'Weer en klimaat',k:`weer|De toestand van de atmosfeer op een bepaald moment en een bepaalde plaats.
+klimaat|Het gemiddelde weer over minstens 30 jaar.
+klimaatgrafiek|Grafiek met de gemiddelde temperatuur en neerslag per maand.
+zeeklimaat|Zachte winters, koele zomers en het hele jaar neerslag, zoals in Nederland.
+landklimaat|Koude winters en warme zomers.
+tropisch regenwoudklimaat|Het hele jaar warm en veel neerslag.
+woestijnklimaat|Heel weinig neerslag en een groot verschil tussen dag en nacht.
+stuwingsregen|Regen doordat lucht omhoog moet langs een gebergte.
+frontale regen|Regen bij een front: warme lucht schuift omhoog over koude lucht.
+golfstroom|Warme zeestroom die West-Europa verwarmt.
+breedtegraad|Hoe ver een plaats van de evenaar ligt; verder weg is meestal kouder.
+hoogteligging|Hoe hoger, hoe kouder: ongeveer 0,6 °C per 100 meter.
+klimaatverandering|Verandering van het klimaat, nu vooral opwarming door broeikasgassen.`},
+ {id:'bevolking',t:'Bevolking en ruimte',k:`bevolkingsdichtheid|Aantal inwoners per vierkante kilometer.
+geboortecijfer|Aantal geboorten per 1000 inwoners per jaar.
+sterftecijfer|Aantal sterfgevallen per 1000 inwoners per jaar.
+natuurlijke groei|Geboortecijfer min sterftecijfer.
+bevolkingspiramide|Diagram van de bevolking naar leeftijd en geslacht.
+vergrijzing|Het aandeel ouderen in de bevolking neemt toe.
+ontgroening|Het aandeel jongeren in de bevolking neemt af.
+emigratie|Vertrek uit een land.
+immigratie|Vestiging in een land.
+pushfactor|Reden om ergens weg te gaan, zoals oorlog of armoede.
+pullfactor|Reden om ergens naartoe te gaan, zoals werk.
+verstedelijking|Steeds meer mensen gaan in steden wonen.
+Randstad|Stedelijk gebied in het westen met Amsterdam, Rotterdam, Den Haag en Utrecht.
+suburbanisatie|Mensen verhuizen van de stad naar dorpen en voorsteden eromheen.`},
+ {id:'water',t:'Water',k:`waterkringloop|Verdampen, condenseren, neerslag en afstromen naar zee.
+stroomgebied|Gebied waarvan het water via één rivier naar zee stroomt.
+regenrivier|Rivier die vooral door regenwater wordt gevoed, zoals de Maas.
+gemengde rivier|Rivier die door regen- en smeltwater wordt gevoed, zoals de Rijn.
+polder|Drooggemaakt gebied met een geregeld waterpeil.
+dijk|Wal die het land tegen water beschermt.
+NAP|Normaal Amsterdams Peil: het nulpunt voor hoogtes in Nederland.
+Watersnoodramp|1953: overstroming in Zeeland en Zuid-Holland.
+Deltawerken|Dammen en stormvloedkeringen die na de ramp van 1953 zijn gebouwd.
+Afsluitdijk|Dijk die in 1932 de Zuiderzee afsloot; zo ontstond het IJsselmeer.
+Oostelijk Flevoland|Drooggevallen in 1957; Dronten ligt hier.
+Ruimte voor de Rivier|Rivieren meer ruimte geven om overstromingen te voorkomen.
+grondwater|Water in de bodem.
+verzilting|Zout water dringt het grondwater of de bodem binnen.`}
+],
+ec:[
+ {id:'cons',t:'Consumptie',k:`bruto inkomen|Inkomen voordat belasting en premies eraf gaan.
+netto inkomen|Wat je overhoudt na aftrek van belasting en premies.
+budget|Het bedrag dat je te besteden hebt.
+vaste lasten|Uitgaven die elke maand terugkomen, zoals huur en verzekeringen.
+variabele lasten|Uitgaven die per maand verschillen.
+sparen|Geld opzijzetten voor later.
+rente|Vergoeding voor het lenen of sparen van geld.
+schaarste|Behoeften zijn groter dan de middelen om ze te vervullen.
+primaire behoeften|Basisbehoeften zoals eten, drinken, kleding en wonen.
+inflatie|Stijging van het algemene prijspeil.
+koopkracht|Wat je met je inkomen kunt kopen.
+Consumentenbond|Organisatie die opkomt voor consumenten en producten test.
+garantie|Belofte dat een product een bepaalde tijd goed blijft werken.`},
+ {id:'arbeid',t:'Arbeid en productie',k:`beroepsbevolking|Mensen die werken of graag willen werken.
+werkloosheid|Mensen die willen werken maar geen betaald werk hebben.
+cao|Collectieve arbeidsovereenkomst: afspraken over loon en werktijden voor een hele bedrijfstak.
+vakbond|Organisatie die opkomt voor werknemers.
+minimumloon|Het laagste loon dat een werkgever volgens de wet mag betalen.
+productiefactoren|Natuur, arbeid, kapitaal en ondernemerschap.
+arbeidsproductiviteit|Productie per werknemer per tijdseenheid.
+omzet|Prijs × afzet (aantal verkochte producten).
+winst|Opbrengsten min kosten.
+vaste kosten|Kosten die niet veranderen als je meer maakt, zoals huur.
+variabele kosten|Kosten die meestijgen met de productie, zoals grondstoffen.
+zzp'er|Zelfstandige zonder personeel.`},
+ {id:'overheid',t:'Overheid en internationale handel',k:`belasting|Verplichte betaling aan de overheid zonder directe tegenprestatie.
+btw|Belasting over de toegevoegde waarde; zit in de prijs van producten.
+premies|Bijdragen voor sociale verzekeringen, zoals de AOW.
+begroting|Overzicht van de verwachte inkomsten en uitgaven van de overheid.
+begrotingstekort|De uitgaven van de overheid zijn hoger dan de inkomsten.
+staatsschuld|Alle schulden van de overheid samen.
+AOW|Basispensioen van de overheid vanaf de AOW-leeftijd.
+uitkering|Geld dat je krijgt als je geen of te weinig inkomen hebt.
+import|Goederen en diensten uit het buitenland kopen.
+export|Goederen en diensten aan het buitenland verkopen.
+wisselkoers|Prijs van een munt uitgedrukt in een andere munt.
+externe effecten|Gevolgen voor anderen waarvoor niet wordt betaald, zoals vervuiling.`}
+],
+levo:[
+ {id:'hindo',t:'Hindoeïsme',k:`Brahman|De allesomvattende goddelijke kracht.
+karma|De gevolgen van je daden bepalen je volgende leven.
+reïncarnatie|Wedergeboorte in een nieuw leven.
+dharma|Je plicht; de juiste manier van leven.
+moksha|Bevrijding uit de kringloop van wedergeboorten.
+Ganges|Heilige rivier in India.
+kastenstelsel|Traditionele indeling van de samenleving in groepen.
+Diwali|Het lichtjesfeest.
+Veda's|De oudste heilige geschriften.
+mandir|Hindoeïstische tempel.`},
+ {id:'boed',t:'Boeddhisme',k:`Boeddha|'De verlichte': Siddhartha Gautama.
+vier edele waarheden|De leer over het lijden, de oorzaak ervan, het einde ervan en de weg daarheen.
+achtvoudig pad|De weg om het lijden te beëindigen.
+nirwana|Toestand van verlichting en rust zonder lijden.
+samsara|De kringloop van geboorte, dood en wedergeboorte.
+meditatie|Concentratie- en bezinningsoefening.
+middenweg|Geen luxe en geen strenge onthouding: het midden daartussen.
+monnik|Iemand die volgens strenge regels in een klooster leeft.`}
+]};
+// andere vakken gebruiken (deels) dezelfde leerstof
+const LEER_ALIAS={wa:['wi'],wb:['wi'],wc:['wi'],wd:['wi'],na:['nask1'],sk:['nask2'],nask:['nask1','nask2'],maw:['ma'],beco:['ec']};
+
+// ===== Somgeneratoren: geven {v: vraag, a: antwoord, e: eenheid, u: uitwerking} =====
+const rnd=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const nl=(x,d=2)=>{ const f=Math.pow(10,d); const y=Math.round(x*f)/f; return String(y).replace('.',','); };
+const r1s=x=>Math.round(x*10)/10, r2s=x=>Math.round(x*100)/100;
+const SOMMEN={
+ proc_van(){ const p=pick([5,10,12,15,20,25,30,40,60,75]), n=rnd(4,80)*5, a=p*n/100; return {v:`Hoeveel is ${p}% van ${n}?`,a,e:'',u:`${p}% = ${nl(p/100)}. ${nl(p/100)} × ${n} = ${nl(a)}`}; },
+ korting(){ const prijs=rnd(8,60)*2.5, p=pick([10,15,20,25,30,40,50]), a=r2s(prijs*(1-p/100)); return {v:`Een jas kost €${nl(prijs)}. Je krijgt ${p}% korting. Wat betaal je?`,a,e:'€',u:`Je betaalt ${100-p}% = ${nl((100-p)/100)}. ${nl((100-p)/100)} × ${nl(prijs)} = €${nl(a)}`}; },
+ toename(){ const oud=rnd(4,40)*10, p=rnd(1,12)*5, nieuw=oud*(1+p/100); return {v:`Het aantal leerlingen gaat van ${oud} naar ${nl(nieuw)}. Met hoeveel procent is het toegenomen?`,a:p,e:'%',u:`Toename: ${nl(nieuw)} - ${oud} = ${nl(nieuw-oud)}. ${nl(nieuw-oud)} : ${oud} × 100% = ${p}%`}; },
+ btw(){ const ex=rnd(4,80)*5, a=r2s(ex*1.21); return {v:`Een fiets kost €${ex} zonder btw. De btw is 21%. Wat is de prijs met btw?`,a,e:'€',u:`Met btw is 121% = 1,21. 1,21 × ${ex} = €${nl(a)}`}; },
+ schaal(){ const s=pick([25000,50000,100000,200000]), c=rnd(2,15), a=c*s/100000; return {v:`Op een kaart met schaal 1 : ${s.toLocaleString('nl-NL')} is een weg ${c} cm lang. Hoe lang is de weg in het echt in km?`,a,e:'km',u:`${c} cm × ${s.toLocaleString('nl-NL')} = ${(c*s).toLocaleString('nl-NL')} cm = ${nl(a)} km (100 000 cm = 1 km)`}; },
+ recept(){ const g=pick([150,200,250,300,400,500]), n=pick([2,3,6,8,10]); const a=r1s(g/4*n); return {v:`Voor 4 personen heb je ${g} gram pasta nodig. Hoeveel gram heb je nodig voor ${n} personen?`,a,e:'gram',u:`Per persoon: ${g} : 4 = ${nl(g/4)} gram. Voor ${n} personen: ${nl(g/4)} × ${n} = ${nl(a)} gram`}; },
+ opp_rechthoek(){ const l=rnd(3,25), b=rnd(2,15); return {v:`Een rechthoek is ${l} cm lang en ${b} cm breed. Wat is de oppervlakte?`,a:l*b,e:'cm²',u:`Oppervlakte = lengte × breedte = ${l} × ${b} = ${l*b} cm²`}; },
+ opp_driehoek(){ const z=rnd(3,20), h=rnd(2,16); const a=z*h/2; return {v:`Een driehoek heeft een basis van ${z} cm en een hoogte van ${h} cm. Wat is de oppervlakte?`,a,e:'cm²',u:`Oppervlakte = ½ × basis × hoogte = ½ × ${z} × ${h} = ${nl(a)} cm²`}; },
+ opp_cirkel(){ const r=rnd(2,15); const a=r1s(Math.PI*r*r); return {v:`Een cirkel heeft een straal van ${r} cm. Wat is de oppervlakte? Rond af op één decimaal.`,a,e:'cm²',u:`Oppervlakte = π × r² = π × ${r} × ${r} ≈ ${nl(a,1)} cm²`}; },
+ omtrek_cirkel(){ const d=rnd(4,30); const a=r1s(Math.PI*d); return {v:`Een cirkel heeft een diameter van ${d} cm. Wat is de omtrek? Rond af op één decimaal.`,a,e:'cm',u:`Omtrek = π × diameter = π × ${d} ≈ ${nl(a,1)} cm`}; },
+ inh_balk(){ const l=rnd(2,20), b=rnd(2,12), h=rnd(2,10); return {v:`Een doos is ${l} cm lang, ${b} cm breed en ${h} cm hoog. Wat is de inhoud?`,a:l*b*h,e:'cm³',u:`Inhoud = l × b × h = ${l} × ${b} × ${h} = ${l*b*h} cm³`}; },
+ inh_cilinder(){ const r=rnd(2,10), h=rnd(3,20); const a=r1s(Math.PI*r*r*h); return {v:`Een blik (cilinder) heeft een straal van ${r} cm en is ${h} cm hoog. Wat is de inhoud? Rond af op één decimaal.`,a,e:'cm³',u:`Inhoud = π × r² × h = π × ${r}² × ${h} ≈ ${nl(a,1)} cm³`}; },
+ inh_piramide(){ const z=rnd(2,12), h=rnd(3,15); const a=r1s(z*z*h/3); return {v:`Een piramide heeft een vierkant grondvlak met zijden van ${z} cm en een hoogte van ${h} cm. Wat is de inhoud? Rond af op één decimaal.`,a,e:'cm³',u:`Inhoud = ⅓ × grondvlak × hoogte = ⅓ × ${z*z} × ${h} ≈ ${nl(a,1)} cm³`}; },
+ liter(){ const c=rnd(2,60)*250; return {v:`Hoeveel liter is ${c.toLocaleString('nl-NL')} cm³?`,a:c/1000,e:'liter',u:`1 liter = 1000 cm³ (1 dm³). ${c.toLocaleString('nl-NL')} : 1000 = ${nl(c/1000,3)} liter`}; },
+ pyth_schuin(){ const a=rnd(3,15), b=rnd(3,15); const c=r1s(Math.sqrt(a*a+b*b)); return {v:`Een rechthoekige driehoek heeft rechthoekszijden van ${a} cm en ${b} cm. Hoe lang is de schuine zijde? Rond af op één decimaal.`,a:c,e:'cm',u:`c² = ${a}² + ${b}² = ${a*a} + ${b*b} = ${a*a+b*b}. c = √${a*a+b*b} ≈ ${nl(c,1)} cm`}; },
+ pyth_rechth(){ const b=rnd(3,12), c=b+rnd(2,10); const a=r1s(Math.sqrt(c*c-b*b)); return {v:`In een rechthoekige driehoek is de schuine zijde ${c} cm en één rechthoekszijde ${b} cm. Hoe lang is de andere rechthoekszijde? Rond af op één decimaal.`,a,e:'cm',u:`a² = ${c}² - ${b}² = ${c*c} - ${b*b} = ${c*c-b*b}. a = √${c*c-b*b} ≈ ${nl(a,1)} cm`}; },
+ gonio_tan(){ const h=pick([20,25,30,35,40,45,50,55,60]), aan=rnd(3,20); const a=r1s(aan*Math.tan(h*Math.PI/180)); return {v:`In een rechthoekige driehoek is een hoek ${h}°. De aanliggende rechthoekszijde is ${aan} m. Hoe lang is de overstaande zijde? Rond af op één decimaal.`,a,e:'m',u:`tan(${h}°) = overstaande : aanliggende. Overstaande = tan(${h}°) × ${aan} ≈ ${nl(a,1)} m`}; },
+ gonio_sin(){ const h=pick([20,25,30,35,40,50,60,70]), s=rnd(5,25); const a=r1s(s*Math.sin(h*Math.PI/180)); return {v:`Een ladder van ${s} m staat tegen een muur en maakt een hoek van ${h}° met de grond. Hoe hoog komt de ladder tegen de muur? Rond af op één decimaal.`,a,e:'m',u:`sin(${h}°) = overstaande : schuine. Hoogte = sin(${h}°) × ${s} ≈ ${nl(a,1)} m`}; },
+ gonio_hoek(){ const o=rnd(2,15), aan=rnd(2,15); const a=r1s(Math.atan(o/aan)*180/Math.PI); return {v:`In een rechthoekige driehoek is de overstaande zijde ${o} cm en de aanliggende zijde ${aan} cm. Hoe groot is de hoek? Rond af op één decimaal.`,a,e:'°',u:`tan(hoek) = ${o} : ${aan} = ${nl(o/aan,3)}. Hoek = tan⁻¹(${nl(o/aan,3)}) ≈ ${nl(a,1)}°`}; },
+ lin_invullen(){ const a=pick([-3,-2,2,3,4,5,1.5,2.5]), b=rnd(-10,20), x=rnd(1,12); const y=r2s(a*x+b); return {v:`Gegeven de formule y = ${nl(a)}x ${b<0?'- '+(-b):'+ '+b}. Bereken y als x = ${x}.`,a:y,e:'',u:`y = ${nl(a)} × ${x} ${b<0?'- '+(-b):'+ '+b} = ${nl(a*x)} ${b<0?'- '+(-b):'+ '+b} = ${nl(y)}`}; },
+ lin_helling(){ const x1=rnd(0,5), x2=x1+rnd(1,6), a=pick([-4,-3,-2,-1,1,2,3,4,5,0.5]), b=rnd(-5,10); const y1=a*x1+b, y2=a*x2+b; return {v:`Een rechte lijn gaat door de punten (${x1}, ${nl(y1)}) en (${x2}, ${nl(y2)}). Wat is het hellingsgetal?`,a,e:'',u:`Hellingsgetal = verschil y : verschil x = (${nl(y2)} - ${nl(y1)}) : (${x2} - ${x1}) = ${nl(y2-y1)} : ${x2-x1} = ${nl(a)}`}; },
+ lin_vergelijking(){ const a=pick([2,3,4,5,6]), x=rnd(-5,12), b=rnd(-10,15), c=a*x+b; return {v:`Los op: ${a}x ${b<0?'- '+(-b):'+ '+b} = ${c}. Wat is x?`,a:x,e:'',u:`${a}x = ${c} ${b<0?'+ '+(-b):'- '+b} = ${c-b}. x = ${c-b} : ${a} = ${x}`}; },
+ groei(){ const B=rnd(2,40)*100, p=pick([2,3,4,5,6,8,10]), n=rnd(2,6); const g=1+p/100, a=Math.round(B*Math.pow(g,n)); return {v:`Een bedrag van €${B} groeit elk jaar met ${p}%. Hoeveel is het na ${n} jaar? Rond af op hele euro's.`,a,e:'€',tol:1,u:`Groeifactor = ${nl(g)}. ${B} × ${nl(g)}^${n} ≈ €${a}`}; },
+ stat_gem(){ const n=rnd(5,7), d=Array.from({length:n},()=>rnd(3,10)); const s=d.reduce((x,y)=>x+y,0), a=r1s(s/n); return {v:`Cijfers: ${d.join(', ')}. Wat is het gemiddelde? Rond af op één decimaal.`,a,e:'',u:`Som = ${s}. ${s} : ${n} ≈ ${nl(a,1)}`}; },
+ stat_mediaan(){ const n=pick([5,7,9]), d=Array.from({length:n},()=>rnd(1,30)); const o=[...d].sort((x,y)=>x-y); return {v:`Getallen: ${d.join(', ')}. Wat is de mediaan?`,a:o[(n-1)/2],e:'',u:`Op volgorde: ${o.join(', ')}. De middelste waarde is ${o[(n-1)/2]}.`}; },
+ stat_spreiding(){ const n=rnd(6,9), d=Array.from({length:n},()=>rnd(10,99)); const mx=Math.max(...d), mn=Math.min(...d); return {v:`Getallen: ${d.join(', ')}. Wat is de spreidingsbreedte?`,a:mx-mn,e:'',u:`Grootste - kleinste = ${mx} - ${mn} = ${mx-mn}`}; },
+ ohm_U(){ const I=pick([0.1,0.2,0.25,0.5,1,1.5,2,3]), R=pick([4,6,10,12,20,24,50,100]); const a=r2s(I*R); return {v:`Door een weerstand van ${R} Ω loopt een stroom van ${nl(I)} A. Hoe groot is de spanning?`,a,e:'V',u:`U = I × R = ${nl(I)} × ${R} = ${nl(a)} V`}; },
+ ohm_I(){ const U=pick([3,4.5,6,9,12,24,230]), R=pick([2,3,4,6,10,12,15,20,46]); const a=r2s(U/R); return {v:`Op een lampje met een weerstand van ${R} Ω staat een spanning van ${nl(U)} V. Hoe groot is de stroomsterkte? Rond af op twee decimalen.`,a,e:'A',u:`I = U : R = ${nl(U)} : ${R} ≈ ${nl(a)} A`}; },
+ ohm_R(){ const I=pick([0.2,0.5,1,2,4,5]), R=pick([3,6,10,12,15,20,30]); const U=r2s(I*R); return {v:`Een apparaat werkt op ${nl(U)} V en er loopt ${nl(I)} A doorheen. Hoe groot is de weerstand?`,a:R,e:'Ω',u:`R = U : I = ${nl(U)} : ${nl(I)} = ${R} Ω`}; },
+ vermogen(){ const I=pick([0.5,1,2,4,5,8,10]); const a=230*I; return {v:`Een waterkoker werkt op 230 V en er loopt ${nl(I)} A doorheen. Hoe groot is het vermogen?`,a,e:'W',u:`P = U × I = 230 × ${nl(I)} = ${nl(a)} W`}; },
+ vermogen_I(){ const P=pick([23,46,115,460,690,1150,2300]); const a=r2s(P/230); return {v:`Een apparaat van ${P} W wordt aangesloten op 230 V. Hoe groot is de stroomsterkte?`,a,e:'A',u:`I = P : U = ${P} : 230 = ${nl(a)} A`}; },
+ kwh(){ const P=pick([60,100,500,800,1000,1500,2000,2500]), t=pick([0.5,1,2,3,4,5,8]); const a=r2s(P/1000*t); return {v:`Een apparaat van ${P} W staat ${nl(t)} uur aan. Hoeveel energie gebruikt het in kWh?`,a,e:'kWh',u:`P = ${P} W = ${nl(P/1000,3)} kW. E = P × t = ${nl(P/1000,3)} × ${nl(t)} = ${nl(a)} kWh`}; },
+ kosten(){ const kwh=pick([2,3,5,8,10,12,20,25,40]), prijs=pick([0.25,0.3,0.35,0.4]); const a=r2s(kwh*prijs); return {v:`Je verbruikt ${kwh} kWh. Eén kWh kost €${nl(prijs)}. Wat kost dat?`,a,e:'€',u:`Kosten = ${kwh} × €${nl(prijs)} = €${nl(a)}`}; },
+ echo(){ const t=pick([0.2,0.4,0.5,0.6,0.8,1,1.2,2]); const a=r1s(343*t/2); return {v:`Je roept tegen een muur en hoort na ${nl(t)} s de echo. Hoe ver staat de muur? (geluidssnelheid 343 m/s) Rond af op één decimaal.`,a,e:'m',u:`Het geluid gaat heen én terug: afstand = 343 × ${nl(t)} : 2 ≈ ${nl(a,1)} m`}; },
+ frequentie(){ const T=pick([1,2,2.5,4,5,10,20]); const a=1000/T; return {v:`Een trilling heeft een trillingstijd van ${nl(T)} ms. Wat is de frequentie?`,a,e:'Hz',u:`T = ${nl(T)} ms = ${nl(T/1000,4)} s. f = 1 : T = 1 : ${nl(T/1000,4)} = ${nl(a)} Hz`}; },
+ zwaartekracht(){ const m=pick([0.5,2,5,12,40,55,70,250,800]); const a=m*10; return {v:`Hoe groot is de zwaartekracht op een voorwerp van ${nl(m)} kg? (g = 10 N/kg)`,a,e:'N',u:`Fz = m × g = ${nl(m)} × 10 = ${nl(a)} N`}; },
+ hefboom(){ const F1=pick([10,20,30,40,50,60,100]), r1=pick([0.2,0.3,0.4,0.5,1]), r2=pick([0.1,0.2,0.25,0.5,1,2]); const a=r1s(F1*r1/r2); return {v:`Aan een hefboom werkt een kracht van ${F1} N op ${nl(r1)} m van het draaipunt. Welke kracht is op ${nl(r2)} m aan de andere kant nodig voor evenwicht? Rond af op één decimaal.`,a,e:'N',u:`F1 × r1 = F2 × r2 → ${F1} × ${nl(r1)} = F2 × ${nl(r2)} → F2 = ${nl(F1*r1)} : ${nl(r2)} ≈ ${nl(a,1)} N`}; },
+ druk(){ const F=pick([100,200,500,600,800,1000,1200]), A=pick([0.01,0.02,0.05,0.1,0.2,0.5]); const a=F/A; return {v:`Een kracht van ${F} N drukt op een oppervlak van ${nl(A)} m². Hoe groot is de druk?`,a,e:'Pa',u:`p = F : A = ${F} : ${nl(A)} = ${nl(a)} Pa (N/m²)`}; },
+ snelheid(){ const v=pick([12,15,18,20,30,45,60,80,100,120]), t=pick([0.25,0.5,0.75,1,1.5,2]); const s=v*t; return {v:`Je legt ${nl(s)} km af in ${nl(t)} uur. Wat is je gemiddelde snelheid?`,a:v,e:'km/h',u:`v = s : t = ${nl(s)} : ${nl(t)} = ${v} km/h`}; },
+ kmh_ms(){ const v=pick([18,36,45,50,54,72,90,100,108,120]); const a=r1s(v/3.6); return {v:`Reken ${v} km/h om naar m/s. Rond af op één decimaal.`,a,e:'m/s',u:`${v} : 3,6 ≈ ${nl(a,1)} m/s`}; },
+ reactie(){ const v=pick([10,15,20,25,30]), t=pick([0.5,0.8,1,1.2,1.5]); const a=r1s(v*t); return {v:`Een auto rijdt ${v} m/s. De reactietijd van de bestuurder is ${nl(t)} s. Hoe groot is de reactieafstand?`,a,e:'m',u:`Reactieafstand = v × reactietijd = ${v} × ${nl(t)} = ${nl(a)} m`}; },
+ stopafstand(){ const ra=rnd(8,30), rw=rnd(10,60); return {v:`De reactieafstand is ${ra} m en de remweg is ${rw} m. Hoe groot is de stopafstand?`,a:ra+rw,e:'m',u:`Stopafstand = reactieafstand + remweg = ${ra} + ${rw} = ${ra+rw} m`}; },
+ ez(){ const m=pick([0.5,1,2,5,10,50,60]), h=pick([1,2,3,5,10,20]); const a=m*10*h; return {v:`Een voorwerp van ${nl(m)} kg wordt ${h} m omhoog getild. Hoeveel zwaarte-energie krijgt het? (g = 10 N/kg)`,a,e:'J',u:`Ez = m × g × h = ${nl(m)} × 10 × ${h} = ${nl(a)} J`}; },
+ ek(){ const m=pick([1,2,4,10,50,60,80]), v=pick([2,3,4,5,6,10]); const a=0.5*m*v*v; return {v:`Een voorwerp van ${m} kg beweegt met ${v} m/s. Hoeveel bewegingsenergie heeft het?`,a,e:'J',u:`Ek = ½ × m × v² = 0,5 × ${m} × ${v}² = ${nl(a)} J`}; },
+ rendement(){ const tot=pick([200,400,500,800,1000,2000]), p=pick([20,25,30,40,60,75,80,90]); const nut=tot*p/100; return {v:`Een apparaat krijgt ${tot} J energie en levert ${nl(nut)} J nuttige energie. Wat is het rendement?`,a:p,e:'%',u:`Rendement = nuttig : totaal × 100% = ${nl(nut)} : ${tot} × 100% = ${p}%`}; },
+ lens_beeld(){ const opties=[[10,15,30],[10,20,20],[10,30,15],[5,10,10],[20,30,60],[20,60,30],[15,20,60],[12,20,30],[6,10,15],[8,24,12]]; const [f,v,b]=pick(opties); return {v:`Een bolle lens heeft een brandpuntsafstand van ${f} cm. Het voorwerp staat ${v} cm voor de lens. Hoe groot is de beeldafstand?`,a:b,e:'cm',u:`1/f = 1/v + 1/b → 1/b = 1/${f} - 1/${v} → b = ${b} cm`}; },
+ vergroting(){ const v=pick([10,15,20,25,30]), b=pick([5,10,20,30,45,60]); const a=r2s(b/v); return {v:`De voorwerpsafstand is ${v} cm en de beeldafstand ${b} cm. Hoe groot is de vergroting? Rond af op twee decimalen.`,a,e:'×',u:`N = b : v = ${b} : ${v} ≈ ${nl(a)}`}; },
+ halvering(){ const A=pick([800,1600,2000,3200,4000,6400]), T=pick([2,5,8,10,12]), k=rnd(1,4); const a=A/Math.pow(2,k); return {v:`Een bron heeft een activiteit van ${A} Bq. De halveringstijd is ${T} dagen. Hoeveel is de activiteit na ${T*k} dagen?`,a,e:'Bq',u:`${T*k} dagen = ${k} halveringstijden. ${A} gedeeld door 2${k>1?' ('+k+' keer)':''} = ${nl(a)} Bq`}; },
+ dichtheid(){ const V=pick([10,20,25,40,50,100]), rho=pick([0.8,1,2.7,7.9,8.9,11.3]); const m=r1s(V*rho); return {v:`Een blokje van ${V} cm³ heeft een massa van ${nl(m)} g. Wat is de dichtheid?`,a:rho,e:'g/cm³',u:`ρ = m : V = ${nl(m)} : ${V} = ${nl(rho)} g/cm³`}; },
+ kruising(){ const g=['AA','Aa','aa']; const p1=pick(g), p2=pick(['Aa','aa','Aa']); const c1=p1.split(''), c2=p2.split(''); let n=0; for(const x of c1) for(const y of c2) if(x==='a'&&y==='a') n++; const a=n*25; return {v:`Een ouder met genotype ${p1} en een ouder met genotype ${p2} krijgen een kind. A is dominant, a is recessief. Hoe groot is de kans (in %) dat het kind het recessieve fenotype (aa) heeft?`,a,e:'%',u:`Kruisingsschema: ${c1.map(x=>c2.map(y=>x+y).join(', ')).join(', ')}. ${n} van de 4 vakjes zijn aa = ${a}%`}; }
+};
+
+// ===== Leren: kaartjes, begrippen, grammatica, sommen en oefentoets (27-10-2026 MK) =====
+const TAALVAKKEN=['en','du','fa','sp','la','gr'];
+let lrVak=null;
+function eigenSets(vak){ return (S.kaartjes[vak]||[]); }
+function leerTopics(vak){
+  const bron=[...(LEERSTOF[vak]||[]),...(LEER_ALIAS[vak]||[]).flatMap(a=>(LEERSTOF[a]||[]).map(t=>({...t,id:a+'_'+t.id})))];
+  const eigen=eigenSets(vak).map(e=>({id:'e_'+e.id,t:e.titel,eigen:true,[TAALVAKKEN.includes(vak)?'w':'k']:e.regels}));
+  return [...bron,...eigen];
+}
+const TOPIC_CACHE=new Map();
+function regelsVan(txt){ return String(txt||'').split('\n').map(r=>r.trim()).filter(Boolean); }
+function topicItems(vak,t){
+  const key=vak+'|'+t.id+'|'+(t.eigen?(t.k||t.w||'').length:''); if(TOPIC_CACHE.has(key)) return TOPIC_CACHE.get(key);
+  const pre=`${vak}.${t.id}.`, kaarten=[], gram=[];
+  regelsVan(t.k).forEach((r,i)=>{ const [a,...b]=r.split('|'); kaarten.push({id:pre+'k'+i,soort:'k',voor:a.trim(),achter:b.join('|').trim()}); });
+  regelsVan(t.w).forEach((r,i)=>{ const [a,b]=r.split('|'); const alt=String(b||'').split(';').map(x=>x.trim()).filter(Boolean); kaarten.push({id:pre+'w'+i,soort:'w',voor:a.trim(),achter:alt[0]||'',alt}); });
+  regelsVan(t.irr).forEach((r,i)=>{ const [inf,past,pp,nlv]=r.split('|'); kaarten.push({id:pre+'i'+i,soort:'irr',voor:`to ${inf} (${nlv})`,achter:`${past} - ${pp}`,inf,past:past.split('/'),pp}); });
+  if(t.g) regelsVan(t.g.o).forEach((r,i)=>{ const [zin,ant]=r.split('|'); gram.push({id:pre+'g'+i,zin,antw:ant.split(';').map(x=>x.trim())}); });
+  const res={kaarten,gram,gens:(t.s||[]).filter(g=>SOMMEN[g]).map(g=>({id:pre+'s.'+g,gen:g}))};
+  TOPIC_CACHE.set(key,res); return res;
+}
+// kennis: [box 0-5, goed, fout, dagnummer]
+function kGet(id){ return S.kennis[id]||[0,0,0,0]; }
+function kZet(id,ok){ const k=[...kGet(id)]; if(ok){ k[0]=Math.min(5,k[0]+1); k[1]++; } else { k[0]=0; k[2]++; } k[3]=dag(VANDAAG()); S.kennis[id]=k; }
+function topicKennis(vak,t){ const it=topicItems(vak,t); const ids=[...it.kaarten,...it.gram,...it.gens].map(x=>x.id); if(!ids.length) return {pct:0,n:0,gezien:0};
+  let som=0,gez=0; for(const id of ids){ const k=kGet(id); som+=Math.min(k[0],4)/4; if(k[1]+k[2]) gez++; } return {pct:Math.round(som/ids.length*100),n:ids.length,gezien:gez}; }
+function vakKennis(vak){ let s=0,n=0; for(const t of leerTopics(vak)){ const k=topicKennis(vak,t); s+=k.pct*k.n; n+=k.n; } return n?Math.round(s/n):0; }
+function volgendeToetsVak(vak){ const nu=VANDAAG(); return [...S.agenda].filter(a=>a.vak===vak&&a.datum>=nu&&status(a)!=='klaar').sort((a,b)=>a.datum.localeCompare(b.datum))[0]||null; }
+const overDagen=iso=>{ const d=dag(iso)-dag(VANDAAG()); return d===0?'vandaag':d===1?'morgen':`over ${d} dagen`; };
+const ringSvg=(pct,maat=56)=>`<span class="lr-ring" style="--p:${pct};width:${maat}px;height:${maat}px"><b>${pct}%</b></span>`;
+
+// ---------- antwoorden nakijken ----------
+function normTekst(s){ return String(s||'').toLowerCase().replace(/[’‘`´]/g,"'").replace(/ß/g,'ss').normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[.!?"]+$/,'').replace(/^["']|["']$/g,'').replace(/\s+/g,' ').trim(); }
+function afstand(a,b){ const m=a.length,n=b.length; if(Math.abs(m-n)>1) return 2; const d=Array.from({length:m+1},(_,i)=>[i]); for(let j=1;j<=n;j++) d[0][j]=j;
+  for(let i=1;i<=m;i++) for(let j=1;j<=n;j++) d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1)); return d[m][n]; }
+function checkTekst(inv,alts){ const x=normTekst(inv); if(!x) return {ok:false};
+  for(const a of alts){ const y=normTekst(a); if(x===y) return {ok:true}; }
+  for(const a of alts){ const y=normTekst(a); if(y.length>=6&&afstand(x,y)===1) return {ok:true,bijna:a}; }
+  return {ok:false}; }
+function checkGetal(inv,q){ const m=String(inv||'').replace(/\s/g,'').replace(/\.(?=\d{3}(\D|$))/g,'').replace(',','.').match(/-?\d+(\.\d+)?/); if(!m) return {ok:false};
+  const x=parseFloat(m[0]), a=q.a; const dec=(String(a).split('.')[1]||'').length; const tol=q.tol!=null?q.tol:Math.max(0.5*Math.pow(10,-dec)+1e-9,Math.abs(a)*0.005);
+  return {ok:Math.abs(x-a)<=tol}; }
+const fmtA=q=>(q.e==='€'?'€':'')+String(Math.round(q.a*1000)/1000).replace('.',',')+(q.e&&q.e!=='€'?' '+q.e:'');
+
+// ---------- studiescherm ----------
+let ST=null;
+function stOpen(titel,sub){ $('studie').hidden=false; document.body.classList.add('studie-open'); $('stTitel').textContent=titel; $('stSub').textContent=sub||''; $('stTeller').textContent=''; $('stVoortgang').style.width='0%'; }
+function stSluit(){ $('studie').hidden=true; document.body.classList.remove('studie-open'); ST=null; save(); renderLeren(); renderHome(); }
+function stBalk(i,n){ $('stVoortgang').style.width=Math.round(i/n*100)+'%'; $('stTeller').textContent=n?`${Math.min(i+1,n)}/${n}`:''; }
+const vakNaam=vak=>(BY_ID[vak]||ORIGINEEL[vak]||{naam:vak}).naam;
+
+// Kaartjes omdraaien
+function startKaartjes(vak,topics,alleenIds){
+  let kaarten=topics.flatMap(t=>topicItems(vak,t).kaarten); if(alleenIds) kaarten=kaarten.filter(k=>alleenIds.includes(k.id));
+  if(!kaarten.length) return;
+  kaarten.sort((a,b)=>(kGet(a.id)[0]-kGet(b.id)[0])||(kGet(a.id)[3]-kGet(b.id)[3])||(Math.random()-.5));
+  const rij=kaarten.slice(0,20).sort(()=>Math.random()-.5);
+  ST={mode:'kaart',vak,rij,i:0,goed:0,fout:[],om:false,richting:'voor',keer:{}};
+  stOpen(topics.length===1?topics[0].t:vakNaam(vak),'Kaartjes omdraaien'); stKaart();
+}
+function stKaart(){
+  const s=ST, b=$('stBody'); if(s.i>=s.rij.length) return stKaartKlaar();
+  const k=s.rij[s.i]; stBalk(s.i,s.rij.length); s.om=false;
+  const isTaal=k.soort==='w'; const voor=isTaal&&s.richting==='achter'?k.achter:k.voor, achter=isTaal&&s.richting==='achter'?k.voor:k.achter;
+  b.innerHTML=`${isTaal?`<div class="st-wissel"><button type="button" id="stRichting">${s.richting==='voor'?'Nederlands → vreemde taal':'Vreemde taal → Nederlands'} ⇄</button></div>`:''}
+    <div class="flipkaart" id="stFlip" tabindex="0" role="button" aria-label="Kaartje omdraaien"><div class="fk-binnen"><div class="fk-voor"><span class="fk-label">${k.soort==='k'?'Begrip':k.soort==='irr'?'Werkwoord':'Vertaal'}</span><b>${esc(voor)}</b><small>Tik om om te draaien</small></div>
+      <div class="fk-achter"><span class="fk-label">Antwoord</span><b>${esc(achter)}</b>${k.alt&&k.alt.length>1&&s.richting==='voor'?`<small>Ook goed: ${esc(k.alt.slice(1).join(', '))}</small>`:''}</div></div></div>
+    <div class="st-knoppen" id="stOordeel" hidden><button type="button" class="st-nee" id="stNee">✗ Wist ik nog niet</button><button type="button" class="st-ja" id="stJa">✓ Wist ik!</button></div>
+    <p class="st-tip small muted">Draai het kaartje om. Wist je het? Veeg naar rechts. Nog niet? Veeg naar links.</p>`;
+  const f=$('stFlip'); const draai=()=>{ s.om=!s.om; f.classList.toggle('om',s.om); $('stOordeel').hidden=!s.om; };
+  f.addEventListener('click',()=>{ if(f.dataset.geveegd) return; draai(); });
+  f.addEventListener('keydown',e=>{ if(e.key===' '||e.key==='Enter'){ e.preventDefault(); draai(); } });
+  $('stJa').addEventListener('click',()=>stOordeel(true)); $('stNee').addEventListener('click',()=>stOordeel(false));
+  const r=$('stRichting'); if(r) r.addEventListener('click',()=>{ s.richting=s.richting==='voor'?'achter':'voor'; stKaart(); });
+  veegKaart(f,ok=>{ if(!s.om){ draai(); return false; } stOordeel(ok); return true; });
+}
+function stOordeel(ok){ const s=ST, k=s.rij[s.i]; kZet(k.id,ok);
+  if(ok) s.goed++; else { if(!s.fout.includes(k)) s.fout.push(k); s.keer[k.id]=(s.keer[k.id]||0)+1; if(s.keer[k.id]<2) s.rij.push(k); }
+  s.i++; stKaart(); }
+function stKaartKlaar(){
+  const s=ST; stBalk(1,1); $('stTeller').textContent='';
+  const uniek=new Set(s.rij.map(k=>k.id)).size, wist=uniek-s.fout.length;
+  $('stBody').innerHTML=`<div class="st-eind"><div class="st-groot">${wist}/${uniek}</div><h3>${wist===uniek?'Alles goed, top!':wist/uniek>=.7?'Goed bezig!':'Blijf oefenen, het komt vanzelf.'}</h3>
+    ${s.fout.length?`<p class="muted">Deze waren nog lastig:</p><ul class="st-lijst">${s.fout.map(k=>`<li><b>${esc(k.voor)}</b> <span>${esc(k.achter)}</span></li>`).join('')}</ul>`:''}
+    <div class="st-knoppen">${s.fout.length?'<button type="button" id="stFouten">Oefen deze nog een keer</button>':''}<button type="button" class="primary" id="stKlaar">Klaar</button></div></div>`;
+  const fk=$('stFouten'); if(fk) fk.addEventListener('click',()=>{ const ids=s.fout.map(k=>k.id), vak=s.vak; startKaartjes(vak,leerTopics(vak),ids); });
+  $('stKlaar').addEventListener('click',stSluit);
+}
+function veegKaart(el,klaar){
+  let x0=null,y0=0,dx=0,id=null;
+  el.addEventListener('pointerdown',e=>{ x0=e.clientX; y0=e.clientY; dx=0; id=e.pointerId; el.style.transition='none'; });
+  el.addEventListener('pointermove',e=>{ if(x0==null||e.pointerId!==id) return; dx=e.clientX-x0; if(Math.abs(dx)<8||Math.abs(dx)<Math.abs(e.clientY-y0)) return;
+    el.style.transform=`translateX(${dx}px) rotate(${dx/18}deg)`; el.classList.toggle('veeg-ja',dx>40); el.classList.toggle('veeg-nee',dx<-40); });
+  const los=()=>{ if(x0==null) return; el.style.transition=''; const ver=dx; x0=null; el.classList.remove('veeg-ja','veeg-nee');
+    if(Math.abs(ver)>90){ el.dataset.geveegd='1'; setTimeout(()=>{ delete el.dataset.geveegd; },50); if(klaar(ver>0)===false) el.style.transform=''; else el.style.transform=`translateX(${ver>0?600:-600}px) rotate(${ver>0?25:-25}deg)`; }
+    else { el.style.transform=''; if(Math.abs(ver)>8){ el.dataset.geveegd='1'; setTimeout(()=>{ delete el.dataset.geveegd; },50); } } };
+  el.addEventListener('pointerup',los); el.addEventListener('pointercancel',los);
+}
+
+// Meerkeuze begrippen
+function maakMC(k,alle){ const omgekeerd=Math.random()<.4;
+  const andere=alle.filter(x=>x.id!==k.id&&x.achter!==k.achter).sort(()=>Math.random()-.5).slice(0,3);
+  if(omgekeerd) return {soort:'mc',item:k,vraag:`Welk begrip hoort hierbij?`,detail:k.achter,opties:[k,...andere].sort(()=>Math.random()-.5).map(x=>({t:x.voor,goed:x.id===k.id})),goedTekst:k.voor};
+  return {soort:'mc',item:k,vraag:`Wat betekent “${k.voor}”?`,opties:[k,...andere].sort(()=>Math.random()-.5).map(x=>({t:x.achter,goed:x.id===k.id})),goedTekst:k.achter};
+}
+function startMeerkeuze(vak,t){
+  const alle=topicItems(vak,t).kaarten; if(alle.length<4) return startKaartjes(vak,[t]);
+  const rij=[...alle].sort((a,b)=>(kGet(a.id)[0]-kGet(b.id)[0])||(Math.random()-.5)).slice(0,10).sort(()=>Math.random()-.5).map(k=>maakMC(k,alle));
+  ST={mode:'oefen',vak,rij,i:0,goed:0,fout:[]}; stOpen(t.t,'Meerkeuze'); stVraag();
+}
+// Grammatica
+function startGrammatica(vak,t){
+  ST={mode:'oefen',vak,rij:topicItems(vak,t).gram.map(g=>({soort:'gram',item:g})).sort(()=>Math.random()-.5),i:0,goed:0,fout:[]};
+  stOpen(t.t,'Uitleg en oefenen'); stBalk(0,1); $('stTeller').textContent='';
+  $('stBody').innerHTML=`<div class="st-uitleg"><span class="fk-label">Uitleg</span>${t.g.u}<button type="button" class="primary" id="stStart">Ik snap het, start met oefenen</button></div>`;
+  $('stStart').addEventListener('click',stVraag);
+}
+// Sommen
+function maakSom(vak,g){ const q=SOMMEN[g.gen](); return {soort:'som',item:g,q}; }
+function startSommen(vak,t){ const gens=topicItems(vak,t).gens; const rij=[]; for(let i=0;i<8;i++) rij.push(maakSom(vak,gens[i%gens.length])); rij.sort(()=>Math.random()-.5);
+  ST={mode:'oefen',vak,rij,i:0,goed:0,fout:[]}; stOpen(t.t,'Sommen oefenen'); stVraag(); }
+// Een vraag tonen (oefenen met directe feedback, of toets zonder feedback)
+function vraagHtml(v){
+  if(v.soort==='mc') return `<p class="st-vraag">${esc(v.vraag)}</p>${v.detail?`<p class="st-detail">${esc(v.detail)}</p>`:''}<div class="st-opties">${v.opties.map((o,i)=>`<button type="button" data-o="${i}">${esc(o.t)}</button>`).join('')}</div>`;
+  if(v.soort==='gram') return `<p class="st-vraag">Vul in:</p><p class="st-zin">${esc(v.item.zin).replace('___','<input id="stIn" class="st-gat" autocomplete="off" autocapitalize="none" spellcheck="false" aria-label="Antwoord">')}</p>`;
+  if(v.soort==='woord') return `<p class="st-vraag">${esc(v.vraag)}</p><p class="st-detail"><b>${esc(v.voor)}</b></p><input id="stIn" class="st-invoer" autocomplete="off" autocapitalize="none" spellcheck="false" aria-label="Antwoord" placeholder="Typ je antwoord">`;
+  if(v.soort==='som') return `<p class="st-vraag st-somvraag">${esc(v.q.v)}</p><div class="st-somrij"><input id="stIn" class="st-invoer" inputmode="decimal" autocomplete="off" aria-label="Antwoord" placeholder="Antwoord">${v.q.e?`<span class="st-eenheid">${esc(v.q.e)}</span>`:''}</div>`;
+  return '';
+}
+function goedAntwoord(v){ return v.soort==='mc'?v.goedTekst:v.soort==='gram'?v.item.antw[0]:v.soort==='woord'?v.alts[0]:fmtA(v.q); }
+function beoordeel(v,inv){ if(v.soort==='gram') return checkTekst(inv,v.item.antw); if(v.soort==='woord') return checkTekst(inv,v.alts); if(v.soort==='som') return checkGetal(inv,v.q); return {ok:false}; }
+function stVraag(){
+  const s=ST, b=$('stBody'); if(s.i>=s.rij.length) return s.mode==='toets'?stToetsKlaar():stOefenKlaar();
+  const v=s.rij[s.i]; stBalk(s.i,s.rij.length);
+  b.innerHTML=`<div class="st-kaart">${vraagHtml(v)}<div class="st-feedback" id="stFb" aria-live="polite"></div>
+    <div class="st-knoppen">${v.soort!=='mc'?`<button type="button" class="primary" id="stCheck">${s.mode==='toets'?'Volgende':'Controleer'}</button>`:''}${s.mode==='toets'&&v.soort!=='mc'?'<button type="button" id="stWeetNiet">Weet ik niet</button>':''}</div></div>`;
+  const inp=$('stIn'); if(inp){ setTimeout(()=>inp.focus({preventScroll:true}),50); inp.addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); const c=$('stCheck'); if(c) c.click(); } }); }
+  const antwoord=(inv,ok,bijna)=>{
+    kZet(v.item.id,ok); if(ok) s.goed++; else s.fout.push({v,inv});
+    if(s.mode==='toets'){ s.antw.push({v,inv,ok}); s.i++; return stVraag(); }
+    const fb=$('stFb'); fb.className='st-feedback '+(ok?'ok':'nee');
+    fb.innerHTML=ok?`✓ Goed!${bijna?` Let op de spelling: <b>${esc(bijna)}</b>`:''}${v.soort==='som'?`<small>${esc(v.q.u)}</small>`:''}`:`✗ Het goede antwoord is <b>${esc(goedAntwoord(v))}</b>${v.soort==='som'?`<small>${esc(v.q.u)}</small>`:''}${v.soort==='mc'&&v.item.achter&&v.goedTekst!==v.item.achter?`<small>${esc(v.item.voor)}: ${esc(v.item.achter)}</small>`:''}`;
+    const kn=b.querySelector('.st-knoppen'); kn.innerHTML='<button type="button" class="primary" id="stVerder">Volgende</button>';
+    $('stVerder').addEventListener('click',()=>{ s.i++; stVraag(); }); $('stVerder').focus({preventScroll:true});
+  };
+  if(v.soort==='mc') for(const knop of b.querySelectorAll('[data-o]')) knop.addEventListener('click',()=>{ const o=v.opties[+knop.dataset.o];
+    if(s.mode!=='toets'){ for(const k2 of b.querySelectorAll('[data-o]')){ k2.disabled=true; const oo=v.opties[+k2.dataset.o]; if(oo.goed) k2.classList.add('goed'); } if(!o.goed) knop.classList.add('fout'); }
+    antwoord(o.t,o.goed); });
+  const c=$('stCheck'); if(c) c.addEventListener('click',()=>{ const inv=inp?inp.value:''; if(!inv.trim()&&s.mode!=='toets'){ inp.focus(); return; } const r=beoordeel(v,inv); if(inp) inp.disabled=true; antwoord(inv,r.ok,r.bijna); });
+  const wn=$('stWeetNiet'); if(wn) wn.addEventListener('click',()=>antwoord('',false));
+}
+function stOefenKlaar(){
+  const s=ST, n=s.rij.length; stBalk(1,1); $('stTeller').textContent='';
+  $('stBody').innerHTML=`<div class="st-eind"><div class="st-groot">${s.goed}/${n}</div><h3>${s.goed===n?'Foutloos!':s.goed/n>=.7?'Goed gedaan!':'Nog even oefenen.'}</h3>
+    ${s.fout.length?`<ul class="st-lijst">${s.fout.map(f=>`<li><b>${esc(f.v.soort==='som'?f.v.q.v:f.v.soort==='gram'?f.v.item.zin:f.v.soort==='mc'?(f.v.detail||f.v.vraag):f.v.voor)}</b><span>${esc(goedAntwoord(f.v))}</span></li>`).join('')}</ul>`:''}
+    <div class="st-knoppen"><button type="button" id="stNogEens">Nog een keer</button><button type="button" class="primary" id="stKlaar">Klaar</button></div></div>`;
+  const herhaal=ST.herhaal; $('stNogEens').addEventListener('click',()=>{ if(herhaal) herhaal(); }); $('stNogEens').hidden=!herhaal;
+  $('stKlaar').addEventListener('click',stSluit);
+}
+
+// ---------- oefentoets ----------
+function toetsVragen(vak,topics,aantal=15){
+  const pools=topics.map(t=>{ const it=topicItems(vak,t), alleK=it.kaarten.filter(k=>k.soort==='k'), vr=[];
+    for(const k of it.kaarten){
+      if(k.soort==='k'&&alleK.length>=4) vr.push(()=>maakMC(k,alleK));
+      if(k.soort==='w') vr.push(()=>({soort:'woord',item:k,vraag:'Vertaal:',voor:k.voor,alts:k.alt}));
+      if(k.soort==='irr') vr.push(()=>Math.random()<.5?{soort:'woord',item:k,vraag:'Wat is de past simple van:',voor:'to '+k.inf,alts:k.past}:{soort:'woord',item:k,vraag:'Wat is het voltooid deelwoord (3e rijtje) van:',voor:'to '+k.inf,alts:[k.pp]});
+    }
+    for(const g of it.gram) vr.push(()=>({soort:'gram',item:g}));
+    for(const g of it.gens){ vr.push(()=>maakSom(vak,g)); vr.push(()=>maakSom(vak,g)); }
+    return {t,vr:vr.map(f=>({f,box:0}))}; }).filter(p=>p.vr.length);
+  for(const p of pools) p.vr.sort(()=>Math.random()-.5);
+  const rij=[]; let i=0, rondes=0;
+  while(rij.length<aantal&&pools.some(p=>p.vr.length)&&rondes<500){ const p=pools[i%pools.length]; i++; rondes++; if(!p.vr.length) continue; const v=p.vr.shift().f(); v.topic=p.t; rij.push(v); }
+  return rij;
+}
+function startToets(vak,topics,label){
+  const rij=toetsVragen(vak,topics); if(!rij.length) return;
+  ST={mode:'toets',vak,rij,i:0,goed:0,fout:[],antw:[],label,topics};
+  stOpen(label,'Oefentoets · je ziet je cijfer aan het eind'); stVraag();
+}
+function eisTekst(vak,cijfer){
+  const v=BY_ID[vak]; if(!v||!v.toetsen) return []; const i=seInfo(v), uit=[];
+  const a=volgendeToetsVak(vak); const info=a?toetsInfo(a):{}; const wt=info.t&&info.t[3]?info.t[3]:1;
+  const toetsNaam=a?`je toets ${overDagen(a.datum)} (${datumNL(a.datum)})`:'je volgende toets';
+  if(i.w>0){ const nodig=(5.45*(i.w+wt)-i.sum)/wt, nieuw=(i.sum+cijfer*wt)/(i.w+wt);
+    uit.push(`Haal je dit cijfer ook op ${toetsNaam}, dan wordt je gemiddelde voor ${v.naam} een ${fmt(r1(nieuw))} (nu ${fmt(i.se)}).`);
+    if(nodig<=1) uit.push('Je gemiddelde blijft hoe dan ook voldoende.');
+    else if(nodig>10) uit.push('Met één toets kom je helaas niet meer aan een voldoende gemiddelde; elke punt telt wel mee.');
+    else { const n=fmt(Math.ceil(nodig*10-1e-9)/10);
+      uit.push(cijfer>=nodig?(cijfer>=5.5?`Om je gemiddelde voldoende te houden heb je op die toets minstens een ${n} nodig. Daar zit je boven. 👍`:`Je gemiddelde blijft voldoende als je minstens een ${n} haalt, maar dit cijfer zelf is nog een onvoldoende. Probeer hoger te scoren.`):`Om je gemiddelde voldoende te houden heb je op die toets minstens een ${n} nodig. Daar zit je nog onder, dus blijf oefenen.`); } }
+  else uit.push(cijfer>=5.5?'Dit zou een voldoende zijn.':'Dit zou nog een onvoldoende zijn. Blijf oefenen!');
+  if(v.type==='ce'&&examJaar()&&i.se!=null){ const ce=ceNodig(i.se,6); uit.push(ce<=1?'Voor je eindexamen sta je er sterk voor.':`Voor je eindexamen heb je met je gemiddelde van nu een ${nodigTekst(ce)} nodig voor een 6. Je oefencijfer ligt daar ${cijfer>=ce?'boven':'onder'}.`); }
+  return uit;
+}
+function stToetsKlaar(){
+  const s=ST, n=s.rij.length, cijfer=r1(1+9*s.goed/n); stBalk(1,1); $('stTeller').textContent='';
+  (S.oefen[s.vak]=S.oefen[s.vak]||[]).push({d:VANDAAG(),t:s.label,c:cijfer,g:s.goed,n}); if(S.oefen[s.vak].length>20) S.oefen[s.vak].shift();
+  const perT=new Map(); for(const x of s.antw){ const k=x.v.topic.t; const p=perT.get(k)||[0,0]; p[1]++; if(x.ok) p[0]++; perT.set(k,p); }
+  const fout=s.antw.filter(x=>!x.ok), foutKaart=[...new Set(fout.filter(x=>x.v.item&&x.v.item.voor).map(x=>x.v.item.id))];
+  const kl=cijfer<5.5?(cijfer<4.5?'bad':'warn'):'ok';
+  $('stBody').innerHTML=`<div class="st-eind st-toetsuitslag">
+    <div class="st-cijfer ${kl}"><span>Je cijfer</span><b>${fmt(cijfer)}</b><small>${s.goed} van de ${n} goed</small></div>
+    <h3>${cijfer>=8?'Super! Jij kent de stof.':cijfer>=6.5?'Goed gedaan, je bent op de goede weg.':cijfer>=5.5?'Voldoende! Nog even oefenen voor zekerheid.':'Nog onvoldoende. Oefen je fouten en probeer het opnieuw.'}</h3>
+    <div class="st-analyse">${eisTekst(s.vak,cijfer).map(t=>`<p>${esc(t)}</p>`).join('')}<p class="small muted">Let op: dit is een oefentoets van de app, niet van je school. Zie het als een indicatie.</p></div>
+    ${perT.size>1?`<div class="st-pert">${[...perT.entries()].map(([t,[g,m]])=>`<div><span>${esc(t)}</span><span class="lr-bar"><i style="width:${Math.round(g/m*100)}%"></i></span><b>${g}/${m}</b></div>`).join('')}</div>`:''}
+    ${fout.length?`<details class="st-fouten"><summary>Bekijk je fouten (${fout.length})</summary><ul class="st-lijst">${fout.map(x=>`<li><b>${esc(x.v.soort==='som'?x.v.q.v:x.v.soort==='gram'?x.v.item.zin:x.v.soort==='mc'?(x.v.detail||x.v.vraag):x.v.vraag+' '+x.v.voor)}</b><span>Goed: ${esc(goedAntwoord(x.v))}${x.inv?` · jij: ${esc(x.inv)}`:''}</span></li>`).join('')}</ul></details>`:''}
+    <div class="st-knoppen">${foutKaart.length?'<button type="button" id="stFouten">Oefen je fouten met kaartjes</button>':''}<button type="button" id="stOpnieuw">Nieuwe oefentoets</button><button type="button" class="primary" id="stKlaar">Klaar</button></div></div>`;
+  const vak=s.vak, topics=s.topics, label=s.label;
+  const fk=$('stFouten'); if(fk) fk.addEventListener('click',()=>startKaartjes(vak,leerTopics(vak),foutKaart));
+  $('stOpnieuw').addEventListener('click',()=>startToets(vak,topics,label));
+  $('stKlaar').addEventListener('click',stSluit);
+  save();
+}
+
+// ---------- Leren-pagina ----------
+function renderLeren(){
+  const el=$('lrInhoud'); if(!el) return;
+  if(lrVak&&!S.pakket.includes(lrVak)) lrVak=null;
+  if(!lrVak) return renderLerenVakken(el);
+  renderLerenVak(el,lrVak);
+}
+function renderLerenVakken(el){
+  const vakken=S.pakket.filter(id=>BY_ID[id]);
+  const kom=vakken.map(id=>({id,a:volgendeToetsVak(id)})).filter(x=>x.a&&dag(x.a.datum)-dag(VANDAAG())<=14).sort((p,q)=>p.a.datum.localeCompare(q.a.datum));
+  let h='';
+  if(kom.length){ const x=kom[0]; h+=`<div class="lr-banner"><span class="ico g1"><svg><use href="#i-agenda"/></svg></span><div><b>Toets ${esc(vakNaam(x.id))} ${overDagen(x.a.datum)}</b><small>${esc(aTitel(x.a).replace(/<[^>]+>/g,''))}</small></div><button type="button" class="primary" data-vak="${x.id}">Oefen nu</button></div>`; }
+  h+='<div class="lr-vakken">';
+  for(const id of vakken){ const tps=leerTopics(id), pct=vakKennis(id), a=volgendeToetsVak(id);
+    const sub=tps.length?`${tps.length} onderwerp${tps.length>1?'en':''}`:'Maak eigen kaartjes';
+    h+=`<button type="button" class="lr-vak" data-vak="${id}">${tps.length?ringSvg(pct):'<span class="lr-ring leeg"><b>+</b></span>'}<span class="lr-vt"><b>${esc(vakNaam(id))}</b><small>${sub}</small>${a&&dag(a.datum)-dag(VANDAAG())<=14?`<span class="lr-toetschip">toets ${overDagen(a.datum)}</span>`:''}</span></button>`; }
+  h+='</div>';
+  if(!vakken.length) h='<p class="muted">Kies eerst je vakken bij Instellingen.</p>';
+  el.innerHTML=h;
+  for(const b of el.querySelectorAll('[data-vak]')) b.addEventListener('click',()=>{ lrVak=b.dataset.vak; renderLeren(); window.scrollTo({top:0}); });
+}
+function analyseVak(vak){
+  const tps=leerTopics(vak).map(t=>({t,k:topicKennis(vak,t)})).filter(x=>x.k.n);
+  const pct=vakKennis(vak), oef=(S.oefen[vak]||[]).slice(-3); const verwacht=oef.length?r1(oef.reduce((s,x)=>s+x.c,0)/oef.length):null;
+  const zwak=[...tps].sort((a,b)=>a.k.pct-b.k.pct)[0], a=volgendeToetsVak(vak), adv=[];
+  if(!tps.length) adv.push('Voor dit vak heeft de app nog geen leerstof. Maak hieronder je eigen kaartjes met de begrippen of woordjes uit je boek.');
+  else if(pct===0) adv.push('Je hebt voor dit vak nog niet geoefend. Begin met de kaartjes van het hoofdstuk dat je nu op school hebt.');
+  else { if(zwak&&zwak.k.pct<70) adv.push(`Hier valt het meeste te winnen: ${zwak.t.t} (${zwak.k.pct}%).`);
+    adv.push(pct>=80?'Je kent de stof goed. Maak een oefentoets om te checken of je klaar bent.':pct>=50?'Je bent goed op weg. Herhaal de kaartjes die je nog niet wist.':'Oefen elke dag een kwartiertje; dan onthoud je het het beste.'); }
+  if(a) adv.unshift(`Je hebt ${overDagen(a.datum)} een toets ${vakNaam(vak)}. ${dag(a.datum)-dag(VANDAAG())<=3?'Doe vandaag nog een oefentoets!':'Plan in de Leerhulp een paar leermomenten.'}`);
+  return {pct,verwacht,adv};
+}
+function toetsTopics(vak,tps){ const a=volgendeToetsVak(vak); if(!a) return null; const {t}=toetsInfo(a); const tekst=lc(t?t[2]:(a.oms||'')); if(!tekst) return null;
+  const hs=[...tekst.matchAll(/h(\d+)/g)].map(m=>'h'+m[1]);
+  const gevonden=tps.filter(tp=>hs.includes(String(tp.id).replace(/^.*_/,''))||lc(tp.t).split(/[^a-z]+/).some(w=>w.length>=5&&tekst.includes(w)));
+  return gevonden.length?{a,tps:gevonden}:null; }
+function renderLerenVak(el,vak){
+  const tps=leerTopics(vak), an=analyseVak(vak), oef=(S.oefen[vak]||[]).slice(-5).reverse(), tt=toetsTopics(vak,tps);
+  const toetsbaar=tps.filter(t=>{ const it=topicItems(vak,t); return it.kaarten.length||it.gram.length||it.gens.length; });
+  let h=`<button type="button" class="lr-terug" id="lrTerug">‹ Alle vakken</button>
+    <section class="lr-analyse"><div class="lr-an-links">${ringSvg(an.pct,92)}</div><div class="lr-an-tekst"><h2>${esc(vakNaam(vak))}</h2>
+      <p class="lr-an-kop">Je kent <b>${an.pct}%</b> van de stof${an.verwacht!=null?` · verwacht cijfer <b class="${an.verwacht<5.5?'t-bad':'t-ok'}">${fmt(an.verwacht)}</b>`:''}</p>
+      <ul>${an.adv.map(t=>`<li>${esc(t)}</li>`).join('')}</ul>
+      <div class="row">${tt?`<button type="button" class="primary" id="lrToetsVoor">Oefentoets voor je toets: ${esc(tt.tps.map(x=>x.t).join(' + '))}</button>`:''}${toetsbaar.length?`<button type="button" class="${tt?'':'primary'}" id="lrToetsAlles">Oefentoets hele vak</button>`:''}</div></div></section>
+    <div class="lr-topics">`;
+  tps.forEach((t,ix)=>{ const it=topicItems(vak,t), k=topicKennis(vak,t); const soorten=[];
+    if(it.kaarten.some(x=>x.soort==='w')) soorten.push('Woordjes'); if(it.kaarten.some(x=>x.soort==='irr')) soorten.push('Werkwoorden'); if(it.kaarten.some(x=>x.soort==='k')) soorten.push('Begrippen'); if(it.gram.length) soorten.push('Grammatica'); if(it.gens.length) soorten.push('Sommen');
+    const kn=[];
+    if(it.kaarten.length) kn.push(`<button type="button" data-a="kaart" data-t="${ix}">Kaartjes</button>`);
+    if(it.kaarten.filter(x=>x.soort==='k').length>=4) kn.push(`<button type="button" data-a="mc" data-t="${ix}">Meerkeuze</button>`);
+    if(it.gram.length) kn.push(`<button type="button" data-a="gram" data-t="${ix}">Uitleg en oefenen</button>`);
+    if(it.gens.length) kn.push(`<button type="button" data-a="som" data-t="${ix}">Sommen</button>`);
+    if(it.kaarten.length+it.gram.length+it.gens.length) kn.push(`<button type="button" class="lr-toetsknop" data-a="toets" data-t="${ix}">Oefentoets</button>`);
+    h+=`<article class="lr-topic${t.eigen?' eigen':''}"><div class="lr-tkop"><div><b>${esc(t.t)}</b><small>${soorten.join(' · ')}${t.eigen?' · eigen kaartjes':''}</small></div>${t.eigen?`<button type="button" class="mini-weg" data-weg="${t.id.slice(2)}" aria-label="Eigen kaartjes verwijderen" title="Verwijderen">×</button>`:''}<span class="lr-pct">${k.pct}%</span></div>
+      <span class="lr-bar"><i style="width:${k.pct}%"></i></span><div class="lr-knoppen">${kn.join('')}</div></article>`; });
+  h+=`</div>
+    <details class="lr-eigen" ${tps.length?'':'open'}><summary><b>+ Eigen kaartjes maken</b><small>Uit je eigen boek of woordenlijst</small></summary>
+      <form id="lrEigenForm" class="lr-eigen-form"><input id="lrEigenTitel" maxlength="60" placeholder="Naam, bijv. Hoofdstuk 3 woordjes" aria-label="Naam van de set">
+      <textarea id="lrEigenRegels" rows="6" placeholder="${TAALVAKKEN.includes(vak)?'Eén per regel, bijvoorbeeld:\nde hond = the dog\nhet huis = the house':'Eén per regel, bijvoorbeeld:\nfotosynthese = planten maken glucose met licht\nproducent = organisme dat zelf voedsel maakt'}" aria-label="Kaartjes, één per regel"></textarea>
+      <div class="row"><button type="submit" class="primary">Opslaan</button><span class="small muted" id="lrEigenMelding"></span></div></form></details>`;
+  if(oef.length) h+=`<section class="lr-geschiedenis"><h3>Je laatste oefentoetsen</h3><ul>${oef.map(o=>`<li><span>${datumNL(o.d)}</span><span>${esc(o.t)}</span><b class="${o.c<5.5?'t-bad':'t-ok'}">${fmt(o.c)}</b></li>`).join('')}</ul></section>`;
+  el.innerHTML=h;
+  $('lrTerug').addEventListener('click',()=>{ lrVak=null; renderLeren(); });
+  const ta=$('lrToetsAlles'); if(ta) ta.addEventListener('click',()=>startToets(vak,toetsbaar,'Oefentoets '+vakNaam(vak)));
+  const tv=$('lrToetsVoor'); if(tv) tv.addEventListener('click',()=>startToets(vak,tt.tps,'Oefentoets '+tt.tps.map(x=>x.t).join(' + ')));
+  for(const b of el.querySelectorAll('[data-a]')) b.addEventListener('click',()=>{ const t=tps[+b.dataset.t], a=b.dataset.a;
+    if(a==='kaart') startKaartjes(vak,[t]); else if(a==='mc'){ startMeerkeuze(vak,t); ST.herhaal=()=>startMeerkeuze(vak,t); }
+    else if(a==='gram'){ startGrammatica(vak,t); ST.herhaal=()=>startGrammatica(vak,t); } else if(a==='som'){ startSommen(vak,t); ST.herhaal=()=>startSommen(vak,t); }
+    else if(a==='toets') startToets(vak,[t],t.t); });
+  for(const b of el.querySelectorAll('[data-weg]')) b.addEventListener('click',()=>{ const id=b.dataset.weg; const set=eigenSets(vak).find(e=>e.id===id); if(!set) return;
+    S.kaartjes[vak]=eigenSets(vak).filter(e=>e.id!==id); save(); renderLeren();
+    toonToast(`"${set.titel}" verwijderd`,()=>{ (S.kaartjes[vak]=S.kaartjes[vak]||[]).push(set); save(); renderLeren(); }); });
+  $('lrEigenForm').addEventListener('submit',e=>{ e.preventDefault(); const titel=$('lrEigenTitel').value.trim()||'Mijn kaartjes';
+    const regels=$('lrEigenRegels').value.split('\n').map(r=>r.trim()).filter(Boolean).map(r=>{ const m=r.split(/\s*(?:=|\t|\|)\s*/); if(m.length>=2&&m[0]&&m[1]) return m[0]+'|'+m.slice(1).join(' / ');
+      const d=r.split(/\s+[-–:]\s+/); return d.length>=2?d[0]+'|'+d.slice(1).join(' - '):null; }).filter(Boolean).slice(0,300);
+    if(!regels.length){ $('lrEigenMelding').textContent='Zet op elke regel een woord, een = en de betekenis.'; return; }
+    (S.kaartjes[vak]=S.kaartjes[vak]||[]).push({id:Date.now().toString(36),titel:titel.slice(0,60),regels:regels.join('\n')}); save(); renderLeren(); });
+}
+function initLeren(){
+  $('stSluit').addEventListener('click',()=>{ if(ST&&ST.mode==='toets'&&ST.i>0&&ST.i<ST.rij.length){ if(!$('stBody').querySelector('.st-stop')){ const p=document.createElement('div'); p.className='st-stop';
+      p.innerHTML='<p>Wil je stoppen? Je toets telt dan niet mee.</p><div class="st-knoppen"><button type="button" id="stStopJa">Stoppen</button><button type="button" class="primary" id="stStopNee">Doorgaan</button></div>';
+      $('stBody').prepend(p); $('stStopJa').addEventListener('click',stSluit); $('stStopNee').addEventListener('click',()=>p.remove()); } return; } stSluit(); });
+  document.addEventListener('keydown',e=>{ if($('studie').hidden||!ST) return; if(e.key==='Escape') $('stSluit').click();
+    if(ST.mode==='kaart'&&!['INPUT','TEXTAREA'].includes(document.activeElement.tagName)){ if(e.key==='ArrowRight'&&ST.om) stOordeel(true); if(e.key==='ArrowLeft'&&ST.om) stOordeel(false); } });
+}
+// ---------- vegen om te verwijderen ----------
+let toastTimer=null;
+function toonToast(tekst,ongedaan){
+  const t=$('toast'); t.innerHTML=`<span>${esc(tekst)}</span>${ongedaan?'<button type="button" id="toastTerug">Ongedaan maken</button>':''}`; t.hidden=false; t.classList.add('aan');
+  clearTimeout(toastTimer); toastTimer=setTimeout(()=>{ t.classList.remove('aan'); setTimeout(()=>{ t.hidden=true; },250); },5000);
+  const b=$('toastTerug'); if(b) b.addEventListener('click',()=>{ clearTimeout(toastTimer); t.classList.remove('aan'); t.hidden=true; ongedaan(); });
+}
+function maakVeegbaar(el,onWeg){
+  if(el.dataset.veeg) return; el.dataset.veeg='1'; el.classList.add('veegbaar');
+  let x0=null,y0=0,dx=0,pid=null,actief=false;
+  el.addEventListener('pointerdown',e=>{ if(e.button&&e.button!==0) return; x0=e.clientX; y0=e.clientY; dx=0; pid=e.pointerId; actief=false; });
+  el.addEventListener('pointermove',e=>{ if(x0==null||e.pointerId!==pid) return; dx=e.clientX-x0; const dy=e.clientY-y0;
+    if(!actief){ if(Math.abs(dx)>12&&Math.abs(dx)>Math.abs(dy)*1.5&&dx>0){ actief=true; try{ el.setPointerCapture(pid); }catch(_){} el.style.transition='none'; } else if(Math.abs(dy)>12){ x0=null; return; } else return; }
+    const v=Math.max(0,dx); el.style.transform=`translateX(${v}px)`; el.style.opacity=String(Math.max(.35,1-v/320)); el.classList.toggle('veeg-klaar',v>110); });
+  const los=()=>{ if(x0==null) return; const v=dx; x0=null; el.style.transition=''; el.classList.remove('veeg-klaar');
+    if(actief&&v>110){ el.dataset.geveegd='1'; el.style.transform='translateX(110%)'; el.style.opacity='0'; setTimeout(()=>onWeg(),180); }
+    else { el.style.transform=''; el.style.opacity=''; if(actief){ el.dataset.geveegd='1'; setTimeout(()=>{ delete el.dataset.geveegd; },60); } } actief=false; };
+  el.addEventListener('pointerup',los); el.addEventListener('pointercancel',los);
+  el.addEventListener('click',e=>{ if(el.dataset.geveegd){ e.preventDefault(); e.stopPropagation(); } },true);
+}
+function verwijderLeer(id){ const i=S.leer.findIndex(x=>x.id===id); if(i<0) return; const [l]=S.leer.splice(i,1); save(); renderWeek(); renderHome();
+  toonToast(`Leermoment ${vakNaam(l.vak)} verwijderd`,()=>{ S.leer.splice(Math.min(i,S.leer.length),0,l); save(); renderWeek(); renderHome(); }); }
+function verwijderHuiswerk(id){ const i=S.huiswerk.findIndex(x=>x.id===id); if(i<0) return; const [h]=S.huiswerk.splice(i,1); save(); renderWeek(); renderHome(); renderHuiswerk();
+  toonToast('Huiswerk verwijderd',()=>{ S.huiswerk.splice(Math.min(i,S.huiswerk.length),0,h); save(); renderWeek(); renderHome(); renderHuiswerk(); }); }
+function zetHuiswerk(id,aan){ const h=S.huiswerk.find(x=>x.id===id); if(!h) return; h.gedaan=aan; save(); renderWeek(); renderHome(); renderHuiswerk(); }
+function renderHuiswerk(){
+  const ul=$('hwLijst'); if(!ul) return; const nu=VANDAAG(); ul.innerHTML='';
+  const lijst=[...S.huiswerk].sort((a,b)=>a.datum.localeCompare(b.datum)).filter(h=>h.datum>=nu||!h.gedaan);
+  for(const h of lijst){ const li=document.createElement('li'); li.className='aitem';
+    li.innerHTML=`<label class="hw-vink"><input type="checkbox" ${h.gedaan?'checked':''} aria-label="Huiswerk afvinken"></label><span class="datum">${datumNL(h.datum)}</span><span class="wat"><strong>${esc(vakNaam(h.vak))}</strong> · ${esc(h.tekst)}</span><span class="acties"><button type="button">Verwijderen</button></span>`;
+    li.querySelector('input').addEventListener('change',e=>zetHuiswerk(h.id,e.target.checked));
+    li.querySelector('button').addEventListener('click',()=>verwijderHuiswerk(h.id)); maakVeegbaar(li,()=>verwijderHuiswerk(h.id)); ul.appendChild(li); }
+  if(!lijst.length) ul.innerHTML='<li class="leeg">Geen huiswerk. Lekker!</li>';
+  const open=S.huiswerk.filter(h=>!h.gedaan&&h.datum>=nu).length; $('hwSub').textContent=open?`${open} keer huiswerk open`:'Opdrachten, lezen, woordjes leren';
+}
+function initHuiswerk(){
+  const vul=()=>{ const s=$('hwVak'), oud=s.value; s.innerHTML=''; for(const id of S.pakket){ if(!BY_ID[id]) continue; const o=document.createElement('option'); o.value=id; o.textContent=BY_ID[id].naam; s.appendChild(o); } if(S.pakket.includes(oud)) s.value=oud; };
+  vul(); $('agHuiswerk').addEventListener('toggle',()=>{ vul(); if(!$('hwDatum').value) $('hwDatum').value=isoVan(dag(VANDAAG())+1); });
+  $('hwForm').addEventListener('submit',e=>{ e.preventDefault(); const t=$('hwTekst').value.trim(); if(!t){ $('hwTekst').focus(); return; } const d=$('hwDatum').value||isoVan(dag(VANDAAG())+1);
+    S.huiswerk.push({id:'h'+Date.now(),datum:d,vak:$('hwVak').value,tekst:t.slice(0,120),gedaan:false}); $('hwTekst').value=''; save(); renderWeek(); renderHome(); renderHuiswerk(); });
+}
+
 // Rondleiding
 const TOUR_ALLE=[
  {ico:'home',kl:'g2',titel:n=>`Welkom${n?', '+n:''}!`,tekst:'Met deze app houd je je examencijfers bij en zie je of je op koers ligt om te slagen. In een paar stappen laten we zien waar alles staat.'},
@@ -2116,13 +3566,14 @@ const TOUR_ALLE=[
  {ico:'cijfers',kl:'g2',nav:'cijfers',titel:()=>'Cijfers invullen',tekst:'Na een toets vul je hier je cijfer in. De app rekent meteen je gemiddelde uit, en wat je op het eindexamen nodig hebt.'},
  {ico:'magister',kl:'g5',nav:'magister',titel:()=>'Snel uit Magister',tekst:'Geen zin om alles over te typen? Kopieer je cijferoverzicht uit Magister en plak het hier. De app vult alles zelf in.'},
  {ico:'agenda',kl:'g1',nav:'agenda',titel:()=>'Toetsagenda',tekst:'Zet je toetsen in de agenda en bekijk je hele week in één oogopslag. Vertel de Leerhulp wanneer je toets is en wanneer je kunt, dan plant hij je leermomenten in.'},
+ {ico:'leren',kl:'g5',nav:'leren',titel:()=>'Leren en oefenen',tekst:'Bij Leren oefen je per vak en hoofdstuk: kaartjes omdraaien, begrippen, grammatica en sommen. Met een oefentoets zie je meteen welk cijfer je zou halen.'},
  {ico:'uitslag',kl:'g3',nav:'uitslag',titel:()=>'Ga ik slagen?',tekst:'Hier zie je of je met je cijfers van nu zou slagen, en bij welke vakken je extra moet opletten.'},
  {ico:'herk',kl:'g4',nav:'herkansen',titel:()=>'Slim herkansen',tekst:'Je mag drie toetsen opnieuw maken. Hier zie je bij welke toetsen dat het meeste oplevert.'},
  {ico:'ster',kl:'g1',nav:'instellingen',titel:()=>'Snap je een woord niet?',tekst:'Bij Instellingen staat een lijst met alle afkortingen, zoals SE, CE en PTA. Deze rondleiding kun je daar ook opnieuw bekijken.'},
 ];
 const TOURF=()=>TOUR_ALLE.filter(s=>!(EIGEN()&&['herkansen','magister'].includes(s.nav)));
 let tourStap=0;
-function tourLicht(nav){ for(const a of document.querySelectorAll('[data-nav]')) a.classList.toggle('tour-licht',!!nav&&(a.dataset.nav===nav||(a.dataset.nav==='meer'&&['herkansen','magister','instellingen'].includes(nav)&&a.closest('.tabbar')))); }
+function tourLicht(nav){ for(const a of document.querySelectorAll('[data-nav]')) a.classList.toggle('tour-licht',!!nav&&(a.dataset.nav===nav||(a.dataset.nav==='meer'&&['uitslag','herkansen','magister','instellingen'].includes(nav)&&a.closest('.tabbar')))); }
 function toonTour(stap){
   tourStap=stap; const s=TOURF()[stap]; const voornaam=String(S.naam||'').split(' ')[0];
   $('tourIco').className='tour-ico '+s.kl; $('tourIco').innerHTML=`<svg><use href="#i-${s.ico}"/></svg>`;
@@ -2133,16 +3584,17 @@ function toonTour(stap){
 }
 function sluitTour(){ $('tour').hidden=true; tourLicht(null); if(!S.tour){ S.tour=true; save(); } }
 // Navigatie
-const VIEWS=['home','agenda','cijfers','uitslag','herkansen','magister','instellingen'];
+const VIEWS=['home','agenda','leren','cijfers','uitslag','herkansen','magister','instellingen'];
 function go(v,push=true){ if(!VIEWS.includes(v)) v='home';
   for(const s of document.querySelectorAll('[data-view]')) s.hidden=s.dataset.view!==v;
-  for(const a of document.querySelectorAll('[data-nav]')) a.classList.toggle('actief',a.dataset.nav===v||(a.dataset.nav==='meer'&&['herkansen','magister','instellingen'].includes(v)));
+  for(const a of document.querySelectorAll('[data-nav]')) a.classList.toggle('actief',a.dataset.nav===v||(a.dataset.nav==='meer'&&['uitslag','herkansen','magister','instellingen'].includes(v)));
   $('meerMenu').hidden=true;
+  if(v==='leren') renderLeren();
   if(push){ try{ history.replaceState(null,'','#'+v); }catch(e){} }
   window.scrollTo({top:0});
 }
 function renderAll(){
-  bouwVakken(); zetModusUI(); renderLeerling(); renderPakket(); renderVakken(); renderUitslag(); renderAgenda(); renderTijdlijn(); vulProfiel(); regioCheck(); document.getElementById('code').value=JSON.stringify(S);
+  bouwVakken(); zetModusUI(); renderLeerling(); renderPakket(); renderVakken(); renderUitslag(); renderAgenda(); renderTijdlijn(); vulProfiel(); regioCheck(); renderLeren(); renderHuiswerk(); document.getElementById('code').value=JSON.stringify(S);
 }
 document.getElementById('kopieer').addEventListener('click',()=>{
   const ta=document.getElementById('code'), m=document.getElementById('codeMelding');
@@ -2181,6 +3633,8 @@ $('beheer').open=false;
 initPlanner();
 initProfiel();
 initNiveau();
+initLeren();
+initHuiswerk();
 $('fotoInput').addEventListener('change',async e=>{ const f=e.target.files&&e.target.files[0]; const m=$('fotoMelding'); m.style.color=''; if(!f) return;
   m.textContent='Bezig…';
   try{ S.foto=await maakFoto(f); save(); renderAvatars(); m.textContent='Profielfoto opgeslagen.'; m.style.color='var(--ok)'; }
