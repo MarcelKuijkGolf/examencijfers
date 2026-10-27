@@ -568,6 +568,11 @@ body.feest{background-image:radial-gradient(800px 400px at 90% -10%,rgba(255,95,
 .lr-topic.eigen{border-style:dashed}
 .lr-tkop{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:8px;align-items:start}
 .lr-tkop b{display:block;font-family:var(--f-display)} .lr-tkop small{color:var(--muted);font-size:.78rem}
+.lr-tnaam{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;min-width:0} .lr-tnaam small{flex-basis:100%}
+.lr-hnr{flex:none;padding:2px 8px;border-radius:8px;font-family:var(--f-num);font-size:.78rem;font-weight:700;background:rgba(139,92,246,.22);border:1px solid rgba(139,92,246,.5);color:#d9ccff}
+.lr-hnr.leeg{background:transparent;border-style:dashed;color:var(--muted);font-weight:600}
+.lr-hnr-in{width:4.5em;padding:3px 8px;font-size:.85rem}
+.lr-hnr-tip{margin:12px 0 0}
 .lr-pct{font-family:var(--f-num);font-weight:700;color:var(--accent)}
 .lr-bar{display:block;height:7px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden} .lr-bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--pink))}
 .lr-knoppen{display:flex;flex-wrap:wrap;gap:6px} .lr-knoppen button{font-size:.82rem;padding:7px 11px}
@@ -1181,7 +1186,7 @@ function load(){
   try{const oud=localStorage.getItem(OUDE_KEY); if(oud){const o=JSON.parse(oud); if(o&&o.pakket) Object.assign(liam,norm(o),{naam:liam.naam});}}catch(e){}
   return {actief:'l1',leerlingen:{l1:liam}};
 }
-function norm(s){return {naam:String(s.naam||'Leerling').slice(0,40),pakket:Array.isArray(s.pakket)?s.pakket.filter(id=>BY_ID[id]):[],cijfers:s.cijfers||{},ce:s.ce||{},agenda:Array.isArray(s.agenda)?s.agenda:[],tour:!!s.tour,niveau:['vmbo-bb','vmbo-kb','vmbo-gl','vmbo-tl','havo','vwo'].includes(s.niveau)?s.niveau:'vmbo-tl',leerjaar:Math.max(1,Math.min(6,parseInt(s.leerjaar)||4)),leerjaarSJ:typeof s.leerjaarSJ==='string'?s.leerjaarSJ:'',kennis:s.kennis&&typeof s.kennis==='object'&&!Array.isArray(s.kennis)?s.kennis:{},oefen:s.oefen&&typeof s.oefen==='object'&&!Array.isArray(s.oefen)?s.oefen:{},kaartjes:s.kaartjes&&typeof s.kaartjes==='object'&&!Array.isArray(s.kaartjes)?s.kaartjes:{},huiswerk:Array.isArray(s.huiswerk)?s.huiswerk.filter(h=>h&&h.datum&&h.tekst):[],pakketen:s.pakketen&&typeof s.pakketen==='object'&&!Array.isArray(s.pakketen)?s.pakketen:{},eigen:s.eigen&&typeof s.eigen==='object'&&!Array.isArray(s.eigen)?s.eigen:{},school:String(s.school||'').slice(0,60),plaats:String(s.plaats||'').slice(0,40),geboorte:/^\d{4}-\d{2}-\d{2}$/.test(s.geboorte||'')?s.geboorte:'',regio:['noord','midden','zuid'].includes(s.regio)?s.regio:'',regioAuto:s.regioAuto&&typeof s.regioAuto==='object'?s.regioAuto:null,vast:Array.isArray(s.vast)?s.vast.filter(v=>v&&v.naam&&v.dag>=0&&v.dag<=6).map(v=>({...v,naam:vastNaamVan(v.naam),leren:!!v.leren})).filter((v,i,a)=>a.findIndex(x=>x.naam===v.naam&&x.dag===v.dag)===i):[],leer:Array.isArray(s.leer)?s.leer.filter(l=>l&&l.datum&&BY_ID[l.vak]):[],foto:typeof s.foto==='string'&&s.foto.startsWith('data:image/')&&s.foto.length<200000?s.foto:''};}
+function norm(s){return {naam:String(s.naam||'Leerling').slice(0,40),pakket:Array.isArray(s.pakket)?s.pakket.filter(id=>BY_ID[id]):[],cijfers:s.cijfers||{},ce:s.ce||{},agenda:Array.isArray(s.agenda)?s.agenda:[],tour:!!s.tour,niveau:['vmbo-bb','vmbo-kb','vmbo-gl','vmbo-tl','havo','vwo'].includes(s.niveau)?s.niveau:'vmbo-tl',leerjaar:Math.max(1,Math.min(6,parseInt(s.leerjaar)||4)),leerjaarSJ:typeof s.leerjaarSJ==='string'?s.leerjaarSJ:'',hnr:s.hnr&&typeof s.hnr==='object'&&!Array.isArray(s.hnr)?s.hnr:{},kennis:s.kennis&&typeof s.kennis==='object'&&!Array.isArray(s.kennis)?s.kennis:{},oefen:s.oefen&&typeof s.oefen==='object'&&!Array.isArray(s.oefen)?s.oefen:{},kaartjes:s.kaartjes&&typeof s.kaartjes==='object'&&!Array.isArray(s.kaartjes)?s.kaartjes:{},huiswerk:Array.isArray(s.huiswerk)?s.huiswerk.filter(h=>h&&h.datum&&h.tekst):[],pakketen:s.pakketen&&typeof s.pakketen==='object'&&!Array.isArray(s.pakketen)?s.pakketen:{},eigen:s.eigen&&typeof s.eigen==='object'&&!Array.isArray(s.eigen)?s.eigen:{},school:String(s.school||'').slice(0,60),plaats:String(s.plaats||'').slice(0,40),geboorte:/^\d{4}-\d{2}-\d{2}$/.test(s.geboorte||'')?s.geboorte:'',regio:['noord','midden','zuid'].includes(s.regio)?s.regio:'',regioAuto:s.regioAuto&&typeof s.regioAuto==='object'?s.regioAuto:null,vast:Array.isArray(s.vast)?s.vast.filter(v=>v&&v.naam&&v.dag>=0&&v.dag<=6).map(v=>({...v,naam:vastNaamVan(v.naam),leren:!!v.leren})).filter((v,i,a)=>a.findIndex(x=>x.naam===v.naam&&x.dag===v.dag)===i):[],leer:Array.isArray(s.leer)?s.leer.filter(l=>l&&l.datum&&BY_ID[l.vak]):[],foto:typeof s.foto==='string'&&s.foto.startsWith('data:image/')&&s.foto.length<200000?s.foto:''};}
 function save(){DB.leerlingen[DB.actief]=S; if(CLOUD) CLOUD.bewaar(S); else { try{localStorage.setItem(KEY,JSON.stringify(DB));}catch(e){} } document.getElementById('code').value=JSON.stringify(S);}
 
 const r1=x=>Math.round(x*10+1e-9)/10;
@@ -2784,7 +2789,7 @@ wrijving|Kracht die een beweging tegenwerkt.
 luchtweerstand|Wrijving door lucht; wordt groter bij hogere snelheid.`}
 ],
 nask2:[
- {id:'verbr',t:'Verbrandingen',k:`verbranding|Een reactie van een stof met zuurstof.
+ {id:'verbr',t:'Verbrandingen',h:'8',k:`verbranding|Een reactie van een stof met zuurstof.
 branddriehoek|Brandstof, zuurstof en de ontbrandingstemperatuur.
 ontbrandingstemperatuur|De laagste temperatuur waarbij een stof gaat branden.
 volledige verbranding|Genoeg zuurstof: er ontstaan koolstofdioxide en water.
@@ -3224,7 +3229,8 @@ function eigenSets(vak){ return (S.kaartjes[vak]||[]); }
 function leerTopics(vak){
   const bron=[...(LEERSTOF[vak]||[]),...(LEER_ALIAS[vak]||[]).flatMap(a=>(LEERSTOF[a]||[]).map(t=>({...t,id:a+'_'+t.id})))];
   const eigen=eigenSets(vak).map(e=>({id:'e_'+e.id,t:e.titel,eigen:true,[TAALVAKKEN.includes(vak)?'w':'k']:e.regels}));
-  return [...bron,...eigen];
+  return [...bron,...eigen].map(t=>{ const eigenNr=S.hnr[vak+'.'+t.id]; const auto=t.h!=null?t.h:(/^(?:.*_)?h(\d+)$/.exec(t.id)||[])[1]||'';
+    const nr=eigenNr!=null?eigenNr:auto; return {...t,titel:t.t,hnr:nr,t:nr?`H${nr} · ${t.t}`:t.t}; });
 }
 const TOPIC_CACHE=new Map();
 function regelsVan(txt){ return String(txt||'').split('\n').map(r=>r.trim()).filter(Boolean); }
@@ -3485,13 +3491,14 @@ function renderLerenVak(el,vak){
     if(it.gram.length) kn.push(`<button type="button" data-a="gram" data-t="${ix}">Uitleg en oefenen</button>`);
     if(it.gens.length) kn.push(`<button type="button" data-a="som" data-t="${ix}">Sommen</button>`);
     if(it.kaarten.length+it.gram.length+it.gens.length) kn.push(`<button type="button" class="lr-toetsknop" data-a="toets" data-t="${ix}">Oefentoets</button>`);
-    h+=`<article class="lr-topic${t.eigen?' eigen':''}"><div class="lr-tkop"><div><b>${esc(t.t)}</b><small>${soorten.join(' · ')}${t.eigen?' · eigen kaartjes':''}</small></div>${t.eigen?`<button type="button" class="mini-weg" data-weg="${t.id.slice(2)}" aria-label="Eigen kaartjes verwijderen" title="Verwijderen">×</button>`:''}<span class="lr-pct">${k.pct}%</span></div>
+    h+=`<article class="lr-topic${t.eigen?' eigen':''}"><div class="lr-tkop"><div class="lr-tnaam"><button type="button" class="lr-hnr${t.hnr?'':' leeg'}" data-h="${ix}" title="Hoofdstuknummer uit je boek aanpassen">${t.hnr?'H'+esc(t.hnr):'+ H'}</button><b>${esc(t.titel)}</b><small>${soorten.join(' · ')}${t.eigen?' · eigen kaartjes':''}</small></div>${t.eigen?`<button type="button" class="mini-weg" data-weg="${t.id.slice(2)}" aria-label="Eigen kaartjes verwijderen" title="Verwijderen">×</button>`:''}<span class="lr-pct">${k.pct}%</span></div>
       <span class="lr-bar"><i style="width:${k.pct}%"></i></span><div class="lr-knoppen">${kn.join('')}</div></article>`; });
   h+=`</div>
     <details class="lr-eigen" ${tps.length?'':'open'}><summary><b>+ Eigen kaartjes maken</b><small>Uit je eigen boek of woordenlijst</small></summary>
       <form id="lrEigenForm" class="lr-eigen-form"><input id="lrEigenTitel" maxlength="60" placeholder="Naam, bijv. Hoofdstuk 3 woordjes" aria-label="Naam van de set">
       <textarea id="lrEigenRegels" rows="6" placeholder="${TAALVAKKEN.includes(vak)?'Eén per regel, bijvoorbeeld:\nde hond = the dog\nhet huis = the house':'Eén per regel, bijvoorbeeld:\nfotosynthese = planten maken glucose met licht\nproducent = organisme dat zelf voedsel maakt'}" aria-label="Kaartjes, één per regel"></textarea>
-      <div class="row"><button type="submit" class="primary">Opslaan</button><span class="small muted" id="lrEigenMelding"></span></div></form></details>`;
+      <div class="row"><button type="submit" class="primary">Opslaan</button><span class="small muted" id="lrEigenMelding"></span></div></form></details>
+    <p class="small muted lr-hnr-tip">Klopt een hoofdstuknummer niet met je boek? Tik op het nummer (of op <b>+ H</b>) en vul het nummer uit je eigen boek in.</p>`;
   if(oef.length) h+=`<section class="lr-geschiedenis"><h3>Je laatste oefentoetsen</h3><ul>${oef.map(o=>`<li><span>${datumNL(o.d)}</span><span>${esc(o.t)}</span><b class="${o.c<5.5?'t-bad':'t-ok'}">${fmt(o.c)}</b></li>`).join('')}</ul></section>`;
   el.innerHTML=h;
   $('lrTerug').addEventListener('click',()=>{ lrVak=null; renderLeren(); });
@@ -3501,6 +3508,10 @@ function renderLerenVak(el,vak){
     if(a==='kaart') startKaartjes(vak,[t]); else if(a==='mc'){ startMeerkeuze(vak,t); ST.herhaal=()=>startMeerkeuze(vak,t); }
     else if(a==='gram'){ startGrammatica(vak,t); ST.herhaal=()=>startGrammatica(vak,t); } else if(a==='som'){ startSommen(vak,t); ST.herhaal=()=>startSommen(vak,t); }
     else if(a==='toets') startToets(vak,[t],t.t); });
+  for(const b of el.querySelectorAll('[data-h]')) b.addEventListener('click',()=>{ const t=tps[+b.dataset.h]; const inp=document.createElement('input');
+    inp.className='lr-hnr-in'; inp.value=t.hnr||''; inp.maxLength=6; inp.placeholder='nr'; inp.setAttribute('aria-label','Hoofdstuknummer'); b.replaceWith(inp); inp.focus(); inp.select();
+    let klaar=false; const bewaar=()=>{ if(klaar) return; klaar=true; const v=inp.value.trim().replace(/^h\s*/i,'').slice(0,6); S.hnr[vak+'.'+t.id]=v; save(); renderLeren(); };
+    inp.addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); bewaar(); } if(e.key==='Escape'){ klaar=true; renderLeren(); } }); inp.addEventListener('blur',bewaar); });
   for(const b of el.querySelectorAll('[data-weg]')) b.addEventListener('click',()=>{ const id=b.dataset.weg; const set=eigenSets(vak).find(e=>e.id===id); if(!set) return;
     S.kaartjes[vak]=eigenSets(vak).filter(e=>e.id!==id); save(); renderLeren();
     toonToast(`"${set.titel}" verwijderd`,()=>{ (S.kaartjes[vak]=S.kaartjes[vak]||[]).push(set); save(); renderLeren(); }); });
@@ -3508,7 +3519,7 @@ function renderLerenVak(el,vak){
     const regels=$('lrEigenRegels').value.split('\n').map(r=>r.trim()).filter(Boolean).map(r=>{ const m=r.split(/\s*(?:=|\t|\|)\s*/); if(m.length>=2&&m[0]&&m[1]) return m[0]+'|'+m.slice(1).join(' / ');
       const d=r.split(/\s+[-–:]\s+/); return d.length>=2?d[0]+'|'+d.slice(1).join(' - '):null; }).filter(Boolean).slice(0,300);
     if(!regels.length){ $('lrEigenMelding').textContent='Zet op elke regel een woord, een = en de betekenis.'; return; }
-    (S.kaartjes[vak]=S.kaartjes[vak]||[]).push({id:Date.now().toString(36),titel:titel.slice(0,60),regels:regels.join('\n')}); save(); renderLeren(); });
+    const nid=Date.now().toString(36); (S.kaartjes[vak]=S.kaartjes[vak]||[]).push({id:nid,titel:titel.slice(0,60),regels:regels.join('\n')}); const hm=/(?:hoofdstuk|\bh)\s*(\d+)/i.exec(titel); if(hm) S.hnr[vak+'.e_'+nid]=hm[1]; save(); renderLeren(); });
 }
 function initLeren(){
   $('stSluit').addEventListener('click',()=>{ if(ST&&ST.mode==='toets'&&ST.i>0&&ST.i<ST.rij.length){ if(!$('stBody').querySelector('.st-stop')){ const p=document.createElement('div'); p.className='st-stop';
